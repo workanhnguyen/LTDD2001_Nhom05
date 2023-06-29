@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">QuanLyChiTieu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select">Select items</string>
+    <string name="category">Category name</string>
+    <string name="amount">Amount</string>
+    <string name="description">Description</string>
+    <string name="search">Search categories</string>
+    <string name="items_add">Category name</string>
+    <string-array name="list_items">
+        <item>Expense</item>
+        <item>Balance</item>
+        <item>Income</item>
+    </string-array>
 </resources>
