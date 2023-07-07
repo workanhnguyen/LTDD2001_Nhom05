@@ -1,10 +1,11 @@
 package com.example.quanlychitieu;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.example.quanlychitieu.R;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,5 +13,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setTitle("Chào Anh Nguyễn!");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     }
 }
