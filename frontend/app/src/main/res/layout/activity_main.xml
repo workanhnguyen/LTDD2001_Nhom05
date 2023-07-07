@@ -5,31 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.activity.MainActivity">
+    tools:context=".MainActivity">
+    <include layout="@layout/custom_action_bar" />
 
-    <FrameLayout
-        android:id="@+id/fragmentContainerView4"
-        android:name="com.example.quanlychitieu.FragmentItemAdd"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="130dp"
-        android:layout_height="58dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/custom_background_addnew"
-        android:drawableLeft="@drawable/plus"
-        android:text="Add new"
-        app:backgroundTint="@color/lavender" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu" />
+        android:layout_height="match_parent">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.example.quanlychitieu.fragment.OverViewFragment" />
+    </ScrollView>
 
 </LinearLayout>
