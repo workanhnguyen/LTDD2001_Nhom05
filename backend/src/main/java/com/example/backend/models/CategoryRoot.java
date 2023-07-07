@@ -4,6 +4,7 @@
  */
 package com.example.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class CategoryRoot implements Serializable {
     @Basic(optional = false)
     @Column(name = "type")
     private String type;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryRootId")
     private Set<CategoryChildren> categoryChildrenSet;
 

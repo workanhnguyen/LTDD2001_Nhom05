@@ -4,6 +4,7 @@
  */
 package com.example.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -45,8 +46,10 @@ public class User implements Serializable {
     private String password;
     @Column(name = "email")
     private String email;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Wallet> walletSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Transaction> transactionSet;
 

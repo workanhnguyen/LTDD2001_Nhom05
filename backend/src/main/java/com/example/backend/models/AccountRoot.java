@@ -4,6 +4,7 @@
  */
 package com.example.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -33,6 +34,7 @@ public class AccountRoot implements Serializable {
     @Lob
     @Column(name = "image")
     private String image;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountTypeId")
     private Set<AccountChildren> accountChildrenSet;
 
