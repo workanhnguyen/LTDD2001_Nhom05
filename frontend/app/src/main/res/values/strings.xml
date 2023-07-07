@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QuanLyChiTieu</string>
+    <string name="app_name">Spendify</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select">Select items</string>
@@ -8,9 +8,23 @@
     <string name="description">Description</string>
     <string name="search">Search categories</string>
     <string name="items_add">Category name</string>
+    <string name="hello_username">Chào Nguyễn Anh!</string>
+    <string name="title_financial_situation">Tình hình thu chi</string>
+    <string name="spinner_prompt">Tháng này</string>
+    <string name="sum_of_money">Tổng số dư</string>
+    <string name="this_month">Tháng này</string>
+    <string name="sum_income">Tổng thu</string>
+    <string name="sum_expense">Tổng chi</string>
+    <string name="today">Hôm nay</string>
     <string-array name="list_items">
         <item>Expense</item>
         <item>Balance</item>
         <item>Income</item>
+    </string-array>
+    <string-array name="spinner_statistic_items">
+        <item>Hôm nay</item>
+        <item>Tuần này</item>
+        <item>Tháng này</item>
+        <item>Năm nay</item>
     </string-array>
 </resources>
