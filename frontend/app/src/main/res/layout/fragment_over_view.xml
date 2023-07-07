@@ -5,11 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".fragment.OverViewFragment">
 
+    <!-- Parent Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/light_grey">
+
+        <!-- Overview Balance -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="90dp"
@@ -64,6 +67,7 @@
 
         </LinearLayout>
 
+        <!-- Statistic Filter -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -81,7 +85,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_keyboard_arrow_right_24_primary" />
         </LinearLayout>
-        
+
+        <!-- Sum of income and expense -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -99,7 +104,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sum_income"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -123,7 +129,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sum_expense"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,6 +140,7 @@
                     android:textColor="@color/red"/>
             </LinearLayout>
         </LinearLayout>
+
         <!-- Transaction -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,7 +163,8 @@
                         android:layout_height="wrap_content"
                         android:text="01"
                         android:textSize="35sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -164,7 +173,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/today"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -220,7 +230,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ăn sáng"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="12dp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -228,7 +239,8 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"
-                            android:textStyle="italic"/>
+                            android:textStyle="italic"
+                            android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -262,7 +274,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -283,7 +296,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiền thưởng"
-                        android:layout_marginStart="12dp"/>
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -316,7 +330,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -343,7 +358,8 @@
                         android:layout_height="wrap_content"
                         android:text="01"
                         android:textSize="35sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -352,7 +368,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/today"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -408,7 +425,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ăn sáng"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="12dp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -416,7 +434,8 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"
-                            android:textStyle="italic"/>
+                            android:textStyle="italic"
+                            android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -450,7 +469,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -471,7 +491,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiền thưởng"
-                        android:layout_marginStart="12dp"/>
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -504,7 +525,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -531,7 +553,8 @@
                         android:layout_height="wrap_content"
                         android:text="01"
                         android:textSize="35sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -540,7 +563,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/today"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -596,7 +620,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ăn sáng"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="12dp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -604,7 +629,8 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"
-                            android:textStyle="italic"/>
+                            android:textStyle="italic"
+                            android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -638,7 +664,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -659,7 +686,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiền thưởng"
-                        android:layout_marginStart="12dp"/>
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -692,7 +720,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -719,7 +748,8 @@
                         android:layout_height="wrap_content"
                         android:text="01"
                         android:textSize="35sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -728,7 +758,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/today"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -784,7 +815,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ăn sáng"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="12dp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -792,7 +824,8 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"
-                            android:textStyle="italic"/>
+                            android:textStyle="italic"
+                            android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -826,7 +859,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -847,7 +881,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiền thưởng"
-                        android:layout_marginStart="12dp"/>
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -880,7 +915,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -907,7 +943,8 @@
                         android:layout_height="wrap_content"
                         android:text="01"
                         android:textSize="35sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -916,7 +953,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/today"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -972,7 +1010,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ăn sáng"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="12dp"
+                            android:textColor="@color/black"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -980,7 +1019,8 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="4dp"
                             android:textSize="12sp"
-                            android:textStyle="italic"/>
+                            android:textStyle="italic"
+                            android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -1014,7 +1054,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -1035,7 +1076,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiền thưởng"
-                        android:layout_marginStart="12dp"/>
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1068,7 +1110,8 @@
                             android:text="Tiền riêng"
                             android:textSize="12sp"
                             tools:ignore="SmallSp"
-                            android:layout_marginStart="6dp"/>
+                            android:layout_marginStart="6dp"
+                            android:textColor="@color/dark_grey"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
