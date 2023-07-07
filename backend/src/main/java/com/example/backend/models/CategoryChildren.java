@@ -4,6 +4,7 @@
  */
 package com.example.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -39,6 +40,7 @@ public class CategoryChildren implements Serializable {
     @JoinColumn(name = "category_root_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CategoryRoot categoryRootId;
+    @JsonIgnore
     @OneToMany(mappedBy = "categoryChildrenId")
     private Set<Transaction> transactionSet;
 
