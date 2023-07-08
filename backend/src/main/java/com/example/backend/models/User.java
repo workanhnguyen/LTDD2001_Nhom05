@@ -44,14 +44,12 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
     @Column(name = "email")
     private String email;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Wallet> walletSet;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Transaction> transactionSet;
 
     public User() {
     }
@@ -60,12 +58,13 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstname, String lastname, String username, String password) {
+    public User(Integer id, String firstname, String lastname, String username, String password, String email) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
     public Integer getId() {
@@ -122,14 +121,6 @@ public class User implements Serializable {
 
     public void setWalletSet(Set<Wallet> walletSet) {
         this.walletSet = walletSet;
-    }
-
-    public Set<Transaction> getTransactionSet() {
-        return transactionSet;
-    }
-
-    public void setTransactionSet(Set<Transaction> transactionSet) {
-        this.transactionSet = transactionSet;
     }
 
     @Override

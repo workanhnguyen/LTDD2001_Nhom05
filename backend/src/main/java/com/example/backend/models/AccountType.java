@@ -15,12 +15,12 @@ import java.util.Set;
  * @author ASUS
  */
 @Entity
-@Table(name = "category_children")
+@Table(name = "account_type")
 @NamedQueries({
-    @NamedQuery(name = "CategoryChildren.findAll", query = "SELECT c FROM CategoryChildren c"),
-    @NamedQuery(name = "CategoryChildren.findById", query = "SELECT c FROM CategoryChildren c WHERE c.id = :id"),
-    @NamedQuery(name = "CategoryChildren.findByName", query = "SELECT c FROM CategoryChildren c WHERE c.name = :name")})
-public class CategoryChildren implements Serializable {
+    @NamedQuery(name = "AccountType.findAll", query = "SELECT a FROM AccountType a"),
+    @NamedQuery(name = "AccountType.findById", query = "SELECT a FROM AccountType a WHERE a.id = :id"),
+    @NamedQuery(name = "AccountType.findByName", query = "SELECT a FROM AccountType a WHERE a.name = :name")})
+public class AccountType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,21 +37,21 @@ public class CategoryChildren implements Serializable {
     @Lob
     @Column(name = "description")
     private String description;
-    @JoinColumn(name = "category_root_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_root", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CategoryRoot categoryRootId;
+    private AccountRoot accountRoot;
     @JsonIgnore
-    @OneToMany(mappedBy = "categoryChildrenId")
-    private Set<Transaction> transactionSet;
+    @OneToMany(mappedBy = "accountType")
+    private Set<Wallet> walletSet;
 
-    public CategoryChildren() {
+    public AccountType() {
     }
 
-    public CategoryChildren(Integer id) {
+    public AccountType(Integer id) {
         this.id = id;
     }
 
-    public CategoryChildren(Integer id, String name) {
+    public AccountType(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -88,20 +88,20 @@ public class CategoryChildren implements Serializable {
         this.description = description;
     }
 
-    public CategoryRoot getCategoryRootId() {
-        return categoryRootId;
+    public AccountRoot getAccountRoot() {
+        return accountRoot;
     }
 
-    public void setCategoryRootId(CategoryRoot categoryRootId) {
-        this.categoryRootId = categoryRootId;
+    public void setAccountRoot(AccountRoot accountRoot) {
+        this.accountRoot = accountRoot;
     }
 
-    public Set<Transaction> getTransactionSet() {
-        return transactionSet;
+    public Set<Wallet> getWalletSet() {
+        return walletSet;
     }
 
-    public void setTransactionSet(Set<Transaction> transactionSet) {
-        this.transactionSet = transactionSet;
+    public void setWalletSet(Set<Wallet> walletSet) {
+        this.walletSet = walletSet;
     }
 
     @Override
@@ -114,10 +114,10 @@ public class CategoryChildren implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CategoryChildren)) {
+        if (!(object instanceof AccountType)) {
             return false;
         }
-        CategoryChildren other = (CategoryChildren) object;
+        AccountType other = (AccountType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,7 +126,7 @@ public class CategoryChildren implements Serializable {
 
     @Override
     public String toString() {
-        return "com.example.backend.models.CategoryChildren[ id=" + id + " ]";
+        return "com.example.backend.models.AccountType[ id=" + id + " ]";
     }
     
 }

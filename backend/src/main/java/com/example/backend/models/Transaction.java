@@ -18,7 +18,9 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "Transaction.findAll", query = "SELECT t FROM Transaction t"),
     @NamedQuery(name = "Transaction.findById", query = "SELECT t FROM Transaction t WHERE t.id = :id"),
-    @NamedQuery(name = "Transaction.findByCreatedDate", query = "SELECT t FROM Transaction t WHERE t.createdDate = :createdDate")})
+    @NamedQuery(name = "Transaction.findByDescription", query = "SELECT t FROM Transaction t WHERE t.description = :description"),
+    @NamedQuery(name = "Transaction.findByCreatedDate", query = "SELECT t FROM Transaction t WHERE t.createdDate = :createdDate"),
+    @NamedQuery(name = "Transaction.findByTotal", query = "SELECT t FROM Transaction t WHERE t.total = :total")})
 public class Transaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,22 +29,23 @@ public class Transaction implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Lob
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @JoinColumn(name = "category_children_id", referencedColumnName = "id")
+    @Column(name = "total")
+    private Long total;
+    @Lob
+    @Column(name = "image")
+    private String image;
+    @JoinColumn(name = "category_type", referencedColumnName = "id")
     @ManyToOne
-    private CategoryChildren categoryChildrenId;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private User userId;
-    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
+    private CategoryType categoryType;
+    @JoinColumn(name = "wallet", referencedColumnName = "id")
     @ManyToOne
-    private Wallet walletId;
+    private Wallet wallet;
 
     public Transaction() {
     }
@@ -80,28 +83,36 @@ public class Transaction implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public CategoryChildren getCategoryChildrenId() {
-        return categoryChildrenId;
+    public Long getTotal() {
+        return total;
     }
 
-    public void setCategoryChildrenId(CategoryChildren categoryChildrenId) {
-        this.categoryChildrenId = categoryChildrenId;
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
-    public User getUserId() {
-        return userId;
+    public String getImage() {
+        return image;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Wallet getWalletId() {
-        return walletId;
+    public CategoryType getCategoryType() {
+        return categoryType;
     }
 
-    public void setWalletId(Wallet walletId) {
-        this.walletId = walletId;
+    public void setCategoryType(CategoryType categoryType) {
+        this.categoryType = categoryType;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     @Override

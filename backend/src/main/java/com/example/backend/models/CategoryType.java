@@ -15,12 +15,12 @@ import java.util.Set;
  * @author ASUS
  */
 @Entity
-@Table(name = "account_children")
+@Table(name = "category_type")
 @NamedQueries({
-    @NamedQuery(name = "AccountChildren.findAll", query = "SELECT a FROM AccountChildren a"),
-    @NamedQuery(name = "AccountChildren.findById", query = "SELECT a FROM AccountChildren a WHERE a.id = :id"),
-    @NamedQuery(name = "AccountChildren.findByName", query = "SELECT a FROM AccountChildren a WHERE a.name = :name")})
-public class AccountChildren implements Serializable {
+    @NamedQuery(name = "CategoryType.findAll", query = "SELECT c FROM CategoryType c"),
+    @NamedQuery(name = "CategoryType.findById", query = "SELECT c FROM CategoryType c WHERE c.id = :id"),
+    @NamedQuery(name = "CategoryType.findByName", query = "SELECT c FROM CategoryType c WHERE c.name = :name")})
+public class CategoryType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,24 +34,21 @@ public class AccountChildren implements Serializable {
     @Lob
     @Column(name = "image")
     private String image;
-    @Lob
-    @Column(name = "description")
-    private String description;
-    @JoinColumn(name = "account_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_root", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private AccountRoot accountTypeId;
+    private CategoryRoot categoryRoot;
     @JsonIgnore
-    @OneToMany(mappedBy = "accountChildrenId")
-    private Set<Wallet> walletSet;
+    @OneToMany(mappedBy = "categoryType")
+    private Set<Transaction> transactionSet;
 
-    public AccountChildren() {
+    public CategoryType() {
     }
 
-    public AccountChildren(Integer id) {
+    public CategoryType(Integer id) {
         this.id = id;
     }
 
-    public AccountChildren(Integer id, String name) {
+    public CategoryType(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -80,28 +77,20 @@ public class AccountChildren implements Serializable {
         this.image = image;
     }
 
-    public String getDescription() {
-        return description;
+    public CategoryRoot getCategoryRoot() {
+        return categoryRoot;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategoryRoot(CategoryRoot categoryRoot) {
+        this.categoryRoot = categoryRoot;
     }
 
-    public AccountRoot getAccountTypeId() {
-        return accountTypeId;
+    public Set<Transaction> getTransactionSet() {
+        return transactionSet;
     }
 
-    public void setAccountTypeId(AccountRoot accountTypeId) {
-        this.accountTypeId = accountTypeId;
-    }
-
-    public Set<Wallet> getWalletSet() {
-        return walletSet;
-    }
-
-    public void setWalletSet(Set<Wallet> walletSet) {
-        this.walletSet = walletSet;
+    public void setTransactionSet(Set<Transaction> transactionSet) {
+        this.transactionSet = transactionSet;
     }
 
     @Override
@@ -114,10 +103,10 @@ public class AccountChildren implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AccountChildren)) {
+        if (!(object instanceof CategoryType)) {
             return false;
         }
-        AccountChildren other = (AccountChildren) object;
+        CategoryType other = (CategoryType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,7 +115,7 @@ public class AccountChildren implements Serializable {
 
     @Override
     public String toString() {
-        return "com.example.backend.models.AccountChildren[ id=" + id + " ]";
+        return "com.example.backend.models.CategoryType[ id=" + id + " ]";
     }
     
 }

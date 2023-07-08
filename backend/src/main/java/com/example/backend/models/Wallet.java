@@ -20,7 +20,8 @@ import java.util.Set;
     @NamedQuery(name = "Wallet.findAll", query = "SELECT w FROM Wallet w"),
     @NamedQuery(name = "Wallet.findById", query = "SELECT w FROM Wallet w WHERE w.id = :id"),
     @NamedQuery(name = "Wallet.findByName", query = "SELECT w FROM Wallet w WHERE w.name = :name"),
-    @NamedQuery(name = "Wallet.findByBalance", query = "SELECT w FROM Wallet w WHERE w.balance = :balance")})
+    @NamedQuery(name = "Wallet.findByBalance", query = "SELECT w FROM Wallet w WHERE w.balance = :balance"),
+    @NamedQuery(name = "Wallet.findByDescription", query = "SELECT w FROM Wallet w WHERE w.description = :description")})
 public class Wallet implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,17 +36,16 @@ public class Wallet implements Serializable {
     @Basic(optional = false)
     @Column(name = "balance")
     private long balance;
-    @Lob
     @Column(name = "description")
     private String description;
-    @JoinColumn(name = "account_children_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_type", referencedColumnName = "id")
     @ManyToOne
-    private AccountChildren accountChildrenId;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private AccountType accountType;
+    @JoinColumn(name = "user", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User userId;
+    private User user;
     @JsonIgnore
-    @OneToMany(mappedBy = "walletId")
+    @OneToMany(mappedBy = "wallet")
     private Set<Transaction> transactionSet;
 
     public Wallet() {
@@ -93,20 +93,20 @@ public class Wallet implements Serializable {
         this.description = description;
     }
 
-    public AccountChildren getAccountChildrenId() {
-        return accountChildrenId;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setAccountChildrenId(AccountChildren accountChildrenId) {
-        this.accountChildrenId = accountChildrenId;
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Transaction> getTransactionSet() {

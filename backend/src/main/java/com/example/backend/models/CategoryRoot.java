@@ -39,8 +39,8 @@ public class CategoryRoot implements Serializable {
     @Column(name = "type")
     private String type;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryRootId")
-    private Set<CategoryChildren> categoryChildrenSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryRoot")
+    private Set<CategoryType> categoryTypeSet;
 
     public CategoryRoot() {
     }
@@ -87,12 +87,12 @@ public class CategoryRoot implements Serializable {
         this.type = type;
     }
 
-    public Set<CategoryChildren> getCategoryChildrenSet() {
-        return categoryChildrenSet;
+    public Set<CategoryType> getCategoryTypeSet() {
+        return categoryTypeSet;
     }
 
-    public void setCategoryChildrenSet(Set<CategoryChildren> categoryChildrenSet) {
-        this.categoryChildrenSet = categoryChildrenSet;
+    public void setCategoryTypeSet(Set<CategoryType> categoryTypeSet) {
+        this.categoryTypeSet = categoryTypeSet;
     }
 
     @Override

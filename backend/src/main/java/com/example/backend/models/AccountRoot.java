@@ -35,8 +35,8 @@ public class AccountRoot implements Serializable {
     @Column(name = "image")
     private String image;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountTypeId")
-    private Set<AccountChildren> accountChildrenSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountRoot")
+    private Set<AccountType> accountTypeSet;
 
     public AccountRoot() {
     }
@@ -74,12 +74,12 @@ public class AccountRoot implements Serializable {
         this.image = image;
     }
 
-    public Set<AccountChildren> getAccountChildrenSet() {
-        return accountChildrenSet;
+    public Set<AccountType> getAccountTypeSet() {
+        return accountTypeSet;
     }
 
-    public void setAccountChildrenSet(Set<AccountChildren> accountChildrenSet) {
-        this.accountChildrenSet = accountChildrenSet;
+    public void setAccountTypeSet(Set<AccountType> accountTypeSet) {
+        this.accountTypeSet = accountTypeSet;
     }
 
     @Override
