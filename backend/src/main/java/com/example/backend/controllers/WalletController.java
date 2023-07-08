@@ -15,7 +15,7 @@ public class WalletController {
     @Autowired
     private WalletDao walletDao;
 
-    @GetMapping("/wallet/get-all")
+    @GetMapping("/wallets")
     private List<Wallet> getAllWallets() {
         return walletDao.getAllWallets();
     }

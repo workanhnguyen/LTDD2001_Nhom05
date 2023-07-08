@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-    @GetMapping("/user/get-all")
+    @GetMapping("/users")
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
