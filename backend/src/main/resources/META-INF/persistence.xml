@@ -5,10 +5,10 @@
     <class>com.example.backend.models.User</class>
     <class>com.example.backend.models.CategoryRoot</class>
     <class>com.example.backend.models.AccountRoot</class>
-    <class>com.example.backend.models.AccountChildren</class>
-    <class>com.example.backend.models.CategoryChildren</class>
     <class>com.example.backend.models.Transaction</class>
     <class>com.example.backend.models.Wallet</class>
+    <class>com.example.backend.models.CategoryType</class>
+    <class>com.example.backend.models.AccountType</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/fmdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
