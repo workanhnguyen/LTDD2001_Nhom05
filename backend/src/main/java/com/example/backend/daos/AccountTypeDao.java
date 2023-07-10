@@ -1,6 +1,6 @@
 package com.example.backend.daos;
 
-import com.example.backend.dto.AccountTypeDto;
+import com.example.backend.dtos.AccountTypeDto;
 import com.example.backend.models.AccountRoot;
 import com.example.backend.models.AccountType;
 import com.example.backend.repositories.AccountRootRepository;
@@ -8,7 +8,6 @@ import com.example.backend.repositories.AccountTypeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,3 +45,5 @@ public class AccountTypeDao {
         return modelMapper.map(accountTypeRepository.save(accountType), AccountTypeDto.class);
     }
 }
+
+

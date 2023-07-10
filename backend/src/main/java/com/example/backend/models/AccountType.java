@@ -44,3 +44,5 @@ public class AccountType implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountType", fetch = FetchType.LAZY)
     private Set<Wallet> walletSet;
 }
+
+
