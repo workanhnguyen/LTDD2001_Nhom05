@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `account_root`;
 CREATE TABLE `account_root` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `image` longtext COLLATE utf8mb4_vietnamese_ci,
+  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -51,12 +51,12 @@ CREATE TABLE `account_type` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `account_root` int NOT NULL,
-  `image` longtext COLLATE utf8mb4_vietnamese_ci,
-  `description` longtext COLLATE utf8mb4_vietnamese_ci,
+  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
+  `description` tinytext COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_account_account_type_idx` (`account_root`),
   CONSTRAINT `fk_account_account_type` FOREIGN KEY (`account_root`) REFERENCES `account_root` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `account_type` (
 
 LOCK TABLES `account_type` WRITE;
 /*!40000 ALTER TABLE `account_type` DISABLE KEYS */;
-INSERT INTO `account_type` VALUES (1,'Tiền mặt',1,NULL,NULL),(2,'Agribank',2,NULL,'Ngân hàng Nông nghiệp và Phát triển nông thôn Việt Nam'),(3,'Vietcombank',2,NULL,'Ngân hàng TMCP Ngoại thương Việt Nam'),(4,'Nam A Bank',2,NULL,'Ngân hàng TMCP Nam Á'),(5,'Momo',3,NULL,NULL),(6,'Moca',3,NULL,NULL),(7,'ShoppePay',3,NULL,NULL),(8,'ViettelPay',3,NULL,NULL),(9,'VnPay',3,NULL,NULL),(10,'ZaloPay',3,NULL,NULL),(11,'Khác',1,NULL,NULL),(12,'Mặc định',1,NULL,NULL);
+INSERT INTO `account_type` VALUES (1,'Tiền mặt',1,NULL,NULL),(2,'Agribank',2,NULL,'Ngân hàng Nông nghiệp và Phát triển nông thôn Việt Nam'),(3,'Vietcombank',2,NULL,'Ngân hàng TMCP Ngoại thương Việt Nam'),(4,'Nam A Bank',2,NULL,'Ngân hàng TMCP Nam Á'),(5,'Momo',3,NULL,NULL),(6,'Moca',3,NULL,NULL),(7,'ShoppePay',3,NULL,NULL),(8,'ViettelPay',3,NULL,NULL),(9,'VnPay',3,NULL,NULL),(10,'ZaloPay',3,NULL,NULL),(11,'Khác',1,NULL,NULL),(12,'Mặc định',1,NULL,NULL),(17,'Tiền tiết kiệm 1',1,NULL,NULL),(18,'Tiền tiết kiệm 2',1,NULL,NULL),(19,'Tiền tiết kiệm 3',1,NULL,NULL);
 /*!40000 ALTER TABLE `account_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +79,7 @@ DROP TABLE IF EXISTS `category_root`;
 CREATE TABLE `category_root` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `image` longtext COLLATE utf8mb4_vietnamese_ci,
+  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
   `type` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -106,10 +106,10 @@ CREATE TABLE `category_type` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `category_root` int NOT NULL,
-  `image` longtext COLLATE utf8mb4_vietnamese_ci,
+  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_category_category_type_idx` (`category_root`),
-  CONSTRAINT `fk_category_children_category_root` FOREIGN KEY (`category_root`) REFERENCES `category_root` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_category_type_category_root` FOREIGN KEY (`category_root`) REFERENCES `category_root` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -136,8 +136,8 @@ CREATE TABLE `transaction` (
   `category_type` int DEFAULT NULL,
   `created_date` datetime(6) NOT NULL,
   `wallet` int DEFAULT NULL,
-  `total` decimal(10,0) DEFAULT NULL,
-  `image` longtext COLLATE utf8mb4_vietnamese_ci,
+  `total` bigint DEFAULT NULL,
+  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_category_id_idx` (`category_type`),
   KEY `fk_transaction_wallet_idx` (`wallet`),
@@ -196,12 +196,12 @@ CREATE TABLE `wallet` (
   `user` int NOT NULL,
   `account_type` int DEFAULT NULL,
   `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `balance` decimal(10,0) NOT NULL,
+  `balance` bigint NOT NULL,
   `description` tinytext COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_wallet_account_idx` (`account_type`),
   KEY `fk_wallet_user_idx` (`user`),
-  CONSTRAINT `fk_wallet_account_children` FOREIGN KEY (`account_type`) REFERENCES `account_type` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_wallet_account_type` FOREIGN KEY (`account_type`) REFERENCES `account_type` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_wallet_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -225,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-08 12:00:52
+-- Dump completed on 2023-07-10 19:59:47
