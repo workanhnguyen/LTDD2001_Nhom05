@@ -22,10 +22,23 @@ public class AccountTypeController {
     public ResponseEntity<List<AccountTypeDto>> getAllAccountTypes() {
         return ResponseEntity.ok().body(accountTypeDao.getAllAccountTypes());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountTypeDto> getAccountType(@PathVariable int id) {
+        return ResponseEntity.ok().body(accountTypeDao.getAccountType(id));
+    }
+
     @PostMapping
     public ResponseEntity<AccountTypeDto> addNewAccountType(@RequestBody AccountTypeDto accountTypeDto) throws Exception {
         return new ResponseEntity<>(accountTypeDao.addNewAccountType(accountTypeDto), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteAccountType(@PathVariable int id) {
+        return accountTypeDao.deleteAccountType(id);
+    }
+
+
 }
 
 
