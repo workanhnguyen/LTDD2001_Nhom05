@@ -32,11 +32,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    LayoutUtil util = new LayoutUtil();
-
-    // UI variables
-//    TextView tvTotalBalance1;
-//    RecyclerView transactionList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,50 +41,11 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle("Chào Anh Nguyễn!");
-//        util.customActionBar("Chào Anh Nguyễn!");
-//        util.changeFragment(R.id.fragmentContainerView, new SettingFragment());
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainerView, new OverViewFragment())
                 .commit();
-
-//        initializeElement();
-//        loadTransactionData();
     }
-
-//    private void loadTransactionData() {
-//        RetrofitConfig retrofitConfig = new RetrofitConfig();
-//        TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
-//
-//        transactionApi.getAllTransactions()
-//                .enqueue(new Callback<List<Transaction>>() {
-//                    @Override
-//                    public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
-//                        transactionList.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-//                        populateListView(response.body());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<Transaction>> call, Throwable t) {
-//                        Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                        tvTotalBalance1.setText(t.getMessage());
-//                    }
-//                });
-//    }
-
-//    private void populateListView(List<Transaction> transactions) {
-//        List<Transaction> transactionSaved = new ArrayList<>();
-//
-//        for (Transaction t: transactions) {
-//            transactionSaved.add(t);
-//        }
-//        TransactionAdapter transactionAdapter = new TransactionAdapter(transactionSaved);
-//        transactionList.setAdapter(transactionAdapter);
-//    }
-//
-//    private void initializeElement() {
-////        tvTotalBalance1 = findViewById(R.id.tvTotalBalance1);
-//        transactionList = findViewById(R.id.transactionList);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
