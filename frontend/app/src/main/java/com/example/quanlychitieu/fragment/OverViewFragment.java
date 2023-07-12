@@ -43,13 +43,12 @@ public class OverViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Show the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
         }
-        loadTransactionData();
-
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,8 +59,9 @@ public class OverViewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        tvTotalBalance1 = view.findViewById(R.id.tvTotalBalance1);
-        transactionList = view.findViewById(R.id.transactionList);
+
+        initializeElement(view);
+        loadTransactionData();
     }
     private void loadTransactionData() {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
@@ -91,9 +91,7 @@ public class OverViewFragment extends Fragment {
         TransactionAdapter transactionAdapter = new TransactionAdapter(transactionSaved);
         transactionList.setAdapter(transactionAdapter);
     }
-
-//    private void initializeElement() {
-//        tvTotalBalance1 = findViewById(R.id.tvTotalBalance1);
-//        transactionList = findViewById(R.id.transactionList);
-//    }
+    private void initializeElement(View view) {
+        transactionList = view.findViewById(R.id.transactionList);
+    }
 }
