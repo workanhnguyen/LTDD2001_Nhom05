@@ -1,12 +1,9 @@
 package com.example.quanlychitieu.fragment;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.TransactionAdapter;
 import com.example.quanlychitieu.apis.TransactionApi;
