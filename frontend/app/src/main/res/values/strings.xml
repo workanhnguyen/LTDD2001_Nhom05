@@ -17,6 +17,13 @@
     <string name="sum_expense">Tổng chi</string>
     <string name="today">Hôm nay</string>
     <string name="edit">Chỉnh sửa</string>
+    <string name="general_setting">Cài đặt chung</string>
+    <string name="dev_info">Thông tin nhà phát triển</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="language_vn">Tiếng Việt</string>
+    <string name="language_en">Tiếng Anh</string>
     <string-array name="list_items">
         <item>Expense</item>
         <item>Balance</item>
