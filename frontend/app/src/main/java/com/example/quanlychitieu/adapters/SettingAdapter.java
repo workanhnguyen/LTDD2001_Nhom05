@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlychitieu.MainActivity;
+import com.example.quanlychitieu.activities.DevInfoActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.GeneralSettingActivity;
-import com.example.quanlychitieu.fragment.SettingFragment;
 import com.example.quanlychitieu.holders.SettingHolder;
 import com.example.quanlychitieu.models.Setting;
 
@@ -56,7 +54,8 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingHolder> {
                     Intent intent = new Intent(context, GeneralSettingActivity.class);
                     context.startActivity(intent);
                 } else if (holder.getAdapterPosition() == 1) {
-                    Toast.makeText(context, setting.getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, DevInfoActivity.class);
+                    context.startActivity(intent);
                 }
             }
         });
