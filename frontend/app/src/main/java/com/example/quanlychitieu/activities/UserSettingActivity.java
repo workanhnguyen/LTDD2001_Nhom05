@@ -31,14 +31,12 @@ public class UserSettingActivity extends AppCompatActivity {
 
         userSettingList = findViewById(R.id.userSettingList);
 
-        userSettings.add("Đổi mật khẩu");
-        userSettings.add("Đăng xuất");
+        userSettings.add(getString(R.string.change_password));
+        userSettings.add(getString(R.string.logout));
 
         UserSettingAdapter adapter = new UserSettingAdapter(userSettings);
         userSettingList.setAdapter(adapter);
         userSettingList.setLayoutManager(new LinearLayoutManager(this));
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(UserSettingActivity.this, android.R.layout.simple_list_item_1, userSettings);
-//        userSettingList.setAdapter(adapter);
     }
 
     @Override
