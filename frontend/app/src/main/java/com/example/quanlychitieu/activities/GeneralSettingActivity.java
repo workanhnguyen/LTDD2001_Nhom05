@@ -1,42 +1,44 @@
 package com.example.quanlychitieu.activities;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.UserSettingAdapter;
+import com.example.quanlychitieu.adapters.GeneralSettingAdapter;
+import com.example.quanlychitieu.models.GeneralSetting;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserSettingActivity extends AppCompatActivity {
-    RecyclerView userSettingList;
-    List<String> userSettings = new ArrayList<>();
+public class GeneralSettingActivity extends AppCompatActivity {
+
+    RecyclerView generalSettingList;
+
+    List<GeneralSetting> generalSettings = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_setting);
+        setContentView(R.layout.activity_general_setting);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("");
+            actionBar.setTitle(R.string.general_setting);
         }
 
-        userSettingList = findViewById(R.id.userSettingList);
+        generalSettingList = findViewById(R.id.generalSettingList);
 
-        userSettings.add(getString(R.string.change_password));
-        userSettings.add(getString(R.string.logout));
+        generalSettings.add(new GeneralSetting(getString(R.string.language), getString(R.string.language_vn)));
 
-        UserSettingAdapter adapter = new UserSettingAdapter(userSettings);
-        userSettingList.setAdapter(adapter);
-        userSettingList.setLayoutManager(new LinearLayoutManager(this));
+        GeneralSettingAdapter adapter = new GeneralSettingAdapter(generalSettings);
+        generalSettingList.setAdapter(adapter);
+        generalSettingList.setLayoutManager(new LinearLayoutManager(GeneralSettingActivity.this));
     }
 
     @Override
