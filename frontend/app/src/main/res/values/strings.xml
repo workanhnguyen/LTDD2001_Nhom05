@@ -16,6 +16,7 @@
     <string name="sum_income">Tổng thu</string>
     <string name="sum_expense">Tổng chi</string>
     <string name="today">Hôm nay</string>
+    <string name="edit">Chỉnh sửa</string>
     <string-array name="list_items">
         <item>Expense</item>
         <item>Balance</item>
