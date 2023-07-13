@@ -68,13 +68,13 @@ public class SettingFragment extends Fragment {
         super.onViewCreated(view, saveInstanceState);
 
         settingList = view.findViewById(R.id.settingList);
-//        settingUsername = view.findViewById(R.id.settingUsername);
         linearLayoutUserInfo = view.findViewById(R.id.linearLayoutUserInfo);
 
-        items.add(new Setting(R.drawable.app_icon_background, "Cài đặt chung"));
-        items.add(new Setting(R.drawable.app_icon_background, "Thông tin nhà phát triển"));
+        items.add(new Setting(R.drawable.app_icon_background, getString(R.string.general_setting)));
+        items.add(new Setting(R.drawable.app_icon_background, getString(R.string.dev_info)));
 
         SettingAdapter adapter = new SettingAdapter(items);
+        adapter.setContext(getActivity());
         settingList.setAdapter(adapter);
         settingList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
