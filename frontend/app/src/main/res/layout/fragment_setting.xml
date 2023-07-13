@@ -9,6 +9,7 @@
 
     <!-- User Info -->
     <LinearLayout
+        android:id="@+id/linearLayoutUserInfo"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
@@ -25,6 +26,7 @@
             android:orientation="vertical"
             android:layout_marginStart="16dp">
             <TextView
+                android:id="@+id/settingUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Nguyễn Anh"
