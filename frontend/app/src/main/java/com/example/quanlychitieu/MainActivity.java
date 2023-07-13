@@ -39,11 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle("Chào Anh Nguyễn!");
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView, new OverViewFragment())
+                .replace(R.id.fragmentContainerView, new SettingFragment())
                 .commit();
     }
 
