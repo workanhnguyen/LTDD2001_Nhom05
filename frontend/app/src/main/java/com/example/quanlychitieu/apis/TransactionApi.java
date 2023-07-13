@@ -1,6 +1,5 @@
 package com.example.quanlychitieu.apis;
 
-import com.example.quanlychitieu.models.AccountType;
 import com.example.quanlychitieu.models.Transaction;
 
 import java.util.List;
