@@ -1,6 +1,7 @@
 package com.example.backend.controllers;
 
 import com.example.backend.daos.AccountTypeDao;
+import com.example.backend.dtos.AccountRootDto;
 import com.example.backend.dtos.AccountTypeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,21 @@ public class AccountTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<AccountTypeDto> addNewAccountType(@RequestBody AccountTypeDto accountTypeDto) throws Exception {
-        return new ResponseEntity<>(accountTypeDao.addNewAccountType(accountTypeDto), HttpStatus.CREATED);
+    public ResponseEntity<AccountTypeDto> addNewAccountType(
+            @RequestBody AccountTypeDto accountTypeDto) throws Exception {
+        return new ResponseEntity<>(accountTypeDao.addNewAccountType(accountTypeDto),
+                HttpStatus.CREATED);
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AccountTypeDto> updateAccountType (@PathVariable int id, @RequestBody AccountTypeDto accountTypeDto) throws Exception {
+        return ResponseEntity.ok().body(accountTypeDao.updateAccountType(id, accountTypeDto));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<AccountTypeDto> patchAccountType (@PathVariable int id, @RequestBody AccountTypeDto accountTypeDto) throws Exception {
+        return ResponseEntity.ok().body(accountTypeDao.patchAccountType(id, accountTypeDto));
     }
 
     @DeleteMapping("/{id}")

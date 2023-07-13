@@ -40,6 +40,11 @@ public class AccountRootController {
         return ResponseEntity.ok().body(accountRootDao.updateAccountRoot(id, accountRootDto));
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<AccountRootDto> patchAccountRoot (@PathVariable int id, @RequestBody AccountRootDto accountRootDto) throws Exception {
+        return ResponseEntity.ok().body(accountRootDao.patchAccountRoot(id, accountRootDto));
+    }
+
     @DeleteMapping("/{id}")
     public boolean deleteAccountRoot(@PathVariable int id) {
         return accountRootDao.deleteAccountRoot(id);

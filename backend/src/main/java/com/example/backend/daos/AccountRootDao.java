@@ -1,9 +1,9 @@
 package com.example.backend.daos;
 
 import com.example.backend.dtos.AccountRootDto;
-import com.example.backend.dtos.AccountTypeDto;
+
 import com.example.backend.models.AccountRoot;
-import com.example.backend.models.AccountType;
+
 import com.example.backend.repositories.AccountRootRepository;
 import com.example.backend.repositories.AccountTypeRepository;
 import lombok.AllArgsConstructor;
@@ -65,7 +65,6 @@ public class AccountRootDao {
         AccountRoot accountRoot = accountRootRepository.findById(id)
                 .orElseThrow(Exception::new);
 
-        accountRoot.setId(id);
         accountRoot.setName(updatedAccountRootDto.getName());
         accountRoot.setImage(updatedAccountRootDto.getImage());
 
@@ -73,6 +72,24 @@ public class AccountRootDao {
 
         return modelMapper.map(updatedAccountRoot, AccountRootDto.class);
     }
+
+    public AccountRootDto patchAccountRoot(int id, AccountRootDto updatedAccountRootDto) throws Exception {
+        AccountRoot accountRoot = accountRootRepository.findById(id)
+                .orElseThrow(Exception::new);
+
+        if (updatedAccountRootDto.getName() != null) {
+            accountRoot.setName(updatedAccountRootDto.getName());
+        }
+
+        if (updatedAccountRootDto.getImage() != null) {
+            accountRoot.setImage(updatedAccountRootDto.getImage());
+        }
+
+        AccountRoot updatedAccountRoot = accountRootRepository.save(accountRoot);
+
+        return modelMapper.map(updatedAccountRoot, AccountRootDto.class);
+    }
+
 
 }
 

@@ -39,18 +39,24 @@ public class AccountTypeDao {
         return modelMapper.map(accountType, AccountTypeDto.class);
     }
 
-    public boolean deleteAccountType(int id) {
-        if (accountTypeRepository.existsById(id)) {
-            accountTypeRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 
     public AccountTypeDto addNewAccountType(AccountTypeDto accountTypeDto) throws Exception {
+
+//        AccountType accountType = new AccountType();
+//
+//        accountType.setName(accountTypeDto.getName());
+//        accountType.setImage(accountTypeDto.getImage());
+//        accountType.setDescription(accountTypeDto.getDescription());
+//
+//        AccountRoot accountRoot = accountRootRepository.findById(accountTypeDto.getAccountRootId())
+//                .orElseThrow(Exception::new);
+//        accountType.setAccountRoot(accountRoot);
+//
+//        AccountType updatedAccountType = accountTypeRepository.save(accountType);
+
+//        return modelMapper.map(updatedAccountType, AccountTypeDto.class);
 
         AccountRoot accountRoot = accountRootRepository.findById(accountTypeDto.getAccountRootId())
                 .orElseThrow(Exception::new);
@@ -60,10 +66,63 @@ public class AccountTypeDao {
         accountType.setDescription(accountTypeDto.getDescription());
         accountType.setImage(accountTypeDto.getImage());
         accountType.setAccountRoot(accountRoot);
-        AccountType saveAccountType = accountTypeRepository.save(accountType);
 
-        return modelMapper.map(saveAccountType, AccountTypeDto.class);
+        return modelMapper.map(accountTypeRepository.save(accountType), AccountTypeDto.class);
     }
+
+    public AccountTypeDto updateAccountType(int id, AccountTypeDto accountTypeDto) throws Exception {
+        AccountType accountType = accountTypeRepository.findById(id)
+                .orElseThrow(Exception::new);
+
+        accountType.setName(accountTypeDto.getName());
+        accountType.setImage(accountTypeDto.getImage());
+        accountType.setDescription(accountTypeDto.getDescription());
+        AccountRoot accountRoot = accountRootRepository.findById(accountTypeDto.getAccountRootId())
+                .orElseThrow(Exception::new);
+        accountType.setAccountRoot(accountRoot);
+        AccountType updatedAccountType = accountTypeRepository.save(accountType);
+
+        return modelMapper.map(updatedAccountType, AccountTypeDto.class);
+    }
+
+    public AccountTypeDto patchAccountType(int id, AccountTypeDto accountTypeDto) throws Exception {
+        AccountType accountType = accountTypeRepository.findById(id)
+                .orElseThrow(Exception::new);
+
+        if (accountTypeDto.getName() != null) {
+            accountType.setName(accountTypeDto.getName());
+        }
+
+        if (accountTypeDto.getImage() != null) {
+            accountType.setImage(accountTypeDto.getImage());
+        }
+
+        if (accountTypeDto.getDescription() != null) {
+            accountType.setDescription(accountTypeDto.getDescription());
+        }
+
+        if(accountTypeDto.getAccountRootId() != null) {
+            AccountRoot accountRoot = accountRootRepository.findById(accountTypeDto.getAccountRootId())
+                    .orElseThrow(Exception::new);
+            accountType.setAccountRoot(accountRoot);
+        }
+
+        AccountType updatedAccountType = accountTypeRepository.save(accountType);
+
+        return modelMapper.map(updatedAccountType, AccountTypeDto.class);
+    }
+
+
+
+    public boolean deleteAccountType(int id) {
+        if (accountTypeRepository.existsById(id)) {
+            accountTypeRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 
