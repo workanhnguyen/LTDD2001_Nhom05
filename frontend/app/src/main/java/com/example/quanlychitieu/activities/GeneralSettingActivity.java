@@ -35,6 +35,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         generalSettingList = findViewById(R.id.generalSettingList);
 
         generalSettings.add(new GeneralSetting(getString(R.string.language), getString(R.string.language_vn)));
+        generalSettings.add(new GeneralSetting(getString(R.string.format_time), "dd/MM/yyyy"));
 
         GeneralSettingAdapter adapter = new GeneralSettingAdapter(generalSettings);
         generalSettingList.setAdapter(adapter);
