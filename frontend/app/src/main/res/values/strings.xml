@@ -30,6 +30,7 @@
     <string name="subject">Môn học:</string>
     <string name="open_uni">Trường Đại học Mở TP.HCM</string>
     <string name="mobile_programming">Lập trình trên thiết bị di động</string>
+    <string name="format_time">Định dạng thời gian</string>
     <string-array name="list_items">
         <item>Expense</item>
         <item>Balance</item>
