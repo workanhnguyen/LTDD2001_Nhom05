@@ -8,17 +8,17 @@ import android.view.MenuItem;
 
 import com.example.quanlychitieu.R;
 
-public class DevInfoActivity extends AppCompatActivity {
+public class EditUserInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dev_info);
+        setContentView(R.layout.activity_edit_user_info);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(R.string.dev_info);
+            actionBar.setTitle(R.string.edit_info);
             actionBar.setElevation(0);
         }
     }

@@ -1,7 +1,10 @@
 package com.example.quanlychitieu.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,7 @@ import java.util.List;
 
 public class UserSettingActivity extends AppCompatActivity {
     RecyclerView userSettingList;
+    Button btnEditUserInfo;
     List<String> userSettings = new ArrayList<>();
 
     @Override
@@ -26,7 +30,8 @@ public class UserSettingActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("");
+            actionBar.setTitle(R.string.user);
+            actionBar.setElevation(0);
         }
 
         userSettingList = findViewById(R.id.userSettingList);
@@ -37,6 +42,20 @@ public class UserSettingActivity extends AppCompatActivity {
         UserSettingAdapter adapter = new UserSettingAdapter(userSettings);
         userSettingList.setAdapter(adapter);
         userSettingList.setLayoutManager(new LinearLayoutManager(this));
+
+        handleChangeIntentEditUserInfo();
+    }
+
+    private void handleChangeIntentEditUserInfo() {
+        btnEditUserInfo = findViewById(R.id.btnEditUserInfo);
+
+        btnEditUserInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserSettingActivity.this, EditUserInfoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

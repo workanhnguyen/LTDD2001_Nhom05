@@ -30,6 +30,26 @@
     <string name="subject">Môn học:</string>
     <string name="open_uni">Trường Đại học Mở TP.HCM</string>
     <string name="mobile_programming">Lập trình trên thiết bị di động</string>
+    <string name="format_time">Định dạng thời gian</string>
+    <string name="showed_name">Tên hiển thị</string>
+    <string name="email">Email</string>
+    <string name="gender">Giới tính</string>
+    <string name="career">Nghề nghiệp</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="update">Cập nhật</string>
+    <string name="data_setting">Cài đặt dữ liệu</string>
+    <string name="edit_info">Chỉnh sửa thông tin</string>
+    <string name="user">Người dùng</string>
+    <string name="date">Ngày</string>
+    <string name="month">Tháng</string>
+    <string name="custom_time">Tùy chọn</string>
+    <string name="yesterday">Hôm qua</string>
+    <string name="another_day">Ngày khác</string>
+    <string name="past_month">Tháng trước</string>
+    <string name="another_month">Tháng khác</string>
+    <string name="from_date">Từ ngày</string>
+    <string name="to_date">Đến ngày</string>
     <string-array name="list_items">
         <item>Expense</item>
         <item>Balance</item>

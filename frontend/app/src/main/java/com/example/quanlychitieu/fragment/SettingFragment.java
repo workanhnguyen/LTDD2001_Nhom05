@@ -78,6 +78,11 @@ public class SettingFragment extends Fragment {
         settingList.setAdapter(adapter);
         settingList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        handleGoToUserInfoActivity();
+
+    }
+
+    private void handleGoToUserInfoActivity() {
         linearLayoutUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +90,5 @@ public class SettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 }

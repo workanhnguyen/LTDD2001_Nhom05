@@ -65,6 +65,7 @@
 
     <!-- Statistic Filter -->
     <LinearLayout
+        android:id="@+id/linearLayoutFilter"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/white"

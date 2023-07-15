@@ -30,11 +30,13 @@ public class GeneralSettingActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.general_setting);
+            actionBar.setElevation(0);
         }
 
         generalSettingList = findViewById(R.id.generalSettingList);
 
         generalSettings.add(new GeneralSetting(getString(R.string.language), getString(R.string.language_vn)));
+        generalSettings.add(new GeneralSetting(getString(R.string.format_time), "dd/MM/yyyy"));
 
         GeneralSettingAdapter adapter = new GeneralSettingAdapter(generalSettings);
         generalSettingList.setAdapter(adapter);
