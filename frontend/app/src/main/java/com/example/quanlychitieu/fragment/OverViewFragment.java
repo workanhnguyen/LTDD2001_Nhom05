@@ -1,12 +1,11 @@
 package com.example.quanlychitieu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.StatisticFilterActivity;
+import com.example.quanlychitieu.activities.UserSettingActivity;
 import com.example.quanlychitieu.adapters.TransactionAdapter;
 import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
@@ -34,6 +34,7 @@ import retrofit2.Response;
 public class OverViewFragment extends Fragment {
     TextView tvTotalBalance1;
     RecyclerView transactionList;
+    LinearLayout linearLayoutFilter;
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -48,6 +49,7 @@ public class OverViewFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
+            activity.getSupportActionBar().setElevation(0);
         }
     }
     @Override
@@ -62,7 +64,22 @@ public class OverViewFragment extends Fragment {
 
         initializeElement(view);
         loadTransactionData();
+
+        linearLayoutFilter = view.findViewById(R.id.linearLayoutFilter);
+
+        handleGoToStatisticFilterActivity();
     }
+
+    private void handleGoToStatisticFilterActivity() {
+        linearLayoutFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StatisticFilterActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void loadTransactionData() {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
