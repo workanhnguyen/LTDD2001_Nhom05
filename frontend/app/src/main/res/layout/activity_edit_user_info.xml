@@ -33,7 +33,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="60dp"
-                android:background="@drawable/rounded_bg"
+                android:background="@drawable/circle_bg"
                 android:src="@drawable/baseline_edit_24"
                 app:circularflow_radiusInDP="100"
                 app:civ_border_color="@color/dark_grey"
