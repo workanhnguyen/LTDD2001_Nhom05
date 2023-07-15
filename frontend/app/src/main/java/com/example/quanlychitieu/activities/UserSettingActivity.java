@@ -30,7 +30,8 @@ public class UserSettingActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("");
+            actionBar.setTitle(R.string.user);
+            actionBar.setElevation(0);
         }
 
         userSettingList = findViewById(R.id.userSettingList);

@@ -19,6 +19,7 @@ public class DevInfoActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.dev_info);
+            actionBar.setElevation(0);
         }
     }
 

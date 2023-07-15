@@ -30,6 +30,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.general_setting);
+            actionBar.setElevation(0);
         }
 
         generalSettingList = findViewById(R.id.generalSettingList);
