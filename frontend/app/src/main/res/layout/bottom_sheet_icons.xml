@@ -23,29 +23,25 @@
             android:id="@+id/imageView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/cafe" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/imageView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/donate" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/imageView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/education" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/imageView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/electronics" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,29 +54,25 @@
             android:id="@+id/imageView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/fuel" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/imageView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/gifts" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/imageView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/health" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/imageView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/laundry" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -94,28 +86,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/restaurant" />
+ />
 
         <ImageView
             android:id="@+id/imageView28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/savings" />
+/>
 
         <ImageView
             android:id="@+id/imageView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/self_development" />
+/>
 
         <ImageView
             android:id="@+id/imageView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/sport" />
+/>
     </LinearLayout>
 
     <LinearLayout
@@ -130,15 +122,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
             android:layout_marginLeft="27dp"
-            app:srcCompat="@drawable/maintenance" />
+ />
 
         <ImageView
             android:id="@+id/imageView32"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="53dp"
-            android:layout_marginLeft="53dp"
-            app:srcCompat="@drawable/party" />
+ />
 
         <ImageView
             android:id="@+id/imageView33"
@@ -146,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="53dp"
             android:layout_marginLeft="53dp"
-            app:srcCompat="@drawable/university" />
+/>
     </LinearLayout>
 
 </LinearLayout>

@@ -5,12 +5,9 @@
     <string name="select">Select items</string>
     <string name="category">Category name</string>
     <string name="amount">Amount</string>
-    <string name="description">Description</string>
-    <string name="search">Search categories</string>
-    <string name="items_add">Category name</string>
-    <string-array name="list_items">
-        <item>Expense</item>
-        <item>Balance</item>
-        <item>Income</item>
-    </string-array>
+    <string name="hoten">Họ và tên đệm</string>
+    <string name="ten">Tên</string>
+    <string name="taikhoan">Tài khoản</string>
+    <string name="desciption">Diễn giải</string>
+    <string name="search">Tìm kiếm theo tên hạng mục</string>
 </resources>

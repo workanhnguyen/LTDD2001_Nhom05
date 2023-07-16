@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/report"
-        android:title="Report"
-        android:icon="@drawable/report"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/home"
-        android:title="Home"
+        android:title="Tổng quan"
         android:icon="@drawable/home"/>
     <item
-        android:id="@+id/settings"
-        android:title="Settings"
-        android:icon="@drawable/settings"/>
+        android:id="@+id/wallet"
+        android:title="Ví"
+        android:icon="@drawable/wallet"/>
+    <item
+        android:id="@+id/add_expense"
+        android:title="Thêm"
+        android:icon="@drawable/them_thu_chi"
+        app:actionLayout="@layout/custom_them_thu_chi_button"
+/>
+    <item
+        android:id="@+id/categories"
+        android:title="Danh mục"
+        android:icon="@drawable/category"/>
+    <item
+        android:id="@+id/user"
+        android:title="Tài khoản"
+        android:icon="@drawable/user"/>
 </menu>
