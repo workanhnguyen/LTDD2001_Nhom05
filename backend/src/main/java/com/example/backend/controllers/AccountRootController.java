@@ -6,6 +6,7 @@ import com.example.backend.dtos.AccountRootDto;
 import com.example.backend.dtos.AccountTypeDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/account-roots")
 @CrossOrigin
+@SpringBootApplication
 public class AccountRootController {
     @Autowired
     private AccountRootDao accountRootDao;
