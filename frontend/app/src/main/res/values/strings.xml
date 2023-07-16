@@ -50,6 +50,10 @@
     <string name="another_month">Tháng khác</string>
     <string name="from_date">Từ ngày</string>
     <string name="to_date">Đến ngày</string>
+    <string name="manage_user">Quản lý người dùng</string>
+    <string name="edit_user">Chỉnh sửa người dùng</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
     <string-array name="list_items">
         <item>Expense</item>
         <item>Balance</item>
