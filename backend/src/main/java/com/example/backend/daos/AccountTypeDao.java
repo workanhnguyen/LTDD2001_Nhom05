@@ -1,6 +1,5 @@
 package com.example.backend.daos;
 
-import com.example.backend.dtos.AccountRootDto;
 import com.example.backend.dtos.AccountTypeDto;
 import com.example.backend.models.AccountRoot;
 import com.example.backend.models.AccountType;
@@ -9,7 +8,6 @@ import com.example.backend.repositories.AccountTypeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -121,6 +119,16 @@ public class AccountTypeDao {
         } else {
             return false;
         }
+    }
+
+
+    public List<AccountTypeDto> getAccountTypeByAccountRoot(int id) throws Exception {
+        AccountRoot accountRoot = accountRootRepository.findById(id)
+                .orElseThrow(Exception::new);
+        List<AccountType> accountTypes = accountTypeRepository.findByAccountRoot(accountRoot);
+
+        return accountTypes.stream().map((a) -> modelMapper.map(a, AccountTypeDto.class))
+                .collect(Collectors.toList());
     }
 
 }

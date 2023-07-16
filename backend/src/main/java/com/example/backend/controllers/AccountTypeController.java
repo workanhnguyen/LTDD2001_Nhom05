@@ -52,6 +52,11 @@ public class AccountTypeController {
         return accountTypeDao.deleteAccountType(id);
     }
 
+    @GetMapping(params = "accountRootId")
+    public ResponseEntity<List<AccountTypeDto>> getAllAccountTypeFindByAccountRootID(@RequestParam("accountRootId") int accountRootId  ) throws Exception {
+        return ResponseEntity.ok().body((List<AccountTypeDto>) accountTypeDao.getAccountTypeByAccountRoot(accountRootId));
+    }//
+
 
 }
 
