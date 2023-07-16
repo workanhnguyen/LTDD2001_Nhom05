@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quanlychitieu.fragment.OverViewFragment;
 import com.example.quanlychitieu.fragment.SettingFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle("Chào Anh Nguyễn!");
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainerView, new SettingFragment())
+                .replace(R.id.fragmentContainerView, new OverViewFragment())
                 .commit();
     }
 
