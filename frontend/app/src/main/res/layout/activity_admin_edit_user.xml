@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
+                android:id="@+id/adminEditUserAvatar"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/app_icon_background"
@@ -54,7 +54,50 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="24dp">
+        <!-- Username -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/username"
+                android:textColor="@color/dark_grey" />
+
+            <EditText
+                android:id="@+id/adminEditUserUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_grey"
+                android:hapticFeedbackEnabled="true"
+                android:textColor="@color/dark_grey"
+                android:editable="false"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <!-- Password -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                android:textColor="@color/dark_grey" />
+
+            <EditText
+                android:id="@+id/adminEditUserPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_grey"
+                android:hapticFeedbackEnabled="true"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <!-- Full name -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,13 +110,15 @@
                 android:textColor="@color/dark_grey" />
 
             <EditText
+                android:id="@+id/adminEditUserFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_grey"
                 android:hapticFeedbackEnabled="true"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
         </LinearLayout>
-
+        <!-- Email -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,13 +131,37 @@
                 android:textColor="@color/dark_grey" />
 
             <EditText
+                android:id="@+id/adminEditUserEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_grey"
                 android:hapticFeedbackEnabled="true"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
         </LinearLayout>
+        <!-- Career -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/career"
+                android:textColor="@color/dark_grey" />
+
+            <EditText
+                android:id="@+id/adminEditUserCareer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_grey"
+                android:hapticFeedbackEnabled="true"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <!-- Gender -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,13 +177,13 @@
                 android:textColor="@color/dark_grey" />
 
             <RadioGroup
-                android:id="@+id/rgGender"
+                android:id="@+id/adminEditUserRgGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/rdMale"
+                    android:id="@+id/adminEditUserRbMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/primary"
@@ -124,7 +193,7 @@
                     android:textColor="@color/black" />
 
                 <RadioButton
-                    android:id="@+id/rdFemale"
+                    android:id="@+id/adminEditUserRbFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -134,35 +203,33 @@
                     android:textColor="@color/black" />
             </RadioGroup>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/career"
-                android:textColor="@color/dark_grey" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/light_grey"
-                android:hapticFeedbackEnabled="true"
-                android:textColor="@color/black" />
-        </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <LinearLayout
+        android:weightSum="100"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/primary"
-        android:text="@string/update"
-        android:textColor="@color/white"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnDeleteUser"
+            android:layout_weight="50"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/red"
+            android:text="Xóa người dùng"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/btnSaveUser"
+            android:layout_weight="50"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/primary"
+            android:text="@string/update"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 
 </LinearLayout>
