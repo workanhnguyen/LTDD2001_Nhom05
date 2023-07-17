@@ -1,42 +1,89 @@
 package com.example.quanlychitieu.fragment;
 
+import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.ExpenseAdapter;
+import com.example.quanlychitieu.adapters.SettingAdapter;
 import com.example.quanlychitieu.models.ListExpense;
+import com.example.quanlychitieu.models.Setting;
 import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
 
-public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
-    ImageView img;
-    private CustomSpinnerExpense spinner_expense;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-    private ExpenseAdapter adapter;
+public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
+    LinearLayout calendarView;
+
+    TextView txtCalendarDate;
+
+    TextView txtTimerDate;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+        // Hide the action bar
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null && activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().show();
+            activity.getSupportActionBar().setTitle(R.string.transaction);
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
-        img = view.findViewById(R.id.arrowRight);
-        spinner_expense = view.findViewById(R.id.spinner_expense);
-        spinner_expense.setSpinnerEventsListener(this);
-        adapter = new ExpenseAdapter(getContext(), ListExpense.getExpenseList());
-        spinner_expense.setAdapter(adapter);
-        img.setOnClickListener(new View.OnClickListener() {
+        return view;
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
+        super.onViewCreated(view, saveInstanceState);
+
+        initializeElement(view);
+//        img.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                navigateToCategoriesFragment();
+//            }
+//        });
+        calendarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToCategoriesFragment();
+                showCalendar();
             }
         });
+    }
 
-        return view;
+    private void initializeElement(View view) {
+        txtCalendarDate = view.findViewById(R.id.calendarDate);
+        txtTimerDate = view.findViewById(R.id.timerDate);
+        calendarView = view.findViewById(R.id.calendar);
     }
 
 
@@ -57,4 +104,20 @@ public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense
                 .addToBackStack(null) // Optional, for back stack handling
                 .commit();
     }
+
+    public void showCalendar() {
+        CalendarFragment calendarDialogFragment = new CalendarFragment();
+        calendarDialogFragment.show(getChildFragmentManager(), "calendar_dialog");
+    }
+
+    public void setDateTime(String selectedDate, String selectedTime) {
+        txtCalendarDate.setText(selectedDate);
+        txtTimerDate.setText(selectedTime);
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_save, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 }

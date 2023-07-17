@@ -172,7 +172,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginHorizontal="6dp">
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginTop="6dp">
         <Button
             android:id="@+id/btnWalletDetailDelete"
             android:layout_width="0dp"

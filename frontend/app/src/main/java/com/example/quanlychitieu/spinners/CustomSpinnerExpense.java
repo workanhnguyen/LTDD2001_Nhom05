@@ -11,12 +11,6 @@ import androidx.appcompat.widget.AppCompatSpinner;
 
 public class CustomSpinnerExpense extends AppCompatSpinner{
 
-
-
-    /********************************************
-     *     Created by DailyCoding on 15-May-21.  *
-     ********************************************/
-
         public interface OnSpinnerEventsListener {
             void onPopupWindowOpened(Spinner spinner);
 
@@ -83,12 +77,6 @@ public class CustomSpinnerExpense extends AppCompatSpinner{
                 mListener.onPopupWindowClosed(this);
             }
         }
-
-        /**
-         * A boolean flag indicating that the Spinner triggered an open event.
-         *
-         * @return true for opened Spinner
-         */
         public boolean hasBeenOpened() {
             return mOpenInitiated;
         }

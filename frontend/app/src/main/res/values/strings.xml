@@ -82,4 +82,8 @@
     <string name="save">Lưu</string>
     <string name="account_type">Loại tài khoản</string>
     <string name="edit_wallet">Chỉnh sửa ví</string>
+    <string name="transaction">Giao dịch</string>
+    <string name="amount_money">Số tiền</string>
+    <string name="choose_category">Chọn hạng mục</string>
+    <string name="choose_wallet">Chọn loại ví</string>
 </resources>
