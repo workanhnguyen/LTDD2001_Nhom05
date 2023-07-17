@@ -65,4 +65,21 @@
         <item>Tháng này</item>
         <item>Năm nay</item>
     </string-array>
+    <string name="hoten">Họ và tên đệm</string>
+    <string name="ten">Tên</string>
+    <string name="taikhoan">Tài khoản</string>
+    <string name="desciption">Diễn giải</string>
+    <string name="oveview">Tổng quan</string>
+    <string name="wallet">Ví</string>
+    <string name="add">Thêm</string>
+    <string name="category_2">Danh mục</string>
+    <string name="account">Tài khoản</string>
+    <string name="sum_money">Tổng tiền:</string>
+    <string name="cash">Tiền mặt:</string>
+    <string name="account_name">Tên tài khoản</string>
+    <string name="description_2">Diễn giải</string>
+    <string name="delete">Xóa</string>
+    <string name="save">Lưu</string>
+    <string name="account_type">Loại tài khoản</string>
+    <string name="edit_wallet">Chỉnh sửa ví</string>
 </resources>

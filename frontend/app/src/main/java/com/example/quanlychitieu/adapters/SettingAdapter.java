@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlychitieu.activities.DevInfoActivity;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.DevInfoActivity;
 import com.example.quanlychitieu.activities.GeneralSettingActivity;
 import com.example.quanlychitieu.holders.SettingHolder;
 import com.example.quanlychitieu.models.Setting;

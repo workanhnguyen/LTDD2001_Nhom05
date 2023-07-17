@@ -35,8 +35,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/cafe" />
+                android:layout_margin="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,8 +59,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/gifts" />
+                android:layout_margin="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,8 +81,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/groceries" />
+                android:layout_margin="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -115,8 +112,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/electronics" />
+                android:layout_margin="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,8 +135,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/health" />
+                android:layout_margin="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -161,8 +156,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/transportation" />
+                android:layout_margin="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"

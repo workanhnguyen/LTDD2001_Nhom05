@@ -3,6 +3,8 @@ package com.example.quanlychitieu.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -18,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.StatisticFilterActivity;
-import com.example.quanlychitieu.activities.UserSettingActivity;
 import com.example.quanlychitieu.adapters.TransactionAdapter;
 import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
@@ -44,11 +45,13 @@ public class OverViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         // Show the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
+            activity.getSupportActionBar().setTitle("Chào Anh Nguyễn!");
             activity.getSupportActionBar().setElevation(0);
         }
     }
@@ -63,10 +66,7 @@ public class OverViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeElement(view);
-        loadTransactionData();
-
-        linearLayoutFilter = view.findViewById(R.id.linearLayoutFilter);
-
+//        loadTransactionData();
         handleGoToStatisticFilterActivity();
     }
 
@@ -74,7 +74,7 @@ public class OverViewFragment extends Fragment {
         linearLayoutFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StatisticFilterActivity.class);
+                Intent intent = new Intent(getContext(), StatisticFilterActivity.class);
                 startActivity(intent);
             }
         });
@@ -110,5 +110,11 @@ public class OverViewFragment extends Fragment {
     }
     private void initializeElement(View view) {
         transactionList = view.findViewById(R.id.transactionList);
+        linearLayoutFilter = view.findViewById(R.id.linearLayoutFilter);
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_renew, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

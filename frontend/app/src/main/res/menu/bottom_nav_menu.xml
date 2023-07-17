@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/report"
-        android:title="Report"
-        android:icon="@drawable/report"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/home"
-        android:title="Home"
-        android:icon="@drawable/home"/>
+        android:title="@string/oveview"
+        android:icon="@drawable/home"
+        app:showAsAction="withText"/>
     <item
-        android:id="@+id/settings"
-        android:title="Settings"
-        android:icon="@drawable/settings"/>
+        android:id="@+id/wallet"
+        android:title="@string/wallet"
+        android:icon="@drawable/wallet"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/addTransaction"
+        android:title="@string/add"
+        android:icon="@drawable/baseline_add_circle_24"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/category"
+        android:title="@string/category_2"
+        android:icon="@drawable/category"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/account"
+        android:title="@string/account"
+        android:icon="@drawable/user"
+        app:showAsAction="withText"/>
 </menu>

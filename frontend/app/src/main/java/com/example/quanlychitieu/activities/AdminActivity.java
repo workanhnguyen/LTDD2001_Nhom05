@@ -1,13 +1,13 @@
 package com.example.quanlychitieu.activities;
 
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.AdminUserAdapter;

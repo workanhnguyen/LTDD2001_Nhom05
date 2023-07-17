@@ -3,6 +3,8 @@ package com.example.quanlychitieu.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -46,11 +48,14 @@ public class SettingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         // Hide the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().hide();
+            activity.getSupportActionBar().show();
+            activity.getSupportActionBar().setTitle(R.string.user);
+            activity.getSupportActionBar().setElevation(0);
         }
 
     }
@@ -90,5 +95,11 @@ public class SettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_notification, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

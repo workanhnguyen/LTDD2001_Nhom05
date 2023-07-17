@@ -1,11 +1,10 @@
 package com.example.quanlychitieu.models;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-
-import java.util.Set;
 
 public class User implements Parcelable {
     private Integer id;
@@ -117,7 +116,9 @@ public class User implements Parcelable {
         dest.writeString(this.email);
         dest.writeString(this.imageLink);
         dest.writeString(this.career);
-        dest.writeBoolean(this.gender);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            dest.writeBoolean(this.gender);
+        }
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
@@ -142,6 +143,8 @@ public class User implements Parcelable {
         email = source.readString();
         imageLink = source.readString();
         career = source.readString();
-        gender = source.readBoolean();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            gender = source.readBoolean();
+        }
     }
 }

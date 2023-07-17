@@ -2,8 +2,6 @@ package com.example.quanlychitieu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,13 +51,13 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserHolder> {
                 .placeholder(R.drawable.blank_avatar) // Replace with your placeholder image resource
                 .error(R.drawable.blank_avatar); // Replace with your error image resource
 
-        holder.getAdminUserName().setText(user.getLastname() + " " + user.getFirstname());
-        holder.getAdminUserEmail().setText(user.getEmail());
-
         Glide.with(context)
                 .load(user.getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.getAdminUserAvatar());
+
+        holder.getAdminUserName().setText(user.getLastname() + " " + user.getFirstname());
+        holder.getAdminUserEmail().setText(user.getEmail());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

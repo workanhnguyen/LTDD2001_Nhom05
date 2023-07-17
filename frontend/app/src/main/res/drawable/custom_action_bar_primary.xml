@@ -1,0 +1,4 @@
+<!-- res/drawable/my_drawable.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#17b5f3" /> <!-- Màu tùy chỉnh, ví dụ: đỏ -->
+</shape>

@@ -1,12 +1,12 @@
 package com.example.quanlychitieu.activities;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.ViewPagerAdapter;

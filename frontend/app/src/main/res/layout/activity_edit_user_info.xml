@@ -92,7 +92,25 @@
                 android:hapticFeedbackEnabled="true"
                 android:textColor="@color/black" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/career"
+                android:textColor="@color/dark_grey" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_grey"
+                android:hapticFeedbackEnabled="true"
+                android:textColor="@color/black" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,26 +151,6 @@
                     android:text="@string/female"
                     android:textColor="@color/black" />
             </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/career"
-                android:textColor="@color/dark_grey" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/light_grey"
-                android:hapticFeedbackEnabled="true"
-                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 
