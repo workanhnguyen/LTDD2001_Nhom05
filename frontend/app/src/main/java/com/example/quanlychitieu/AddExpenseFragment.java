@@ -1,26 +1,54 @@
 package com.example.quanlychitieu;
 
+import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.applandeo.materialcalendarview.EventDay;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class AddExpenseFragment extends Fragment implements com.example.quanlychitieu.CustomSpinnerExpense.OnSpinnerEventsListener {
-    ImageView img;
+    ImageView img, calendarView;
+
+    TextView txtCalendarDate;
+
+    TextView txtTimerDate;
     private com.example.quanlychitieu.CustomSpinnerExpense spinner_expense;
+
 
     private com.example.quanlychitieu.ExpenseAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
+
         img = view.findViewById(R.id.arrowRight);
+        txtCalendarDate = view.findViewById(R.id.calendarDate);
+        txtTimerDate = view.findViewById(R.id.timerDate);
+        calendarView = view.findViewById(R.id.calendar);
+
         spinner_expense = view.findViewById(R.id.spinner_expense);
+
         spinner_expense.setSpinnerEventsListener(this);
         adapter = new ExpenseAdapter(getContext(), ListExpense.getExpenseList());
         spinner_expense.setAdapter(adapter);
@@ -30,7 +58,12 @@ public class AddExpenseFragment extends Fragment implements com.example.quanlych
                 navigateToCategoriesFragment();
             }
         });
-
+        calendarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCalendar();
+            }
+        });
         return view;
     }
 
@@ -51,5 +84,15 @@ public class AddExpenseFragment extends Fragment implements com.example.quanlych
         fragmentManager.beginTransaction().replace(R.id.frame_layout, categoryFragment)
                 .addToBackStack(null) // Optional, for back stack handling
                 .commit();
+    }
+
+    public void showCalendar() {
+        CalendarFragment calendarDialogFragment = new CalendarFragment();
+        calendarDialogFragment.show(getChildFragmentManager(), "calendar_dialog");
+    }
+
+    public void setDateTime(String selectedDate, String selectedTime) {
+        txtCalendarDate.setText(selectedDate);
+        txtTimerDate.setText(selectedTime);
     }
 }

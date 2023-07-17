@@ -150,13 +150,31 @@
             android:layout_marginTop="10dp"
             >
             <ImageView
+                android:id="@+id/calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/calendar">
             </ImageView>
-
+            <TextView
+                android:id="@+id/calendarDate"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:id="@+id/timerDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold">
+            </TextView>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
