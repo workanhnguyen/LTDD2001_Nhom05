@@ -1,5 +1,6 @@
 package com.example.quanlychitieu;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,31 +24,39 @@ import androidx.fragment.app.FragmentManager;
 
 import com.applandeo.materialcalendarview.EventDay;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AddExpenseFragment extends Fragment implements com.example.quanlychitieu.CustomSpinnerExpense.OnSpinnerEventsListener {
     ImageView img, calendarView;
 
-    TextView txtCalendarDate;
 
-    TextView txtTimerDate;
+    TextView txtCalendarDateTime;
+
+
+
     private com.example.quanlychitieu.CustomSpinnerExpense spinner_expense;
 
 
+
     private com.example.quanlychitieu.ExpenseAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
 
         img = view.findViewById(R.id.arrowRight);
-        txtCalendarDate = view.findViewById(R.id.calendarDate);
-        txtTimerDate = view.findViewById(R.id.timerDate);
-        calendarView = view.findViewById(R.id.calendar);
 
+        txtCalendarDateTime = view.findViewById(R.id.calendarDateTime);
+        calendarView = view.findViewById(R.id.calendar);
         spinner_expense = view.findViewById(R.id.spinner_expense);
+        String currentDateTime = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        txtCalendarDateTime.setText(currentDateTime);
 
         spinner_expense.setSpinnerEventsListener(this);
         adapter = new ExpenseAdapter(getContext(), ListExpense.getExpenseList());
@@ -91,8 +100,9 @@ public class AddExpenseFragment extends Fragment implements com.example.quanlych
         calendarDialogFragment.show(getChildFragmentManager(), "calendar_dialog");
     }
 
-    public void setDateTime(String selectedDate, String selectedTime) {
-        txtCalendarDate.setText(selectedDate);
-        txtTimerDate.setText(selectedTime);
+    public void setDateTime(String selectedDateTime) {
+        txtCalendarDateTime.setText(selectedDateTime);
     }
+
+
 }
