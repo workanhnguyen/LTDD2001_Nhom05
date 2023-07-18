@@ -86,4 +86,7 @@
     <string name="amount_money">Số tiền</string>
     <string name="choose_category">Chọn hạng mục</string>
     <string name="choose_wallet">Chọn loại ví</string>
+    <string name="category_3">Hạng mục thu chi</string>
+    <string name="income">MỤC THU</string>
+    <string name="expense">MỤC CHI</string>
 </resources>
