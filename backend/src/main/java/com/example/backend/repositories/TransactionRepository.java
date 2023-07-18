@@ -5,6 +5,7 @@ import com.example.backend.models.Transaction;
 import com.example.backend.models.User;
 import com.example.backend.models.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,4 +14,5 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
     List<Transaction> findByWalletId (Wallet wallet);
     List<Transaction> findByCategoryTypeId (CategoryType categoryType);
+    List<Transaction> findByKeyword(@Param("keyword") String kw);
 }

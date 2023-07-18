@@ -134,4 +134,10 @@ public class TransactionDao {
             return true;
         } else return false;
     }
+
+    //Function is not ready to use
+    public TransactionDto getTransactionByKeyword (String kw, TransactionDto transactionDto) throws Exception {
+        Transaction transaction = (Transaction) transactionRepository.findByKeyword(kw);
+        return modelMapper.map(transaction, TransactionDto.class);
+    }
 }
