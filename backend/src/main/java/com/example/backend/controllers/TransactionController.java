@@ -70,6 +70,6 @@ public class TransactionController {
     public String getTransactionByKeyword(@RequestParam("keyword") String keyword, Model model) {
         List<Transaction> transactions = transactionRepository.findByKeyword(keyword);
         model.addAttribute("transactions", transactions);
-        return "user/search";
+        return "transactions/search";
     }
 }
