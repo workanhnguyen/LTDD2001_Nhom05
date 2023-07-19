@@ -1,6 +1,6 @@
 package com.example.quanlychitieu.adapters;
 
-import static com.example.quanlychitieu.models.ListExpense.getExpenseList;
+import static com.example.quanlychitieu.sampledatas.ListExpense.getExpenseList;
 
 import android.content.Context;
 import android.view.LayoutInflater;

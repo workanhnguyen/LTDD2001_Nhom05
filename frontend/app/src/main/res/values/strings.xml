@@ -65,7 +65,11 @@
         <item>Tháng này</item>
         <item>Năm nay</item>
     </string-array>
-    <string name="hoten">Họ và tên đệm</string>
+    <string-array name="languages">
+        <item>Tiếng Việt</item>
+        <item>English</item>
+    </string-array>
+    <string name="fullname">Họ và tên</string>
     <string name="ten">Tên</string>
     <string name="taikhoan">Tài khoản</string>
     <string name="desciption">Diễn giải</string>
@@ -89,4 +93,23 @@
     <string name="category_3">Hạng mục thu chi</string>
     <string name="income">MỤC THU</string>
     <string name="expense">MỤC CHI</string>
+    <string name="spendify">Spendify</string>
+    <string name="confirm_password">Nhập lại mật khẩu</string>
+    <string name="register">Đăng ký</string>
+    <string name="already_account">Bạn đã có tài khoản?</string>
+    <string name="login_now">Đăng nhập ngay</string>
+    <string name="login">Đăng nhập</string>
+    <string name="press_again_to_exit">Ấn lần nữa để thoát</string>
+    <string name="no_account">Chưa có tài khoản?</string>
+    <string name="create_wallet">Tạo ví</string>
+    <string name="init_balance">Số dư ban đầu</string>
+    <string name="password_text">Mật khẩu phải có ít nhất 8 ký tự.</string>
+    <string name="current_password">Mật khẩu hiện tại</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="confirm_new_password">Xác nhận mật khẩu mới</string>
+    <string name="setting">Cài đặt</string>
+    <string name="financial_management_app">Ứng dụng quản lý chi tiêu</string>
+    <string name="welcome_to_spendify">Chào mừng đến với Spendify</string>
+    <string name="app_description">Trải nghiệm niềm vui quản lý tài chính bằng việc đăng ký trong lần đầu sử dụng</string>
+    <string name="register_new_account">ĐĂNG KÝ TÀI KHOẢN MỚI</string>
 </resources>

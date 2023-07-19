@@ -1,41 +1,23 @@
 package com.example.quanlychitieu.fragment;
 
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.ExpenseAdapter;
-import com.example.quanlychitieu.adapters.SettingAdapter;
-import com.example.quanlychitieu.models.ListExpense;
-import com.example.quanlychitieu.models.Setting;
 import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
     LinearLayout calendarView;

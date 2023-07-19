@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.UserSettingAdapter;
+import com.example.quanlychitieu.utils.AdapterListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class UserSettingActivity extends AppCompatActivity {
     RecyclerView userSettingList;
     Button btnEditUserInfo;
     List<String> userSettings = new ArrayList<>();
+    AdapterListener adapterListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,21 @@ public class UserSettingActivity extends AppCompatActivity {
             actionBar.setElevation(0);
         }
 
+        adapterListener = new AdapterListener() {
+            @Override
+            public void onFinishActivity() {
+                finishAffinity();
+            }
+        };
+
         userSettingList = findViewById(R.id.userSettingList);
 
         userSettings.add(getString(R.string.change_password));
         userSettings.add(getString(R.string.logout));
 
         UserSettingAdapter adapter = new UserSettingAdapter(userSettings);
+        adapter.setContext(UserSettingActivity.this);
+        adapter.setAdapterListener(adapterListener);
         userSettingList.setAdapter(adapter);
         userSettingList.setLayoutManager(new LinearLayoutManager(this));
 

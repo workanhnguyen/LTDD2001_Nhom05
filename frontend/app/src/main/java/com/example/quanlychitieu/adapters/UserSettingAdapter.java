@@ -1,6 +1,8 @@
 package com.example.quanlychitieu.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +13,35 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.ChangePasswordActivity;
+import com.example.quanlychitieu.activities.LoginActivity;
 import com.example.quanlychitieu.holders.UserSettingHolder;
+import com.example.quanlychitieu.utils.AdapterListener;
 
 import java.util.List;
 
 public class UserSettingAdapter extends RecyclerView.Adapter<UserSettingHolder> {
+    private Context context;
+    private AdapterListener adapterListener;
     private List<String> userSettings;
 
     public UserSettingAdapter(List<String> userSettings) { this.userSettings = userSettings; }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public AdapterListener getAdapterListener() {
+        return adapterListener;
+    }
+
+    public void setAdapterListener(AdapterListener adapterListener) {
+        this.adapterListener = adapterListener;
+    }
 
     @NonNull
     @Override
@@ -36,7 +59,21 @@ public class UserSettingAdapter extends RecyclerView.Adapter<UserSettingHolder> 
         if (holder.getAdapterPosition() == 1)
             holder.getUserSettingItem().setTextColor(Color.RED);
 
-        holder.itemView.setOnClickListener(v -> Toast.makeText(v.getContext(), userSettingItem, Toast.LENGTH_SHORT).show());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.getAdapterPosition() == 0) {
+                    Intent intent = new Intent(context, ChangePasswordActivity.class);
+                    context.startActivity(intent);
+                } else {
+                    if (adapterListener != null) {
+                        Intent intent = new Intent(context, LoginActivity.class);
+                        context.startActivity(intent);
+                        adapterListener.onFinishActivity();
+                    }
+                }
+            }
+        });
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.example.backend.daos.CategoryRootDao;
 import com.example.backend.daos.CategoryTypeDao;
 import com.example.backend.dtos.CategoryRootDto;
 import com.example.backend.dtos.CategoryTypeDto;
+import com.example.backend.models.CategoryType;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -21,12 +23,12 @@ public class CategoryTypeController {
     private CategoryTypeDao categoryTypeDao;
 
     @GetMapping
-    public ResponseEntity<List<CategoryTypeDto>> getAllCategoryTypes() {
+    public ResponseEntity<List<CategoryType>> getAllCategoryTypes() {
         return ResponseEntity.ok().body(categoryTypeDao.getAllCategoryTypes());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryTypeDto> getCategoryType(@PathVariable int id) {
+    public ResponseEntity<Optional<CategoryType>> getCategoryType(@PathVariable int id) {
         return ResponseEntity.ok().body(categoryTypeDao.getCategoryType(id));
     }
 

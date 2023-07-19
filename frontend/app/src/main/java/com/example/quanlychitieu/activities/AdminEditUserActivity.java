@@ -2,6 +2,7 @@ package com.example.quanlychitieu.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +19,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.models.User;
 
-public class AdminEditUser extends AppCompatActivity {
+import org.parceler.Parcels;
+
+public class AdminEditUserActivity extends AppCompatActivity {
     ImageView adminEditUserAvatar;
     EditText adminEditUserUsername, adminEditUserPassword, adminEditUserFullName, adminEditUserEmail, adminEditUserCareer;
     RadioGroup adminEditUserRgGender;
@@ -60,15 +63,15 @@ public class AdminEditUser extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.blank_avatar) // Replace with your placeholder image resource
                 .error(R.drawable.blank_avatar); // Replace with your error image resource
-        Glide.with(AdminEditUser.this)
+        Glide.with(AdminEditUserActivity.this)
                 .load(user.getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(adminEditUserAvatar);
     }
 
     private void initializeUserData() {
-        Intent intent = getIntent();
-        user = intent.getParcelableExtra("user");
+        Parcelable parcelable = getIntent().getParcelableExtra("user");
+        user = Parcels.unwrap(parcelable);
     }
 
     private void initializeElement() {

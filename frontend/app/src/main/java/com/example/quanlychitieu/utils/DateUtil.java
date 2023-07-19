@@ -42,4 +42,14 @@ public class DateUtil {
 
         return new SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.getTime());
     }
+
+    public static String getDate(Date date) {
+        return new SimpleDateFormat("dd").format(date);
+    }
+    public static String getMonth(Date date) {
+        return new SimpleDateFormat("MM").format(date);
+    }
+    public static String getYear(Date date) {
+        return new SimpleDateFormat("yyyy").format(date);
+    }
 }

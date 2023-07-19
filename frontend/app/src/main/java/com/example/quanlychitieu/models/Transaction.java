@@ -8,8 +8,8 @@ public class Transaction {
     private Date createdDate;
     private Long total;
     private String image;
-    private Integer categoryTypeId;
-    private Integer walletId;
+    private CategoryType categoryTypeId;
+    private Wallet walletId;
 
     public Integer getId() {
         return id;
@@ -51,19 +51,19 @@ public class Transaction {
         this.image = image;
     }
 
-    public Integer getCategoryTypeId() {
+    public CategoryType getCategoryTypeId() {
         return categoryTypeId;
     }
 
-    public void setCategoryTypeId(Integer categoryTypeId) {
+    public void setCategoryTypeId(CategoryType categoryTypeId) {
         this.categoryTypeId = categoryTypeId;
     }
 
-    public Integer getWalletId() {
+    public Wallet getWalletId() {
         return walletId;
     }
 
-    public void setWalletId(Integer walletId) {
+    public void setWalletId(Wallet walletId) {
         this.walletId = walletId;
     }
 }

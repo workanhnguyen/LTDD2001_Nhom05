@@ -2,6 +2,7 @@ package com.example.quanlychitieu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,18 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.activities.AdminEditUser;
+import com.example.quanlychitieu.activities.AdminEditUserActivity;
 import com.example.quanlychitieu.holders.AdminUserHolder;
 import com.example.quanlychitieu.models.User;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserHolder> {
     private Context context;
-    List<User> users = new ArrayList<>();
+    List<User> users;
 
     public AdminUserAdapter(List<User> users) {
         this.users = users;
@@ -62,9 +65,10 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Parcelable parcelable = Parcels.wrap(user);
 
-                Intent intent = new Intent(context, AdminEditUser.class);
-                intent.putExtra("user", user);
+                Intent intent = new Intent(context, AdminEditUserActivity.class);
+                intent.putExtra("user", parcelable);
                 context.startActivity(intent);
             }
         });

@@ -1,6 +1,7 @@
-package com.example.quanlychitieu.models;
+package com.example.quanlychitieu.sampledatas;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.models.Category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,6 @@ public class ListCategory {
 
         return categoryList;
     }
-
     public static List<Category> getCategoryEnjoymentList(){
         List<Category> categoryList = new ArrayList<>();
         Category cate1 = new Category();
@@ -106,7 +106,6 @@ public class ListCategory {
 
         return categoryList;
     }
-
     public static List<Category> getCategoryReceivingList(){
         List<Category> categoryList = new ArrayList<>();
 

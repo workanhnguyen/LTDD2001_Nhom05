@@ -54,7 +54,7 @@ public class SettingFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
-            activity.getSupportActionBar().setTitle(R.string.user);
+            activity.getSupportActionBar().setTitle(R.string.setting);
             activity.getSupportActionBar().setElevation(0);
         }
 
@@ -75,8 +75,8 @@ public class SettingFragment extends Fragment {
         settingList = view.findViewById(R.id.settingList);
         linearLayoutUserInfo = view.findViewById(R.id.linearLayoutUserInfo);
 
-        items.add(new Setting(R.drawable.app_icon_background, getString(R.string.general_setting)));
-        items.add(new Setting(R.drawable.app_icon_background, getString(R.string.dev_info)));
+        items.add(new Setting(R.drawable.baseline_settings_24, getString(R.string.general_setting)));
+        items.add(new Setting(R.drawable.baseline_info_grey_24, getString(R.string.dev_info)));
 
         SettingAdapter adapter = new SettingAdapter(items);
         adapter.setContext(getActivity());
@@ -99,7 +99,7 @@ public class SettingFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_notification, menu);
+        inflater.inflate(R.menu.menu_only_title, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 }

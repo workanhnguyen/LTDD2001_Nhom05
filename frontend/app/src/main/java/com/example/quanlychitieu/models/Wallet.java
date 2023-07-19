@@ -1,27 +1,31 @@
 package com.example.quanlychitieu.models;
 
-import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class Wallet implements Parcelable {
+import org.parceler.Parcel;
+
+@Parcel
+public class Wallet {
     private Integer id;
     private String name;
     private long balance;
     private String description;
-    private Integer accountTypeId;
-    private Integer userId;
-
+    private AccountType accountType;
+    private User user;
     private String imageLink;
 
-    public Wallet(Integer id, String name, long balance, String description, Integer accountTypeId, Integer userId, String imageLink) {
+    public Wallet() {
+    }
+
+    public Wallet(Integer id, String name, long balance, String description, AccountType accountType, User user, String imageLink) {
         this.id = id;
         this.name = name;
         this.balance = balance;
         this.description = description;
-        this.accountTypeId = accountTypeId;
-        this.userId = userId;
+        this.accountType = accountType;
+        this.user = user;
         this.imageLink = imageLink;
     }
 
@@ -57,20 +61,20 @@ public class Wallet implements Parcelable {
         this.description = description;
     }
 
-    public Integer getAccountTypeId() {
-        return accountTypeId;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setAccountTypeId(Integer accountTypeId) {
-        this.accountTypeId = accountTypeId;
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getImageLink() {
@@ -79,43 +83,5 @@ public class Wallet implements Parcelable {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.name);
-        dest.writeString(this.description);
-        dest.writeLong(this.balance);
-        dest.writeString(this.imageLink);
-        dest.writeInt(this.accountTypeId);
-        dest.writeInt(this.userId);
-    }
-
-    public static final Parcelable.Creator<Wallet> CREATOR = new Parcelable.Creator<Wallet>() {
-        @Override
-        public Wallet createFromParcel(Parcel source) {
-            return new Wallet(source);
-        }
-
-        @Override
-        public Wallet[] newArray(int size) {
-            return new Wallet[size];
-        }
-    };
-
-    private Wallet(Parcel source) {
-        id = source.readInt();
-        name = source.readString();
-        description = source.readString();
-        balance = source.readLong();
-        accountTypeId = source.readInt();
-        userId = source.readInt();
-        imageLink = source.readString();
     }
 }

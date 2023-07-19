@@ -16,17 +16,40 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.WelcomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CreateWalletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.WalletDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activities.StatisticFilterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AdminEditUser"
+            android:name=".activities.AdminEditUserActivity"
             android:exported="false" />
         <activity
             android:name=".activities.AdminActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activities.EditUserInfoActivity"
             android:exported="false" />
@@ -41,13 +64,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

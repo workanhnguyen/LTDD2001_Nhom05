@@ -1,91 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    android:orientation="vertical">
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Chi tiêu ăn uống"
-            android:textSize="22dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            >
-
-        </TextView>
-        <LinearLayout
-            android:layout_marginTop="15dp"
-            android:layout_marginHorizontal="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="385dp"
-            android:background="@color/light_grey"
-            android:orientation="vertical"
-            >
-            <ListView
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:id="@+id/AnUong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </ListView>
-
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Chi tiêu sinh hoạt"
-            android:textSize="22dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-    </TextView>
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:background="@color/light_grey"
-            android:orientation="vertical"
-            >
-
-            <ListView
-                android:id="@+id/DVSH"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"></ListView>
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Chi tiêu hưởng thụ"
-            android:textSize="22dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-        </TextView>
-
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="520dp"
-            android:background="@color/light_grey"
-            android:orientation="vertical"
-            >
-            <ListView
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:id="@+id/lvEnjoyment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </ListView>
-        </LinearLayout>
-    </LinearLayout>
-
+        android:text="Chi tiêu ăn uống"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/black"/>
+    <ListView
+        android:id="@+id/AnUong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="12dp"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Chi tiêu sinh hoạt"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginTop="12dp" />-->
+<!--    <ListView-->
+<!--        android:id="@+id/DVSH"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginVertical="12dp" />-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Chi tiêu hưởng thụ"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:textColor="@color/black"/>-->
+<!--    <ListView-->
+<!--        android:id="@+id/lvEnjoyment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginVertical="12dp" />-->
 </LinearLayout>

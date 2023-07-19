@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.models.Category;
@@ -39,11 +37,11 @@ public class CategorySpendAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(getContext()).inflate(R.layout.category_spend, parent, false);
-        TextView txtName = convertView.findViewById(R.id.nameCate);
-        ImageView image = convertView.findViewById(R.id.imageCate);
-        txtName.setText(getList().get(i).getCategoryName());
-        image.setImageResource(getList().get(i).getImg());
+        convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_catetory_item, parent, false);
+//        TextView txtName = convertView.findViewById(R.id.nameCate);
+//        ImageView image = convertView.findViewById(R.id.imageCate);
+//        txtName.setText(getList().get(i).getCategoryName());
+//        image.setImageResource(getList().get(i).getImg());
         return convertView;
     }
 

@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.holders.TransactionHolder;
 import com.example.quanlychitieu.models.Transaction;
+import com.example.quanlychitieu.utils.CommonUtil;
 import com.example.quanlychitieu.utils.DateUtil;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionHolder> {
     private List<Transaction> transactions;
@@ -31,11 +34,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionHolder> 
     @Override
     public void onBindViewHolder(@NonNull TransactionHolder holder, int position) {
         Transaction transaction = transactions.get(position);
-        holder.getTransactionDay().setText(String.valueOf(transaction.getCreatedDate().getDate()));
-        holder.getTransactionDayOfWeek().setText(String.valueOf(DateUtil.getDayOfWeekVietnam(transaction.getCreatedDate())));
-        holder.getTransactionMonthYear().setText(String.valueOf(transaction.getCreatedDate().getMonth() + 1 + "/" + (transaction.getCreatedDate().getYear() + 1900)));
-        holder.getTransactionSumIncome().setText(String.valueOf(transaction.getTotal()));
-        holder.getTransactionSumExpense().setText(String.valueOf(transaction.getTotal()));
+        holder.getTransactionDay().setText(DateUtil.getDate(transaction.getCreatedDate()));
+        holder.getTransactionDayOfWeek().setText(DateUtil.getDayOfWeekVietnam(transaction.getCreatedDate()));
+        holder.getTransactionMonthYear().setText(DateUtil.getMonth(transaction.getCreatedDate()) + "/" + DateUtil.getYear(transaction.getCreatedDate()));
+        holder.getTransactionTotal().setText(CommonUtil.getMoneyFormat(transaction.getTotal()));
     }
 
     @Override

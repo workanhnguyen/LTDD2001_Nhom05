@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginBottom="12dp">
+    android:orientation="horizontal">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -46,35 +45,39 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginHorizontal="24dp">
+            <TextView
+                android:id="@+id/txtShowTransactionName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ăn sáng"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
             android:layout_marginEnd="12dp">
             <TextView
-                android:id="@+id/transactionSumIncome"
+                android:id="@+id/transactionTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="55.000 đ"
                 android:layout_gravity="end"
                 android:textSize="16sp"
                 android:textColor="@color/green"/>
-            <TextView
-                android:id="@+id/transactionSumExpense"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20.000 đ"
-                android:layout_gravity="end"
-                android:textSize="16sp"
-                android:textColor="@color/red"/>
         </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/light_grey"/>
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/transactionDetailList"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
 </LinearLayout>

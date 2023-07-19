@@ -26,7 +26,7 @@
             android:gravity="center_vertical">
 
             <EditText
-                android:id="@+id/walletDetailBalance"
+                android:id="@+id/createWalletBalance"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -63,7 +63,7 @@
                 android:src="@drawable/baseline_edit_24"
                 android:layout_gravity="center" />
             <EditText
-                android:id="@+id/walletDetailName"
+                android:id="@+id/createWalletName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -78,6 +78,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="end">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/baseline_keyboard_arrow_right_24" />
             </LinearLayout>
         </LinearLayout>
         <View
@@ -92,17 +97,18 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/walletDetailAccountImage"
+                android:id="@+id/createWalletAccountImage"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/app_icon_background"
                 android:layout_gravity="center" />
             <TextView
-                android:id="@+id/walletDetailAccountName"
+                android:id="@+id/createWalletAccountName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
                 android:text="@string/account_type"
                 android:textColor="@color/dark_grey"
                 android:textSize="16sp" />
@@ -134,7 +140,7 @@
                 android:src="@drawable/baseline_segment_24"
                 android:layout_gravity="center" />
             <EditText
-                android:id="@+id/walletDetailDescription"
+                android:id="@+id/createWalletDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -149,6 +155,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="end">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/baseline_keyboard_arrow_right_24" />
             </LinearLayout>
         </LinearLayout>
         <View
@@ -157,26 +168,16 @@
             android:background="@color/light_grey"/>
     </LinearLayout>
     <LinearLayout
-        android:weightSum="100"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="6dp"
         android:layout_marginTop="6dp">
         <Button
-            android:id="@+id/btnWalletDetailDelete"
-            android:layout_width="0dp"
+            android:id="@+id/btnCreateWallet"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:text="@string/delete"
-            android:backgroundTint="@color/red"
-            android:textColor="@color/white" />
-        <Button
-            android:id="@+id/btnWalletDetailSave"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:text="@string/save"
+            android:text="@string/create_wallet"
             android:backgroundTint="@color/primary"
             android:textColor="@color/white" />
     </LinearLayout>

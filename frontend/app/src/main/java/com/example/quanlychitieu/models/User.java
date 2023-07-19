@@ -1,12 +1,14 @@
 package com.example.quanlychitieu.models;
 
 import android.os.Build;
-import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class User implements Parcelable {
+import org.parceler.Parcel;
+
+@Parcel
+public class User  {
     private Integer id;
     private String firstname;
     private String lastname;
@@ -27,6 +29,13 @@ public class User implements Parcelable {
         this.imageLink = imageLink;
         this.career = career;
         this.gender = gender;
+    }
+
+    public User() {
+    }
+
+    public User(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
@@ -99,52 +108,5 @@ public class User implements Parcelable {
 
     public void setGender(boolean gender) {
         this.gender = gender;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.firstname);
-        dest.writeString(this.lastname);
-        dest.writeString(this.username);
-        dest.writeString(this.password);
-        dest.writeString(this.email);
-        dest.writeString(this.imageLink);
-        dest.writeString(this.career);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            dest.writeBoolean(this.gender);
-        }
-    }
-
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
-    // Constructor từ Parcel
-    private User(Parcel source) {
-        id = source.readInt();
-        firstname = source.readString();
-        lastname = source.readString();
-        username = source.readString();
-        password = source.readString();
-        email = source.readString();
-        imageLink = source.readString();
-        career = source.readString();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            gender = source.readBoolean();
-        }
     }
 }

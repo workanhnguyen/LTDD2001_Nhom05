@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class OverViewFragment extends Fragment {
     TextView tvTotalBalance1;
     RecyclerView transactionList;
-    LinearLayout linearLayoutFilter;
+    LinearLayout linearLayoutFilter, linearLayoutShowWallet;
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -67,10 +67,10 @@ public class OverViewFragment extends Fragment {
 
         initializeElement(view);
 //        loadTransactionData();
-        handleGoToStatisticFilterActivity();
+        handleSwitchToStatisticFilter();
     }
 
-    private void handleGoToStatisticFilterActivity() {
+    private void handleSwitchToStatisticFilter() {
         linearLayoutFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

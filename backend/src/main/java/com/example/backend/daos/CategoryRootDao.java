@@ -27,11 +27,12 @@ public class CategoryRootDao {
     private CategoryRootRepository categoryRootRepository;
     private ModelMapper modelMapper;
 
-    public List<CategoryRootDto> getAllCategoryRoots() {
+    public List<CategoryRoot> getAllCategoryRoots() {
         List<CategoryRoot> categoryRoots = categoryRootRepository.findAll();
 
-        return categoryRoots.stream().map((a) -> modelMapper.map(a, CategoryRootDto.class))
-                .collect(Collectors.toList());
+//        return categoryRoots.stream().map((a) -> modelMapper.map(a, CategoryRootDto.class))
+//                .collect(Collectors.toList());
+        return categoryRoots;
     }
 
     public CategoryRootDto getCategoryRoot(int id) {

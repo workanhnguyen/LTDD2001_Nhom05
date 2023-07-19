@@ -2,6 +2,7 @@ package com.example.quanlychitieu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,10 @@ import com.example.quanlychitieu.activities.WalletDetailActivity;
 import com.example.quanlychitieu.holders.WalletHolder;
 import com.example.quanlychitieu.models.Wallet;
 
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class WalletAdapter extends RecyclerView.Adapter<WalletHolder> {
@@ -61,8 +66,10 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Parcelable parcelable = Parcels.wrap(wallet);
+
                 Intent intent = new Intent(context, WalletDetailActivity.class);
-                intent.putExtra("wallet", wallet);
+                intent.putExtra("wallet", parcelable);
                 context.startActivity(intent);
             }
         });

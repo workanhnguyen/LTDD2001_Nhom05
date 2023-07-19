@@ -1,11 +1,7 @@
 package com.example.backend.daos;
 
 
-import com.example.backend.dtos.AccountTypeDto;
-import com.example.backend.dtos.CategoryRootDto;
 import com.example.backend.dtos.CategoryTypeDto;
-import com.example.backend.models.AccountRoot;
-import com.example.backend.models.AccountType;
 import com.example.backend.models.CategoryRoot;
 import com.example.backend.models.CategoryType;
 import com.example.backend.repositories.CategoryRootRepository;
@@ -18,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -30,16 +25,18 @@ public class CategoryTypeDao {
     private CategoryRootRepository categoryRootRepository;
     private ModelMapper modelMapper;
 
-    public List<CategoryTypeDto> getAllCategoryTypes() {
+    public List<CategoryType> getAllCategoryTypes() {
         List<CategoryType> categoryTypes = categoryTypeRepository.findAll();
 
-        return categoryTypes.stream().map((a) -> modelMapper.map(a, CategoryTypeDto.class))
-                .collect(Collectors.toList());
+//        return categoryTypes.stream().map((a) -> modelMapper.map(a, CategoryTypeDto.class))
+//                .collect(Collectors.toList());
+        return categoryTypes;
     }
 
-    public CategoryTypeDto getCategoryType(int id) {
+    public Optional<CategoryType> getCategoryType(int id) {
         Optional<CategoryType> categoryType = categoryTypeRepository.findById(id);
-        return modelMapper.map(categoryType, CategoryTypeDto.class);
+//        return modelMapper.map(categoryType, CategoryTypeDto.class);
+        return categoryType;
     }
 
     public boolean deleteCategoryType(int id) {

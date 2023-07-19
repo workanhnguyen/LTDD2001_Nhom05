@@ -1,11 +1,39 @@
 package com.example.quanlychitieu.models;
 
+import android.os.Build;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+import org.parceler.Parcel;
+
+@Parcel
 public class AccountType {
     private Integer id;
     private String name;
-    private String image;
+    private String imageLink;
     private String description;
-    private Integer accountRootId;
+    private AccountRoot accountRoot;
+
+    public AccountType() {
+    }
+
+    public AccountType(Integer id) {
+        this.id = id;
+    }
+
+    public AccountType(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public AccountType(Integer id, String name, String imageLink, String description, AccountRoot accountRoot) {
+        this.id = id;
+        this.name = name;
+        this.imageLink = imageLink;
+        this.description = description;
+        this.accountRoot = accountRoot;
+    }
 
     public Integer getId() {
         return id;
@@ -23,12 +51,12 @@ public class AccountType {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageLink() {
+        return imageLink;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     public String getDescription() {
@@ -39,11 +67,11 @@ public class AccountType {
         this.description = description;
     }
 
-    public Integer getAccountRootId() {
-        return accountRootId;
+    public AccountRoot getAccountRoot() {
+        return accountRoot;
     }
 
-    public void setAccountRootId(Integer accountRootId) {
-        this.accountRootId = accountRootId;
+    public void setAccountRoot(AccountRoot accountRoot) {
+        this.accountRoot = accountRoot;
     }
 }
