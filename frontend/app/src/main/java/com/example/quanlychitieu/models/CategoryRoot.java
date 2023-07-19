@@ -9,6 +9,16 @@ public class CategoryRoot {
     private String imageLink;
     private String type;
 
+    public CategoryRoot() {
+    }
+
+    public CategoryRoot(Integer id, String name, String imageLink, String type) {
+        this.id = id;
+        this.name = name;
+        this.imageLink = imageLink;
+        this.type = type;
+    }
+
     public Integer getId() {
         return id;
     }

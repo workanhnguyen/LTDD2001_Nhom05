@@ -17,6 +17,7 @@ import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.WalletDetailActivity;
 import com.example.quanlychitieu.holders.WalletHolder;
 import com.example.quanlychitieu.models.Wallet;
+import com.example.quanlychitieu.utils.CommonUtil;
 
 import org.parceler.Parcel;
 import org.parceler.Parcels;
@@ -61,7 +62,7 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletHolder> {
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.getWalletImage());
 
         holder.getWalletName().setText(wallet.getName());
-        holder.getWalletBalance().setText(wallet.getBalance() + " đ");
+        holder.getWalletBalance().setText(CommonUtil.getMoneyFormat(wallet.getBalance()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

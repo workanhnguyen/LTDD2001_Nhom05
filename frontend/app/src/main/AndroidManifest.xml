@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ChooseCategoryTypeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChooseAccountTypeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChooseAccountRootActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true">
             <intent-filter>
@@ -32,9 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="false" />

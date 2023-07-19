@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,15 +19,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.quanlychitieu.R;
 
-public class CategoryFragment extends Fragment {
+public class CategoryTypeFragment extends Fragment {
     TextView mucThu, mucChi;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        // Show the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
@@ -48,8 +45,11 @@ public class CategoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeElement(view);
+        handleChangeCategoryTypeFragment();
+    }
 
-        navigateToCategorySpendingFragment();
+    private void handleChangeCategoryTypeFragment() {
+        navigateToCategoryExpenseFragment();
         mucChi.setTextColor(getResources().getColor(R.color.primary));
         mucThu.setTextColor(getResources().getColor(R.color.black));
         View.OnClickListener textViewClickListener = new View.OnClickListener() {
@@ -65,15 +65,14 @@ public class CategoryFragment extends Fragment {
 
                 // Handle navigation based on which TextView is clicked
                 if (v.getId() == R.id.txtMucChi) {
-                    navigateToCategorySpendingFragment();
+                    navigateToCategoryExpenseFragment();
                 } else if (v.getId() == R.id.txtMucThu) {
-                    navigateToCategoryReceivingFragment();
+                    navigateToCategoryIncomeFragment();
                 }
             }
         };
         mucChi.setOnClickListener(textViewClickListener);
         mucThu.setOnClickListener(textViewClickListener);
-
     }
 
     private void initializeElement(View view) {
@@ -81,17 +80,17 @@ public class CategoryFragment extends Fragment {
         mucThu = view.findViewById(R.id.txtMucThu);
     }
 
-    private void navigateToCategorySpendingFragment() {
-        CategorySpendingFragment categorySpendingFragment = new  CategorySpendingFragment ();
+    private void navigateToCategoryExpenseFragment() {
+        CategoryTypeExpenseFragment categoryExpenseFragment = new CategoryTypeExpenseFragment();
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_view, categorySpendingFragment)
+        fragmentManager.beginTransaction().replace(R.id.fragment_container_view, categoryExpenseFragment)
                 .addToBackStack(null) // Optional, for back stack handling
                 .commit();
     }
-    private void navigateToCategoryReceivingFragment() {
-        CategoryReceivingFragment categoryReceivingFragment = new  CategoryReceivingFragment ();
+    private void navigateToCategoryIncomeFragment() {
+        CategoryTypeIncomeFragment categoryIncomeFragment = new CategoryTypeIncomeFragment();
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_view, categoryReceivingFragment)
+        fragmentManager.beginTransaction().replace(R.id.fragment_container_view, categoryIncomeFragment)
                 .addToBackStack(null) // Optional, for back stack handling
                 .commit();
     }

@@ -1,5 +1,6 @@
 package com.example.quanlychitieu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,10 +18,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
 
-public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
-    LinearLayout calendarView;
+public class CreateTransactionFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
+    LinearLayout calendarView, linearLayoutCreateTransactionCategoryType;
 
     TextView txtCalendarDate;
 
@@ -30,7 +32,6 @@ public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        // Hide the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
@@ -40,7 +41,7 @@ public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_transaction, container, false);
         return view;
     }
     @Override
@@ -48,12 +49,21 @@ public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense
         super.onViewCreated(view, saveInstanceState);
 
         initializeElement(view);
-//        img.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                navigateToCategoriesFragment();
-//            }
-//        });
+        handleShowCalendar();
+        handleSwitchToChooseCategoryTypeActivity();
+    }
+
+    private void handleSwitchToChooseCategoryTypeActivity() {
+        linearLayoutCreateTransactionCategoryType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChooseCategoryTypeActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void handleShowCalendar() {
         calendarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +76,7 @@ public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense
         txtCalendarDate = view.findViewById(R.id.calendarDate);
         txtTimerDate = view.findViewById(R.id.timerDate);
         calendarView = view.findViewById(R.id.calendar);
+        linearLayoutCreateTransactionCategoryType = view.findViewById(R.id.linearLayoutCreateTransactionCategoryType);
     }
 
 
@@ -80,7 +91,7 @@ public class AddExpenseFragment extends Fragment implements CustomSpinnerExpense
     }
 
     private void navigateToCategoriesFragment() {
-        CategoryFragment categoryFragment = new CategoryFragment();
+        CategoryTypeFragment categoryFragment = new CategoryTypeFragment();
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frame_layout, categoryFragment)
                 .addToBackStack(null) // Optional, for back stack handling

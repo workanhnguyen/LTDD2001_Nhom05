@@ -112,4 +112,11 @@
     <string name="welcome_to_spendify">Chào mừng đến với Spendify</string>
     <string name="app_description">Trải nghiệm niềm vui quản lý tài chính bằng việc đăng ký trong lần đầu sử dụng</string>
     <string name="register_new_account">ĐĂNG KÝ TÀI KHOẢN MỚI</string>
+    <string name="choose_account_root">Chọn loại tài khoản</string>
+    <string name="delete_wallet">Xóa ví</string>
+    <string name="do_you_want_to_delete_this_wallet">Bạn có chắc chắn xóa ví này không?</string>
+    <string name="ok">Ok</string>
+    <string name="no">Không</string>
+    <string name="create_wallet_successful">Tạo ví thành công!</string>
+    <string name="choose_category_type">Chọn loại danh mục</string>
 </resources>

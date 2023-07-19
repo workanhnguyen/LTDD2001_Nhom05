@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.quanlychitieu.databinding.ActivityMainBinding;
-import com.example.quanlychitieu.fragment.AddExpenseFragment;
-import com.example.quanlychitieu.fragment.CategoryFragment;
+import com.example.quanlychitieu.fragment.CreateTransactionFragment;
+import com.example.quanlychitieu.fragment.CategoryTypeFragment;
 import com.example.quanlychitieu.fragment.OverViewFragment;
 import com.example.quanlychitieu.fragment.SettingFragment;
 import com.example.quanlychitieu.fragment.WalletFragment;
@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.wallet) {
                 replaceFragment(new WalletFragment());
             } else if (item.getItemId() == R.id.category) {
-                replaceFragment(new CategoryFragment());
+                replaceFragment(new CategoryTypeFragment());
             } else if (item.getItemId() == R.id.account) {
                 replaceFragment(new SettingFragment());
             } else if (item.getItemId() == R.id.addTransaction){
-               replaceFragment(new AddExpenseFragment());
+               replaceFragment(new CreateTransactionFragment());
             }
             return true;
 

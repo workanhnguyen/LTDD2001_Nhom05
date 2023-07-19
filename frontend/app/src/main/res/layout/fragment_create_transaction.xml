@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/light_grey"
-    tools:context=".fragment.AddExpenseFragment">
+    tools:context=".fragment.CreateTransactionFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,6 +59,7 @@
             android:background="@color/white">
             <!-- Choosing category -->
             <LinearLayout
+                android:id="@+id/linearLayoutCreateTransactionCategoryType"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
