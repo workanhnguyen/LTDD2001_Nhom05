@@ -1,22 +1,30 @@
 package com.example.quanlychitieu.activities;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.fragment.CategoryTypeExpenseFragment;
-import com.example.quanlychitieu.fragment.CategoryTypeIncomeFragment;
-import com.example.quanlychitieu.fragment.ChooseCategoryTypeExpenseFragment;
-import com.example.quanlychitieu.fragment.ChooseCategoryTypeIncomeFragment;
+import com.example.quanlychitieu.adapters.ChooseCategoryTypeAdapter;
+import com.example.quanlychitieu.models.CategoryType;
+import com.example.quanlychitieu.sampledatas.CategoryData;
+
+import java.util.List;
 
 public class ChooseCategoryTypeActivity extends AppCompatActivity {
-    TextView chooseCategoryTypeMucChi, chooseCategoryTypeMucThu;
+    TextView chooseCategoryTypeExpense, chooseCategoryTypeIncome;
+    RecyclerView chooseCategoryTypeList;
+    ChooseCategoryTypeAdapter adapter;
+    List<CategoryType> expenseCategories = CategoryData.getExpenseCategoryTypeList();
+    List<CategoryType> incomeCategories = CategoryData.getIncomeCategoryTypeList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,54 +39,49 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity {
         }
 
         initializeElement();
-        handleChangeCategoryTypeFragment();
+        loadCategoryTypeData(expenseCategories);
+        handleShowCategoryTypeToUI();
     }
 
-    private void handleChangeCategoryTypeFragment() {
-        navigateToCategoryExpenseFragment();
-        chooseCategoryTypeMucChi.setTextColor(getResources().getColor(R.color.primary));
-        chooseCategoryTypeMucThu.setTextColor(getResources().getColor(R.color.black));
-        View.OnClickListener textViewClickListener = new View.OnClickListener() {
+    private void loadCategoryTypeData(List<CategoryType> list) {
+        adapter = new ChooseCategoryTypeAdapter(list);
+        adapter.setContext(ChooseCategoryTypeActivity.this);
+        chooseCategoryTypeList.setAdapter(adapter);
+        chooseCategoryTypeList.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void handleShowCategoryTypeToUI() {
+        chooseCategoryTypeExpense.setTextColor(R.color.green);
+        chooseCategoryTypeIncome.setTextColor(R.color.black);
+
+        chooseCategoryTypeExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Set the default text color for both TextViews
-                chooseCategoryTypeMucChi.setTextColor(getResources().getColor(R.color.black));
-                chooseCategoryTypeMucThu.setTextColor(getResources().getColor(R.color.black));
+                chooseCategoryTypeIncome.setTextColor(R.color.black);
+                chooseCategoryTypeExpense.setTextColor(Color.RED);
 
-                // Set the clicked TextView's text color to the selected color
-                TextView clickedTextView = (TextView) v;
-                clickedTextView.setTextColor(getResources().getColor(R.color.primary));
-
-                // Handle navigation based on which TextView is clicked
-                if (v.getId() == R.id.txtMucChi) {
-                    navigateToCategoryExpenseFragment();
-                } else if (v.getId() == R.id.txtMucThu) {
-                    navigateToCategoryIncomeFragment();
-                }
+                loadCategoryTypeData(expenseCategories);
             }
-        };
-        chooseCategoryTypeMucChi.setOnClickListener(textViewClickListener);
-        chooseCategoryTypeMucThu.setOnClickListener(textViewClickListener);
-    }
+        });
 
-    private void navigateToCategoryExpenseFragment() {
-        ChooseCategoryTypeExpenseFragment chooseCategoryExpenseFragment = new ChooseCategoryTypeExpenseFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_view_choose_category, chooseCategoryExpenseFragment)
-                .addToBackStack(null) // Optional, for back stack handling
-                .commit();
-    }
-    private void navigateToCategoryIncomeFragment() {
-        ChooseCategoryTypeIncomeFragment chooseCategoryIncomeFragment = new ChooseCategoryTypeIncomeFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_view_choose_category, chooseCategoryIncomeFragment)
-                .addToBackStack(null) // Optional, for back stack handling
-                .commit();
+        chooseCategoryTypeIncome.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+//                navigateToChooseCategoryTypeFragment(new ChooseCategoryTypeIncomeFragment());
+                chooseCategoryTypeIncome.setTextColor(Color.RED);
+                chooseCategoryTypeExpense.setTextColor(R.color.black);
+
+                loadCategoryTypeData(incomeCategories);
+            }
+        });
     }
 
     private void initializeElement() {
-        chooseCategoryTypeMucChi = findViewById(R.id.chooseCategoryTypeMucChi);
-        chooseCategoryTypeMucThu = findViewById(R.id.chooseCategoryTypeMucThu);
+        chooseCategoryTypeExpense = findViewById(R.id.chooseCategoryTypeExpense);
+        chooseCategoryTypeIncome = findViewById(R.id.chooseCategoryTypeIncome);
+        chooseCategoryTypeList = findViewById(R.id.chooseCategoryTypeList);
     }
 
     @Override

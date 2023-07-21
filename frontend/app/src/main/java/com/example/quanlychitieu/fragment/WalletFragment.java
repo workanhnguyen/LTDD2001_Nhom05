@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.CreateWalletActivity;
 import com.example.quanlychitieu.adapters.WalletAdapter;
-import com.example.quanlychitieu.models.AccountRoot;
 import com.example.quanlychitieu.models.AccountType;
 import com.example.quanlychitieu.models.User;
 import com.example.quanlychitieu.models.Wallet;

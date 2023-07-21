@@ -1,5 +1,6 @@
 package com.example.quanlychitieu.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,12 +16,23 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.adapters.CategoryTypeAdapter;
+import com.example.quanlychitieu.models.CategoryType;
+import com.example.quanlychitieu.sampledatas.CategoryData;
+
+import java.util.List;
 
 public class CategoryTypeFragment extends Fragment {
-    TextView mucThu, mucChi;
+    TextView categoryTypeExpense, categoryTypeIncome;
+    RecyclerView categoryTypeList;
+    CategoryTypeAdapter adapter;
+
+    List<CategoryType> expenseCategories = CategoryData.getExpenseCategoryTypeList();
+    List<CategoryType> incomeCategories = CategoryData.getIncomeCategoryTypeList();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +48,7 @@ public class CategoryTypeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_category, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_type, container, false);
         return view;
     }
 
@@ -45,54 +57,47 @@ public class CategoryTypeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeElement(view);
-        handleChangeCategoryTypeFragment();
+        loadCategoryTypeData(expenseCategories);
+        handleShowCategoryTypeDataToUI();
     }
 
-    private void handleChangeCategoryTypeFragment() {
-        navigateToCategoryExpenseFragment();
-        mucChi.setTextColor(getResources().getColor(R.color.primary));
-        mucThu.setTextColor(getResources().getColor(R.color.black));
-        View.OnClickListener textViewClickListener = new View.OnClickListener() {
+    private void loadCategoryTypeData(List<CategoryType> list) {
+        adapter = new CategoryTypeAdapter(list);
+        adapter.setContext(getActivity());
+        categoryTypeList.setAdapter(adapter);
+        categoryTypeList.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void handleShowCategoryTypeDataToUI() {
+        categoryTypeExpense.setTextColor(R.color.primary);
+        categoryTypeIncome.setTextColor(R.color.black);
+
+        categoryTypeExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Set the default text color for both TextViews
-                mucChi.setTextColor(getResources().getColor(R.color.black));
-                mucThu.setTextColor(getResources().getColor(R.color.black));
+                categoryTypeExpense.setTextColor(R.color.primary);
+                categoryTypeIncome.setTextColor(R.color.black);
 
-                // Set the clicked TextView's text color to the selected color
-                TextView clickedTextView = (TextView) v;
-                clickedTextView.setTextColor(getResources().getColor(R.color.primary));
-
-                // Handle navigation based on which TextView is clicked
-                if (v.getId() == R.id.txtMucChi) {
-                    navigateToCategoryExpenseFragment();
-                } else if (v.getId() == R.id.txtMucThu) {
-                    navigateToCategoryIncomeFragment();
-                }
+                loadCategoryTypeData(expenseCategories);
             }
-        };
-        mucChi.setOnClickListener(textViewClickListener);
-        mucThu.setOnClickListener(textViewClickListener);
+        });
+
+        categoryTypeIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryTypeExpense.setTextColor(R.color.black);
+                categoryTypeIncome.setTextColor(R.color.primary);
+
+                loadCategoryTypeData(incomeCategories);
+            }
+        });
     }
 
     private void initializeElement(View view) {
-        mucChi = view.findViewById(R.id.txtMucChi);
-        mucThu = view.findViewById(R.id.txtMucThu);
-    }
-
-    private void navigateToCategoryExpenseFragment() {
-        CategoryTypeExpenseFragment categoryExpenseFragment = new CategoryTypeExpenseFragment();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_view, categoryExpenseFragment)
-                .addToBackStack(null) // Optional, for back stack handling
-                .commit();
-    }
-    private void navigateToCategoryIncomeFragment() {
-        CategoryTypeIncomeFragment categoryIncomeFragment = new CategoryTypeIncomeFragment();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_view, categoryIncomeFragment)
-                .addToBackStack(null) // Optional, for back stack handling
-                .commit();
+        categoryTypeExpense = view.findViewById(R.id.categoryTypeExpense);
+        categoryTypeIncome = view.findViewById(R.id.categoryTypeIncome);
+        categoryTypeList = view.findViewById(R.id.categoryTypeList);
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

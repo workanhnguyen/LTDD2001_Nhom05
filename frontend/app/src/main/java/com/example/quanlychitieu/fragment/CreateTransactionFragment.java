@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
@@ -57,7 +56,7 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
         linearLayoutCreateTransactionCategoryType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChooseCategoryTypeActivity.class);
+                Intent intent = new Intent(getActivity(), ChooseCategoryTypeActivity.class);
                 startActivity(intent);
             }
         });
@@ -90,13 +89,13 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
 
     }
 
-    private void navigateToCategoriesFragment() {
-        CategoryTypeFragment categoryFragment = new CategoryTypeFragment();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frame_layout, categoryFragment)
-                .addToBackStack(null) // Optional, for back stack handling
-                .commit();
-    }
+//    private void navigateToCategoriesFragment() {
+//        CategoryTypeFragment categoryFragment = new CategoryTypeFragment();
+//        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.frame_layout, categoryFragment)
+//                .addToBackStack(null) // Optional, for back stack handling
+//                .commit();
+//    }
 
     public void showCalendar() {
         CalendarFragment calendarDialogFragment = new CalendarFragment();

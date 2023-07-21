@@ -20,7 +20,6 @@ import com.example.quanlychitieu.models.User;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserHolder> {

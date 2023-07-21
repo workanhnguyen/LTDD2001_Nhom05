@@ -12,6 +12,11 @@ public class CategoryType {
     public CategoryType() {
     }
 
+    public CategoryType(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public CategoryType(Integer id, String name, String imageLink) {
         this.id = id;
         this.name = name;

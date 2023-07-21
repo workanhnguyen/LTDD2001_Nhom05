@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="50">
             <TextView
-                android:id="@+id/txtMucChi"
+                android:id="@+id/categoryTypeExpense"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -38,7 +38,7 @@
             android:layout_weight="50"
             android:gravity="center">
             <TextView
-                android:id="@+id/txtMucThu"
+                android:id="@+id/categoryTypeIncome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -48,11 +48,10 @@
                 android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryTypeList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"/>
 
 </LinearLayout>

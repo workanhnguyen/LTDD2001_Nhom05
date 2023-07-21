@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.quanlychitieu.databinding.ActivityMainBinding;
-import com.example.quanlychitieu.fragment.CreateTransactionFragment;
 import com.example.quanlychitieu.fragment.CategoryTypeFragment;
+import com.example.quanlychitieu.fragment.CreateTransactionFragment;
 import com.example.quanlychitieu.fragment.OverViewFragment;
 import com.example.quanlychitieu.fragment.SettingFragment;
 import com.example.quanlychitieu.fragment.WalletFragment;

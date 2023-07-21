@@ -11,12 +11,12 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/chooseCategoryTypeIncomeItemImage"
+            android:id="@+id/chooseCategoryTypeItemImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/app_icon_background"/>
         <TextView
-            android:id="@+id/chooseCategoryTypeIncomeItemTitle"
+            android:id="@+id/chooseCategoryTypeItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"

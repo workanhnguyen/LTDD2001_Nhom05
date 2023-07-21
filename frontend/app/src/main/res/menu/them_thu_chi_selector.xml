@@ -1,5 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="1" android:drawable="@drawable/them_thu_chi_press" android:state_pressed="true"/>
-    <item android:title="2" android:drawable="@drawable/them_thu_chi_selected" android:state_selected="true"/>
-    <item android:title="3" android:drawable="@drawable/them_thu_chi"/>
-</selector>

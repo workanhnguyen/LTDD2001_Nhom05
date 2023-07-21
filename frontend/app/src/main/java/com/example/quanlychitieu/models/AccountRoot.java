@@ -1,10 +1,5 @@
 package com.example.quanlychitieu.models;
 
-import android.os.Build;
-import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-
 import org.parceler.Parcel;
 
 @Parcel

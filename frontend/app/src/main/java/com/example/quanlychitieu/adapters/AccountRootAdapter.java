@@ -13,11 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.holders.AccountRootHolder;
-import com.example.quanlychitieu.holders.CategoryTypeExpenseHolder;
-import com.example.quanlychitieu.holders.CategoryTypeIncomeHolder;
 import com.example.quanlychitieu.models.AccountRoot;
-import com.example.quanlychitieu.models.CategoryRoot;
-import com.example.quanlychitieu.models.CategoryType;
 
 import java.util.List;
 

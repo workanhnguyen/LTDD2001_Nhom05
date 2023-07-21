@@ -19,10 +19,8 @@ import com.example.quanlychitieu.holders.WalletHolder;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.utils.CommonUtil;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WalletAdapter extends RecyclerView.Adapter<WalletHolder> {

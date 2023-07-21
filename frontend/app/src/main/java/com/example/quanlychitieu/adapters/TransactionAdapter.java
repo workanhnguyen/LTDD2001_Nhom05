@@ -13,9 +13,7 @@ import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.utils.CommonUtil;
 import com.example.quanlychitieu.utils.DateUtil;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionHolder> {
     private List<Transaction> transactions;

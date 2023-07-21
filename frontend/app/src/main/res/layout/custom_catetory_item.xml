@@ -12,11 +12,11 @@
         android:background="@color/white"
         android:paddingHorizontal="12dp">
         <ImageView
-            android:id="@+id/expenseItemImage"
+            android:id="@+id/categoryTypeItemImage"
             android:layout_width="40dp"
             android:layout_height="40dp"/>
         <TextView
-            android:id="@+id/expenseItemName"
+            android:id="@+id/categoryTypeItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
