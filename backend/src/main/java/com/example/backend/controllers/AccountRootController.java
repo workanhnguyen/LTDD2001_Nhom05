@@ -1,9 +1,8 @@
 package com.example.backend.controllers;
 
 import com.example.backend.daos.AccountRootDao;
-import com.example.backend.daos.AccountTypeDao;
 import com.example.backend.dtos.AccountRootDto;
-import com.example.backend.dtos.AccountTypeDto;
+import com.example.backend.models.AccountRoot;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -23,12 +23,12 @@ public class AccountRootController {
     private AccountRootDao accountRootDao;
 
     @GetMapping
-    public ResponseEntity<List<AccountRootDto>> getAllAccountRoots() {
+    public ResponseEntity<List<AccountRoot>> getAllAccountRoots() {
         return ResponseEntity.ok().body(accountRootDao.getAllAccountRoots());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccountRootDto> getAccountRoot(@PathVariable int id) {
+    public ResponseEntity<Optional<AccountRoot>> getAccountRoot(@PathVariable int id) {
         return ResponseEntity.ok().body(accountRootDao.getAccountRoot(id));
     }
 

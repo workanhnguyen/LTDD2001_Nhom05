@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,16 +26,15 @@ public class CategoryRootDao {
     private CategoryRootRepository categoryRootRepository;
     private ModelMapper modelMapper;
 
-    public List<CategoryRootDto> getAllCategoryRoots() {
+    public List<CategoryRoot> getAllCategoryRoots() {
         List<CategoryRoot> categoryRoots = categoryRootRepository.findAll();
 
-        return categoryRoots.stream().map((a) -> modelMapper.map(a, CategoryRootDto.class))
-                .collect(Collectors.toList());
+        return categoryRoots;
     }
 
-    public CategoryRootDto getCategoryRoot(int id) {
+    public Optional<CategoryRoot> getCategoryRoot(int id) {
         Optional<CategoryRoot> categoryRoot = categoryRootRepository.findById(id);
-        return modelMapper.map(categoryRoot, CategoryRootDto.class);
+        return categoryRoot;
     }
 
     public boolean deleteCategoryRoot(int id) {

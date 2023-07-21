@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 import com.example.backend.daos.CategoryTypeDao;
 import com.example.backend.dtos.CategoryTypeDto;
+import com.example.backend.models.CategoryType;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -19,12 +21,12 @@ public class CategoryTypeController {
     private CategoryTypeDao categoryTypeDao;
 
     @GetMapping
-    public ResponseEntity<List<CategoryTypeDto>> getAllCategoryTypes() {
+    public ResponseEntity<List<CategoryType>> getAllCategoryTypes() {
         return ResponseEntity.ok().body(categoryTypeDao.getAllCategoryTypes());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryTypeDto> getCategoryType(@PathVariable int id) {
+    public ResponseEntity<Optional<CategoryType>> getCategoryType(@PathVariable int id) {
         return ResponseEntity.ok().body(categoryTypeDao.getCategoryType(id));
     }
 
@@ -50,13 +52,13 @@ public class CategoryTypeController {
 
 
     @GetMapping(params = "categoryRootId")
-    public ResponseEntity<List<CategoryTypeDto>> getAllAccountTypeFindByAccountRootID(@RequestParam("categoryRootId") int categoryRootId  ) throws Exception {
-        return ResponseEntity.ok().body((List<CategoryTypeDto>) categoryTypeDao.getCategoryTypeByCategoryRoot(categoryRootId));
+    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByAccountRootID(@RequestParam("categoryRootId") int categoryRootId  ) throws Exception {
+        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByCategoryRoot(categoryRootId));
     }//
 
     @GetMapping(params = "name")
-    public ResponseEntity<List<CategoryTypeDto>> getAllAccountTypeFindByName(@RequestParam("name") String name  ) throws Exception {
-        return ResponseEntity.ok().body((List<CategoryTypeDto>) categoryTypeDao.getCategoryTypeByName(name));
+    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByName(@RequestParam("name") String name  ) throws Exception {
+        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByName(name));
     }//
 
     @GetMapping("/check-root-type/{id}")

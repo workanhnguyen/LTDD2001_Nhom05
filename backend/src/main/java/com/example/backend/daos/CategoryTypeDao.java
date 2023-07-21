@@ -1,11 +1,7 @@
 package com.example.backend.daos;
 
 
-import com.example.backend.dtos.AccountTypeDto;
-import com.example.backend.dtos.CategoryRootDto;
 import com.example.backend.dtos.CategoryTypeDto;
-import com.example.backend.models.AccountRoot;
-import com.example.backend.models.AccountType;
 import com.example.backend.models.CategoryRoot;
 import com.example.backend.models.CategoryType;
 import com.example.backend.repositories.CategoryRootRepository;
@@ -30,16 +26,15 @@ public class CategoryTypeDao {
     private CategoryRootRepository categoryRootRepository;
     private ModelMapper modelMapper;
 
-    public List<CategoryTypeDto> getAllCategoryTypes() {
+    public List<CategoryType> getAllCategoryTypes() {
         List<CategoryType> categoryTypes = categoryTypeRepository.findAll();
 
-        return categoryTypes.stream().map((a) -> modelMapper.map(a, CategoryTypeDto.class))
-                .collect(Collectors.toList());
+        return categoryTypes;
     }
 
-    public CategoryTypeDto getCategoryType(int id) {
+    public Optional<CategoryType> getCategoryType(int id) {
         Optional<CategoryType> categoryType = categoryTypeRepository.findById(id);
-        return modelMapper.map(categoryType, CategoryTypeDto.class);
+        return categoryType;
     }
 
     public boolean deleteCategoryType(int id) {
@@ -106,21 +101,19 @@ public class CategoryTypeDao {
         return modelMapper.map(updatedCategoryType, CategoryTypeDto.class);
     }
 
-    public List<CategoryTypeDto> getCategoryTypeByCategoryRoot(int id) throws Exception {
+    public List<CategoryType> getCategoryTypeByCategoryRoot(int id) throws Exception {
         CategoryRoot categoryRoot = categoryRootRepository.findById(id)
                 .orElseThrow(Exception::new);
         List<CategoryType> categoryTypes = categoryTypeRepository.findByCategoryRoot(categoryRoot);
 
-        return categoryTypes.stream().map((a) -> modelMapper.map(a, CategoryTypeDto.class))
-                .collect(Collectors.toList());
+        return categoryTypes;
     }
 
-    public List<CategoryTypeDto> getCategoryTypeByName(String name) throws Exception {
+    public List<CategoryType> getCategoryTypeByName(String name) throws Exception {
 
         List<CategoryType> categoryTypes = categoryTypeRepository.findByNameContaining(name);
 
-        return categoryTypes.stream().map((a) -> modelMapper.map(a, CategoryTypeDto.class))
-                .collect(Collectors.toList());
+        return categoryTypes;
     }
 
 

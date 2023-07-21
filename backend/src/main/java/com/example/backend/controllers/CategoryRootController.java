@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 import com.example.backend.daos.CategoryRootDao;
 import com.example.backend.dtos.CategoryRootDto;
+import com.example.backend.models.CategoryRoot;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -19,12 +21,12 @@ public class CategoryRootController {
     private CategoryRootDao categoryRootDao;
 
     @GetMapping
-    public ResponseEntity<List<CategoryRootDto>> getAllCategoryRoots() {
+    public ResponseEntity<List<CategoryRoot>> getAllCategoryRoots() {
         return ResponseEntity.ok().body(categoryRootDao.getAllCategoryRoots());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryRootDto> getCategoryRoot(@PathVariable int id) {
+    public ResponseEntity<Optional<CategoryRoot>> getCategoryRoot(@PathVariable int id) {
         return ResponseEntity.ok().body(categoryRootDao.getCategoryRoot(id));
     }
 

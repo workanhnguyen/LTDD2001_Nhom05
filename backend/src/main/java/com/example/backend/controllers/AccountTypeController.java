@@ -1,8 +1,8 @@
 package com.example.backend.controllers;
 
 import com.example.backend.daos.AccountTypeDao;
-import com.example.backend.dtos.AccountRootDto;
 import com.example.backend.dtos.AccountTypeDto;
+import com.example.backend.models.AccountType;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -20,12 +21,12 @@ public class AccountTypeController {
     private AccountTypeDao accountTypeDao;
 
     @GetMapping
-    public ResponseEntity<List<AccountTypeDto>> getAllAccountTypes() {
+    public ResponseEntity<List<AccountType>> getAllAccountTypes() {
         return ResponseEntity.ok().body(accountTypeDao.getAllAccountTypes());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccountTypeDto> getAccountType(@PathVariable int id) {
+    public ResponseEntity<Optional<AccountType>> getAccountType(@PathVariable int id) {
         return ResponseEntity.ok().body(accountTypeDao.getAccountType(id));
     }
 
@@ -53,8 +54,8 @@ public class AccountTypeController {
     }
 
     @GetMapping(params = "accountRootId")
-    public ResponseEntity<List<AccountTypeDto>> getAllAccountTypeFindByAccountRootID(@RequestParam("accountRootId") int accountRootId  ) throws Exception {
-        return ResponseEntity.ok().body((List<AccountTypeDto>) accountTypeDao.getAccountTypeByAccountRoot(accountRootId));
+    public ResponseEntity<List<AccountType>> getAllAccountTypeFindByAccountRootID(@RequestParam("accountRootId") int accountRootId  ) throws Exception {
+        return ResponseEntity.ok().body((List<AccountType>) accountTypeDao.getAccountTypeByAccountRoot(accountRootId));
     }//
 
 

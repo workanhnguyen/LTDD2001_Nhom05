@@ -29,18 +29,23 @@ public class AccountType implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+
     @Lob
     @Column(name = "image")
     private String image;
+
     @Lob
     @Column(name = "description")
     private String description;
+
     @JoinColumn(name = "account_root", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AccountRoot accountRoot;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountType", fetch = FetchType.LAZY)
     private Set<Wallet> walletSet;
 }

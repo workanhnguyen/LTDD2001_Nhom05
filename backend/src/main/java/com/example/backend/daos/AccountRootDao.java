@@ -9,13 +9,11 @@ import com.example.backend.repositories.AccountTypeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,16 +25,15 @@ public class AccountRootDao {
     private AccountRootRepository accountRootRepository;
     private ModelMapper modelMapper;
 
-    public List<AccountRootDto> getAllAccountRoots() {
+    public List<AccountRoot> getAllAccountRoots() {
         List<AccountRoot> accountRoots = accountRootRepository.findAll();
 
-        return accountRoots.stream().map((a) -> modelMapper.map(a, AccountRootDto.class))
-                .collect(Collectors.toList());
+        return accountRoots;
     }
 
-    public AccountRootDto getAccountRoot(int id) {
+    public Optional<AccountRoot> getAccountRoot(int id) {
         Optional<AccountRoot> accountRoot = accountRootRepository.findById(id);
-        return modelMapper.map(accountRoot, AccountRootDto.class);
+        return accountRoot;
     }
 
     public boolean deleteAccountRoot(int id) {

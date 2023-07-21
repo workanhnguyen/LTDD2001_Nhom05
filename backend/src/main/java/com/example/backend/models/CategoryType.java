@@ -30,15 +30,19 @@ public class CategoryType implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+
     @Lob
     @Column(name = "image")
     private String image;
+
     @JoinColumn(name = "category_root", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CategoryRoot categoryRoot;
+
     @JsonIgnore
     @OneToMany(mappedBy = "categoryType")
     private Set<Transaction> transactionSet;
