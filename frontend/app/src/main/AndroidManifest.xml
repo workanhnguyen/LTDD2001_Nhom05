@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,8 +12,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.QuanLyChiTieu"
+        android:theme="@style/Base.Theme.QuanLyChiTieu"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.AdminEditUser"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AdminActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".activities.EditUserInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DevInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GeneralSettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.UserSettingActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

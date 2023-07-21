@@ -1,6 +1,5 @@
 package com.example.quanlychitieu.adapters;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import com.example.quanlychitieu.holders.TransactionHolder;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.utils.DateUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionHolder> {

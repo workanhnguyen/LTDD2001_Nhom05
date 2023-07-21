@@ -1,24 +1,37 @@
 package com.example.quanlychitieu.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quanlychitieu.activities.DevInfoActivity;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.GeneralSettingActivity;
 import com.example.quanlychitieu.holders.SettingHolder;
 import com.example.quanlychitieu.models.Setting;
 
 import java.util.List;
 
 public class SettingAdapter extends RecyclerView.Adapter<SettingHolder> {
+
+    private Context context;
     private List<Setting> settings;
 
     public SettingAdapter(List<Setting> settings) {
         this.settings = settings;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     @NonNull
@@ -37,7 +50,13 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), setting.getText(), Toast.LENGTH_SHORT).show();
+                if (holder.getAdapterPosition() == 0) {
+                    Intent intent = new Intent(context, GeneralSettingActivity.class);
+                    context.startActivity(intent);
+                } else if (holder.getAdapterPosition() == 1) {
+                    Intent intent = new Intent(context, DevInfoActivity.class);
+                    context.startActivity(intent);
+                }
             }
         });
     }

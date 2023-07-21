@@ -1,10 +1,7 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.QuanLyChiTieu" parent="Theme.AppCompat">
+    <style name="Base.Theme.QuanLyChiTieu" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/primary</item>
-         <item name="android:actionBarStyle">@style/MyActionBarStyle</item>
+        <item name="colorPrimary">@color/primary</item>
     </style>
-
-    <style name="Theme.QuanLyChiTieu" parent="Base.Theme.QuanLyChiTieu" />
 </resources>
