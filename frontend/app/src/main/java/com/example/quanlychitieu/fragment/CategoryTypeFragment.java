@@ -68,16 +68,15 @@ public class CategoryTypeFragment extends Fragment {
         categoryTypeList.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    @SuppressLint("ResourceAsColor")
     private void handleShowCategoryTypeDataToUI() {
-        categoryTypeExpense.setTextColor(R.color.primary);
-        categoryTypeIncome.setTextColor(R.color.black);
+        categoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
+        categoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
 
         categoryTypeExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categoryTypeExpense.setTextColor(R.color.primary);
-                categoryTypeIncome.setTextColor(R.color.black);
+                categoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
+                categoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
 
                 loadCategoryTypeData(expenseCategories);
             }
@@ -86,8 +85,8 @@ public class CategoryTypeFragment extends Fragment {
         categoryTypeIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categoryTypeExpense.setTextColor(R.color.black);
-                categoryTypeIncome.setTextColor(R.color.primary);
+                categoryTypeExpense.setTextColor(getResources().getColor(R.color.black));
+                categoryTypeIncome.setTextColor(getResources().getColor(R.color.primary));
 
                 loadCategoryTypeData(incomeCategories);
             }

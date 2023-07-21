@@ -49,29 +49,25 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity {
         chooseCategoryTypeList.setAdapter(adapter);
         chooseCategoryTypeList.setLayoutManager(new LinearLayoutManager(this));
     }
-
-    @SuppressLint("ResourceAsColor")
     private void handleShowCategoryTypeToUI() {
-        chooseCategoryTypeExpense.setTextColor(R.color.green);
-        chooseCategoryTypeIncome.setTextColor(R.color.black);
+        chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
+        chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
 
         chooseCategoryTypeExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseCategoryTypeIncome.setTextColor(R.color.black);
-                chooseCategoryTypeExpense.setTextColor(Color.RED);
+                chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
+                chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
 
                 loadCategoryTypeData(expenseCategories);
             }
         });
 
         chooseCategoryTypeIncome.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-//                navigateToChooseCategoryTypeFragment(new ChooseCategoryTypeIncomeFragment());
-                chooseCategoryTypeIncome.setTextColor(Color.RED);
-                chooseCategoryTypeExpense.setTextColor(R.color.black);
+                chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.primary));
+                chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.black));
 
                 loadCategoryTypeData(incomeCategories);
             }
