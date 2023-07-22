@@ -1,5 +1,6 @@
 package com.example.quanlychitieu.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 
 public class StatisticFilterActivity extends AppCompatActivity {
@@ -33,21 +35,30 @@ public class StatisticFilterActivity extends AppCompatActivity {
         filterLastMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
+                intent.putExtra("test", filterLastMonth.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
         filterThisMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
+                intent.putExtra("test", filterThisMonth.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
         filterAnotherMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
+                intent.putExtra("test", filterAnotherMonth.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

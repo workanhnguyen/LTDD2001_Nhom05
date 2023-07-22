@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.quanlychitieu.activities.StatisticFilterActivity;
 import com.example.quanlychitieu.databinding.ActivityMainBinding;
 import com.example.quanlychitieu.fragment.CategoryTypeFragment;
 import com.example.quanlychitieu.fragment.CreateTransactionFragment;
@@ -17,8 +18,10 @@ import com.example.quanlychitieu.fragment.SettingFragment;
 import com.example.quanlychitieu.fragment.WalletFragment;
 
 public class MainActivity extends AppCompatActivity {
+
     private long backPressedTime;
     ActivityMainBinding binding;
+    String resultData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         handleChangeFragment();
+
+
     }
 
     private void handleChangeFragment() {
@@ -65,5 +70,4 @@ public class MainActivity extends AppCompatActivity {
         }
         backPressedTime = System.currentTimeMillis();
     }
-
 }

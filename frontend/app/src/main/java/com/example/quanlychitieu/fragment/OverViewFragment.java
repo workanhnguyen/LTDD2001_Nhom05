@@ -1,5 +1,7 @@
 package com.example.quanlychitieu.fragment;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +37,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OverViewFragment extends Fragment {
+    private static final int REQUEST_CODE_SECOND_ACTIVITY = 1;
+    String resultData;
     TextView tvTotalBalance1, filterTitle;
     RecyclerView transactionList;
     LinearLayout linearLayoutFilter;
@@ -88,17 +92,15 @@ public class OverViewFragment extends Fragment {
             }
         });
     }
-
     private void handleSwitchToStatisticFilter() {
         linearLayoutFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), StatisticFilterActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getActivity(), StatisticFilterActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_SECOND_ACTIVITY);
             }
         });
     }
-
     private void loadTransactionData() {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
@@ -140,7 +142,6 @@ public class OverViewFragment extends Fragment {
         inflater.inflate(R.menu.menu_renew, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -151,5 +152,19 @@ public class OverViewFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // Method to get data from another activity and back to origin activity
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_SECOND_ACTIVITY) {
+            if (resultCode == RESULT_OK && data != null) {
+                filterTitle.setText(data.getStringExtra("test"));
+            } else {
+                // Handle the case where the user canceled or there was an error in the second activity
+            }
+        }
     }
 }
