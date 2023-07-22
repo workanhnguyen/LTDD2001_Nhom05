@@ -7,6 +7,7 @@
     tools:context=".fragment.DayStatisticFragment">
 
     <TextView
+        android:id="@+id/filterDayYesterday"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:text="@string/yesterday"
@@ -19,6 +20,7 @@
         android:layout_height="0.5dp"
         android:background="@color/light_grey" />
     <TextView
+        android:id="@+id/filterDayToday"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:text="@string/today"
@@ -31,6 +33,7 @@
         android:layout_height="0.5dp"
         android:background="@color/light_grey" />
     <TextView
+        android:id="@+id/filterDayOtherDay"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:text="@string/another_day"

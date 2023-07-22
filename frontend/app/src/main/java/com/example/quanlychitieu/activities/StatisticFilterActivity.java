@@ -35,6 +35,11 @@ public class StatisticFilterActivity extends AppCompatActivity {
 
         initializeElement();
         setTabLayoutAdapter();
+        handleFilterItemClicked();
+    }
+
+    private void handleFilterItemClicked() {
+
     }
 
     private void setTabLayoutAdapter() {

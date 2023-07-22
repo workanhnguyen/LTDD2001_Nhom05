@@ -1,12 +1,15 @@
 package com.example.quanlychitieu.fragment;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,18 +27,25 @@ import com.example.quanlychitieu.adapters.TransactionAdapter;
 import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
 import com.example.quanlychitieu.models.Transaction;
+import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OverViewFragment extends Fragment {
-    TextView tvTotalBalance1;
+    TextView tvTotalBalance1, filterTitle;
     RecyclerView transactionList;
-    LinearLayout linearLayoutFilter, linearLayoutShowWallet;
+    LinearLayout linearLayoutFilter;
+    ImageView switchShowHideBalance;
+    Intent intent;
+    Bundle bundle;
+    boolean isBalanceShowed = true;
+//    String defaultFilterTitle = "";
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -68,6 +78,40 @@ public class OverViewFragment extends Fragment {
         initializeElement(view);
 //        loadTransactionData();
         handleSwitchToStatisticFilter();
+        handleSwitchShowHideBalance();
+//        handleChangeFilterTitle();
+    }
+
+//    private void handleChangeFilterTitle() {
+//        String title = getActivity().getIntent().getStringExtra("statistic_filter");
+//        if (title.equals(CustomConstant.FILTER_STATISTIC_YESTERDAY))
+//            filterTitle.setText(getString(R.string.yesterday));
+//        else if (title.equals(CustomConstant.FILTER_STATISTIC_TODAY))
+//            filterTitle.setText(getString(R.string.today));
+//        else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_DAY))
+//            filterTitle.setText(getString(R.string.another_day));
+////        } else {
+////            Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
+////        }
+////        else if (title.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH))
+////            filterTitle.setText(getString(R.string.last_month));
+////        else if (title.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH))
+////            filterTitle.setText(getString(R.string.this_month));
+////        else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH))
+////            filterTitle.setText(getString(R.string.another_month));
+//    }
+    private void handleSwitchShowHideBalance() {
+        switchShowHideBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isBalanceShowed = !isBalanceShowed;
+
+                if (isBalanceShowed)
+                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_24);
+                else
+                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_off_24);
+            }
+        });
     }
 
     private void handleSwitchToStatisticFilter() {
@@ -111,10 +155,26 @@ public class OverViewFragment extends Fragment {
     private void initializeElement(View view) {
         transactionList = view.findViewById(R.id.transactionList);
         linearLayoutFilter = view.findViewById(R.id.linearLayoutFilter);
+        switchShowHideBalance = view.findViewById(R.id.switchShowHideBalance);
+
+        filterTitle = view.findViewById(R.id.filterTitle);
+        filterTitle.setText(getString(R.string.this_month));
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_renew, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.btnRenew) {
+            // handle refresh data here
+            Toast.makeText(getActivity(), "Refresh Data", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
