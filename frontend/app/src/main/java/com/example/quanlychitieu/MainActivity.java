@@ -1,5 +1,6 @@
 package com.example.quanlychitieu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -17,7 +18,6 @@ import com.example.quanlychitieu.fragment.WalletFragment;
 
 public class MainActivity extends AppCompatActivity {
     private long backPressedTime;
-
     ActivityMainBinding binding;
 
     @Override
@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        handleChangeFragment();
+    }
+
+    private void handleChangeFragment() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new OverViewFragment());
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.account) {
                 replaceFragment(new SettingFragment());
             } else if (item.getItemId() == R.id.addTransaction){
-               replaceFragment(new CreateTransactionFragment());
+                replaceFragment(new CreateTransactionFragment());
             }
             return true;
 

@@ -8,34 +8,78 @@
     android:background="@color/light_grey"
     tools:context=".activities.StatisticFilterActivity">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/statisticTabLayout"
+    <TextView
+        android:id="@+id/filterLastMonth"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabTextColor="@color/white"
-        app:tabBackground="@color/primary"
-        app:tabIndicatorColor="@color/white">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/month" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/custom_time" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/statisticViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/last_month"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
         android:background="@color/white"
+        android:paddingHorizontal="12dp"
         android:layout_marginTop="12dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_grey" />
+    <TextView
+        android:id="@+id/filterThisMonth"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/this_month"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:paddingHorizontal="12dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_grey" />
+    <TextView
+        android:id="@+id/filterAnotherMonth"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/another_month"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:paddingHorizontal="12dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_grey" />
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/statisticTabLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:tabTextColor="@color/white"-->
+<!--        app:tabBackground="@color/primary"-->
+<!--        app:tabIndicatorColor="@color/white">-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/date" />-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/month" />-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/custom_time" />-->
+<!--    </com.google.android.material.tabs.TabLayout>-->
+
+<!--    <androidx.viewpager.widget.ViewPager-->
+<!--        android:id="@+id/statisticViewPager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/white"-->
+<!--        android:layout_marginTop="12dp"/>-->
 </LinearLayout>

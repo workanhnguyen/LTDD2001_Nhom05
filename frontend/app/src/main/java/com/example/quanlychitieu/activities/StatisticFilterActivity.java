@@ -2,24 +2,16 @@ package com.example.quanlychitieu.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.ViewPagerAdapter;
-import com.example.quanlychitieu.fragment.CustomTimeSatisticFragment;
-import com.example.quanlychitieu.fragment.DayStatisticFragment;
-import com.example.quanlychitieu.fragment.MonthStatisticFragment;
-import com.google.android.material.tabs.TabLayout;
 
 public class StatisticFilterActivity extends AppCompatActivity {
-    TabLayout statisticTabLayout;
-    ViewPager statisticViewPager;
-
-    ViewPagerAdapter viewPagerAdapter;
+    TextView filterLastMonth, filterThisMonth, filterAnotherMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +26,36 @@ public class StatisticFilterActivity extends AppCompatActivity {
         }
 
         initializeElement();
-        setTabLayoutAdapter();
         handleFilterItemClicked();
     }
 
     private void handleFilterItemClicked() {
+        filterLastMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-    }
+            }
+        });
 
-    private void setTabLayoutAdapter() {
-        statisticTabLayout.setupWithViewPager(statisticViewPager);
+        filterThisMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPagerAdapter.addFragment(new DayStatisticFragment(), getString(R.string.date));
-        viewPagerAdapter.addFragment(new MonthStatisticFragment(), getString(R.string.month));
-        viewPagerAdapter.addFragment(new CustomTimeSatisticFragment(), getString(R.string.custom_time));
+            }
+        });
 
-        statisticViewPager.setAdapter(viewPagerAdapter);
+        filterAnotherMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initializeElement() {
-        statisticTabLayout = findViewById(R.id.statisticTabLayout);
-        statisticViewPager = findViewById(R.id.statisticViewPager);
+        filterLastMonth = findViewById(R.id.filterLastMonth);
+        filterThisMonth = findViewById(R.id.filterThisMonth);
+        filterAnotherMonth = findViewById(R.id.filterAnotherMonth);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.quanlychitieu.fragment;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,11 +26,9 @@ import com.example.quanlychitieu.adapters.TransactionAdapter;
 import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
 import com.example.quanlychitieu.models.Transaction;
-import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,10 +39,7 @@ public class OverViewFragment extends Fragment {
     RecyclerView transactionList;
     LinearLayout linearLayoutFilter;
     ImageView switchShowHideBalance;
-    Intent intent;
-    Bundle bundle;
     boolean isBalanceShowed = true;
-//    String defaultFilterTitle = "";
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -68,7 +62,8 @@ public class OverViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_over_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_over_view, container, false);
+        return view;
     }
     // Resolve UI here
     @Override
@@ -79,27 +74,7 @@ public class OverViewFragment extends Fragment {
 //        loadTransactionData();
         handleSwitchToStatisticFilter();
         handleSwitchShowHideBalance();
-//        handleChangeFilterTitle();
     }
-
-//    private void handleChangeFilterTitle() {
-//        String title = getActivity().getIntent().getStringExtra("statistic_filter");
-//        if (title.equals(CustomConstant.FILTER_STATISTIC_YESTERDAY))
-//            filterTitle.setText(getString(R.string.yesterday));
-//        else if (title.equals(CustomConstant.FILTER_STATISTIC_TODAY))
-//            filterTitle.setText(getString(R.string.today));
-//        else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_DAY))
-//            filterTitle.setText(getString(R.string.another_day));
-////        } else {
-////            Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();
-////        }
-////        else if (title.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH))
-////            filterTitle.setText(getString(R.string.last_month));
-////        else if (title.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH))
-////            filterTitle.setText(getString(R.string.this_month));
-////        else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH))
-////            filterTitle.setText(getString(R.string.another_month));
-//    }
     private void handleSwitchShowHideBalance() {
         switchShowHideBalance.setOnClickListener(new View.OnClickListener() {
             @Override
