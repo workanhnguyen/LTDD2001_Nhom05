@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spendify</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select">Select items</string>
+    <string name="category">Category name</string>
+    <string name="amount">Amount</string>
+    <string name="description">Description</string>
+    <string name="search">Search categories</string>
+    <string name="items_add">Category name</string>
+    <string name="hello_username">Hello Anh Nguyen!</string>
+    <string name="title_financial_situation">Financial situation</string>
+    <string name="spinner_prompt">This month</string>
+    <string name="sum_of_money">Total balance</string>
+    <string name="this_month">This month</string>
+    <string name="sum_income">Total income</string>
+    <string name="sum_expense">Total expenditure</string>
+    <string name="today">Today</string>
+    <string name="edit">Edit</string>
+    <string name="general_setting">General Settings</string>
+    <string name="dev_info">Developer information</string>
+    <string name="change_password">Change password</string>
+    <string name="logout">Log out</string>
+    <string name="language">Language</string>
+    <string name="language_vn">Tiếng Việt</string>
+    <string name="language_en">English</string>
+    <string name="school">University:</string>
+    <string name="group_member">Group members:</string>
+    <string name="teacher">Lecturer:</string>
+    <string name="subject">Subject:</string>
+    <string name="open_uni">Ho Chi Minh Open University</string>
+    <string name="mobile_programming">Mobile programming</string>
+    <string name="format_time">Time format</string>
+    <string name="showed_name">Display name</string>
+    <string name="email">Email</string>
+    <string name="gender">Gender</string>
+    <string name="career">Career</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="update">Update</string>
+    <string name="data_setting">Data setting</string>
+    <string name="edit_info">Edit information</string>
+    <string name="user">User</string>
+    <string name="date">Day</string>
+    <string name="month">Month</string>
+    <string name="custom_time">Options</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="another_day">Other day</string>
+    <string name="past_month">Last month</string>
+    <string name="another_month">Other month</string>
+    <string name="from_date">From day</string>
+    <string name="to_date">To day</string>
+    <string name="manage_user">User management</string>
+    <string name="edit_user">Edit user</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string-array name="list_items">
+        <item>Expense</item>
+        <item>Balance</item>
+        <item>Income</item>
+    </string-array>
+    <string-array name="spinner_statistic_items">
+        <item>Today</item>
+        <item>This week</item>
+        <item>This month</item>
+        <item>This year</item>
+    </string-array>
+    <string-array name="languages">
+        <item>Tiếng Việt</item>
+        <item>English</item>
+    </string-array>
+    <string name="fullname">Full name</string>
+    <string name="ten">Name</string>
+    <string name="taikhoan">Account</string>
+    <string name="desciption">Description</string>
+    <string name="oveview">Overview</string>
+    <string name="wallet">Wallet</string>
+    <string name="add">Add</string>
+    <string name="category_2">Categories</string>
+    <string name="account">Account</string>
+    <string name="sum_money">Total amount:</string>
+    <string name="cash">Cash:</string>
+    <string name="account_name">Account name</string>
+    <string name="description_2">Description</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="account_type">Account type</string>
+    <string name="edit_wallet">Edit wallet</string>
+    <string name="transaction">Transaction</string>
+    <string name="amount_money">Amount</string>
+    <string name="choose_category">Choose category</string>
+    <string name="choose_wallet">Choose wallet</string>
+    <string name="category_3">Income and expense categories</string>
+    <string name="income">INCOME</string>
+    <string name="expense">EXPENSE</string>
+    <string name="spendify">Spendify</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
+    <string name="already_account">Already have an account?</string>
+    <string name="login_now">Log in now</string>
+    <string name="login">Log in</string>
+    <string name="press_again_to_exit">Press again to exit</string>
+    <string name="no_account">Do not have an account?</string>
+    <string name="create_wallet">Create wallet</string>
+    <string name="init_balance">Inital balance</string>
+    <string name="password_text">Password must have at least 8 character.</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="setting">Setting</string>
+    <string name="financial_management_app">Financial management app</string>
+    <string name="welcome_to_spendify">Welcome to Spendify</string>
+    <string name="app_description">Experience the joy of financial management by signing up for a free trial</string>
+    <string name="register_new_account">Create a new account</string>
+    <string name="choose_account_root">Choose account root</string>
+    <string name="delete_wallet">Delete wallet</string>
+    <string name="do_you_want_to_delete_this_wallet">Do you want to delete this wallet?</string>
+    <string name="ok">Ok</string>
+    <string name="no">No</string>
+    <string name="create_wallet_successful">Create wallet successful!</string>
+    <string name="choose_category_type">Choose a category type</string>
+    <string name="last_month">Last month</string>
+</resources>
