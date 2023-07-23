@@ -121,4 +121,8 @@
     <string name="choose_category_type">Chọn loại danh mục</string>
     <string name="last_month">Tháng trước</string>
     <string name="edit_transaction">Chỉnh sửa giao dịch</string>
+    <string name="delete_transaction">Xóa bản ghi giao dịch</string>
+    <string name="do_you_want_to_delete_this_transaction">Bạn có chắc chắn xóa giao dịch này không?</string>
+    <string name="loading_data">Đang tải dữ liệu...</string>
+    <string name="error_loading_data">Lấy dữ liệu thất bại!</string>
 </resources>
