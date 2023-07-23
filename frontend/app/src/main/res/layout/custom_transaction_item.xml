@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:background="@drawable/custom_background_transaction">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -48,16 +49,15 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="55dp"
-            android:orientation="horizontal"
-            android:gravity="center"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
             android:layout_marginHorizontal="24dp">
             <TextView
-                android:id="@+id/txtShowTransactionName"
+                android:id="@+id/transactionName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ăn sáng"
                 android:textSize="16sp"
-                android:textStyle="italic"
                 android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
