@@ -1,7 +1,6 @@
 package com.example.backend.daos;
 
 import com.example.backend.dtos.TransactionDto;
-import com.example.backend.dtos.WalletDto;
 import com.example.backend.models.*;
 import com.example.backend.repositories.CategoryTypeRepository;
 import com.example.backend.repositories.TransactionRepository;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,34 +26,36 @@ public class TransactionDao {
     private CategoryTypeRepository categoryTypeRepository;
     private ModelMapper modelMapper;
 
-    public List<TransactionDto> getAllTransaction() {
-        List<Transaction> transactions = transactionRepository.findAll();
+    public List<Transaction> getAllTransaction() {
 
-        return transactions.stream().map((a) -> modelMapper.map(a, TransactionDto.class))
-                .collect(Collectors.toList());
+        return transactionRepository.findAll();
+//        return transactions.stream().map((a) -> modelMapper.map(a, TransactionDto.class))
+//                .collect(Collectors.toList());
     }
 
-    public TransactionDto getTransaction(int id){
-        Optional<Transaction> transaction = transactionRepository.findById(id);
-        return modelMapper.map(transaction, TransactionDto.class);
+    public Optional<Transaction> getTransaction(int id){
+
+        return transactionRepository.findById(id);
+//        return modelMapper.map(transaction, TransactionDto.class);
     }
 
-    public List<TransactionDto> getTransactionByWalletId(int id) throws Exception {
+    public List<Transaction> getTransactionByWalletId(int id) throws Exception {
         Wallet wallet = walletRepository.findById(id)
                     .orElseThrow(Exception::new);
-        List<Transaction> transactions = transactionRepository.findByWalletId(wallet);
 
-        return transactions.stream().map((a) -> modelMapper.map(a, TransactionDto.class))
-                .collect(Collectors.toList());
+        return transactionRepository.findByWalletId(wallet);
+
+//        return transactions.stream().map((a) -> modelMapper.map(a, TransactionDto.class))
+//                .collect(Collectors.toList());
     }
 
-    public List<TransactionDto> getTransactionByCateType(int id) throws Exception {
+    public List<Transaction> getTransactionByCateType(int id) throws Exception {
         CategoryType categoryType = categoryTypeRepository.findById(id)
                 .orElseThrow(Exception::new);
-        List<Transaction> transactions = transactionRepository.findByCategoryTypeId(categoryType);
 
-        return transactions.stream().map((a) -> modelMapper.map(a, TransactionDto.class))
-                .collect(Collectors.toList());
+        return transactionRepository.findByCategoryTypeId(categoryType);
+//        return transactions.stream().map((a) -> modelMapper.map(a, TransactionDto.class))
+//                .collect(Collectors.toList());
     }
 
     public TransactionDto addNewTransaction(TransactionDto transactionDto) throws Exception {
@@ -135,9 +135,8 @@ public class TransactionDao {
         } else return false;
     }
 
-    //Function is not ready to use
-    public TransactionDto getTransactionByKeyword (String kw, TransactionDto transactionDto) throws Exception {
-        Transaction transaction = (Transaction) transactionRepository.findByKeyword(kw);
-        return modelMapper.map(transaction, TransactionDto.class);
-    }
+//    Function is not ready to use
+//    public List<Transaction> getTransactionByKeyword(String keyword) {
+//        return transactionRepository.getByKeyword(keyword);
+//    }
 }

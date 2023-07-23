@@ -29,25 +29,28 @@ public class WalletDao {
     private AccountTypeRepository accountTypeRepository;
     private ModelMapper modelMapper;
 
-    public List<WalletDto> getAllWallets() {
-        List<Wallet> wallets = walletRepository.findAll();
+    public List<Wallet> getAllWallets() {
 
-        return wallets.stream().map((a) -> modelMapper.map(a, WalletDto.class))
-                .collect(Collectors.toList());
+        return walletRepository.findAll();
+
+//        return wallets.stream().map((a) -> modelMapper.map(a, WalletDto.class))
+//                .collect(Collectors.toList());
     }
 
-    public WalletDto getWallet(int id){
-        Optional<Wallet> wallet = walletRepository.findById(id);
-        return modelMapper.map(wallet, WalletDto.class);
+    public Optional<Wallet> getWallet(int id){
+
+        return walletRepository.findById(id);
+//        return modelMapper.map(wallet, WalletDto.class);
     }
 
-    public List<WalletDto> getWalletByUserId(int id) throws Exception {
+    public List<Wallet> getWalletByUserId(int id) throws Exception {
         User user = userRepository.findById(id);
 //                .orElseThrow(Exception::new);
-        List<Wallet> wallets = walletRepository.findByUserId(user);
 
-        return wallets.stream().map((a) -> modelMapper.map(a, WalletDto.class))
-                .collect(Collectors.toList());
+        return walletRepository.findByUserId(user);
+
+//        return wallets.stream().map((a) -> modelMapper.map(a, WalletDto.class))
+//                .collect(Collectors.toList());
     }
 
     public WalletDto addNewWallet(WalletDto walletDto) throws Exception {

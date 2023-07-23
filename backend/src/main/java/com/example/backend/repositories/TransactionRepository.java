@@ -14,5 +14,6 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
     List<Transaction> findByWalletId (Wallet wallet);
     List<Transaction> findByCategoryTypeId (CategoryType categoryType);
-    List<Transaction> findByKeyword(@Param("keyword") String kw);
+    // Not ready to use
+//    List<Transaction> getByKeyword(String kw);
 }

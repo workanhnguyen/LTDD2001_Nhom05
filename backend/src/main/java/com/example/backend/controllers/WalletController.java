@@ -1,11 +1,9 @@
 package com.example.backend.controllers;
 
 import com.example.backend.daos.WalletDao;
-import com.example.backend.dtos.AccountTypeDto;
 import com.example.backend.dtos.WalletDto;
 import com.example.backend.models.Wallet;
 import com.example.backend.repositories.WalletRepository;
-import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/wallet")
@@ -27,7 +26,7 @@ public class WalletController {
     private WalletDao walletDao;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<WalletDto>> getAllWallets() {
+    public ResponseEntity<List<Wallet>> getAllWallets() {
         return ResponseEntity.ok().body(walletDao.getAllWallets());
     }
 //    @RequestMapping(value = "/wallets/", method = RequestMethod.GET)
@@ -66,13 +65,13 @@ public class WalletController {
 //    }
 
     @RequestMapping(value ="/{id}", method = RequestMethod.GET)
-    public ResponseEntity<WalletDto> getWallet(@PathVariable int id) {
+    public ResponseEntity<Optional<Wallet>> getWallet(@PathVariable int id) {
         return ResponseEntity.ok().body(walletDao.getWallet(id));
     }
 
     @GetMapping(params = "userId")
-    public ResponseEntity<List<WalletDto>> getWalletByUserId(@RequestParam("userId") int id) throws Exception {
-        return ResponseEntity.ok().body((List<WalletDto>) walletDao.getWalletByUserId(id));
+    public ResponseEntity<List<Wallet>> getWalletByUserId(@RequestParam("userId") int id) throws Exception {
+        return ResponseEntity.ok().body((List<Wallet>) walletDao.getWalletByUserId(id));
     }
 
     @RequestMapping(method = RequestMethod.POST)
