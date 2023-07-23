@@ -28,7 +28,9 @@ import com.example.quanlychitieu.adapters.TransactionAdapter;
 import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
 import com.example.quanlychitieu.models.Transaction;
+import com.example.quanlychitieu.presenters.OverViewPresenter;
 import com.example.quanlychitieu.utils.CustomConstant;
+import com.example.quanlychitieu.views.OverViewView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +39,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OverViewFragment extends Fragment {
+public class OverViewFragment extends Fragment implements OverViewView {
     private static final int REQUEST_CODE_SECOND_ACTIVITY = 1;
-    String resultData;
     TextView loadDataAlert, filterTitle;
     RecyclerView transactionList;
     LinearLayout linearLayoutFilter;
     ImageView switchShowHideBalance;
     boolean isBalanceShowed = true;
+    private OverViewPresenter overViewPresenter;
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -63,6 +65,8 @@ public class OverViewFragment extends Fragment {
             activity.getSupportActionBar().setTitle("Chào Anh Nguyễn!");
             activity.getSupportActionBar().setElevation(0);
         }
+
+        overViewPresenter = new OverViewPresenter(this);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,24 +108,7 @@ public class OverViewFragment extends Fragment {
     }
     private void loadTransactionData() {
         loadDataAlert.setText(getString(R.string.loading_data));
-
-        RetrofitConfig retrofitConfig = new RetrofitConfig();
-        TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
-
-        transactionApi.getAllTransactions()
-                .enqueue(new Callback<List<Transaction>>() {
-                    @Override
-                    public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
-                        loadDataAlert.setText("");
-                        transactionList.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        populateListView(response.body());
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Transaction>> call, Throwable t) {
-                        loadDataAlert.setText(getString(R.string.error_loading_data));
-                    }
-                });
+        overViewPresenter.loadTransactionList();
     }
     private void populateListView(List<Transaction> transactions) {
         TransactionAdapter adapter = new TransactionAdapter(transactions);
@@ -172,5 +159,17 @@ public class OverViewFragment extends Fragment {
                 // Handle the case where the user canceled or there was an error in the second activity
             }
         }
+    }
+
+    @Override
+    public void showTransactionList(List<Transaction> list) {
+        loadDataAlert.setText("");
+        transactionList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        populateListView(list);
+    }
+
+    @Override
+    public void showTransactionError() {
+        loadDataAlert.setText(getString(R.string.error_loading_data));
     }
 }
