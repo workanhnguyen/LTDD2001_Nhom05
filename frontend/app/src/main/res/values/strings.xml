@@ -120,4 +120,5 @@
     <string name="create_wallet_successful">Tạo ví thành công!</string>
     <string name="choose_category_type">Chọn loại danh mục</string>
     <string name="last_month">Tháng trước</string>
+    <string name="edit_transaction">Chỉnh sửa giao dịch</string>
 </resources>
