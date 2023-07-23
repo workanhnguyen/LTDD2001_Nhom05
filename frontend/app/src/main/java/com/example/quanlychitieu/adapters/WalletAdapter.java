@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.activities.WalletDetailActivity;
+import com.example.quanlychitieu.activities.EditWalletActivity;
 import com.example.quanlychitieu.holders.WalletHolder;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.utils.CommonUtil;
@@ -67,7 +67,7 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletHolder> {
             public void onClick(View v) {
                 Parcelable parcelable = Parcels.wrap(wallet);
 
-                Intent intent = new Intent(context, WalletDetailActivity.class);
+                Intent intent = new Intent(context, EditWalletActivity.class);
                 intent.putExtra("wallet", parcelable);
                 context.startActivity(intent);
             }
