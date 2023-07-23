@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -25,7 +26,7 @@ public class CategoryRootController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryRootDto> getCategoryRoot(@PathVariable int id) {
+    public ResponseEntity<Optional<CategoryRoot>> getCategoryRoot(@PathVariable int id) {
         return ResponseEntity.ok().body(categoryRootDao.getCategoryRoot(id));
     }
 

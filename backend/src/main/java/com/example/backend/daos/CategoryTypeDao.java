@@ -28,14 +28,11 @@ public class CategoryTypeDao {
     public List<CategoryType> getAllCategoryTypes() {
         List<CategoryType> categoryTypes = categoryTypeRepository.findAll();
 
-//        return categoryTypes.stream().map((a) -> modelMapper.map(a, CategoryTypeDto.class))
-//                .collect(Collectors.toList());
         return categoryTypes;
     }
 
     public Optional<CategoryType> getCategoryType(int id) {
         Optional<CategoryType> categoryType = categoryTypeRepository.findById(id);
-//        return modelMapper.map(categoryType, CategoryTypeDto.class);
         return categoryType;
     }
 
@@ -103,6 +100,29 @@ public class CategoryTypeDao {
         return modelMapper.map(updatedCategoryType, CategoryTypeDto.class);
     }
 
+    public List<CategoryType> getCategoryTypeByCategoryRoot(int id) throws Exception {
+        CategoryRoot categoryRoot = categoryRootRepository.findById(id)
+                .orElseThrow(Exception::new);
+        List<CategoryType> categoryTypes = categoryTypeRepository.findByCategoryRoot(categoryRoot);
+
+        return categoryTypes;
+    }
+
+    public List<CategoryType> getCategoryTypeByName(String name) throws Exception {
+
+        List<CategoryType> categoryTypes = categoryTypeRepository.findByNameContaining(name);
+
+        return categoryTypes;
+    }
+
+
+    public String getTypeOfCategoryType(int id) throws Exception {
+        CategoryType categoryType = categoryTypeRepository.findById(id)
+                .orElseThrow(Exception::new);
+//        CategoryRoot categoryRoot = categoryRootRepository.findById(categoryType.getCategoryRoot().getId())
+//                .orElseThrow(Exception::new);
+        return categoryType.getCategoryRoot().getType();
+    }
 
 }
 

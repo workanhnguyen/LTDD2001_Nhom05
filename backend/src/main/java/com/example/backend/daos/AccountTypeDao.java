@@ -1,15 +1,14 @@
 package com.example.backend.daos;
 
-import com.example.backend.dtos.AccountRootDto;
 import com.example.backend.dtos.AccountTypeDto;
 import com.example.backend.models.AccountRoot;
 import com.example.backend.models.AccountType;
+import com.example.backend.models.CategoryType;
 import com.example.backend.repositories.AccountRootRepository;
 import com.example.backend.repositories.AccountTypeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,16 +26,17 @@ public class AccountTypeDao {
     private AccountRootRepository accountRootRepository;
     private ModelMapper modelMapper;
 
-    public List<AccountTypeDto> getAllAccountTypes() {
+    public List<AccountType> getAllAccountTypes() {
         List<AccountType> accountTypes = accountTypeRepository.findAll();
 
-        return accountTypes.stream().map((a) -> modelMapper.map(a, AccountTypeDto.class))
-                .collect(Collectors.toList());
+        return accountTypes;
     }
 
-    public AccountTypeDto getAccountType(int id) {
+
+
+    public Optional<AccountType> getAccountType(int id) {
         Optional<AccountType> accountType = accountTypeRepository.findById(id);
-        return modelMapper.map(accountType, AccountTypeDto.class);
+        return accountType;
     }
 
 
@@ -121,6 +121,15 @@ public class AccountTypeDao {
         } else {
             return false;
         }
+    }
+
+
+    public List<AccountType> getAccountTypeByAccountRoot(int id) throws Exception {
+        AccountRoot accountRoot = accountRootRepository.findById(id)
+                .orElseThrow(Exception::new);
+        List<AccountType> accountTypes = accountTypeRepository.findByAccountRoot(accountRoot);
+
+        return accountTypes;
     }
 
 }

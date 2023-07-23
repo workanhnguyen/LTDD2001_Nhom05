@@ -1,8 +1,6 @@
 package com.example.backend.controllers;
 
-import com.example.backend.daos.CategoryRootDao;
 import com.example.backend.daos.CategoryTypeDao;
-import com.example.backend.dtos.CategoryRootDto;
 import com.example.backend.dtos.CategoryTypeDto;
 import com.example.backend.models.CategoryType;
 import lombok.AllArgsConstructor;
@@ -52,6 +50,21 @@ public class CategoryTypeController {
         return categoryTypeDao.deleteCategoryType(id);
     }
 
+
+    @GetMapping(params = "categoryRootId")
+    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByAccountRootID(@RequestParam("categoryRootId") int categoryRootId  ) throws Exception {
+        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByCategoryRoot(categoryRootId));
+    }//
+
+    @GetMapping(params = "name")
+    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByName(@RequestParam("name") String name  ) throws Exception {
+        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByName(name));
+    }//
+
+    @GetMapping("/check-root-type/{id}")
+    public ResponseEntity<String> getCheckRootTypeFindById(@PathVariable int id) throws Exception {
+        return ResponseEntity.ok().body((String) categoryTypeDao.getTypeOfCategoryType(id));
+    }//
 
 }
 
