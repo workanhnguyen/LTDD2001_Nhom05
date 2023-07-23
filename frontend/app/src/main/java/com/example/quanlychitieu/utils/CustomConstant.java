@@ -8,4 +8,6 @@ public class CustomConstant {
     public static final String FILTER_STATISTIC_LAST_MONTH= "LAST_MONTH";
     public static final String FILTER_STATISTIC_THIS_MONTH= "THIS_MONTH";
     public static final String FILTER_STATISTIC_OTHER_MONTH= "OTHER_MONTH";
+    public static final String CATEGORY_EXPENSE = "EXPENSE";
+    public static final String CATEGORY_INCOME = "INCOME";
 }
