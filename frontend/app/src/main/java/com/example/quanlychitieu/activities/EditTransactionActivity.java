@@ -62,7 +62,7 @@ public class EditTransactionActivity extends AppCompatActivity {
         linearLayoutEditTransactionWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditTransactionActivity.this, ChooseCategoryTypeActivity.class);
+                Intent intent = new Intent(EditTransactionActivity.this, ChooseWalletActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,7 +115,7 @@ public class EditTransactionActivity extends AppCompatActivity {
     }
 
     private void handleShowDataToUI() {
-        editTransactionBalance.setText(CommonUtil.getMoneyFormat(transaction.getTotal()));
+        editTransactionBalance.setText(CommonUtil.getMoneyFormat(transaction.getTotal()).substring(0, CommonUtil.getMoneyFormat(transaction.getTotal()).length() - 1));
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.app_icon_background) // Replace with your placeholder image resource
