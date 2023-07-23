@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.EditTransactionActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ChooseCategoryTypeActivity"
             android:exported="false" />
         <activity
@@ -46,7 +49,7 @@
             android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.WalletDetailActivity"
+            android:name=".activities.EditWalletActivity"
             android:exported="false" />
         <activity
             android:name=".activities.StatisticFilterActivity"
