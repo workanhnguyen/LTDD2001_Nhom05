@@ -107,8 +107,8 @@ public class EditWalletActivity extends AppCompatActivity {
         walletDetailDescription.setText(wallet.getDescription());
 
         RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.blank_avatar) // Replace with your placeholder image resource
-                .error(R.drawable.blank_avatar); // Replace with your error image resource
+                .placeholder(R.drawable.app_icon_background) // Replace with your placeholder image resource
+                .error(R.drawable.app_icon_background); // Replace with your error image resource
         Glide.with(EditWalletActivity.this)
                 .load(wallet.getImageLink())
                 .apply(requestOptions)

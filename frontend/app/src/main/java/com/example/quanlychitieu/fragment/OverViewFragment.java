@@ -76,7 +76,7 @@ public class OverViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeElement(view);
-//        loadTransactionData();
+        loadTransactionData();
         handleSwitchToStatisticFilter();
         handleSwitchShowHideBalance();
     }
@@ -122,18 +122,20 @@ public class OverViewFragment extends Fragment {
                 });
     }
     private void populateListView(List<Transaction> transactions) {
-        List<Transaction> transactionSaved = new ArrayList<>();
-
-        for (Transaction t: transactions) {
-            transactionSaved.add(t);
-        }
-        TransactionAdapter transactionAdapter = new TransactionAdapter(transactionSaved);
-        transactionList.setAdapter(transactionAdapter);
+//        List<Transaction> transactionSaved = new ArrayList<>();
+//
+//        for (Transaction t: transactions) {
+//            transactionSaved.add(t);
+//        }
+        TransactionAdapter adapter = new TransactionAdapter(transactions);
+        adapter.setContext(getActivity());
+        transactionList.setAdapter(adapter);
     }
     private void initializeElement(View view) {
         transactionList = view.findViewById(R.id.transactionList);
         linearLayoutFilter = view.findViewById(R.id.linearLayoutFilter);
         switchShowHideBalance = view.findViewById(R.id.switchShowHideBalance);
+        tvTotalBalance1 = view.findViewById(R.id.tvTotalBalance1);
 
         filterTitle = view.findViewById(R.id.filterTitle);
         filterTitle.setText(getString(R.string.this_month));
@@ -155,7 +157,7 @@ public class OverViewFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    // Method to get data from another activity and back to origin activity
+//     Method to get data from another activity and back to origin activity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
