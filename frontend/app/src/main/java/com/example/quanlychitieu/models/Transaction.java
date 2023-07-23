@@ -1,15 +1,21 @@
 package com.example.quanlychitieu.models;
 
+import org.parceler.Parcel;
+
 import java.util.Date;
 
+@Parcel
 public class Transaction {
     private Integer id;
     private String description;
     private Date createdDate;
     private Long total;
     private String image;
-    private CategoryType categoryTypeId;
-    private Wallet walletId;
+    private CategoryType categoryType;
+    private Wallet wallet;
+
+    public Transaction() {
+    }
 
     public Integer getId() {
         return id;
@@ -51,19 +57,19 @@ public class Transaction {
         this.image = image;
     }
 
-    public CategoryType getCategoryTypeId() {
-        return categoryTypeId;
+    public CategoryType getCategoryType() {
+        return categoryType;
     }
 
-    public void setCategoryTypeId(CategoryType categoryTypeId) {
-        this.categoryTypeId = categoryTypeId;
+    public void setCategoryType(CategoryType categoryType) {
+        this.categoryType = categoryType;
     }
 
-    public Wallet getWalletId() {
-        return walletId;
+    public Wallet getWallet() {
+        return wallet;
     }
 
-    public void setWalletId(Wallet walletId) {
-        this.walletId = walletId;
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 }
