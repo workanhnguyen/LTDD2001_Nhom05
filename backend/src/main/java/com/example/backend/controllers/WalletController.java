@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/wallet")
+@RequestMapping("/wallets")
 public class WalletController {
     //Test this code to more fun
     public static Logger logger = LoggerFactory.getLogger(WalletController.class);
@@ -36,8 +36,13 @@ public class WalletController {
     }
 
     @GetMapping(params = "userId")
-    public ResponseEntity<List<Wallet>> getWalletByUserId(@RequestParam("userId") int id) throws Exception {
+    public ResponseEntity<List<Wallet>> getWalletByUserId(@RequestParam("userId") int id) {
         return ResponseEntity.ok().body(walletDao.getWalletByUserId(id));
+    }
+
+    @GetMapping(value = "/sum-balance", params = "userId")
+    public ResponseEntity<Long> getSumOfBalanceByUserId(@RequestParam(name = "userId") int userId) {
+        return ResponseEntity.ok().body(walletDao.getSumOfBalanceByUserId(userId));
     }
 
     @RequestMapping(method = RequestMethod.POST)

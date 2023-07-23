@@ -8,7 +8,7 @@
     android:background="@color/light_grey"
     android:orientation="vertical">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/accountRootList"
+        android:id="@+id/chooseAccountTypeList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

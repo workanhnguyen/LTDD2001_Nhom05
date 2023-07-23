@@ -114,4 +114,8 @@ public class WalletDao {
             return true;
         } else return false;
     }
+
+    public Long getSumOfBalanceByUserId(int userId) {
+        return walletRepository.sumOfBalanceByUserId(userId);
+    }
 }

@@ -13,6 +13,15 @@ public interface TransactionApi {
     @GET("/transactions")
     Call<List<Transaction>> getAllTransactions();
 
+    @GET("/transactions?userId=2")
+    Call<List<Transaction>> getAllTransactionsByUserId();
+
+    @GET("/transactions?userId=2&type=EXPENSE")
+    Call<Long> getSumOfExpenseByUserId();
+
+    @GET("/transactions?userId=2&type=INCOME")
+    Call<Long> getSumOfIncomeByUserId();
+
     @POST("/transactions")
     Call<Transaction> addNewTransaction(@Body Transaction transaction);
 }

@@ -102,6 +102,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <TextView
+                android:id="@+id/sumOfIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2.000.000 đ"
@@ -127,6 +128,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <TextView
+                android:id="@+id/sumOfExpense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="500.000 đ"

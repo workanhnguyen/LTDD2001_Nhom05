@@ -29,6 +29,7 @@ import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.presenters.OverViewPresenter;
+import com.example.quanlychitieu.utils.CommonUtil;
 import com.example.quanlychitieu.utils.CustomConstant;
 import com.example.quanlychitieu.views.OverViewView;
 
@@ -41,7 +42,7 @@ import retrofit2.Response;
 
 public class OverViewFragment extends Fragment implements OverViewView {
     private static final int REQUEST_CODE_SECOND_ACTIVITY = 1;
-    TextView loadDataAlert, filterTitle;
+    TextView loadDataAlert, filterTitle, tvTotalBalance, tvSumOfIncome, tvSumOfExpense;
     RecyclerView transactionList;
     LinearLayout linearLayoutFilter;
     ImageView switchShowHideBalance;
@@ -82,7 +83,6 @@ public class OverViewFragment extends Fragment implements OverViewView {
         initializeElement(view);
         loadTransactionData();
         handleSwitchToStatisticFilter();
-        handleSwitchShowHideBalance();
     }
     private void handleSwitchShowHideBalance() {
         switchShowHideBalance.setOnClickListener(new View.OnClickListener() {
@@ -90,10 +90,14 @@ public class OverViewFragment extends Fragment implements OverViewView {
             public void onClick(View v) {
                 isBalanceShowed = !isBalanceShowed;
 
-                if (isBalanceShowed)
+                if (isBalanceShowed) {
                     switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_24);
-                else
+                    tvTotalBalance.setText("2.000.000 đ");
+                }
+                else {
                     switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_off_24);
+                    tvTotalBalance.setText("****** đ");
+                }
             }
         });
     }
@@ -109,6 +113,9 @@ public class OverViewFragment extends Fragment implements OverViewView {
     private void loadTransactionData() {
         loadDataAlert.setText(getString(R.string.loading_data));
         overViewPresenter.loadTransactionList();
+        overViewPresenter.loadSumOfBalance();
+        overViewPresenter.loadSumOfExpense();
+        overViewPresenter.loadSumOfIncome();
     }
     private void populateListView(List<Transaction> transactions) {
         TransactionAdapter adapter = new TransactionAdapter(transactions);
@@ -116,6 +123,10 @@ public class OverViewFragment extends Fragment implements OverViewView {
         transactionList.setAdapter(adapter);
     }
     private void initializeElement(View view) {
+        tvTotalBalance = view.findViewById(R.id.tvTotalBalance);
+        tvSumOfExpense = view.findViewById(R.id.sumOfExpense);
+        tvSumOfIncome = view.findViewById(R.id.sumOfIncome);
+
         transactionList = view.findViewById(R.id.transactionList);
         linearLayoutFilter = view.findViewById(R.id.linearLayoutFilter);
         switchShowHideBalance = view.findViewById(R.id.switchShowHideBalance);
@@ -171,5 +182,39 @@ public class OverViewFragment extends Fragment implements OverViewView {
     @Override
     public void showTransactionError() {
         loadDataAlert.setText(getString(R.string.error_loading_data));
+    }
+
+    @Override
+    public void showTotalBalance(Long sumOfBalance) {
+        tvTotalBalance.setText(CommonUtil.getMoneyFormat(sumOfBalance));
+        switchShowHideBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isBalanceShowed = !isBalanceShowed;
+
+                if (isBalanceShowed) {
+                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_24);
+                    tvTotalBalance.setText(CommonUtil.getMoneyFormat(sumOfBalance));
+                }
+                else {
+                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_off_24);
+                    tvTotalBalance.setText("****** đ");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void showSumOfExpense(Long sumOfExpense) {
+        tvSumOfExpense.setText(CommonUtil.getMoneyFormat(sumOfExpense));
+    }
+
+    @Override
+    public void showSumOfIncome(Long sumOfIncome) {
+        if (sumOfIncome != null) {
+            tvSumOfIncome.setText(CommonUtil.getMoneyFormat(sumOfIncome));
+        } else {
+            tvSumOfIncome.setText(CommonUtil.getMoneyFormat(0));
+        }
     }
 }

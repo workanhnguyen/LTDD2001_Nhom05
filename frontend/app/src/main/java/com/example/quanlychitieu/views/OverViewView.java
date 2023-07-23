@@ -7,4 +7,7 @@ import java.util.List;
 public interface OverViewView {
     void showTransactionList(List<Transaction> list);
     void showTransactionError();
+    void showTotalBalance(Long sumOfBalance);
+    void showSumOfExpense(Long sumOfExpense);
+    void showSumOfIncome(Long sumOfIncome);
 }

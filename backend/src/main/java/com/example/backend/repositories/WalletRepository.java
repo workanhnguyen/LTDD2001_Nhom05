@@ -12,4 +12,6 @@ import java.util.List;
 public interface WalletRepository extends JpaRepository<Wallet, Integer> {
     @Query("SELECT w FROM Wallet w WHERE user.id = ?1")
     List<Wallet> findByUserId (Integer userId);
+    @Query("SELECT SUM(w.balance) FROM Wallet w WHERE user.id = ?1")
+    Long sumOfBalanceByUserId(Integer userId);
 }

@@ -1,6 +1,7 @@
 package com.example.quanlychitieu.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,13 @@ public class AccountRootAdapter extends RecyclerView.Adapter<AccountRootHolder> 
                 .load(accountRoot.getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.getAccountRootItemImage());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ChooseAccountTypeAdapter.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -36,7 +36,12 @@ public class TransactionDao {
 
     public Optional<Transaction> getTransaction(int id){
         return transactionRepository.findById(id);
-
+    }
+    public List<Transaction> getAllTransactionsByUserId(Integer id) {
+        return transactionRepository.findByUserId(id);
+    }
+    public Long getSumOfExpenseByUserId(Integer userId, String type) {
+        return transactionRepository.sumOfCategoryType(userId, type);
     }
     public List<Transaction> getAllTransactionByWalletId(int id) {
         return transactionRepository.findByWalletId(id);

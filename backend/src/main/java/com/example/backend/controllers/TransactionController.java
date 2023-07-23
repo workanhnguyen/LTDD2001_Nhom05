@@ -46,6 +46,16 @@ public class TransactionController {
         return ResponseEntity.ok().body(transactionDao.getTransaction(id));
     }
 
+    @GetMapping(params = "userId")
+    public ResponseEntity<List<Transaction>> getAllTransactionsByUserId(@RequestParam(name = "userId") Integer userId) {
+        return ResponseEntity.ok().body(transactionDao.getAllTransactionsByUserId(userId));
+    }
+
+    @GetMapping(params = {"userId", "type"})
+    public ResponseEntity<Long> getSumOfExpenseByUserId(@RequestParam(name = "userId") Integer userId, @RequestParam(name = "type") String type) {
+        return ResponseEntity.ok().body(transactionDao.getSumOfExpenseByUserId(userId, type));
+    }
+
     @GetMapping("/wallet")
     public ResponseEntity<List<Transaction>> getTransactionByWalletId(@RequestParam(name = "walletId") int id) throws Exception {
         return ResponseEntity.ok().body(transactionDao.getAllTransactionByWalletId(id));
