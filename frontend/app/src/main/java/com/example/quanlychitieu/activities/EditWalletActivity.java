@@ -25,7 +25,7 @@ import com.example.quanlychitieu.utils.CommonUtil;
 
 import org.parceler.Parcels;
 
-public class WalletDetailActivity extends AppCompatActivity {
+public class EditWalletActivity extends AppCompatActivity {
     EditText walletDetailBalance, walletDetailName, walletDetailDescription;
     ImageView walletDetailAccountImage;
     TextView walletDetailAccountName;
@@ -36,7 +36,7 @@ public class WalletDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wallet_detail);
+        setContentView(R.layout.activity_edit_wallet);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -68,7 +68,7 @@ public class WalletDetailActivity extends AppCompatActivity {
         btnWalletDetailDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(WalletDetailActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditWalletActivity.this);
                 builder.setTitle(getString(R.string.delete_wallet));
                 builder.setMessage(getString(R.string.do_you_want_to_delete_this_wallet));
                 builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -95,7 +95,7 @@ public class WalletDetailActivity extends AppCompatActivity {
         linearLayoutChooseAccountRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WalletDetailActivity.this, ChooseAccountRootActivity.class);
+                Intent intent = new Intent(EditWalletActivity.this, ChooseAccountRootActivity.class);
                 startActivity(intent);
             }
         });
@@ -109,7 +109,7 @@ public class WalletDetailActivity extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.blank_avatar) // Replace with your placeholder image resource
                 .error(R.drawable.blank_avatar); // Replace with your error image resource
-        Glide.with(WalletDetailActivity.this)
+        Glide.with(EditWalletActivity.this)
                 .load(wallet.getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(walletDetailAccountImage);
