@@ -35,7 +35,7 @@ public class Wallet implements Serializable {
     private String name;
     @Basic(optional = false)
     @Column(name = "balance")
-    private long balance;
+    private Long balance;
     @Column(name = "description")
     private String description;
     @JoinColumn(name = "account_type", referencedColumnName = "id")

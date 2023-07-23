@@ -51,15 +51,15 @@ public class CategoryTypeController {
     }
 
 
-    @GetMapping(params = "categoryRootId")
-    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByAccountRootID(@RequestParam("categoryRootId") int categoryRootId  ) throws Exception {
-        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByCategoryRoot(categoryRootId));
-    }//
-
-    @GetMapping(params = "name")
-    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByName(@RequestParam("name") String name  ) throws Exception {
-        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByName(name));
-    }//
+//    @GetMapping(params = "categoryRootId")
+//    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByAccountRootID(@RequestParam("categoryRootId") int categoryRootId  ) throws Exception {
+//        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByCategoryRoot(categoryRootId));
+//    }//
+//
+//    @GetMapping(params = "name")
+//    public ResponseEntity<List<CategoryType>> getAllAccountTypeFindByName(@RequestParam("name") String name  ) throws Exception {
+//        return ResponseEntity.ok().body((List<CategoryType>) categoryTypeDao.getCategoryTypeByName(name));
+//    }//
 
     @GetMapping("/check-root-type/{id}")
     public ResponseEntity<String> getCheckRootTypeFindById(@PathVariable int id) throws Exception {

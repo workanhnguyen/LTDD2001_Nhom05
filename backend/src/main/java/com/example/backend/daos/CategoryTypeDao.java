@@ -100,20 +100,20 @@ public class CategoryTypeDao {
         return modelMapper.map(updatedCategoryType, CategoryTypeDto.class);
     }
 
-    public List<CategoryType> getCategoryTypeByCategoryRoot(int id) throws Exception {
-        CategoryRoot categoryRoot = categoryRootRepository.findById(id)
-                .orElseThrow(Exception::new);
-        List<CategoryType> categoryTypes = categoryTypeRepository.findByCategoryRoot(categoryRoot);
-
-        return categoryTypes;
-    }
-
-    public List<CategoryType> getCategoryTypeByName(String name) throws Exception {
-
-        List<CategoryType> categoryTypes = categoryTypeRepository.findByNameContaining(name);
-
-        return categoryTypes;
-    }
+//    public List<CategoryType> getCategoryTypeByCategoryRoot(int id) throws Exception {
+//        CategoryRoot categoryRoot = categoryRootRepository.findById(id)
+//                .orElseThrow(Exception::new);
+//        List<CategoryType> categoryTypes = categoryTypeRepository.findByCategoryRoot(categoryRoot);
+//
+//        return categoryTypes;
+//    }
+//
+//    public List<CategoryType> getCategoryTypeByName(String name) throws Exception {
+//
+//        List<CategoryType> categoryTypes = categoryTypeRepository.findByNameContaining(name);
+//
+//        return categoryTypes;
+//    }
 
 
     public String getTypeOfCategoryType(int id) throws Exception {
