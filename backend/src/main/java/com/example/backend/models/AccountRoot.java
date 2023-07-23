@@ -36,7 +36,4 @@ public class AccountRoot implements Serializable {
     @Lob
     @Column(name = "image")
     private String image;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountRoot", fetch = FetchType.LAZY)
-    private Set<AccountType> accountTypeSet;
 }

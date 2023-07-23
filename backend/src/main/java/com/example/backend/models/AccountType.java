@@ -41,8 +41,6 @@ public class AccountType implements Serializable {
     @JoinColumn(name = "account_root", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AccountRoot accountRoot;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountType", fetch = FetchType.LAZY)
-    private Set<Wallet> walletSet;
 }
 
 

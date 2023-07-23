@@ -39,7 +39,4 @@ public class CategoryRoot implements Serializable {
     @Basic(optional = false)
     @Column(name = "type")
     private String type;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryRoot", fetch = FetchType.LAZY)
-    private Set<CategoryType> categoryTypeSet;
 }

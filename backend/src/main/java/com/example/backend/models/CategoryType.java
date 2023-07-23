@@ -39,7 +39,4 @@ public class CategoryType implements Serializable {
     @JoinColumn(name = "category_root", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private CategoryRoot categoryRoot;
-    @JsonIgnore
-    @OneToMany(mappedBy = "categoryType")
-    private Set<Transaction> transactionSet;
 }
