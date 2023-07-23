@@ -44,7 +44,4 @@ public class Wallet implements Serializable {
     @JoinColumn(name = "user", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User user;
-    @JsonIgnore
-    @OneToMany(mappedBy = "wallet")
-    private Set<Transaction> transactionSet;
 }

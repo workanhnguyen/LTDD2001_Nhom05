@@ -49,7 +49,4 @@ public class User implements Serializable {
     private boolean gender;
     @Column(name = "career")
     private String career;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Wallet> walletSet;
 }
