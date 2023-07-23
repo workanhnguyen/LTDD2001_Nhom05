@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 import com.example.backend.daos.TransactionDao;
 import com.example.backend.dtos.TransactionDto;
+import com.example.backend.models.Transaction;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class TransactionController {
     private TransactionDao transactionDao;
 
     @GetMapping
-    public ResponseEntity<List<TransactionDto>> getAllTransactions() {
+    public ResponseEntity<List<Transaction>> getAllTransactions() {
         return ResponseEntity.ok().body(transactionDao.getAllTransactions());
     }
 }

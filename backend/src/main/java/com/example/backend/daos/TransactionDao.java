@@ -21,9 +21,9 @@ public class TransactionDao {
 
     private ModelMapper modelMapper;
 
-    public List<TransactionDto> getAllTransactions() {
+    public List<Transaction> getAllTransactions() {
         List<Transaction> transactions = transactionRepository.findAll();
-
-        return transactions.stream().map((t) -> modelMapper.map(t, TransactionDto.class)).collect(Collectors.toList());
+        return transactions;
+//        return transactions.stream().map((t) -> modelMapper.map(t, TransactionDto.class)).collect(Collectors.toList());
     }
 }
