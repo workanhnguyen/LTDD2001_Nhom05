@@ -76,7 +76,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 } else {
                     selectedLanguage = "en"; // English
                 }
-
                 String currentLanguage = getSelectedLanguage();
                 if (!selectedLanguage.equals(currentLanguage)) {
                     setLocale(selectedLanguage);
@@ -139,20 +138,6 @@ public class WelcomeActivity extends AppCompatActivity {
         backPressedTime = System.currentTimeMillis();
     }
 
-//    public void setLocale(Context context, String lang) {
-//        Locale locale = new Locale(lang);
-//        Locale.setDefault(locale);
-//        Resources resources = getResources();
-//        Configuration config = new Configuration();
-//        config.setLocale(locale);
-//        resources.updateConfiguration(config, resources.getDisplayMetrics());
-//
-//        // Save the selected language in SharedPreferences
-//        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("language", lang);
-//        editor.apply();
-//    }
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

@@ -12,6 +12,8 @@ import androidx.appcompat.widget.AppCompatSpinner;
 public class CustomSpinnerExpense extends AppCompatSpinner{
 
         public interface OnSpinnerEventsListener {
+            void registerForActivityResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults);
+
             void onPopupWindowOpened(Spinner spinner);
 
             void onPopupWindowClosed(Spinner spinner);
