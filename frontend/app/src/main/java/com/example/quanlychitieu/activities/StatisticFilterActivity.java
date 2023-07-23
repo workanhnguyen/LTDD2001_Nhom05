@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.utils.CustomConstant;
 
 public class StatisticFilterActivity extends AppCompatActivity {
     TextView filterLastMonth, filterThisMonth, filterAnotherMonth;
@@ -36,7 +37,7 @@ public class StatisticFilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
-                intent.putExtra("test", filterLastMonth.getText().toString());
+                intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_LAST_MONTH);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -46,7 +47,7 @@ public class StatisticFilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
-                intent.putExtra("test", filterThisMonth.getText().toString());
+                intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_THIS_MONTH);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -56,7 +57,7 @@ public class StatisticFilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
-                intent.putExtra("test", filterAnotherMonth.getText().toString());
+                intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_OTHER_MONTH);
                 setResult(RESULT_OK, intent);
                 finish();
             }

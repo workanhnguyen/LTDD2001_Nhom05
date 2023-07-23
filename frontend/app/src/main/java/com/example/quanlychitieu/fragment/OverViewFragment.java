@@ -28,6 +28,7 @@ import com.example.quanlychitieu.adapters.TransactionAdapter;
 import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
 import com.example.quanlychitieu.models.Transaction;
+import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,7 +162,14 @@ public class OverViewFragment extends Fragment {
 
         if (requestCode == REQUEST_CODE_SECOND_ACTIVITY) {
             if (resultCode == RESULT_OK && data != null) {
-                filterTitle.setText(data.getStringExtra("test"));
+                String title = data.getStringExtra("sts_filter");
+                // Handle filter transaction here
+                if (title.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH))
+                    filterTitle.setText(getString(R.string.last_month));
+                else if (title.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH))
+                    filterTitle.setText(getString(R.string.this_month));
+                else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH))
+                    filterTitle.setText(getString(R.string.another_month));
             } else {
                 // Handle the case where the user canceled or there was an error in the second activity
             }
