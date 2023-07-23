@@ -40,7 +40,7 @@ import retrofit2.Response;
 public class OverViewFragment extends Fragment {
     private static final int REQUEST_CODE_SECOND_ACTIVITY = 1;
     String resultData;
-    TextView tvTotalBalance1, filterTitle;
+    TextView loadDataAlert, filterTitle;
     RecyclerView transactionList;
     LinearLayout linearLayoutFilter;
     ImageView switchShowHideBalance;
@@ -103,6 +103,8 @@ public class OverViewFragment extends Fragment {
         });
     }
     private void loadTransactionData() {
+        loadDataAlert.setText(getString(R.string.loading_data));
+
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
 
@@ -110,23 +112,18 @@ public class OverViewFragment extends Fragment {
                 .enqueue(new Callback<List<Transaction>>() {
                     @Override
                     public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
+                        loadDataAlert.setText("");
                         transactionList.setLayoutManager(new LinearLayoutManager(getActivity()));
                         populateListView(response.body());
                     }
 
                     @Override
                     public void onFailure(Call<List<Transaction>> call, Throwable t) {
-                        Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                        tvTotalBalance1.setText(t.getMessage());
+                        loadDataAlert.setText(getString(R.string.error_loading_data));
                     }
                 });
     }
     private void populateListView(List<Transaction> transactions) {
-//        List<Transaction> transactionSaved = new ArrayList<>();
-//
-//        for (Transaction t: transactions) {
-//            transactionSaved.add(t);
-//        }
         TransactionAdapter adapter = new TransactionAdapter(transactions);
         adapter.setContext(getActivity());
         transactionList.setAdapter(adapter);
@@ -135,7 +132,7 @@ public class OverViewFragment extends Fragment {
         transactionList = view.findViewById(R.id.transactionList);
         linearLayoutFilter = view.findViewById(R.id.linearLayoutFilter);
         switchShowHideBalance = view.findViewById(R.id.switchShowHideBalance);
-        tvTotalBalance1 = view.findViewById(R.id.tvTotalBalance1);
+        loadDataAlert = view.findViewById(R.id.loadDataAlert);
 
         filterTitle = view.findViewById(R.id.filterTitle);
         filterTitle.setText(getString(R.string.this_month));
@@ -150,8 +147,7 @@ public class OverViewFragment extends Fragment {
         int itemId = item.getItemId();
 
         if (itemId == R.id.btnRenew) {
-            // handle refresh data here
-            Toast.makeText(getActivity(), "Refresh Data", Toast.LENGTH_SHORT).show();
+            loadTransactionData();
             return true;
         }
         return super.onOptionsItemSelected(item);

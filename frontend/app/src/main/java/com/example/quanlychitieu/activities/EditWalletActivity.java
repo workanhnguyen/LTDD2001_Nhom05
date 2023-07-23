@@ -76,7 +76,6 @@ public class EditWalletActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Resolve deleting wallet here
 
-                        onBackPressed();
                         finish();
                     }
                 });
