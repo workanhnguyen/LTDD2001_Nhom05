@@ -10,7 +10,7 @@ import com.example.quanlychitieu.R;
 
 public class TransactionHolder extends RecyclerView.ViewHolder {
 
-    TextView transactionDay, transactionDayOfWeek, transactionMonthYear, transactionTotal;
+    TextView transactionDay, transactionDayOfWeek, transactionMonthYear, transactionTotal, transactionName;
 
     public TransactionHolder(@NonNull View itemView) {
         super(itemView);
@@ -19,6 +19,7 @@ public class TransactionHolder extends RecyclerView.ViewHolder {
         transactionDayOfWeek = itemView.findViewById(R.id.transactionDayOfWeek);
         transactionMonthYear = itemView.findViewById(R.id.transactionMonthYear);
         transactionTotal = itemView.findViewById(R.id.transactionTotal);
+        transactionName = itemView.findViewById(R.id.transactionName);
     }
 
     public TextView getTransactionDay() {
@@ -35,5 +36,13 @@ public class TransactionHolder extends RecyclerView.ViewHolder {
 
     public TextView getTransactionTotal() {
         return transactionTotal;
+    }
+
+    public TextView getTransactionName() {
+        return transactionName;
+    }
+
+    public void setTransactionName(TextView transactionName) {
+        this.transactionName = transactionName;
     }
 }
