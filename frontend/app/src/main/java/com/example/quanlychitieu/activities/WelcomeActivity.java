@@ -32,6 +32,11 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String selectedLanguage = sharedPreferences.getString("language", "vi");
+
+        // Set the locale based on the user's preferred language
+        setLocale(selectedLanguage);
         setContentView(R.layout.activity_welcome);
 
         ActionBar actionBar = getSupportActionBar();
@@ -47,23 +52,10 @@ public class WelcomeActivity extends AppCompatActivity {
         handleSwitchToLoginActivity();
 
 
-
-        // Set the locale based on the user's preferred language
-
-
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        String selectedLanguage = sharedPreferences.getString("language", "vi");
-
-        setLocale(selectedLanguage);
-
-        if (selectedLanguage.equals("vi")) {
-            spinnerLanguage.setSelection(0);
-        } else if (selectedLanguage.equals("en")) {
-            spinnerLanguage.setSelection(1);
-        }
-
         SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(WelcomeActivity.this, languages);
         spinnerLanguage.setAdapter(adapter);
+
+
 
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,6 +81,17 @@ public class WelcomeActivity extends AppCompatActivity {
 
             }
         });
+
+
+        // Set the locale based on the user's preferred language
+        setLocale(selectedLanguage);
+
+        // Set the selected item in the spinner based on the selected language
+        if (selectedLanguage.equals("vi")) {
+            spinnerLanguage.setSelection(0);
+        } else if (selectedLanguage.equals("en")) {
+            spinnerLanguage.setSelection(1);
+        }
     }
 
     private void handleSwitchToLoginActivity() {

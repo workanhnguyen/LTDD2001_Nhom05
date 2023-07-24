@@ -59,7 +59,7 @@ public class OverViewFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
-            activity.getSupportActionBar().setTitle("Chào Anh Nguyễn!");
+            activity.getSupportActionBar().setTitle(getString(R.string.hello_username));
             activity.getSupportActionBar().setElevation(0);
         }
     }
