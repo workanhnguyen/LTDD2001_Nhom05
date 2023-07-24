@@ -36,6 +36,14 @@ public class CategoryTypeDao {
         return categoryType;
     }
 
+    public List<CategoryType> getExpenseCategories() {
+        return categoryTypeRepository.getExpenseCategories();
+    }
+
+    public List<CategoryType> getIncomeCategories() {
+        return categoryTypeRepository.getIncomeCategories();
+    }
+
     public boolean deleteCategoryType(int id) {
         if (categoryTypeRepository.existsById(id)) {
             categoryTypeRepository.deleteById(id);

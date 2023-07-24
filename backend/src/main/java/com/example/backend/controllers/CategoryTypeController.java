@@ -30,6 +30,16 @@ public class CategoryTypeController {
         return ResponseEntity.ok().body(categoryTypeDao.getCategoryType(id));
     }
 
+    @GetMapping("/expense")
+    public ResponseEntity<List<CategoryType>> getExpenseCategories() {
+        return ResponseEntity.ok().body(categoryTypeDao.getExpenseCategories());
+    }
+
+    @GetMapping("/income")
+    public ResponseEntity<List<CategoryType>> getIncomeCategories() {
+        return ResponseEntity.ok().body(categoryTypeDao.getIncomeCategories());
+    }
+
     @PostMapping
     public ResponseEntity<CategoryTypeDto> addNewCategoryType(@RequestBody CategoryTypeDto categoryTypeDto) throws Exception {
         return new ResponseEntity<>(categoryTypeDao.addNewCategoryType(categoryTypeDto), HttpStatus.CREATED);
