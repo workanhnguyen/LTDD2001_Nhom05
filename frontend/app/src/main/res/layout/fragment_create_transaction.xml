@@ -65,11 +65,13 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="12dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/createTransactionCategoryTypeImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/baseline_category_24" />
                 <TextView
+                    android:id="@+id/createTransactionCategoryTypeName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/choose_category"
@@ -98,9 +100,9 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="12dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/baseline_account_balance_wallet_24" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,9 +129,9 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="12dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/baseline_segment_24" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -151,9 +153,9 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="12dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/baseline_calendar_month_24" />
                 <TextView
                     android:id="@+id/calendarDate"
