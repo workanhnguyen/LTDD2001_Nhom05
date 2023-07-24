@@ -1,7 +1,6 @@
 package com.example.quanlychitieu.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.example.quanlychitieu.holders.ChooseWalletHolder;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.utils.CommonUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseWalletAdapter extends RecyclerView.Adapter<ChooseWalletHolder> {

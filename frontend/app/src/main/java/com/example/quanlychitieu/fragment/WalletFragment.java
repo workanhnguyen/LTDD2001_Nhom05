@@ -21,8 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.CreateWalletActivity;
 import com.example.quanlychitieu.adapters.WalletAdapter;
-import com.example.quanlychitieu.models.AccountType;
-import com.example.quanlychitieu.models.User;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.sampledatas.WalletData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

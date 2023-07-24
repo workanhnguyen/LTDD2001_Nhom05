@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
-import com.example.quanlychitieu.configs.LoggingUserInfo;
 
 import java.util.ArrayList;
 import java.util.List;

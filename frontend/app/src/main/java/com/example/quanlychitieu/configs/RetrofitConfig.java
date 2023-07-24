@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.rxjava3.internal.schedulers.RxThreadFactory;
-import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

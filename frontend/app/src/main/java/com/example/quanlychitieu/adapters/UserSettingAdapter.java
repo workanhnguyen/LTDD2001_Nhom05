@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChangePasswordActivity;
-import com.example.quanlychitieu.activities.LoginActivity;
 import com.example.quanlychitieu.activities.WelcomeActivity;
 import com.example.quanlychitieu.holders.UserSettingHolder;
 import com.example.quanlychitieu.utils.AdapterListener;

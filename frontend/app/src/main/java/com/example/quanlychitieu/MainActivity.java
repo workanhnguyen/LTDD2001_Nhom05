@@ -1,6 +1,5 @@
 package com.example.quanlychitieu;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.quanlychitieu.activities.StatisticFilterActivity;
 import com.example.quanlychitieu.databinding.ActivityMainBinding;
 import com.example.quanlychitieu.fragment.CategoryTypeFragment;
 import com.example.quanlychitieu.fragment.CreateTransactionFragment;
