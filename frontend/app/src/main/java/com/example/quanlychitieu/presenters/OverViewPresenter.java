@@ -1,15 +1,11 @@
 package com.example.quanlychitieu.presenters;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.apis.TransactionApi;
 import com.example.quanlychitieu.apis.WalletApi;
 import com.example.quanlychitieu.configs.RetrofitConfig;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.views.OverViewView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,23 +13,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OverViewPresenter {
-    private OverViewView overViewView;
-    List<Transaction> list;
+    private final OverViewView overViewView;
 
     public OverViewPresenter(OverViewView overViewView) {
         this.overViewView = overViewView;
-        list = new ArrayList<>();
     }
 
-    public void loadTransactionList() {
+    public void loadTransactionsByUserId(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
 
-        transactionApi.getAllTransactionsByUserId().enqueue(new Callback<List<Transaction>>() {
+        transactionApi.getAllTransactionsByUserId(userId).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
-                list = response.body();
-                overViewView.showTransactionList(list);
+                overViewView.showTransactionList(response.body());
             }
 
             @Override
@@ -42,11 +35,11 @@ public class OverViewPresenter {
             }
         });
     }
-    public void loadSumOfBalance() {
+    public void loadSumOfBalance(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         WalletApi walletApi = retrofitConfig.getRetrofit().create(WalletApi.class);
 
-        walletApi.getSumOfBalanceByUserId().enqueue(new Callback<Long>() {
+        walletApi.getSumOfBalanceByUserId(userId).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
                 overViewView.showTotalBalance(response.body());
@@ -58,11 +51,11 @@ public class OverViewPresenter {
             }
         });
     }
-    public void loadSumOfExpense() {
+    public void loadSumOfExpense(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
 
-        transactionApi.getSumOfExpenseByUserId().enqueue(new Callback<Long>() {
+        transactionApi.getSumOfExpenseByUserId(userId).enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
                 overViewView.showSumOfExpense(response.body());
@@ -75,11 +68,11 @@ public class OverViewPresenter {
         });
     }
 
-    public void loadSumOfIncome() {
+    public void loadSumOfIncome(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
 
-        transactionApi.getSumOfIncomeByUserId().enqueue(new Callback<Long>() {
+        transactionApi.getSumOfIncomeByUserId(userId).enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
                 overViewView.showSumOfIncome(response.body());

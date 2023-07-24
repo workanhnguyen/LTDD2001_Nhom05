@@ -2,7 +2,9 @@ package com.example.quanlychitieu.fragment;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,20 +26,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.StatisticFilterActivity;
 import com.example.quanlychitieu.adapters.TransactionAdapter;
-import com.example.quanlychitieu.apis.TransactionApi;
-import com.example.quanlychitieu.configs.RetrofitConfig;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.presenters.OverViewPresenter;
 import com.example.quanlychitieu.utils.CommonUtil;
 import com.example.quanlychitieu.utils.CustomConstant;
 import com.example.quanlychitieu.views.OverViewView;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class OverViewFragment extends Fragment implements OverViewView {
     private static final int REQUEST_CODE_SECOND_ACTIVITY = 1;
@@ -48,6 +42,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
     ImageView switchShowHideBalance;
     boolean isBalanceShowed = true;
     private OverViewPresenter overViewPresenter;
+    SharedPreferences sharedPreferences;
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -68,6 +63,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
         }
 
         overViewPresenter = new OverViewPresenter(this);
+        sharedPreferences = requireActivity().getSharedPreferences("LoggingUser", Context.MODE_PRIVATE);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,7 +77,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
         super.onViewCreated(view, savedInstanceState);
 
         initializeElement(view);
-        loadTransactionData();
+        loadData();
         handleSwitchToStatisticFilter();
     }
     private void handleSwitchShowHideBalance() {
@@ -110,12 +106,12 @@ public class OverViewFragment extends Fragment implements OverViewView {
             }
         });
     }
-    private void loadTransactionData() {
+    private void loadData() {
         loadDataAlert.setText(getString(R.string.loading_data));
-        overViewPresenter.loadTransactionList();
-        overViewPresenter.loadSumOfBalance();
-        overViewPresenter.loadSumOfExpense();
-        overViewPresenter.loadSumOfIncome();
+        overViewPresenter.loadTransactionsByUserId(sharedPreferences.getInt("userId", 1));
+        overViewPresenter.loadSumOfBalance(sharedPreferences.getInt("userId", 1));
+        overViewPresenter.loadSumOfExpense(sharedPreferences.getInt("userId", 1));
+        overViewPresenter.loadSumOfIncome(sharedPreferences.getInt("userId", 1));
     }
     private void populateListView(List<Transaction> transactions) {
         TransactionAdapter adapter = new TransactionAdapter(transactions);
@@ -145,13 +141,13 @@ public class OverViewFragment extends Fragment implements OverViewView {
         int itemId = item.getItemId();
 
         if (itemId == R.id.btnRenew) {
-            loadTransactionData();
+            loadData();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-//     Method to get data from another activity and back to origin activity
+    // Method to get data from another activity and back to origin activity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -160,12 +156,15 @@ public class OverViewFragment extends Fragment implements OverViewView {
             if (resultCode == RESULT_OK && data != null) {
                 String title = data.getStringExtra("sts_filter");
                 // Handle filter transaction here
-                if (title.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH))
+                if (title.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH)) {
                     filterTitle.setText(getString(R.string.last_month));
-                else if (title.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH))
+                }
+                else if (title.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH)) {
                     filterTitle.setText(getString(R.string.this_month));
-                else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH))
+                }
+                else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH)) {
                     filterTitle.setText(getString(R.string.another_month));
+                }
             } else {
                 // Handle the case where the user canceled or there was an error in the second activity
             }
@@ -187,19 +186,17 @@ public class OverViewFragment extends Fragment implements OverViewView {
     @Override
     public void showTotalBalance(Long sumOfBalance) {
         tvTotalBalance.setText(CommonUtil.getMoneyFormat(sumOfBalance));
-        switchShowHideBalance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isBalanceShowed = !isBalanceShowed;
 
-                if (isBalanceShowed) {
-                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_24);
-                    tvTotalBalance.setText(CommonUtil.getMoneyFormat(sumOfBalance));
-                }
-                else {
-                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_off_24);
-                    tvTotalBalance.setText("****** đ");
-                }
+        switchShowHideBalance.setOnClickListener(v -> {
+            isBalanceShowed = !isBalanceShowed;
+
+            if (isBalanceShowed) {
+                switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_24);
+                tvTotalBalance.setText(CommonUtil.getMoneyFormat(sumOfBalance));
+            }
+            else {
+                switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_off_24);
+                tvTotalBalance.setText("****** đ");
             }
         });
     }
@@ -211,10 +208,6 @@ public class OverViewFragment extends Fragment implements OverViewView {
 
     @Override
     public void showSumOfIncome(Long sumOfIncome) {
-        if (sumOfIncome != null) {
-            tvSumOfIncome.setText(CommonUtil.getMoneyFormat(sumOfIncome));
-        } else {
-            tvSumOfIncome.setText(CommonUtil.getMoneyFormat(0));
-        }
+        tvSumOfIncome.setText(CommonUtil.getMoneyFormat(sumOfIncome));
     }
 }
