@@ -21,12 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     private long backPressedTime;
     ActivityMainBinding binding;
-    String resultData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main);
 
         handleChangeFragment();
 

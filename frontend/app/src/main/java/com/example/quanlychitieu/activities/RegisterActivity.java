@@ -1,6 +1,8 @@
 package com.example.quanlychitieu.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +37,11 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("LoggingUser", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("userId", 2);
+                editor.apply();
+
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(intent);
             }
