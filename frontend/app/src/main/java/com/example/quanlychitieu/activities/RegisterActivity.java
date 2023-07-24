@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.configs.LoggingUserInfo;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView switchToLogin;
@@ -39,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getSharedPreferences("LoggingUser", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("userId", 2);
+                editor.putInt("userId", LoggingUserInfo.user.getId());
                 editor.apply();
 
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
