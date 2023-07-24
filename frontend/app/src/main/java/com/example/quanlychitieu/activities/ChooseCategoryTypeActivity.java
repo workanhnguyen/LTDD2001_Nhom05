@@ -1,8 +1,9 @@
 package com.example.quanlychitieu.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -13,16 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.ChooseCategoryTypeAdapter;
 import com.example.quanlychitieu.models.CategoryType;
-import com.example.quanlychitieu.sampledatas.CategoryData;
+import com.example.quanlychitieu.presenters.ChooseCategoryTypePresenter;
+import com.example.quanlychitieu.utils.AdapterListener;
+import com.example.quanlychitieu.utils.PassData;
+import com.example.quanlychitieu.views.ChooseCategoryTypeView;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
-public class ChooseCategoryTypeActivity extends AppCompatActivity {
-    TextView chooseCategoryTypeExpense, chooseCategoryTypeIncome;
+public class ChooseCategoryTypeActivity extends AppCompatActivity implements ChooseCategoryTypeView, PassData {
+    TextView chooseCategoryTypeExpense, chooseCategoryTypeIncome, alertLoadingCategoryType;
     RecyclerView chooseCategoryTypeList;
     ChooseCategoryTypeAdapter adapter;
-    List<CategoryType> expenseCategories = CategoryData.getExpenseCategoryTypeList();
-    List<CategoryType> incomeCategories = CategoryData.getIncomeCategoryTypeList();
+
+    private ChooseCategoryTypePresenter chooseCategoryTypePresenter;
+    AdapterListener adapterListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,46 +43,48 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity {
             actionBar.setElevation(0);
         }
 
+        adapterListener = this::finish;
+
         initializeElement();
-        loadCategoryTypeData(expenseCategories);
+        loadExpenseCategoryTypeData();
         handleShowCategoryTypeToUI();
     }
 
-    private void loadCategoryTypeData(List<CategoryType> list) {
-        adapter = new ChooseCategoryTypeAdapter(list);
-        adapter.setContext(ChooseCategoryTypeActivity.this);
-        chooseCategoryTypeList.setAdapter(adapter);
-        chooseCategoryTypeList.setLayoutManager(new LinearLayoutManager(this));
+    private void loadExpenseCategoryTypeData() {
+        alertLoadingCategoryType.setText(getString(R.string.loading_data));
+        chooseCategoryTypePresenter.loadExpenseCategories();
+    }
+    private void loadIncomeCategoryTypeData() {
+        alertLoadingCategoryType.setText(getString(R.string.loading_data));
+        chooseCategoryTypePresenter.loadIncomeCategories();
     }
     private void handleShowCategoryTypeToUI() {
         chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
         chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
 
-        chooseCategoryTypeExpense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
-                chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
+        chooseCategoryTypeExpense.setOnClickListener(v -> {
+            chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
+            chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
 
-                loadCategoryTypeData(expenseCategories);
-            }
+            loadExpenseCategoryTypeData();
         });
 
-        chooseCategoryTypeIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.primary));
-                chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.black));
+        chooseCategoryTypeIncome.setOnClickListener(v -> {
+            chooseCategoryTypeIncome.setTextColor(getResources().getColor(R.color.primary));
+            chooseCategoryTypeExpense.setTextColor(getResources().getColor(R.color.black));
 
-                loadCategoryTypeData(incomeCategories);
-            }
+            loadIncomeCategoryTypeData();
         });
     }
 
     private void initializeElement() {
+        chooseCategoryTypePresenter = new ChooseCategoryTypePresenter(this);
+
         chooseCategoryTypeExpense = findViewById(R.id.chooseCategoryTypeExpense);
         chooseCategoryTypeIncome = findViewById(R.id.chooseCategoryTypeIncome);
         chooseCategoryTypeList = findViewById(R.id.chooseCategoryTypeList);
+
+        alertLoadingCategoryType = findViewById(R.id.alertLoadingCategoryType);
     }
 
     @Override
@@ -87,5 +96,46 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void showExpenseCategories(List<CategoryType> list) {
+        alertLoadingCategoryType.setText("");
+
+        adapter = new ChooseCategoryTypeAdapter(list);
+        adapter.setContext(ChooseCategoryTypeActivity.this);
+        adapter.setAdapterListener(adapterListener);
+        adapter.setPassData(this);
+
+        chooseCategoryTypeList.setLayoutManager(new LinearLayoutManager(ChooseCategoryTypeActivity.this));
+        chooseCategoryTypeList.setAdapter(adapter);
+    }
+
+    @Override
+    public void showIncomeCategories(List<CategoryType> list) {
+        alertLoadingCategoryType.setText("");
+
+        adapter = new ChooseCategoryTypeAdapter(list);
+        adapter.setContext(ChooseCategoryTypeActivity.this);
+        adapter.setAdapterListener(adapterListener);
+        adapter.setPassData(this);
+
+        chooseCategoryTypeList.setLayoutManager(new LinearLayoutManager(ChooseCategoryTypeActivity.this));
+        chooseCategoryTypeList.setAdapter(adapter);
+    }
+
+    @Override
+    public void showError() {
+        alertLoadingCategoryType.setText(getString(R.string.error_loading_data));
+    }
+
+    @Override
+    public void passCategoryTypeData(CategoryType categoryType) {
+        Parcelable parcelable = Parcels.wrap(categoryType);
+
+        Intent intent = new Intent();
+        intent.putExtra("categoryType", parcelable);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

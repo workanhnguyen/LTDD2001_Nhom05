@@ -1,6 +1,7 @@
 package com.example.quanlychitieu.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,18 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.holders.ChooseCategoryTypeHolder;
 import com.example.quanlychitieu.models.CategoryType;
+import com.example.quanlychitieu.utils.AdapterListener;
+import com.example.quanlychitieu.utils.PassData;
 
 import java.util.List;
 
 public class ChooseCategoryTypeAdapter extends RecyclerView.Adapter<ChooseCategoryTypeHolder> {
     private Context context;
+    private AdapterListener adapterListener;
+
     List<CategoryType> list;
+    private PassData passData;
+
 
     public ChooseCategoryTypeAdapter(List<CategoryType> list) {
         this.list = list;
@@ -31,6 +38,22 @@ public class ChooseCategoryTypeAdapter extends RecyclerView.Adapter<ChooseCatego
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public AdapterListener getAdapterListener() {
+        return adapterListener;
+    }
+
+    public void setAdapterListener(AdapterListener adapterListener) {
+        this.adapterListener = adapterListener;
+    }
+
+    public PassData getPassData() {
+        return passData;
+    }
+
+    public void setPassData(PassData passData) {
+        this.passData = passData;
     }
 
     @NonNull
@@ -52,6 +75,14 @@ public class ChooseCategoryTypeAdapter extends RecyclerView.Adapter<ChooseCatego
                 .apply(requestOptions).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.getChooseCategoryTypeImage());
 
         holder.getChooseCategoryTypeName().setText(categoryType.getName());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (passData != null) {
+                passData.passCategoryTypeData(categoryType);
+                adapterListener.onFinishActivity();
+            }
+
+        });
     }
 
     @Override
