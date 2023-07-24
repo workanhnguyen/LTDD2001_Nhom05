@@ -1,21 +1,18 @@
 package com.example.backend.daos;
 
 import com.example.backend.dtos.TransactionDto;
-import com.example.backend.models.Transaction;
-import com.example.backend.repositories.TransactionRepository;
 import com.example.backend.models.*;
 import com.example.backend.repositories.CategoryTypeRepository;
+import com.example.backend.repositories.TransactionRepository;
 import com.example.backend.repositories.WalletRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,28 +24,42 @@ public class TransactionDao {
     private WalletRepository walletRepository;
     @Autowired
     private CategoryTypeRepository categoryTypeRepository;
-
     private ModelMapper modelMapper;
 
-    public List<Transaction> getAllTransactions() {
+    public List<Transaction> getAllTransaction() {
         return transactionRepository.findAll();
     }
-
     public Optional<Transaction> getTransaction(int id){
         return transactionRepository.findById(id);
     }
-    public List<Transaction> getAllTransactionsByUserId(Integer id) {
-        return transactionRepository.findByUserId(id);
-    }
-    public Long getSumOfExpenseByUserId(Integer userId, String type) {
-        return transactionRepository.sumOfCategoryType(userId, type);
-    }
-    public List<Transaction> getAllTransactionByWalletId(int id) {
+    public List<Transaction> getTransactionByWalletId(int id) {
         return transactionRepository.findByWalletId(id);
     }
-
-    public List<Transaction> getAllTransactionByCateTypeId(int id) {
+    public List<Transaction> getTransactionByCateType(int id) {
         return transactionRepository.findByCategoryTypeId(id);
+    }
+
+    // Statistic - ALL
+    public List<Transaction> getAllTransactionByUserId(Integer userId) {
+        return transactionRepository.findAllTransactionByUserId(userId);
+    }
+    public Long sumAllExpenseByUserId(Integer userId) {
+        return transactionRepository.sumAllExpenseByUserId(userId);
+    }
+
+    public Long sumAllIncomeByUserId(Integer userId) {
+        return transactionRepository.sumAllIncomeByUserId(userId);
+    }
+
+    // Statistic - MONTH
+    public List<Transaction> getMonthTransactionByUserId(Integer userId, Integer year, Integer month) {
+        return transactionRepository.findMonthTransactionByUserId(userId, year, month);
+    }
+    public Long sumMonthExpenseByUserId(Integer userId, Integer year, Integer month) {
+        return transactionRepository.sumMonthExpenseByUserId(userId, year, month);
+    }
+    public Long sumMonthIncomeByUserId(Integer userId, Integer year, Integer month) {
+        return transactionRepository.sumMonthIncomeByUserId(userId, year, month);
     }
 
     public TransactionDto addNewTransaction(TransactionDto transactionDto) throws Exception {
@@ -127,7 +138,9 @@ public class TransactionDao {
             return true;
         } else return false;
     }
-    public List<Transaction> getTransactionByKeyword (@RequestParam("kw") String keyword) {
-        return transactionRepository.findByKeyword(keyword);
-    }
+
+//    Function is not ready to use
+//    public List<Transaction> getTransactionByKeyword(String keyword) {
+//        return transactionRepository.getByKeyword(keyword);
+//    }
 }

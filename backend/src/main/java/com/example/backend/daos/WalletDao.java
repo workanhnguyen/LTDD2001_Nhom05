@@ -37,8 +37,12 @@ public class WalletDao {
         return walletRepository.findById(id);
     }
 
-    public List<Wallet> getWalletByUserId(int id) {
+    public List<Wallet> getWalletByUserId(int id) throws Exception {
         return walletRepository.findByUserId(id);
+    }
+
+    public Long sumBalanceByUserId(Integer userId) {
+        return walletRepository.sumBalanceByUserId(userId);
     }
 
     public WalletDto addNewWallet(WalletDto walletDto) throws Exception {
@@ -113,9 +117,5 @@ public class WalletDao {
             walletRepository.deleteById(id);
             return true;
         } else return false;
-    }
-
-    public Long getSumOfBalanceByUserId(int userId) {
-        return walletRepository.sumOfBalanceByUserId(userId);
     }
 }

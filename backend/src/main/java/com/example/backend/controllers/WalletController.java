@@ -17,49 +17,46 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/wallets")
 public class WalletController {
-    //Test this code to more fun
-    public static Logger logger = LoggerFactory.getLogger(WalletController.class);
-
     @Autowired
-    private WalletRepository walletRepository;
+    WalletRepository walletRepository;
     @Autowired
     private WalletDao walletDao;
 
-    @RequestMapping
+    @GetMapping
     public ResponseEntity<List<Wallet>> getAllWallets() {
         return ResponseEntity.ok().body(walletDao.getAllWallets());
     }
 
-    @GetMapping
-    public Optional<Wallet> getWallet(@PathVariable int id) {
-        return walletRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Wallet>> getWallet(@PathVariable int id) {
+        return ResponseEntity.ok().body(walletDao.getWallet(id));
     }
 
-    @GetMapping(params = "userId")
-    public ResponseEntity<List<Wallet>> getWalletByUserId(@RequestParam("userId") int id) {
+    @GetMapping(value = "/by-user", params = "userId")
+    public ResponseEntity<List<Wallet>> getWalletByUserId(@RequestParam("userId") int id) throws Exception {
         return ResponseEntity.ok().body(walletDao.getWalletByUserId(id));
     }
 
-    @GetMapping(value = "/sum-balance", params = "userId")
-    public ResponseEntity<Long> getSumOfBalanceByUserId(@RequestParam(name = "userId") int userId) {
-        return ResponseEntity.ok().body(walletDao.getSumOfBalanceByUserId(userId));
+    @GetMapping(value = "/sum-balance/by-user", params = "userId")
+    public ResponseEntity<Long> sumBalanceByUserId(@RequestParam(name = "userId") Integer userId) {
+        return ResponseEntity.ok().body(walletDao.sumBalanceByUserId(userId));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<WalletDto> addNewWallet(@RequestBody WalletDto walletDto) throws Exception {
         return new ResponseEntity<>(walletDao.addNewWallet(walletDto), HttpStatus.CREATED);
     }
-    @RequestMapping(value ="/{id}", method = RequestMethod.PUT)
+    @PutMapping("/{id}")
     public ResponseEntity<WalletDto> updateWallet (@PathVariable int id, @RequestBody WalletDto walletDto) throws Exception {
         return ResponseEntity.ok().body(walletDao.updateWallet(id, walletDto));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+    @PatchMapping("/{id}")
     public ResponseEntity<WalletDto> patchWallet (@PathVariable int id, @RequestBody WalletDto walletDto) throws Exception {
         return ResponseEntity.ok().body(walletDao.patchWallet(id, walletDto));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public boolean DeleteWallet(@PathVariable int id) {
         return walletDao.deleteWallet(id);
     }
