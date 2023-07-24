@@ -3,6 +3,7 @@ package com.example.quanlychitieu.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChangePasswordActivity;
 import com.example.quanlychitieu.activities.LoginActivity;
+import com.example.quanlychitieu.activities.WelcomeActivity;
 import com.example.quanlychitieu.holders.UserSettingHolder;
 import com.example.quanlychitieu.utils.AdapterListener;
 
@@ -66,7 +68,13 @@ public class UserSettingAdapter extends RecyclerView.Adapter<UserSettingHolder> 
                     context.startActivity(intent);
                 } else {
                     if (adapterListener != null) {
-                        Intent intent = new Intent(context, LoginActivity.class);
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("LoggingUser", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        editor.remove("userId");
+                        editor.apply();
+
+                        Intent intent = new Intent(context, WelcomeActivity.class);
                         context.startActivity(intent);
                         adapterListener.onFinishActivity();
                     }
