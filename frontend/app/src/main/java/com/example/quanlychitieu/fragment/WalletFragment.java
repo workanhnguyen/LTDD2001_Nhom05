@@ -1,6 +1,8 @@
 package com.example.quanlychitieu.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,7 +40,7 @@ public class WalletFragment extends Fragment implements WalletView {
     TextView txtShowSumBalance, walletAlertLoadingData;
     WalletAdapter adapter;
     FloatingActionButton btnCreateNewWallet;
-
+    SharedPreferences sharedPreferences;
     WalletPresenter walletPresenter;
     public WalletFragment() { }
 
@@ -61,6 +63,7 @@ public class WalletFragment extends Fragment implements WalletView {
         }
 
         walletPresenter = new WalletPresenter(this);
+        sharedPreferences = requireActivity().getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,8 +83,8 @@ public class WalletFragment extends Fragment implements WalletView {
     private void loadData() {
         walletAlertLoadingData.setText(getString(R.string.loading_data));
 
-        walletPresenter.loadWalletByUserId(LoggingUserInfo.user.getId());
-        walletPresenter.loadSumOfBalance(LoggingUserInfo.user.getId());
+        walletPresenter.loadWalletByUserId(sharedPreferences.getInt("id", 1));
+        walletPresenter.loadSumOfBalance(sharedPreferences.getInt("id", 1));
     }
 
     private void handleSwitchToCreateWalletActivity() {
