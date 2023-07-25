@@ -37,7 +37,7 @@ public class User implements Serializable {
     @Column(name = "lastname")
     private String lastname;
     @Basic(optional = false)
-    @Column(name = "username")
+    @Column(unique = true, name = "username")
     private String username;
     @Basic(optional = false)
     @Column(name = "password")
@@ -49,4 +49,6 @@ public class User implements Serializable {
     private boolean gender;
     @Column(name = "career")
     private String career;
+    @Column(name = "image")
+    private String image;
 }
