@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 
 import com.example.backend.daos.UserDao;
+import com.example.backend.dtos.LoginRequest;
 import com.example.backend.dtos.UserDto;
 import com.example.backend.models.User;
 
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     //Test this code to more fun
@@ -28,21 +29,34 @@ public class UserController {
     //
 
     @Autowired
-    UserRepository userRepository;
-    UserDao userDao;
+    private UserRepository userRepository;
+    @Autowired
+    private UserDao userDao;
 
-    @RequestMapping(value = "/users/", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> listAllUser(){
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUser(){
         List<User> listUser = userRepository.findAll();
         if (listUser.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<User>>(listUser, HttpStatus.OK);
     }
-//    @GetMapping
-//    public ResponseEntity<List<UserDto>> listAllUsers(){
-//        return ResponseEntity.ok().body(userDao.getAllUsers());
-//    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@Valid @RequestBody User requestUser) {
+        String username = requestUser.getUsername();
+        String password = requestUser.getPassword();
+
+        User user = userDao.getUserByUsername(username);
+
+        if (user == null || !password.equals(user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+
+        // Add JWT token generation logic here (optional).
+        // Return token or additional user information as needed.
+        return ResponseEntity.ok().body(user);
+    }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public User findUserById(@PathVariable("id") int id){

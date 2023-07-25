@@ -28,6 +28,10 @@ public class UserDao {
                 .collect(Collectors.toList());
     }
 
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public UserDto addNewUser(UserDto userDto) throws Exception{
         User user = new User();
         user.setFirstname(userDto.getFirstname());
