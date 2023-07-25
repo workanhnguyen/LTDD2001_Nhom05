@@ -54,16 +54,16 @@ public class OverViewFragment extends Fragment implements OverViewView {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        overViewPresenter = new OverViewPresenter(this);
+        sharedPreferences = requireActivity().getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
+
         // Show the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().show();
-            activity.getSupportActionBar().setTitle("Chào Anh Nguyễn!");
+            activity.getSupportActionBar().setTitle(getString(R.string.hello) + " " + sharedPreferences.getString("lastName", "") + " " + sharedPreferences.getString("firstName", "") + "!");
             activity.getSupportActionBar().setElevation(0);
         }
-
-        overViewPresenter = new OverViewPresenter(this);
-        sharedPreferences = requireActivity().getSharedPreferences("LoggingUser", Context.MODE_PRIVATE);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,23 +80,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
         loadData();
         handleSwitchToStatisticFilter();
     }
-    private void handleSwitchShowHideBalance() {
-        switchShowHideBalance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isBalanceShowed = !isBalanceShowed;
 
-                if (isBalanceShowed) {
-                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_24);
-                    tvTotalBalance.setText("2.000.000 đ");
-                }
-                else {
-                    switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_off_24);
-                    tvTotalBalance.setText("****** đ");
-                }
-            }
-        });
-    }
     private void handleSwitchToStatisticFilter() {
         linearLayoutFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,10 +92,10 @@ public class OverViewFragment extends Fragment implements OverViewView {
     }
     private void loadData() {
         loadDataAlert.setText(getString(R.string.loading_data));
-        overViewPresenter.loadTransactionsByUserId(sharedPreferences.getInt("userId", 1));
-        overViewPresenter.loadSumOfBalance(sharedPreferences.getInt("userId", 1));
-        overViewPresenter.loadSumOfExpense(sharedPreferences.getInt("userId", 1));
-        overViewPresenter.loadSumOfIncome(sharedPreferences.getInt("userId", 1));
+        overViewPresenter.loadTransactionsByUserId(sharedPreferences.getInt("id", 1));
+        overViewPresenter.loadSumOfBalance(sharedPreferences.getInt("id", 1));
+        overViewPresenter.loadSumOfExpense(sharedPreferences.getInt("id", 1));
+        overViewPresenter.loadSumOfIncome(sharedPreferences.getInt("id", 1));
     }
     private void populateListView(List<Transaction> transactions) {
         TransactionAdapter adapter = new TransactionAdapter(transactions);

@@ -1,12 +1,15 @@
 package com.example.quanlychitieu.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.UserSettingActivity;
 import com.example.quanlychitieu.adapters.SettingAdapter;
@@ -25,16 +31,13 @@ import com.example.quanlychitieu.models.Setting;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SettingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SettingFragment extends Fragment {
     RecyclerView settingList;
+    TextView settingUserFullName, settingUserEmail;
+    ImageView settingUserImage;
     List<Setting> items = new ArrayList<>();
-    TextView settingUsername;
     LinearLayout linearLayoutUserInfo;
+    SharedPreferences sharedPreferences;
 
     public SettingFragment() { }
 
@@ -50,6 +53,8 @@ public class SettingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        sharedPreferences = requireActivity().getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
+
         // Hide the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null && activity.getSupportActionBar() != null) {
@@ -57,7 +62,6 @@ public class SettingFragment extends Fragment {
             activity.getSupportActionBar().setTitle(R.string.setting);
             activity.getSupportActionBar().setElevation(0);
         }
-
     }
 
     @Override
@@ -72,9 +76,13 @@ public class SettingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
 
-        settingList = view.findViewById(R.id.settingList);
-        linearLayoutUserInfo = view.findViewById(R.id.linearLayoutUserInfo);
+        initializeElement(view);
+        handleShowDataToUI();
+        handleGoToUserInfoActivity();
 
+    }
+
+    private void handleShowDataToUI() {
         items.add(new Setting(R.drawable.baseline_settings_24, getString(R.string.general_setting)));
         items.add(new Setting(R.drawable.baseline_info_grey_24, getString(R.string.dev_info)));
 
@@ -83,8 +91,25 @@ public class SettingFragment extends Fragment {
         settingList.setAdapter(adapter);
         settingList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        handleGoToUserInfoActivity();
+        // Show logging user data
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.blank_avatar)
+                .error(R.drawable.blank_avatar);
+        Glide.with(requireActivity())
+                .load(sharedPreferences.getString("imageLink", ""))
+                .apply(requestOptions)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(settingUserImage);
+        settingUserFullName.setText(sharedPreferences.getString("lastName", "") + " " + sharedPreferences.getString("firstName", ""));
+        settingUserEmail.setText(sharedPreferences.getString("email", ""));
+    }
 
+    private void initializeElement(View view) {
+        settingList = view.findViewById(R.id.settingList);
+        linearLayoutUserInfo = view.findViewById(R.id.linearLayoutUserInfo);
+        settingUserFullName = view.findViewById(R.id.settingUserFullName);
+        settingUserEmail = view.findViewById(R.id.settingUserEmail);
+        settingUserImage = view.findViewById(R.id.settingUserImage);
     }
 
     private void handleGoToUserInfoActivity() {
