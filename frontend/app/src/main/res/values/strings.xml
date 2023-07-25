@@ -125,4 +125,10 @@
     <string name="do_you_want_to_delete_this_transaction">Bạn có chắc chắn xóa giao dịch này không?</string>
     <string name="loading_data">Đang tải dữ liệu...</string>
     <string name="error_loading_data">Lấy dữ liệu thất bại!</string>
+    <string name="username_or_password_not_correct">Tên đăng nhập hoặc mật khẩu không chính xác</string>
+    <string name="not_empty_field">Vui lòng điền đầy đủ thông tin!</string>
+    <string name="unknown_error">Lỗi bất định, vui lòng thử lại sau!</string>
+    <string name="logging">Đang đăng nhập ...</string>
+    <string name="hello">Chào</string>
+    <string name="loading">Đang tải...</string>
 </resources>
