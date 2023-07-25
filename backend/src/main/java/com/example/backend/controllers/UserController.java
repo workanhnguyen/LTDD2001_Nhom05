@@ -2,8 +2,6 @@ package com.example.backend.controllers;
 
 
 import com.example.backend.daos.UserDao;
-import com.example.backend.dtos.LoginRequest;
-import com.example.backend.dtos.UserDto;
 import com.example.backend.models.User;
 
 import com.example.backend.repositories.UserRepository;
@@ -12,9 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
