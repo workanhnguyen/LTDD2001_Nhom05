@@ -179,8 +179,11 @@ public class OverViewFragment extends Fragment implements OverViewView {
     }
 
     @Override
-    public void showTransactionError() {
+    public void showGetDataError() {
         loadDataAlert.setText(getString(R.string.error_loading_data));
+        tvTotalBalance.setText("0 đ");
+        tvSumOfExpense.setText("0 đ");
+        tvSumOfIncome.setText("0 đ");
     }
 
     @Override

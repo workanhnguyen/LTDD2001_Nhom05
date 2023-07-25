@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,18 +22,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.CreateWalletActivity;
 import com.example.quanlychitieu.adapters.WalletAdapter;
+import com.example.quanlychitieu.configs.LoggingUserInfo;
 import com.example.quanlychitieu.models.Wallet;
+import com.example.quanlychitieu.presenters.WalletPresenter;
 import com.example.quanlychitieu.sampledatas.WalletData;
+import com.example.quanlychitieu.utils.CommonUtil;
+import com.example.quanlychitieu.views.WalletView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WalletFragment extends Fragment {
+public class WalletFragment extends Fragment implements WalletView {
     RecyclerView walletList;
+    TextView txtShowSumBalance, walletAlertLoadingData;
     WalletAdapter adapter;
     FloatingActionButton btnCreateNewWallet;
-    List<Wallet> list = new ArrayList<>();
+
+    WalletPresenter walletPresenter;
     public WalletFragment() { }
 
     public static WalletFragment newInstance(Bundle bundle) {
@@ -52,6 +59,8 @@ public class WalletFragment extends Fragment {
             activity.getSupportActionBar().setTitle(getString(R.string.account));
             activity.getSupportActionBar().setElevation(0);
         }
+
+        walletPresenter = new WalletPresenter(this);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,10 +73,15 @@ public class WalletFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeElement(view);
-        loadListWalletData();
-        handleShowDataToUI();
-
+        loadData();
         handleSwitchToCreateWalletActivity();
+    }
+
+    private void loadData() {
+        walletAlertLoadingData.setText(getString(R.string.loading_data));
+
+        walletPresenter.loadWalletByUserId(LoggingUserInfo.user.getId());
+        walletPresenter.loadSumOfBalance(LoggingUserInfo.user.getId());
     }
 
     private void handleSwitchToCreateWalletActivity() {
@@ -80,18 +94,17 @@ public class WalletFragment extends Fragment {
         });
     }
 
-    private void handleShowDataToUI() {
+    private void populateListView(List<Wallet> list) {
         adapter = new WalletAdapter(list);
         adapter.setContext(getActivity());
         walletList.setLayoutManager(new LinearLayoutManager(getActivity()));
         walletList.setAdapter(adapter);
     }
 
-    private void loadListWalletData() {
-        list = WalletData.getAllWallets();
-    }
-
     private void initializeElement(View view) {
+        txtShowSumBalance = view.findViewById(R.id.sumBalance);
+        walletAlertLoadingData = view.findViewById(R.id.walletAlertLoadingData);
+
         btnCreateNewWallet = view.findViewById(R.id.btnCreateNewWallet);
         walletList = view.findViewById(R.id.walletList);
     }
@@ -116,5 +129,22 @@ public class WalletFragment extends Fragment {
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void showWalletList(List<Wallet> list) {
+        walletAlertLoadingData.setText("");
+        populateListView(list);
+    }
+
+    @Override
+    public void showSumOfBalance(Long sumBalance) {
+        txtShowSumBalance.setText(CommonUtil.getMoneyFormat(sumBalance));
+    }
+
+    @Override
+    public void showGetDataError() {
+        walletAlertLoadingData.setText(getString(R.string.error_loading_data));
+        txtShowSumBalance.setText("0 đ");
     }
 }

@@ -31,7 +31,7 @@ public class OverViewPresenter {
 
             @Override
             public void onFailure(Call<List<Transaction>> call, Throwable t) {
-                overViewView.showTransactionError();
+                overViewView.showGetDataError();
             }
         });
     }
