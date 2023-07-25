@@ -67,8 +67,8 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private boolean isUserLoggedIn() {
-        SharedPreferences sharedPreferences = getSharedPreferences("LoggingUser", Context.MODE_PRIVATE);
-        return sharedPreferences.getInt("userId", -1) != -1;
+        SharedPreferences sharedPreferences = getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("id", -1) != -1;
     }
 
     private void handleSwitchToLoginActivity() {
