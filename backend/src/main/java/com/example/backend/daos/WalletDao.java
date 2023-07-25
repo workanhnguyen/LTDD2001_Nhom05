@@ -37,7 +37,7 @@ public class WalletDao {
         return walletRepository.findById(id);
     }
 
-    public List<Wallet> getWalletByUserId(int id) throws Exception {
+    public List<Wallet> getWalletsByUserId(int id) throws Exception {
         return walletRepository.findByUserId(id);
     }
 

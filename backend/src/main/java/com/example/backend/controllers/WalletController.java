@@ -32,9 +32,9 @@ public class WalletController {
         return ResponseEntity.ok().body(walletDao.getWallet(id));
     }
 
-    @GetMapping(value = "/by-user", params = "userId")
-    public ResponseEntity<List<Wallet>> getWalletByUserId(@RequestParam("userId") int id) throws Exception {
-        return ResponseEntity.ok().body(walletDao.getWalletByUserId(id));
+    @GetMapping(value = "/by-user")
+    public ResponseEntity<List<Wallet>> getWalletsByUserId(@RequestParam(name = "userId") int id) throws Exception {
+        return ResponseEntity.ok().body(walletDao.getWalletsByUserId(id));
     }
 
     @GetMapping(value = "/sum-balance/by-user", params = "userId")
