@@ -67,10 +67,10 @@ public class UserSettingAdapter extends RecyclerView.Adapter<UserSettingHolder> 
                     context.startActivity(intent);
                 } else {
                     if (adapterListener != null) {
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("LoggingUser", Context.MODE_PRIVATE);
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                        editor.remove("userId");
+                        editor.clear();
                         editor.apply();
 
                         Intent intent = new Intent(context, WelcomeActivity.class);
