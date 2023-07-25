@@ -17,6 +17,7 @@
         android:paddingHorizontal="12dp"
         android:background="@color/white">
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/settingUserImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/blank_avatar" />
@@ -26,17 +27,18 @@
             android:orientation="vertical"
             android:layout_marginStart="16dp">
             <TextView
-                android:id="@+id/settingUsername"
+                android:id="@+id/settingUserFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Nguyễn Anh"
+                android:text="@string/loading"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="24sp"/>
             <TextView
+                android:id="@+id/settingUserEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="anhnguyen@gmail.com"
+                android:text="@string/loading"
                 android:textColor="@color/dark_grey" />
         </LinearLayout>
     </LinearLayout>

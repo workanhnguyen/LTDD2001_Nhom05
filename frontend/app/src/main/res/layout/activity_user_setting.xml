@@ -15,22 +15,25 @@
         android:background="@color/white">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userSettingUserImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="12dp"
-            android:src="@drawable/app_icon_background"/>
+            android:src="@drawable/blank_avatar"/>
         <TextView
+            android:id="@+id/userSettingUserFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nguyễn Anh"
+            android:text="@string/loading"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginTop="12dp"/>
         <TextView
+            android:id="@+id/userSettingUserEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="anhnguyen.per@gmail.com"
+            android:text="@string/loading"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal"

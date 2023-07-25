@@ -53,7 +53,15 @@
             android:hint="@string/password"
             android:inputType="textPassword"/>
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/loginAlert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:textAlignment="center"
+        android:paddingTop="12dp"
+        android:visibility="gone" />
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
