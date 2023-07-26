@@ -19,6 +19,7 @@ import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.configs.LoggingUserInfo;
 import com.example.quanlychitieu.models.User;
 import com.example.quanlychitieu.presenters.LoginPresenter;
+import com.example.quanlychitieu.utils.CustomConstant;
 import com.example.quanlychitieu.views.LoginView;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
@@ -62,12 +63,25 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     btnLogin.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(LoginActivity.this, R.color.light_grey)));
                     btnLogin.setText(getString(R.string.logging));
                     loginPresenter.login(new User(username, password));
+                    changeActivityByRole(sharedPreferences.getString("role", ""));
                 } else {
                     loginAlert.setVisibility(View.VISIBLE);
                     loginAlert.setText(alertInfo);
                 }
             }
         });
+    }
+
+    private void changeActivityByRole(String role) {
+        if (role.equals(CustomConstant.ROLE_ADMIN)) {
+            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (role.equals(CustomConstant.ROLE_USER)) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private String validateLoginInfo(String username, String password) {
@@ -110,6 +124,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             editor.putString("career", user.getCareer());
             editor.putString("email", user.getEmail());
             editor.putString("imageLink", user.getImageLink());
+            editor.putString("role", user.getRole());
             editor.putBoolean("gender", user.isGender());
             editor.apply();
 
