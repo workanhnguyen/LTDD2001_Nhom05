@@ -4,12 +4,10 @@
  */
 package com.example.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  *
@@ -46,9 +44,12 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
     @Column(name = "gender")
-    private boolean gender;
+    private Boolean gender;
     @Column(name = "career")
     private String career;
-    @Column(name = "image")
-    private String image;
+    @Lob
+    @Column(name = "image_link")
+    private String imageLink;
+    @Column(name = "role")
+    private String role;
 }
