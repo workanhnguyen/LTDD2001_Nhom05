@@ -58,4 +58,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.parceler/parceler-api
     implementation 'org.parceler:parceler-api:1.1.13'
     annotationProcessor 'org.parceler:parceler:1.1.13'
+
+    // Cloudinary SDK
+    implementation 'com.cloudinary:cloudinary-android:2.3.1'
 }
