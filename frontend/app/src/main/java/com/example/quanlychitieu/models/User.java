@@ -13,6 +13,7 @@ public class User  {
     private String imageLink;
     private String career;
     private boolean gender;
+    private String role;
 
     public User(Integer id, String firstname, String lastname, String username, String password, String email, String imageLink, String career, boolean gender) {
         this.id = id;
@@ -108,5 +109,13 @@ public class User  {
 
     public void setGender(boolean gender) {
         this.gender = gender;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
