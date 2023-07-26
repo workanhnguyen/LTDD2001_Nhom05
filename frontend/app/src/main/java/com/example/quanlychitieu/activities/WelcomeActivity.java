@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
+import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +27,28 @@ public class WelcomeActivity extends AppCompatActivity {
     List<String> languages = new ArrayList<>();
     Spinner spinnerLanguage;
     Button btnSwitchToSignUp, btnSwitchToSignIn;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (isUserLoggedIn()) {
-            // Nếu đã đăng nhập, chuyển hướng đến giao diện chính
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-            finish(); // Đóng activity hiện tại để người dùng không thể quay lại giao diện đăng nhập
+            finish();
+//            sharedPreferences = getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
+//
+//            if (sharedPreferences.getString("role", "").equals(CustomConstant.ROLE_USER)) {
+//                // If user logged in and the role is USER, go to MainActivity
+//                Intent intent = new Intent(this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//            } else if (sharedPreferences.getString("role", "").equals(CustomConstant.ROLE_ADMIN)) {
+//                // If user logged in and the role is ADMIN, go to AdminActivity
+//                Intent intent = new Intent(this, AdminActivity.class);
+//                startActivity(intent);
+//                finish(); // Đóng activi
+//            }
         } else {
             setContentView(R.layout.activity_welcome);
             ActionBar actionBar = getSupportActionBar();
