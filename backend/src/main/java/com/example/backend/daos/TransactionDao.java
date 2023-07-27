@@ -41,7 +41,7 @@ public class TransactionDao {
 
     // Statistic - ALL
     public List<Transaction> getAllTransactionByUserId(Integer userId) {
-        return transactionRepository.findAllTransactionByUserId(userId);
+        return transactionRepository.findAllTransactionByUserId(userId) == null ? null : transactionRepository.findAllTransactionByUserId(userId);
     }
     public Long sumAllExpenseByUserId(Integer userId) {
         return transactionRepository.sumAllExpenseByUserId(userId);

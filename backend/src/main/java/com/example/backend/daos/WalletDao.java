@@ -37,8 +37,8 @@ public class WalletDao {
         return walletRepository.findById(id);
     }
 
-    public List<Wallet> getWalletsByUserId(int id) throws Exception {
-        return walletRepository.findByUserId(id);
+    public List<Wallet> getWalletsByUserId(int id) {
+        return walletRepository.findByUserId(id) == null ? null : walletRepository.findByUserId(id);
     }
 
     public Long sumBalanceByUserId(Integer userId) {
