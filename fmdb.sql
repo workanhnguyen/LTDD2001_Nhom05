@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `account_root`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account_root` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,10 +49,10 @@ DROP TABLE IF EXISTS `account_type`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account_type` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `account_root` int NOT NULL,
-  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
-  `description` tinytext COLLATE utf8mb4_vietnamese_ci,
+  `image` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `description` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_account_account_type_idx` (`account_root`),
   CONSTRAINT `fk_account_account_type` FOREIGN KEY (`account_root`) REFERENCES `account_root` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -78,9 +78,9 @@ DROP TABLE IF EXISTS `category_root`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category_root` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
-  `type` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -104,9 +104,9 @@ DROP TABLE IF EXISTS `category_type`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category_type` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `category_root` int NOT NULL,
-  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
+  `image` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_category_category_type_idx` (`category_root`),
   CONSTRAINT `fk_category_type_category_root` FOREIGN KEY (`category_root`) REFERENCES `category_root` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -132,12 +132,12 @@ DROP TABLE IF EXISTS `transaction`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `description` tinytext COLLATE utf8mb4_vietnamese_ci,
+  `description` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   `category_type` int DEFAULT NULL,
   `created_date` datetime(6) NOT NULL,
   `wallet` int DEFAULT NULL,
   `total` bigint DEFAULT NULL,
-  `image` tinytext COLLATE utf8mb4_vietnamese_ci,
+  `image` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_category_id_idx` (`category_type`),
   KEY `fk_transaction_wallet_idx` (`wallet`),
@@ -165,13 +165,18 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `lastname` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+  `firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `gender` tinyint DEFAULT '1',
+  `career` varchar(255) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `image_link` longtext COLLATE utf8mb4_vietnamese_ci,
+  `role` enum('ROLE_ADMIN','ROLE_USER') COLLATE utf8mb4_vietnamese_ci DEFAULT 'ROLE_USER',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +185,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Anh','Nguyễn','anhnguyen','1234','anh@gmail.com'),(2,'Đạt','Lương','luongdat','1234','dat@gmail.com'),(3,'Mãi','Đặng','maidang','1234','mai@gmail.com'),(4,'Quỳnh','Đào','quynhdao','1234','quynh@gmail.com');
+INSERT INTO `user` VALUES (1,'Anh','Nguyễn','anhnguyen','1234','anh@gmail.com',1,'Sinh viên','https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/338018331_254856326897520_3856794107188959630_n.jpg?_nc_cat=101&cb=99be929b-59f725be&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=polDCS2paJIAX-YHF2O&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfBCQKct3Ww1dHczh1Kd_GfEaX_IeQHTQlGZDByMX2EdhQ&oe=64C280E6','ROLE_USER'),(2,'Đạt','Lương','luongdat','1234','dat@gmail.com',1,'Sinh viên','https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/341033378_927338095248252_3614182632098763100_n.jpg?stp=cp6_dst-jpg&_nc_cat=107&cb=99be929b-59f725be&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=XmCsXQ0m5CAAX_GGXZK&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDZeMDi5voLjp0VVnocfW3S9dvqxn8SuA7osUzJCHuIPw&oe=64C1C686','ROLE_USER'),(3,'Mãi','Đặng','maidang','1234','mai@gmail.com',1,'Sinh viên','https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/280334526_126618866654533_5990798067395328668_n.jpg?_nc_cat=104&cb=99be929b-59f725be&ccb=1-7&_nc_sid=174925&_nc_ohc=Fj-XSnen9HcAX_FAirq&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfAOw1xW4QJZQ9Aw6p2b1yOFExjQaoK7_yJMU_g-Ri77Kg&oe=64C23B2F','ROLE_USER'),(4,'Quỳnh','Đào','quynhdao','1234','quynh@gmail.com',0,'Sinh viên','https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/325171580_507602668030371_976961888220416543_n.jpg?stp=cp6_dst-jpg&_nc_cat=111&cb=99be929b-59f725be&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=U4-_UUoVMfUAX-YQWS4&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfCG4-EjM3ZpGMqDepOBDmrWML1hlVKa1kuy2VS_qCEX1w&oe=64C15278','ROLE_USER'),(5,'Manager','Admin','admin','admin','admin@gmail.com',1,NULL,NULL,'ROLE_ADMIN'),(16,'Bảo Lộc','Phạm','baoloc','1234','loc@gmail.com',1,'','',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,9 +200,9 @@ CREATE TABLE `wallet` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user` int NOT NULL,
   `account_type` int DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `balance` bigint NOT NULL,
-  `description` tinytext COLLATE utf8mb4_vietnamese_ci,
+  `description` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   PRIMARY KEY (`id`),
   KEY `fk_wallet_account_idx` (`account_type`),
   KEY `fk_wallet_user_idx` (`user`),
@@ -225,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-10 19:59:47
+-- Dump completed on 2023-07-27  9:17:52
