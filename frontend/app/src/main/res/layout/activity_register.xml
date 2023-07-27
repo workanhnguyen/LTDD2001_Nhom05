@@ -12,13 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="123dp"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         app:srcCompat="@drawable/app_icon" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
         android:gravity="center"
         android:text="@string/spendify"
         android:textSize="34sp"
@@ -52,6 +53,17 @@
             android:textSize="16sp"/>
 
         <EditText
+            android:id="@+id/registerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_grey"
+            android:backgroundTint="@color/light_grey"
+            android:layout_marginBottom="12dp"
+            android:textSize="16sp"/>
+
+        <EditText
             android:id="@+id/registerPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,6 +87,16 @@
             android:textSize="16sp"
             android:inputType="textPassword"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/registerAlert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:paddingBottom="12dp"
+        android:textAlignment="center"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnRegister"
