@@ -32,14 +32,21 @@ public class UserDao {
         return userRepository.findByUsername(username);
     }
 
-    public UserDto addNewUser(UserDto userDto) throws Exception{
+    public User addNewUser(UserDto userDto) {
+        if (userRepository.findByUsername(userDto.getUsername()) != null) {
+            return null;
+        }
+
         User user = new User();
         user.setFirstname(userDto.getFirstname());
         user.setLastname(userDto.getLastname());
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
+        user.setCareer(userDto.getCareer());
+        user.setGender(userDto.isGender());
+        user.setImageLink(userDto.getImageLink());
 
-        return modelMapper.map(userRepository.save(user), UserDto.class);
+        return userRepository.save(user);
     }
 }

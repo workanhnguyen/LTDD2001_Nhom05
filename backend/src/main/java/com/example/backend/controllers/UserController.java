@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 
 import com.example.backend.daos.UserDao;
+import com.example.backend.dtos.UserDto;
 import com.example.backend.models.User;
 
 import com.example.backend.repositories.UserRepository;
@@ -35,7 +36,7 @@ public class UserController {
         if (listUser.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<User>>(listUser, HttpStatus.OK);
+        return new ResponseEntity<>(listUser, HttpStatus.OK);
     }
 
     @PostMapping("/login")
@@ -72,9 +73,9 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "/users/", method = RequestMethod.POST)
-    public User saveUser(@Valid @RequestBody User user) throws Exception{
-        return userRepository.save(user);
+    @PostMapping
+    public User addNewUser(@Valid @RequestBody UserDto userDto) {
+        return userDao.addNewUser(userDto);
     }
 
 //    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
