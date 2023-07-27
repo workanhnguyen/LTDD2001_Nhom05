@@ -131,4 +131,7 @@
     <string name="logging">Đang đăng nhập ...</string>
     <string name="hello">Chào</string>
     <string name="loading">Đang tải...</string>
+    <string name="password_not_match">Mật khẩu không khớp!</string>
+    <string name="registering">Đang đăng ký ...</string>
+    <string name="username_existed">Tên đăng nhập đã tồn tại!</string>
 </resources>
