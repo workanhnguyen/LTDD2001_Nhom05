@@ -5,8 +5,12 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.GeneralSettingAdapter;
+import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
 import com.example.quanlychitieu.models.GeneralSetting;
 
 import java.util.ArrayList;
@@ -23,7 +28,9 @@ import java.util.List;
 
 public class GeneralSettingActivity extends AppCompatActivity {
     Switch switchShowHideBalance;
+    Spinner settingSpinnerLanguage;
     SharedPreferences toggleShowBalancePref;
+    List<String> languages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,26 @@ public class GeneralSettingActivity extends AppCompatActivity {
 
         initializeElement();
         handleToggleShowHideBalance();
+        handleChangeLanguage();
+    }
+
+    private void handleChangeLanguage() {
+        languages.add(getString(R.string.language_vn));
+        languages.add(getString(R.string.language_en));
+        settingSpinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Toast.makeText(GeneralSettingActivity.this, item, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(GeneralSettingActivity.this, languages);
+        settingSpinnerLanguage.setAdapter(adapter);
     }
 
     private void handleToggleShowHideBalance() {
@@ -57,6 +84,8 @@ public class GeneralSettingActivity extends AppCompatActivity {
         switchShowHideBalance = findViewById(R.id.btnShowHideBalance);
         switchShowHideBalance.setChecked(toggleShowBalancePref.getBoolean("isShowBalance", true));
         handleToggleStyle(toggleShowBalancePref.getBoolean("isShowBalance", true));
+
+        settingSpinnerLanguage = findViewById(R.id.settingSpinnerLanguage);
     }
 
     private void handleToggleStyle(boolean isChecked) {

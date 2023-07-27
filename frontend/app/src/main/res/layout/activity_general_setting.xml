@@ -33,16 +33,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end">
-            <TextView
+            <Spinner
+                android:id="@+id/settingSpinnerLanguage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:layout_gravity="center_vertical"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_keyboard_arrow_right_24" />
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:spinnerMode="dialog" />
         </LinearLayout>
     </LinearLayout>
     <View

@@ -56,28 +56,31 @@ public class WelcomeActivity extends AppCompatActivity {
                 actionBar.hide();
             }
 
-            languages.add(getString(R.string.language_vn));
-            languages.add(getString(R.string.language_en));
-
             initializeElement();
             handleSwitchToRegisterActivity();
             handleSwitchToLoginActivity();
-
-            spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String item = parent.getItemAtPosition(position).toString();
-                    Toast.makeText(WelcomeActivity.this, item, Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(WelcomeActivity.this, languages);
-            spinnerLanguage.setAdapter(adapter);
+            handleChangeLanguage();
         }
+    }
+
+    private void handleChangeLanguage() {
+        languages.add(getString(R.string.language_vn));
+        languages.add(getString(R.string.language_en));
+
+        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Toast.makeText(WelcomeActivity.this, item, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(WelcomeActivity.this, languages);
+        spinnerLanguage.setAdapter(adapter);
     }
 
     private boolean isUserLoggedIn() {
