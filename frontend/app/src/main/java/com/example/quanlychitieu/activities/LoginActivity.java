@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void showLoginInfo(User user) {
+    public void saveLoginInfo(User user) {
         btnLogin.setEnabled(true);
         btnLogin.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(LoginActivity.this, R.color.primary)));
         btnLogin.setText(getString(R.string.login));
@@ -130,6 +130,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         } else {
             loginAlert.setVisibility(View.VISIBLE);
             loginAlert.setText(getString(R.string.username_or_password_not_correct));

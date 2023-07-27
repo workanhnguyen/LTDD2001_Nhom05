@@ -23,7 +23,7 @@ public class LoginPresenter {
         userApi.login(requestUser).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                loginView.showLoginInfo(response.body());
+                loginView.saveLoginInfo(response.body());
             }
 
             @Override
