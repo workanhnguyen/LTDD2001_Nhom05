@@ -1,16 +1,12 @@
 package com.example.quanlychitieu.fragment;
 
-import static androidx.core.content.PermissionChecker.checkSelfPermission;
-
-import android.app.Activity;
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -21,9 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -41,8 +35,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.models.CategoryType;
-import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
-import com.example.quanlychitieu.utils.PassData;
 
 import org.parceler.Parcels;
 

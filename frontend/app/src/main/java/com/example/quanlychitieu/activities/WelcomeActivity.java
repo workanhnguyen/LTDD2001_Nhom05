@@ -3,7 +3,6 @@ package com.example.quanlychitieu.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
-import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;

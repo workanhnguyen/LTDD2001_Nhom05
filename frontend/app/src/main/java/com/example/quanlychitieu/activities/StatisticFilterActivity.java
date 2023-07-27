@@ -1,34 +1,17 @@
 package com.example.quanlychitieu.activities;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.quanlychitieu.activities.MonthYearPickerActivity;
-
 
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.utils.CustomConstant;
-import androidx.fragment.app.FragmentManager;
-
-
-import com.example.quanlychitieu.fragment.CalendarFragment;
-import com.example.quanlychitieu.fragment.CreateTransactionFragment;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class StatisticFilterActivity extends AppCompatActivity implements MonthYearPickerActivity.OnDateSetListener {
     TextView filterLastMonth, filterThisMonth, filterAnotherMonth;
