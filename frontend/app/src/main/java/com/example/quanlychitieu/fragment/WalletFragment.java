@@ -136,8 +136,12 @@ public class WalletFragment extends Fragment implements WalletView {
 
     @Override
     public void showWalletList(List<Wallet> list) {
-        walletAlertLoadingData.setText("");
-        populateListView(list);
+        if (!list.isEmpty()) {
+            walletAlertLoadingData.setText("");
+            populateListView(list);
+        } else {
+            walletAlertLoadingData.setText(getString(R.string.no_data));
+        }
     }
 
     @Override

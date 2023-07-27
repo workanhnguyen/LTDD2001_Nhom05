@@ -157,9 +157,13 @@ public class OverViewFragment extends Fragment implements OverViewView {
 
     @Override
     public void showTransactionList(List<Transaction> list) {
-        loadDataAlert.setText("");
-        transactionList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        populateListView(list);
+        if (!list.isEmpty()) {
+            loadDataAlert.setText("");
+            transactionList.setLayoutManager(new LinearLayoutManager(getActivity()));
+            populateListView(list);
+        } else {
+            loadDataAlert.setText(getString(R.string.no_data));
+        }
     }
 
     @Override
