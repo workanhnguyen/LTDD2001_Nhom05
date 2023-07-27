@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,19 +21,26 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.models.Transaction;
+import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.utils.CommonUtil;
 
 import org.parceler.Parcels;
 
 public class EditTransactionActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_SECOND_ACTIVITY = 1;
+    private static final int REQUEST_CODE_SELECT_CATEGORY = 1;
+    private static final int REQUEST_CODE_SELECT_WALLET = 2;
     Transaction transaction;
     EditText editTransactionBalance, editTransactionDescription;
     LinearLayout linearLayoutEditTransactionCategoryType, linearLayoutEditTransactionWallet;
     Button editTransactionDelete, editTransactionSave;
-    ImageView editTransactionCategoryImage, editTransactionWalletImage;
-    TextView editTransactionCategoryName, editTransactionWalletName;
+    ImageView editTransactionCategoryTypeImage, editTransactionWalletImage;
+    TextView editTransactionCategoryTypeName, editTransactionWalletName;
+
+    // ----------------------------------
+    CategoryType categoryType;
+    Wallet wallet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,7 @@ public class EditTransactionActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.edit_transaction);
             actionBar.setElevation(0);
         }
+
         initializeElement();
 
         loadTransactionData();
@@ -62,7 +71,7 @@ public class EditTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditTransactionActivity.this, ChooseWalletActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_SELECT_WALLET);
             }
         });
     }
@@ -72,7 +81,7 @@ public class EditTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EditTransactionActivity.this, ChooseCategoryTypeActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_SELECT_CATEGORY);
             }
         });
     }
@@ -122,12 +131,12 @@ public class EditTransactionActivity extends AppCompatActivity {
         Glide.with(EditTransactionActivity.this)
                 .load(transaction.getCategoryType().getImageLink())
                 .apply(requestOptions)
-                .diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionCategoryImage);
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionCategoryTypeImage);
         Glide.with(EditTransactionActivity.this)
                 .load(transaction.getWallet().getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionWalletImage);
-        editTransactionCategoryName.setText(transaction.getCategoryType().getName());
+        editTransactionCategoryTypeName.setText(transaction.getCategoryType().getName());
         editTransactionWalletName.setText(transaction.getWallet().getName());
         editTransactionDescription.setText(transaction.getDescription());
     }
@@ -142,11 +151,11 @@ public class EditTransactionActivity extends AppCompatActivity {
         editTransactionDelete = findViewById(R.id.editTransactionDelete);
         editTransactionSave = findViewById(R.id.editTransactionSave);
 
-        editTransactionCategoryName = findViewById(R.id.editTransactionCategoryName);
+        editTransactionCategoryTypeName = findViewById(R.id.editTransactionCategoryTypeName);
         editTransactionWalletName = findViewById(R.id.editTransactionWalletName);
 
         editTransactionWalletImage = findViewById(R.id.editTransactionWalletImage);
-        editTransactionCategoryImage = findViewById(R.id.editTransactionCategoryImage);
+        editTransactionCategoryTypeImage = findViewById(R.id.editTransactionCategoryTypeImage);
     }
 
     private void loadTransactionData() {
@@ -162,6 +171,43 @@ public class EditTransactionActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SELECT_CATEGORY && resultCode == RESULT_OK) {
+
+            // Handle to show choosed category
+            assert data != null;
+            Parcelable parcelableCategoryType = data.getParcelableExtra("categoryType");
+            categoryType = Parcels.unwrap(parcelableCategoryType);
+
+            RequestOptions requestOptionsCategoryType = new RequestOptions()
+                    .placeholder(R.drawable.app_icon_background)
+                    .error(R.drawable.app_icon_background);
+
+            Glide.with(EditTransactionActivity.this).load(categoryType.getImageLink())
+                    .apply(requestOptionsCategoryType).diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionCategoryTypeImage);
+
+            editTransactionCategoryTypeName.setText(categoryType.getName());
+        }
+
+         else if (requestCode == REQUEST_CODE_SELECT_WALLET && resultCode == RESULT_OK) {
+            // Handle to show choosed wallet
+            assert data != null;
+            Parcelable parcelableWallet = data.getParcelableExtra("wallet");
+            wallet = Parcels.unwrap(parcelableWallet);
+
+            RequestOptions requestOptionsWallet = new RequestOptions()
+                    .placeholder(R.drawable.app_icon_background)
+                    .error(R.drawable.app_icon_background);
+
+            Glide.with(EditTransactionActivity.this).load(wallet.getImageLink())
+                    .apply(requestOptionsWallet).diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionWalletImage);
+
+            editTransactionWalletName.setText(wallet.getName());
         }
     }
 }

@@ -55,7 +55,7 @@ public class EditWalletActivity extends AppCompatActivity {
         initializeElement();
         loadWalletData();
         handleShowDataToUI();
-        handleSwitchToAccountRootActivity();
+        handleSwitchToAccountTypeActivity();
         handleDeleteButton();
         handleSaveButton();
     }
@@ -97,7 +97,7 @@ public class EditWalletActivity extends AppCompatActivity {
             }
         });
     }
-    private void handleSwitchToAccountRootActivity() {
+    private void handleSwitchToAccountTypeActivity() {
         linearLayoutChooseAccountRoot.setOnClickListener(v -> {
             Intent intent = new Intent(EditWalletActivity.this, ChooseAccountTypeActivity.class);
             startActivityForResult(intent, REQUEST_CODE_SELECT_ACCOUNT);

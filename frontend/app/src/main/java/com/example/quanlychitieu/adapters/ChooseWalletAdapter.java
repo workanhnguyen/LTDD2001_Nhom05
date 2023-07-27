@@ -14,13 +14,17 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.holders.ChooseWalletHolder;
 import com.example.quanlychitieu.models.Wallet;
+import com.example.quanlychitieu.utils.AdapterListener;
 import com.example.quanlychitieu.utils.CommonUtil;
+import com.example.quanlychitieu.utils.PassDataUtil;
 
 import java.util.List;
 
 public class ChooseWalletAdapter extends RecyclerView.Adapter<ChooseWalletHolder> {
     private Context context;
     private List<Wallet> wallets;
+    private AdapterListener adapterListener;
+    private PassDataUtil passDataUtil;
 
     public ChooseWalletAdapter(List<Wallet> wallets) {
         this.wallets = wallets;
@@ -32,6 +36,22 @@ public class ChooseWalletAdapter extends RecyclerView.Adapter<ChooseWalletHolder
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public AdapterListener getAdapterListener() {
+        return adapterListener;
+    }
+
+    public void setAdapterListener(AdapterListener adapterListener) {
+        this.adapterListener = adapterListener;
+    }
+
+    public PassDataUtil getPassDataUtil() {
+        return passDataUtil;
+    }
+
+    public void setPassDataUtil(PassDataUtil passDataUtil) {
+        this.passDataUtil = passDataUtil;
     }
 
     @NonNull
@@ -56,6 +76,16 @@ public class ChooseWalletAdapter extends RecyclerView.Adapter<ChooseWalletHolder
 
         holder.getChooseWalletName().setText(wallet.getName());
         holder.getChooseWalletBalance().setText(CommonUtil.getMoneyFormat(wallet.getBalance()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (passDataUtil != null) {
+                    passDataUtil.passData(wallet);
+                    adapterListener.onFinishActivity();
+                }
+            }
+        });
     }
 
     @Override

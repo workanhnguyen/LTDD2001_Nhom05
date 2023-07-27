@@ -80,7 +80,6 @@ public class ChooseAccountTypeAdapter extends RecyclerView.Adapter<ChooseAccount
                 passDataUtil.passData(accountType);
                 adapterListener.onFinishActivity();
             }
-
         });
     }
 
