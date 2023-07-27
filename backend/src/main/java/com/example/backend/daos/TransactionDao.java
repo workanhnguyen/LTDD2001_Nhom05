@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,11 @@ public class TransactionDao {
 
     // Statistic - ALL
     public List<Transaction> getAllTransactionByUserId(Integer userId) {
-        return transactionRepository.findAllTransactionByUserId(userId) == null ? null : transactionRepository.findAllTransactionByUserId(userId);
+        List<Transaction> transactions = transactionRepository.findAllTransactionByUserId(userId);
+
+        if (transactions == null || transactions.isEmpty())
+            return new ArrayList<>();
+        return transactionRepository.findAllTransactionByUserId(userId);
     }
     public Long sumAllExpenseByUserId(Integer userId) {
         return transactionRepository.sumAllExpenseByUserId(userId);

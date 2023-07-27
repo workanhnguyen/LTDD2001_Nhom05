@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +39,11 @@ public class WalletDao {
     }
 
     public List<Wallet> getWalletsByUserId(int id) {
-        return walletRepository.findByUserId(id) == null ? null : walletRepository.findByUserId(id);
+        List<Wallet> wallets = walletRepository.findByUserId(id);
+
+        if (wallets == null || wallets.isEmpty())
+            return new ArrayList<>();
+        return walletRepository.findByUserId(id);
     }
 
     public Long sumBalanceByUserId(Integer userId) {
