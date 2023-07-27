@@ -1,7 +1,6 @@
 package com.example.quanlychitieu.adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.holders.ChooseCategoryTypeHolder;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.utils.AdapterListener;
-import com.example.quanlychitieu.utils.PassData;
+import com.example.quanlychitieu.utils.PassDataUtil;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class ChooseCategoryTypeAdapter extends RecyclerView.Adapter<ChooseCatego
     private AdapterListener adapterListener;
 
     List<CategoryType> list;
-    private PassData passData;
+    private PassDataUtil passDataUtil;
 
 
     public ChooseCategoryTypeAdapter(List<CategoryType> list) {
@@ -48,12 +47,12 @@ public class ChooseCategoryTypeAdapter extends RecyclerView.Adapter<ChooseCatego
         this.adapterListener = adapterListener;
     }
 
-    public PassData getPassData() {
-        return passData;
+    public PassDataUtil getPassData() {
+        return passDataUtil;
     }
 
-    public void setPassData(PassData passData) {
-        this.passData = passData;
+    public void setPassData(PassDataUtil passData) {
+        this.passDataUtil = passData;
     }
 
     @NonNull
@@ -77,8 +76,8 @@ public class ChooseCategoryTypeAdapter extends RecyclerView.Adapter<ChooseCatego
         holder.getChooseCategoryTypeName().setText(categoryType.getName());
 
         holder.itemView.setOnClickListener(v -> {
-            if (passData != null) {
-                passData.passCategoryTypeData(categoryType);
+            if (passDataUtil != null) {
+                passDataUtil.passData(categoryType);
                 adapterListener.onFinishActivity();
             }
 

@@ -29,7 +29,6 @@ import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
-import com.example.quanlychitieu.utils.PassData;
 
 import org.parceler.Parcels;
 
@@ -84,7 +83,6 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChooseCategoryTypeActivity.class);
-//                startActivity(intent);
                 startActivityForResult(intent, REQUEST_CODE_SELECT_CATEGORY);
             }
         });
@@ -119,14 +117,6 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
     public void onPopupWindowClosed(Spinner spinner) {
 
     }
-
-//    private void navigateToCategoriesFragment() {
-//        CategoryTypeFragment categoryFragment = new CategoryTypeFragment();
-//        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.frame_layout, categoryFragment)
-//                .addToBackStack(null) // Optional, for back stack handling
-//                .commit();
-//    }
 
     public void showCalendar() {
         CalendarFragment calendarDialogFragment = new CalendarFragment();

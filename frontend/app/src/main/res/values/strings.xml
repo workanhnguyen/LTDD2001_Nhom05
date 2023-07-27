@@ -135,4 +135,5 @@
     <string name="registering">Đang đăng ký ...</string>
     <string name="username_existed">Tên đăng nhập đã tồn tại!</string>
     <string name="no_data">Chưa có dữ liệu!</string>
+    <string name="choose_account_type">Chọn loại tài khoản</string>
 </resources>

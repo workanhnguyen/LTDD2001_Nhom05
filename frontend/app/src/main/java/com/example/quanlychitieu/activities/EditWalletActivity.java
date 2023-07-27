@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,18 +21,24 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.models.AccountType;
+import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.utils.CommonUtil;
 
 import org.parceler.Parcels;
 
 public class EditWalletActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_SELECT_ACCOUNT = 1;
     EditText walletDetailBalance, walletDetailName, walletDetailDescription;
     ImageView walletDetailAccountImage;
     TextView walletDetailAccountName;
     Button btnWalletDetailDelete, btnWalletDetailSave;
-    Wallet wallet;
     LinearLayout linearLayoutChooseAccountRoot;
+
+    // -----------------------------
+    AccountType accountType;
+    Wallet wallet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,12 +98,9 @@ public class EditWalletActivity extends AppCompatActivity {
         });
     }
     private void handleSwitchToAccountRootActivity() {
-        linearLayoutChooseAccountRoot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EditWalletActivity.this, ChooseAccountRootActivity.class);
-                startActivity(intent);
-            }
+        linearLayoutChooseAccountRoot.setOnClickListener(v -> {
+            Intent intent = new Intent(EditWalletActivity.this, ChooseAccountTypeActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SELECT_ACCOUNT);
         });
     }
     private void handleShowDataToUI() {
@@ -138,6 +142,26 @@ public class EditWalletActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SELECT_ACCOUNT && resultCode == RESULT_OK) {
+
+            assert data != null;
+            Parcelable parcelable = data.getParcelableExtra("accountType");
+            accountType = Parcels.unwrap(parcelable);
+
+            RequestOptions requestOptions = new RequestOptions()
+                    .placeholder(R.drawable.app_icon_background)
+                    .error(R.drawable.app_icon_background);
+
+            Glide.with(EditWalletActivity.this).load(accountType.getImageLink())
+                    .apply(requestOptions).diskCacheStrategy(DiskCacheStrategy.ALL).into(walletDetailAccountImage);
+
+            walletDetailAccountName.setText(accountType.getName());
         }
     }
 }

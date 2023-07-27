@@ -97,13 +97,13 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/createWalletAccountImage"
+                android:id="@+id/createWalletAccountTypeImage"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/app_icon_background"
                 android:layout_gravity="center" />
             <TextView
-                android:id="@+id/createWalletAccountName"
+                android:id="@+id/createWalletAccountTypeName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"

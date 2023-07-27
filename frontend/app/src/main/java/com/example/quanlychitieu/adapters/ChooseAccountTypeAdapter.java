@@ -14,13 +14,17 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.holders.ChooseAccountTypeHolder;
 import com.example.quanlychitieu.models.AccountType;
+import com.example.quanlychitieu.utils.AdapterListener;
+import com.example.quanlychitieu.utils.PassDataUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseAccountTypeAdapter extends RecyclerView.Adapter<ChooseAccountTypeHolder> {
     private Context context;
-    private List<AccountType> list = new ArrayList<>();
+    private List<AccountType> list;
+    private AdapterListener adapterListener;
+    private PassDataUtil passDataUtil;
 
     public ChooseAccountTypeAdapter(List<AccountType> list) {
         this.list = list;
@@ -32,6 +36,22 @@ public class ChooseAccountTypeAdapter extends RecyclerView.Adapter<ChooseAccount
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public AdapterListener getAdapterListener() {
+        return adapterListener;
+    }
+
+    public void setAdapterListener(AdapterListener adapterListener) {
+        this.adapterListener = adapterListener;
+    }
+
+    public PassDataUtil getPassDataUtil() {
+        return passDataUtil;
+    }
+
+    public void setPassDataUtil(PassDataUtil passDataUtil) {
+        this.passDataUtil = passDataUtil;
     }
 
     @NonNull
@@ -54,6 +74,14 @@ public class ChooseAccountTypeAdapter extends RecyclerView.Adapter<ChooseAccount
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.getChooseAccountTypeItemImage());
 
         holder.getChooseAccountTypeItemName().setText(accountType.getName());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (passDataUtil != null) {
+                passDataUtil.passData(accountType);
+                adapterListener.onFinishActivity();
+            }
+
+        });
     }
 
     @Override

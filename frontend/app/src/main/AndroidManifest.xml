@@ -28,9 +28,6 @@
             android:name=".activities.ChooseAccountTypeActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ChooseAccountRootActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true">
             <intent-filter>

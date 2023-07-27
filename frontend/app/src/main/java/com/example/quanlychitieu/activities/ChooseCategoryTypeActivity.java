@@ -16,14 +16,14 @@ import com.example.quanlychitieu.adapters.ChooseCategoryTypeAdapter;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.presenters.ChooseCategoryTypePresenter;
 import com.example.quanlychitieu.utils.AdapterListener;
-import com.example.quanlychitieu.utils.PassData;
+import com.example.quanlychitieu.utils.PassDataUtil;
 import com.example.quanlychitieu.views.ChooseCategoryTypeView;
 
 import org.parceler.Parcels;
 
 import java.util.List;
 
-public class ChooseCategoryTypeActivity extends AppCompatActivity implements ChooseCategoryTypeView, PassData {
+public class ChooseCategoryTypeActivity extends AppCompatActivity implements ChooseCategoryTypeView, PassDataUtil {
     TextView chooseCategoryTypeExpense, chooseCategoryTypeIncome, alertLoadingCategoryType;
     RecyclerView chooseCategoryTypeList;
     ChooseCategoryTypeAdapter adapter;
@@ -44,6 +44,7 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity implements Cho
         }
 
         adapterListener = this::finish;
+        chooseCategoryTypePresenter = new ChooseCategoryTypePresenter(this);
 
         initializeElement();
         loadExpenseCategoryTypeData();
@@ -78,8 +79,6 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity implements Cho
     }
 
     private void initializeElement() {
-        chooseCategoryTypePresenter = new ChooseCategoryTypePresenter(this);
-
         chooseCategoryTypeExpense = findViewById(R.id.chooseCategoryTypeExpense);
         chooseCategoryTypeIncome = findViewById(R.id.chooseCategoryTypeIncome);
         chooseCategoryTypeList = findViewById(R.id.chooseCategoryTypeList);
@@ -129,9 +128,19 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity implements Cho
         alertLoadingCategoryType.setText(getString(R.string.error_loading_data));
     }
 
+//    @Override
+//    public void passCategoryTypeData(CategoryType categoryType) {
+////        Parcelable parcelable = Parcels.wrap(categoryType);
+////
+////        Intent intent = new Intent();
+////        intent.putExtra("categoryType", parcelable);
+////        setResult(RESULT_OK, intent);
+////        finish();
+//    }
+
     @Override
-    public void passCategoryTypeData(CategoryType categoryType) {
-        Parcelable parcelable = Parcels.wrap(categoryType);
+    public void passData(Object data) {
+        Parcelable parcelable = Parcels.wrap((CategoryType) data);
 
         Intent intent = new Intent();
         intent.putExtra("categoryType", parcelable);
