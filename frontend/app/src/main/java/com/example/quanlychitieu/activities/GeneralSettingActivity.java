@@ -1,10 +1,16 @@
 package com.example.quanlychitieu.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,10 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeneralSettingActivity extends AppCompatActivity {
-
-    RecyclerView generalSettingList;
-
-    List<GeneralSetting> generalSettings = new ArrayList<>();
+    Switch switchShowHideBalance;
+    SharedPreferences toggleShowBalancePref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +37,36 @@ public class GeneralSettingActivity extends AppCompatActivity {
             actionBar.setElevation(0);
         }
 
-        generalSettingList = findViewById(R.id.generalSettingList);
+        toggleShowBalancePref = getSharedPreferences("setting", Context.MODE_PRIVATE);
 
-        generalSettings.add(new GeneralSetting(getString(R.string.language), getString(R.string.language_vn)));
-        generalSettings.add(new GeneralSetting(getString(R.string.format_time), "dd/MM/yyyy"));
+        initializeElement();
+        handleToggleShowHideBalance();
+    }
 
-        GeneralSettingAdapter adapter = new GeneralSettingAdapter(generalSettings);
-        generalSettingList.setAdapter(adapter);
-        generalSettingList.setLayoutManager(new LinearLayoutManager(GeneralSettingActivity.this));
+    private void handleToggleShowHideBalance() {
+        switchShowHideBalance.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferences.Editor editor = toggleShowBalancePref.edit();
+            editor.putBoolean("isShowBalance", isChecked);
+            editor.apply();
+
+            handleToggleStyle(isChecked);
+        });
+    }
+
+    private void initializeElement() {
+        switchShowHideBalance = findViewById(R.id.btnShowHideBalance);
+        switchShowHideBalance.setChecked(toggleShowBalancePref.getBoolean("isShowBalance", true));
+        handleToggleStyle(toggleShowBalancePref.getBoolean("isShowBalance", true));
+    }
+
+    private void handleToggleStyle(boolean isChecked) {
+        if (isChecked) {
+            switchShowHideBalance.setThumbTintList(ColorStateList.valueOf(ContextCompat.getColor(GeneralSettingActivity.this, R.color.primary)));
+            switchShowHideBalance.setTrackTintList(ColorStateList.valueOf(ContextCompat.getColor(GeneralSettingActivity.this, R.color.primary)));
+        } else {
+            switchShowHideBalance.setThumbTintList(ColorStateList.valueOf(ContextCompat.getColor(GeneralSettingActivity.this, R.color.dark_grey)));
+            switchShowHideBalance.setTrackTintList(ColorStateList.valueOf(ContextCompat.getColor(GeneralSettingActivity.this, R.color.dark_grey)));
+        }
     }
 
     @Override

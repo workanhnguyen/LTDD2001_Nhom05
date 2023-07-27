@@ -40,9 +40,10 @@ public class OverViewFragment extends Fragment implements OverViewView {
     RecyclerView transactionList;
     LinearLayout linearLayoutFilter;
     ImageView switchShowHideBalance;
-    boolean isBalanceShowed = true;
+    boolean isBalanceShowed;
     private OverViewPresenter overViewPresenter;
     SharedPreferences sharedPreferences;
+    SharedPreferences toggleShowBalance;
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -56,6 +57,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
 
         overViewPresenter = new OverViewPresenter(this);
         sharedPreferences = requireActivity().getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
+        toggleShowBalance = requireActivity().getSharedPreferences("setting", Context.MODE_PRIVATE);
 
         // Show the action bar
         AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -103,6 +105,8 @@ public class OverViewFragment extends Fragment implements OverViewView {
         transactionList.setAdapter(adapter);
     }
     private void initializeElement(View view) {
+        isBalanceShowed = toggleShowBalance.getBoolean("isShowBalance", true);
+
         tvTotalBalance = view.findViewById(R.id.tvTotalBalance);
         tvSumOfExpense = view.findViewById(R.id.sumOfExpense);
         tvSumOfIncome = view.findViewById(R.id.sumOfIncome);
@@ -177,6 +181,14 @@ public class OverViewFragment extends Fragment implements OverViewView {
     @Override
     public void showTotalBalance(Long sumOfBalance) {
         tvTotalBalance.setText(CommonUtil.getMoneyFormat(sumOfBalance));
+        if (isBalanceShowed) {
+            switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_24);
+            tvTotalBalance.setText(CommonUtil.getMoneyFormat(sumOfBalance));
+        }
+        else {
+            switchShowHideBalance.setImageResource(R.drawable.baseline_visibility_off_24);
+            tvTotalBalance.setText("****** đ");
+        }
 
         switchShowHideBalance.setOnClickListener(v -> {
             isBalanceShowed = !isBalanceShowed;

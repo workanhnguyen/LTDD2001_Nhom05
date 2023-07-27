@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -136,13 +137,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         loginAlert.setText(getString(R.string.unknown_error));
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-//            finishAffinity();
-//        } else {
-//            Toast.makeText(this, getString(R.string.press_again_to_exit), Toast.LENGTH_SHORT).show();
-//        }
-//        backPressedTime = System.currentTimeMillis();
-//    }
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+        } else {
+            Toast.makeText(this, getString(R.string.press_again_to_exit), Toast.LENGTH_SHORT).show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
 }
