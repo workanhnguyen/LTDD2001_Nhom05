@@ -52,8 +52,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         settingSpinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(GeneralSettingActivity.this, item, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
