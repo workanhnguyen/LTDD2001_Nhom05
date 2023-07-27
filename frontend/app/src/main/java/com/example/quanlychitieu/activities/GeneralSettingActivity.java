@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -15,13 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.GeneralSettingAdapter;
 import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
-import com.example.quanlychitieu.models.GeneralSetting;
 
 import java.util.ArrayList;
 import java.util.List;

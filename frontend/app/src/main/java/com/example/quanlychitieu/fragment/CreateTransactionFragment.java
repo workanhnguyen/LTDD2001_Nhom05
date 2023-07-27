@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
@@ -38,9 +37,6 @@ import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.activities.ChooseWalletActivity;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.models.Wallet;
-import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
-import com.example.quanlychitieu.utils.PassDataUtil;
-import com.example.quanlychitieu.views.ChooseWalletView;
 
 import org.parceler.Parcels;
 

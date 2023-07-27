@@ -17,7 +17,6 @@ import com.example.quanlychitieu.models.AccountType;
 import com.example.quanlychitieu.utils.AdapterListener;
 import com.example.quanlychitieu.utils.PassDataUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseAccountTypeAdapter extends RecyclerView.Adapter<ChooseAccountTypeHolder> {

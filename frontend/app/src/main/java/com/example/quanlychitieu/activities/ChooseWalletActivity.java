@@ -15,11 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.ChooseWalletAdapter;
-import com.example.quanlychitieu.adapters.WalletAdapter;
-import com.example.quanlychitieu.models.AccountType;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.presenters.ChooseWalletPresenter;
-import com.example.quanlychitieu.sampledatas.WalletData;
 import com.example.quanlychitieu.utils.AdapterListener;
 import com.example.quanlychitieu.utils.PassDataUtil;
 import com.example.quanlychitieu.views.ChooseWalletView;

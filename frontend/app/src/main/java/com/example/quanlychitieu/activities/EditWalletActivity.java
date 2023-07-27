@@ -22,7 +22,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.models.AccountType;
-import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.utils.CommonUtil;
 

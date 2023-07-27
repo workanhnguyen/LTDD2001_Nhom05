@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.ChooseAccountTypeAdapter;
 import com.example.quanlychitieu.models.AccountType;
-import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.presenters.ChooseAccountTypePresenter;
 import com.example.quanlychitieu.utils.AdapterListener;
 import com.example.quanlychitieu.utils.PassDataUtil;
