@@ -1,20 +1,38 @@
 package com.example.quanlychitieu.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.quanlychitieu.activities.MonthYearPickerActivity;
+
 
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.utils.CustomConstant;
+import androidx.fragment.app.FragmentManager;
 
-public class StatisticFilterActivity extends AppCompatActivity {
+
+import com.example.quanlychitieu.fragment.CalendarFragment;
+import com.example.quanlychitieu.fragment.CreateTransactionFragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+public class StatisticFilterActivity extends AppCompatActivity implements MonthYearPickerActivity.OnDateSetListener {
     TextView filterLastMonth, filterThisMonth, filterAnotherMonth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +68,14 @@ public class StatisticFilterActivity extends AppCompatActivity {
                 intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_THIS_MONTH);
                 setResult(RESULT_OK, intent);
                 finish();
+
             }
         });
 
         filterAnotherMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showMonthYearPickerDialog();
                 Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
                 intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_OTHER_MONTH);
                 setResult(RESULT_OK, intent);
@@ -80,4 +100,25 @@ public class StatisticFilterActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+    private void showMonthYearPickerDialog() {
+        MonthYearPickerActivity dialog = new MonthYearPickerActivity();
+        dialog.setOnDateSetListener(this);
+        dialog.show(getSupportFragmentManager(), "MonthYearPickerDialog");
+    }
+
+    @Override
+    public void onDateSet(int year, int month) {
+//        String selectedDate = String.format("Selected Date: %02d/%04d", month, year);
+//        // For example, update the text of a TextView with the selected date.
+//        selectedDateTextView.setText(selectedDate);
+    }
+
+
+//    @Override
+//    public void onDateSet(int year, int month) {
+//        String selectedDate = String.format("Selected Date: %02d/%04d", month, year);
+//        selectedDateTextView.setText(selectedDate);
+//    }
 }
