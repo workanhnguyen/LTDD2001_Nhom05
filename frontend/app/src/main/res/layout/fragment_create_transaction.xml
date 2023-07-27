@@ -72,7 +72,8 @@
                     android:src="@drawable/baseline_category_24" />
                 <TextView
                     android:id="@+id/createTransactionCategoryTypeName"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/choose_category"
                     android:layout_marginStart="12dp"
@@ -80,7 +81,7 @@
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp" />
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end">
                     <ImageView
@@ -95,17 +96,21 @@
                 android:background="@color/light_grey"/>
             <!-- Choosing wallet -->
             <LinearLayout
+                android:id="@+id/linearLayoutCreateTransactionWallet"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="12dp">
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/createTransactionWalletImage"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/baseline_account_balance_wallet_24" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/createTransactionWalletName"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/choose_wallet"
                     android:layout_marginStart="12dp"
@@ -113,7 +118,7 @@
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp" />
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end">
                     <ImageView

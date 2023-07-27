@@ -27,17 +27,26 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
+import com.example.quanlychitieu.activities.ChooseWalletActivity;
 import com.example.quanlychitieu.models.CategoryType;
+import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
+import com.example.quanlychitieu.utils.PassDataUtil;
+import com.example.quanlychitieu.views.ChooseWalletView;
 
 import org.parceler.Parcels;
 
 public class CreateTransactionFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
     private static final int REQUEST_CODE_SELECT_CATEGORY = 1;
-    LinearLayout calendarView, linearLayoutCreateTransactionCategoryType;
-    TextView txtCalendarDate, txtTimerDate, createTransactionCategoryTypeName;
-    ImageView createTransactionCategoryTypeImage;
+    private static final int REQUEST_CODE_SELECT_WALLET = 2;
+    LinearLayout calendarView, linearLayoutCreateTransactionCategoryType, linearLayoutCreateTransactionWallet;
+    TextView txtCalendarDate, txtTimerDate, createTransactionCategoryTypeName, createTransactionWalletName;
+    ImageView createTransactionCategoryTypeImage, createTransactionWalletImage;
     SharedPreferences sharedPreferences;
+
+    //------------------------------------
+    CategoryType categoryType;
+    Wallet wallet;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,37 +73,25 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
         initializeElement(view);
         handleShowCalendar();
         handleSwitchToChooseCategoryTypeActivity();
-//        handleShowDataToUI();
+        handleSwitchToChooseWalletActivity();
     }
 
-    private void handleShowDataToUI() {
-        RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.app_icon_background)
-                .error(R.drawable.app_icon_background);
-
-        Glide.with(requireActivity()).load(sharedPreferences.getString("imageLink", ""))
-                .apply(requestOptions).diskCacheStrategy(DiskCacheStrategy.ALL).into(createTransactionCategoryTypeImage);
-
-        createTransactionCategoryTypeName.setText(sharedPreferences.getString("name", ""));
+    private void handleSwitchToChooseWalletActivity() {
+        linearLayoutCreateTransactionWallet.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ChooseWalletActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SELECT_WALLET);
+        });
     }
 
     private void handleSwitchToChooseCategoryTypeActivity() {
-        linearLayoutCreateTransactionCategoryType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChooseCategoryTypeActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_SELECT_CATEGORY);
-            }
+        linearLayoutCreateTransactionCategoryType.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ChooseCategoryTypeActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SELECT_CATEGORY);
         });
     }
 
     private void handleShowCalendar() {
-        calendarView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCalendar();
-            }
-        });
+        calendarView.setOnClickListener(v -> showCalendar());
     }
 
     private void initializeElement(View view) {
@@ -102,9 +99,12 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
         txtTimerDate = view.findViewById(R.id.timerDate);
         calendarView = view.findViewById(R.id.calendar);
         linearLayoutCreateTransactionCategoryType = view.findViewById(R.id.linearLayoutCreateTransactionCategoryType);
+        linearLayoutCreateTransactionWallet = view.findViewById(R.id.linearLayoutCreateTransactionWallet);
 
         createTransactionCategoryTypeImage = view.findViewById(R.id.createTransactionCategoryTypeImage);
         createTransactionCategoryTypeName = view.findViewById(R.id.createTransactionCategoryTypeName);
+        createTransactionWalletImage = view.findViewById(R.id.createTransactionWalletImage);
+        createTransactionWalletName = view.findViewById(R.id.createTransactionWalletName);
     }
 
 
@@ -139,17 +139,30 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
         if (requestCode == REQUEST_CODE_SELECT_CATEGORY && resultCode == RESULT_OK) {
 
             assert data != null;
-            Parcelable parcelable = data.getParcelableExtra("categoryType");
-            CategoryType categoryType = Parcels.unwrap(parcelable);
+            Parcelable parcelableCategoryType = data.getParcelableExtra("categoryType");
+            categoryType = Parcels.unwrap(parcelableCategoryType);
 
-            RequestOptions requestOptions = new RequestOptions()
+            RequestOptions requestOptionsCategoryType = new RequestOptions()
                     .placeholder(R.drawable.app_icon_background)
                     .error(R.drawable.app_icon_background);
 
             Glide.with(requireActivity()).load(categoryType.getImageLink())
-                    .apply(requestOptions).diskCacheStrategy(DiskCacheStrategy.ALL).into(createTransactionCategoryTypeImage);
+                    .apply(requestOptionsCategoryType).diskCacheStrategy(DiskCacheStrategy.ALL).into(createTransactionCategoryTypeImage);
 
             createTransactionCategoryTypeName.setText(categoryType.getName());
+        } else if (requestCode == REQUEST_CODE_SELECT_WALLET && resultCode == RESULT_OK) {
+            assert data != null;
+            Parcelable parcelableWallet = data.getParcelableExtra("wallet");
+            wallet = Parcels.unwrap(parcelableWallet);
+
+            RequestOptions requestOptionsWallet = new RequestOptions()
+                    .placeholder(R.drawable.app_icon_background)
+                    .error(R.drawable.app_icon_background);
+
+            Glide.with(requireActivity()).load(wallet.getImageLink())
+                    .apply(requestOptionsWallet).diskCacheStrategy(DiskCacheStrategy.ALL).into(createTransactionWalletImage);
+
+            createTransactionWalletName.setText(wallet.getName());
         }
     }
 }
