@@ -29,7 +29,7 @@ public class UserDao {
     }
 
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username) != null ? userRepository.findByUsername(username) : null;
     }
 
     public User addNewUser(UserDto userDto) {
@@ -46,6 +46,7 @@ public class UserDao {
         user.setCareer(userDto.getCareer());
         user.setGender(userDto.isGender());
         user.setImageLink(userDto.getImageLink());
+        user.setRole(userDto.getRole());
 
         return userRepository.save(user);
     }

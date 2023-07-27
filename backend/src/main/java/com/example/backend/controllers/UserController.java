@@ -74,8 +74,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User addNewUser(@Valid @RequestBody UserDto userDto) {
-        return userDao.addNewUser(userDto);
+    public ResponseEntity<User> addNewUser(@Valid @RequestBody UserDto userDto) {
+        return ResponseEntity.ok().body(userDao.addNewUser(userDto));
     }
 
 //    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
