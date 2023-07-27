@@ -49,25 +49,21 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     private void handleLogin() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginAlert.setVisibility(View.GONE);
+        btnLogin.setOnClickListener(v -> {
+            loginAlert.setVisibility(View.GONE);
 
-                String username = loginUsername.getText().toString();
-                String password = loginPassword.getText().toString();
-                String alertInfo = validateLoginInfo(username, password);
+            String username = loginUsername.getText().toString().trim();
+            String password = loginPassword.getText().toString().trim();
+            String alertInfo = validateLoginInfo(username, password);
 
-                if (alertInfo.trim().isEmpty()) {
-                    btnLogin.setEnabled(false);
-                    btnLogin.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(LoginActivity.this, R.color.light_grey)));
-                    btnLogin.setText(getString(R.string.logging));
-                    loginPresenter.login(new User(username, password));
-                    changeActivityByRole(sharedPreferences.getString("role", ""));
-                } else {
-                    loginAlert.setVisibility(View.VISIBLE);
-                    loginAlert.setText(alertInfo);
-                }
+            if (alertInfo.trim().isEmpty()) {
+                btnLogin.setEnabled(false);
+                btnLogin.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(LoginActivity.this, R.color.light_grey)));
+                btnLogin.setText(getString(R.string.logging));
+                loginPresenter.login(new User(username, password));
+            } else {
+                loginAlert.setVisibility(View.VISIBLE);
+                loginAlert.setText(alertInfo);
             }
         });
     }
@@ -85,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     private String validateLoginInfo(String username, String password) {
-        if (username.trim().isEmpty() || password.trim().isEmpty())
+        if (username.isEmpty() || password.isEmpty())
             return getString(R.string.not_empty_field);
         return "";
     }
@@ -128,9 +124,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             editor.putBoolean("gender", user.isGender());
             editor.apply();
 
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            changeActivityByRole(user.getRole());
         } else {
             loginAlert.setVisibility(View.VISIBLE);
             loginAlert.setText(getString(R.string.username_or_password_not_correct));
