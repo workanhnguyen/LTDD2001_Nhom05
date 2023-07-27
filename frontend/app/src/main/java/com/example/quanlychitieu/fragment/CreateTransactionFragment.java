@@ -2,11 +2,14 @@ package com.example.quanlychitieu.fragment;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultCaller;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,14 +44,16 @@ import com.example.quanlychitieu.views.ChooseWalletView;
 
 import org.parceler.Parcels;
 
-public class CreateTransactionFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
+public class CreateTransactionFragment extends Fragment implements ActivityResultCaller {
     private static final int REQUEST_CODE_SELECT_CATEGORY = 1;
     private static final int REQUEST_CODE_SELECT_WALLET = 2;
-    LinearLayout calendarView, linearLayoutCreateTransactionCategoryType, linearLayoutCreateTransactionWallet;
-    TextView txtCalendarDate, txtTimerDate, createTransactionCategoryTypeName, createTransactionWalletName;
-    ImageView createTransactionCategoryTypeImage, createTransactionWalletImage;
+    private static final int REQUEST_PICK_IMAGE = 102;
+    private ActivityResultLauncher<Intent> someActivityResultLauncher;
     SharedPreferences sharedPreferences;
 
+    LinearLayout calendarView, linearLayoutCreateTransactionCategoryType, linearLayoutCreateTransactionWallet;
+    TextView txtCalendarDate, txtTimerDate, createTransactionCategoryTypeName, createTransactionWalletName;
+    ImageView createTransactionCategoryTypeImage, createTransactionWalletImage, pictureImg;
     //------------------------------------
     CategoryType categoryType;
     Wallet wallet;
@@ -64,8 +74,40 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_transaction, container, false);
+
+        pictureImg = view.findViewById(R.id.choosePicture);
+
+        someActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null) {
+                                Uri selectedImageUri = data.getData();
+                                if (selectedImageUri != null) {
+                                    ImageView imageView = view.findViewById(R.id.imageView2);
+                                    imageView.setImageURI(selectedImageUri);
+                                }
+                            }
+                        }
+                    }
+                });
+        pictureImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
         return view;
     }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        someActivityResultLauncher.launch(intent);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
@@ -107,16 +149,6 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
         createTransactionWalletName = view.findViewById(R.id.createTransactionWalletName);
     }
 
-
-    @Override
-    public void onPopupWindowOpened(Spinner spinner) {
-
-    }
-
-    @Override
-    public void onPopupWindowClosed(Spinner spinner) {
-
-    }
 
     public void showCalendar() {
         CalendarFragment calendarDialogFragment = new CalendarFragment();

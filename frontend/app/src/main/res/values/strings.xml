@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Spendify</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -23,7 +24,7 @@
     <string name="logout">Đăng xuất</string>
     <string name="language">Ngôn ngữ</string>
     <string name="language_vn">Tiếng Việt</string>
-    <string name="language_en">Tiếng Anh</string>
+    <string name="language_en">English</string>
     <string name="school">Trường:</string>
     <string name="group_member">Thành viên nhóm:</string>
     <string name="teacher">Giảng viên:</string>

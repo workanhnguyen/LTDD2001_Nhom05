@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.configs.LoggingUserInfo;
 import com.example.quanlychitieu.models.User;
 import com.example.quanlychitieu.presenters.LoginPresenter;
 import com.example.quanlychitieu.utils.CustomConstant;

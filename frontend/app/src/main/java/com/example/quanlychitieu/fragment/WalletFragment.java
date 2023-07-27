@@ -24,15 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.CreateWalletActivity;
 import com.example.quanlychitieu.adapters.WalletAdapter;
-import com.example.quanlychitieu.configs.LoggingUserInfo;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.presenters.WalletPresenter;
-import com.example.quanlychitieu.sampledatas.WalletData;
 import com.example.quanlychitieu.utils.CommonUtil;
 import com.example.quanlychitieu.views.WalletView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WalletFragment extends Fragment implements WalletView {

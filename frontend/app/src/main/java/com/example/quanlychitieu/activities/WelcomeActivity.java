@@ -3,6 +3,8 @@ package com.example.quanlychitieu.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,21 +19,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
-import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class WelcomeActivity extends AppCompatActivity {
     private long backPressedTime;
     List<String> languages = new ArrayList<>();
     Spinner spinnerLanguage;
     Button btnSwitchToSignUp, btnSwitchToSignIn;
-    SharedPreferences sharedPreferences;
+    SharedPreferences languagePreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (isUserLoggedIn()) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -47,10 +50,12 @@ public class WelcomeActivity extends AppCompatActivity {
 //                // If user logged in and the role is ADMIN, go to AdminActivity
 //                Intent intent = new Intent(this, AdminActivity.class);
 //                startActivity(intent);
-//                finish(); // Đóng activi
+//                finish();
 //            }
         } else {
+
             setContentView(R.layout.activity_welcome);
+
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.hide();
@@ -67,20 +72,37 @@ public class WelcomeActivity extends AppCompatActivity {
         languages.add(getString(R.string.language_vn));
         languages.add(getString(R.string.language_en));
 
+        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(WelcomeActivity.this, languages);
+        spinnerLanguage.setAdapter(adapter);
+
+        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+        String selectedLanguage = languagePreferences.getString("language", "vi");
+        // Set the locale based on the user's preferred language
+        setLocale(selectedLanguage);
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(WelcomeActivity.this, item, Toast.LENGTH_SHORT).show();
+                String selectedLanguage;
+                if (position == 0) {
+                    selectedLanguage = "vi"; // Vietnamese
+                } else {
+                    selectedLanguage = "en"; // English
+                }
+                String currentLanguage = getSelectedLanguage();
+                if (!selectedLanguage.equals(currentLanguage)) {
+                    setLocale(selectedLanguage);
+                    recreate();
+                }
+                // Set the selected item in the spinner based on the selected language
+                if (selectedLanguage.equals("vi")) {
+                    spinnerLanguage.setSelection(0);
+                } else if (selectedLanguage.equals("en")) {
+                    spinnerLanguage.setSelection(1);
+                }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
-        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(WelcomeActivity.this, languages);
-        spinnerLanguage.setAdapter(adapter);
     }
 
     private boolean isUserLoggedIn() {
@@ -133,5 +155,24 @@ public class WelcomeActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.press_again_to_exit), Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources resources = getResources();
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = languagePreferences.edit();
+        editor.putString("language", lang);
+        editor.apply();
+    }
+
+    private String getSelectedLanguage() {
+        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+        return languagePreferences.getString("language", "vi");
     }
 }
