@@ -135,6 +135,16 @@ public class SettingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        handleShowDataToUI();
+        // Show logging user data
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.blank_avatar)
+                .error(R.drawable.blank_avatar);
+        Glide.with(requireActivity())
+                .load(sharedPreferences.getString("imageLink", ""))
+                .apply(requestOptions)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(settingUserImage);
+        settingUserFullName.setText(sharedPreferences.getString("lastName", "") + " " + sharedPreferences.getString("firstName", ""));
+        settingUserEmail.setText(sharedPreferences.getString("email", ""));
     }
 }

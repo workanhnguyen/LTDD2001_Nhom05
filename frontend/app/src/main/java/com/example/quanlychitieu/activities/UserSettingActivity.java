@@ -114,7 +114,17 @@ public class UserSettingActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_UPDATE_USER && resultCode == RESULT_OK && data != null) {
-            handleShowDataToUI();
+            // Show logging user data
+            RequestOptions requestOptions = new RequestOptions()
+                    .placeholder(R.drawable.blank_avatar)
+                    .error(R.drawable.blank_avatar);
+            Glide.with(UserSettingActivity.this)
+                    .load(sharedPreferences.getString("imageLink", ""))
+                    .apply(requestOptions)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(userSettingUserImage);
+            userSettingUserFullName.setText(sharedPreferences.getString("lastName", "") + " " + sharedPreferences.getString("firstName", ""));
+            userSettingUserEmail.setText(sharedPreferences.getString("email", ""));
         }
     }
 }
