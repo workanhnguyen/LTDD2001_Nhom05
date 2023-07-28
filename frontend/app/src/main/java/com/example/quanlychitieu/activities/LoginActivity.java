@@ -122,6 +122,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             editor.putString("imageLink", user.getImageLink());
             editor.putString("role", user.getRole());
             editor.putBoolean("gender", user.isGender());
+            editor.putString("password", user.getPassword());
             editor.apply();
 
             changeActivityByRole(user.getRole());

@@ -141,4 +141,7 @@
     <string name="updating">Đang cập nhật ...</string>
     <string name="updated_successful">Cập nhật thành công!</string>
     <string name="updated_failed">Cập nhật thất bại!</string>
+    <string name="current_password_wrong">Mật khẩu hiện tại không đúng!</string>
+    <string name="change_password_failed">Đổi mật khẩu thất bại!</string>
+    <string name="check_current_password_failed">Kiểm tra mật khẩu hiện tại thất bại!</string>
 </resources>

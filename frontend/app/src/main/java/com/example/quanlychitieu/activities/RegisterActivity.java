@@ -135,6 +135,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
             editor.putString("imageLink", user.getImageLink());
             editor.putString("role", user.getRole());
             editor.putBoolean("gender", user.isGender());
+            editor.putString("password", user.getPassword());
             editor.apply();
 
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
