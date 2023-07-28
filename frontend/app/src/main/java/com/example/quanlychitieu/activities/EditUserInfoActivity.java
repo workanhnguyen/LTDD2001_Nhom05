@@ -59,14 +59,14 @@ public class EditUserInfoActivity extends AppCompatActivity implements EditUserI
 
     private void handleUpdateUser() {
         btnUpdateUser.setOnClickListener(v -> {
-            String[] name = CommonUtil.getFirstAndLastName(editUserInfoFullName.getText().toString());
+            String[] name = CommonUtil.getFirstAndLastName(editUserInfoFullName.getText().toString().trim());
             String firstName = name[1];
             String lastName = name[0];
 
             userDto.setFirstname(firstName);
             userDto.setLastname(lastName);
-            userDto.setEmail(editUserInfoEmail.getText().toString());
-            userDto.setCareer(editUserInfoCareer.getText().toString());
+            userDto.setEmail(editUserInfoEmail.getText().toString().trim());
+            userDto.setCareer(editUserInfoCareer.getText().toString().trim());
 
             if (editUserInfoRbMale.isChecked()) userDto.setGender(true);
             else userDto.setGender(false);
