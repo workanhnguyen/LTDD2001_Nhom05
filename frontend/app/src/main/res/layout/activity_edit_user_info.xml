@@ -112,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/light_grey"
                 android:hapticFeedbackEnabled="true"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,6 +156,15 @@
                     android:textColor="@color/black" />
             </RadioGroup>
         </LinearLayout>
+        <TextView
+            android:id="@+id/editUserInfoAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/red"
+            android:textAlignment="center"
+            android:paddingTop="12dp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <Button

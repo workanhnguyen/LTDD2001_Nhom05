@@ -3,6 +3,7 @@ package com.example.quanlychitieu.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,9 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -27,6 +31,7 @@ import com.example.quanlychitieu.views.EditUserInfoView;
 
 public class EditUserInfoActivity extends AppCompatActivity implements EditUserInfoView {
     ImageView editUserInfoImage;
+    TextView editUserInfoAlert;
     EditText editUserInfoFullName, editUserInfoEmail, editUserInfoCareer;
     RadioGroup editUserInfoRgGender;
     RadioButton editUserInfoRbMale, editUserInfoRbFemale;
@@ -59,20 +64,43 @@ public class EditUserInfoActivity extends AppCompatActivity implements EditUserI
 
     private void handleUpdateUser() {
         btnUpdateUser.setOnClickListener(v -> {
-            String[] name = CommonUtil.getFirstAndLastName(editUserInfoFullName.getText().toString().trim());
-            String firstName = name[1];
-            String lastName = name[0];
+            editUserInfoAlert.setVisibility(View.GONE);
 
-            userDto.setFirstname(firstName);
-            userDto.setLastname(lastName);
-            userDto.setEmail(editUserInfoEmail.getText().toString().trim());
-            userDto.setCareer(editUserInfoCareer.getText().toString().trim());
+            String fullName = editUserInfoFullName.getText().toString().trim();
+            String email = editUserInfoEmail.getText().toString().trim();
+            String career = editUserInfoCareer.getText().toString().trim();
 
-            if (editUserInfoRbMale.isChecked()) userDto.setGender(true);
-            else userDto.setGender(false);
+            String alertString = validateUserInfoInput(fullName, email);
 
-            editUserInfoPresenter.updateUser(userPref.getInt("id", 1), userDto);
+            if (alertString.trim().isEmpty()) {
+                btnUpdateUser.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditUserInfoActivity.this, R.color.dark_grey)));
+                btnUpdateUser.setEnabled(false);
+                btnUpdateUser.setText(getString(R.string.updating));
+
+                String[] name = CommonUtil.getFirstAndLastName(fullName);
+                String firstName = name[1];
+                String lastName = name[0];
+
+                userDto.setFirstname(firstName);
+                userDto.setLastname(lastName);
+                userDto.setEmail(email);
+                userDto.setCareer(career);
+
+                if (editUserInfoRbMale.isChecked()) userDto.setGender(true);
+                else userDto.setGender(false);
+
+                editUserInfoPresenter.updateUser(userPref.getInt("id", 1), userDto);
+            } else {
+                editUserInfoAlert.setVisibility(View.VISIBLE);
+                editUserInfoAlert.setText(alertString);
+            }
         });
+    }
+
+    private String validateUserInfoInput(String fullName, String email) {
+        if (fullName.isEmpty() || fullName.isBlank() || email.isEmpty() || email.isBlank())
+            return getString(R.string.not_empty_field);
+        return "";
     }
 
     private void handleShowDataToUI() {
@@ -99,6 +127,8 @@ public class EditUserInfoActivity extends AppCompatActivity implements EditUserI
     }
 
     private void initializeElement() {
+        editUserInfoAlert = findViewById(R.id.editUserInfoAlert);
+
         editUserInfoImage = findViewById(R.id.editUserInfoImage);
 
         editUserInfoFullName = findViewById(R.id.editUserInfoFullName);
@@ -125,6 +155,11 @@ public class EditUserInfoActivity extends AppCompatActivity implements EditUserI
 
     @Override
     public void showUpdatedUser(User updatedUser) {
+
+        btnUpdateUser.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditUserInfoActivity.this, R.color.primary)));
+        btnUpdateUser.setEnabled(true);
+        btnUpdateUser.setText(getString(R.string.update));
+
         if (updatedUser != null) {
             RequestOptions requestOptions = new RequestOptions()
                     .placeholder(R.drawable.blank_avatar)
@@ -146,7 +181,8 @@ public class EditUserInfoActivity extends AppCompatActivity implements EditUserI
                 editUserInfoRbMale.setChecked(false);
                 editUserInfoRbFemale.setChecked(true);
             }
-            btnUpdateUser.setText("Cập nhật thành công!");
+
+            Toast.makeText(EditUserInfoActivity.this, getString(R.string.updated_successful), Toast.LENGTH_SHORT).show();
 
             userPref = getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = userPref.edit();
@@ -157,7 +193,7 @@ public class EditUserInfoActivity extends AppCompatActivity implements EditUserI
             editor.putBoolean("gender", updatedUser.isGender());
             editor.apply();
         } else {
-            btnUpdateUser.setText("Cập nhật thất bại!");
+            Toast.makeText(EditUserInfoActivity.this, getString(R.string.updated_failed), Toast.LENGTH_SHORT).show();
         }
     }
 

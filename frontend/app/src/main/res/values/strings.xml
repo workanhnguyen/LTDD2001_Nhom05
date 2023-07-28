@@ -138,4 +138,7 @@
     <string name="no_data">Chưa có dữ liệu!</string>
     <string name="choose_account_type">Chọn loại tài khoản</string>
     <string name="show_balance">Hiển thị số dư</string>
+    <string name="updating">Đang cập nhật ...</string>
+    <string name="updated_successful">Cập nhật thành công!</string>
+    <string name="updated_failed">Cập nhật thất bại!</string>
 </resources>
