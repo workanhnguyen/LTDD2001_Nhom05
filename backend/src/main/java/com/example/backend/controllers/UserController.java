@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -40,6 +39,14 @@ public class UserController {
         return new ResponseEntity<>(listUser, HttpStatus.OK);
     }
 
+    @PatchMapping("/password/{userId}")
+    public User updateUserPassword(
+            @PathVariable("userId") Integer userId,
+            @RequestBody UserDto userDto
+    ) {
+        return userDao.updateUserPassword(userId, userDto);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<User> login(@Valid @RequestBody User requestUser) {
         String username = requestUser.getUsername();
@@ -56,15 +63,6 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    public User findUserById(@PathVariable("id") int id){
-        User user = userRepository.findById(id);
-        if (user == null){
-            ResponseEntity.notFound().build();
-        }
-        return user;
-    }
-
     @RequestMapping(value = "/user/{username}=", method = RequestMethod.GET)
     public User findUserByUsername(@PathVariable("username") String username){
         User user = userRepository.findByUsername(username);
@@ -79,15 +77,6 @@ public class UserController {
         return ResponseEntity.ok().body(userDao.addNewUser(userDto));
     }
 
-//    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
-//    public User findUserByUserName(@PathVariable("username") String username){
-//        User user = userRepository.findByUserName(username);
-//        if (user == null){
-//            ResponseEntity.notFound().build();
-//        }
-//        return user;
-//    }
-
     @PatchMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody UserDto userDto) {
         User updatedUser = userDao.updateUser(id, userDto);
@@ -97,7 +86,7 @@ public class UserController {
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PATCH)
     public User updatePatchUser (@PathVariable(value = "id") int userId,
                                  @Valid @RequestBody Map<String, Object> updates){
-        User user = userRepository.findById(userId);
+        User user = userRepository.findByUserId(userId);
         updates.forEach((key, value) -> {
             switch (key) {
                 case "firstname" -> user.setFirstname((String) value);
@@ -113,7 +102,7 @@ public class UserController {
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteUser(@PathVariable(value = "id") int id) {
-        User user = userRepository.findById(id);
+        User user = userRepository.findByUserId(id);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }

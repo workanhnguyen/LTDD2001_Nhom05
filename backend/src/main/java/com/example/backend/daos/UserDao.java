@@ -1,6 +1,5 @@
 package com.example.backend.daos;
 
-import com.example.backend.dtos.AccountTypeDto;
 import com.example.backend.dtos.UserDto;
 import com.example.backend.models.User;
 import com.example.backend.repositories.UserRepository;
@@ -27,6 +26,16 @@ public class UserDao {
 
         return users.stream().map((a) -> modelMapper.map(a, UserDto.class))
                 .collect(Collectors.toList());
+    }
+
+    public User updateUserPassword(Integer userId, UserDto userDto) {
+        User user = userRepository.findByUserId(userId);
+
+        if (user != null && userDto.getPassword() != null) {
+            user.setPassword(userDto.getPassword());
+            return userRepository.save(user);
+        }
+        return null;
     }
 
     public User getUserByUsername(String username) {
