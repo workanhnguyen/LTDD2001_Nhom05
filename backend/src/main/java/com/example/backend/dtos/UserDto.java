@@ -5,8 +5,6 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
 @ToString
 public class UserDto {
     private Integer id;
