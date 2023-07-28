@@ -1,9 +1,12 @@
 package com.example.quanlychitieu.fragment;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,9 +27,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.EditTransactionActivity;
 import com.example.quanlychitieu.activities.UserSettingActivity;
 import com.example.quanlychitieu.adapters.SettingAdapter;
 import com.example.quanlychitieu.models.Setting;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +74,6 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
-
         return view;
     }
 
@@ -79,7 +84,6 @@ public class SettingFragment extends Fragment {
         initializeElement(view);
         handleShowDataToUI();
         handleGoToUserInfoActivity();
-
     }
 
     private void handleShowDataToUI() {
@@ -126,5 +130,11 @@ public class SettingFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_only_title, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handleShowDataToUI();
     }
 }

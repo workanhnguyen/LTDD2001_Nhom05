@@ -21,11 +21,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.UserSettingAdapter;
 import com.example.quanlychitieu.utils.AdapterListener;
+import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserSettingActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_UPDATE_USER = 1;
     RecyclerView userSettingList;
     ImageView userSettingUserImage;
     TextView userSettingUserFullName, userSettingUserEmail;
@@ -91,7 +93,7 @@ public class UserSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserSettingActivity.this, EditUserInfoActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_UPDATE_USER);
             }
         });
     }
@@ -104,6 +106,15 @@ public class UserSettingActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_UPDATE_USER && resultCode == RESULT_OK && data != null) {
+            handleShowDataToUI();
         }
     }
 }

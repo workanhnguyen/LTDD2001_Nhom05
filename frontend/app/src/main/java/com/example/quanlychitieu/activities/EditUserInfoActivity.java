@@ -192,6 +192,10 @@ public class EditUserInfoActivity extends AppCompatActivity implements EditUserI
             editor.putString("career", updatedUser.getCareer());
             editor.putBoolean("gender", updatedUser.isGender());
             editor.apply();
+
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
         } else {
             Toast.makeText(EditUserInfoActivity.this, getString(R.string.updated_failed), Toast.LENGTH_SHORT).show();
         }
