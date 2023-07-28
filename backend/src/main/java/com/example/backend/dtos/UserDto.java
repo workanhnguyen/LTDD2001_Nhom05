@@ -1,21 +1,22 @@
 package com.example.backend.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
+@ToString
 public class UserDto {
     private Integer id;
     private String firstname;
     private String lastname;
-    private String username;
-    private String password;
     private String email;
-    private String imageLink;
-    private boolean gender;
-    private String role;
     private String career;
+    private String password;
+    private boolean gender;
+    private String username;
+    private String imageLink;
+    private String role;
 }

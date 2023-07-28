@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +31,36 @@ public class UserDao {
 
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username) != null ? userRepository.findByUsername(username) : null;
+    }
+
+    public User updateUser(Integer userId, UserDto updatedUser) {
+        User existingUser = userRepository.findById(userId).orElse(null);
+
+        if (existingUser != null) {
+            if (updatedUser.getFirstname() != null) {
+                existingUser.setFirstname(updatedUser.getFirstname());
+            }
+            if (updatedUser.getLastname() != null) {
+                existingUser.setLastname(updatedUser.getLastname());
+            }
+            if (updatedUser.getEmail() != null) {
+                existingUser.setEmail(updatedUser.getEmail());
+            }
+            if (updatedUser.getCareer() != null) {
+                existingUser.setCareer(updatedUser.getCareer());
+            }
+            if (updatedUser.getPassword() != null) {
+                existingUser.setPassword(updatedUser.getPassword());
+            }
+            if (updatedUser.getImageLink() != null) {
+                existingUser.setImageLink(updatedUser.getImageLink());
+            }
+
+            existingUser.setGender(updatedUser.isGender());
+
+            return userRepository.save(existingUser);
+        }
+        return null; // User not found
     }
 
     public User addNewUser(UserDto userDto) {

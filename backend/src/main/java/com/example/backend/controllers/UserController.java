@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -87,22 +88,10 @@ public class UserController {
 //        return user;
 //    }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updatePutUser(@PathVariable(value = "id") int userId,
-                               @Valid @RequestBody User userForm){
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        user.setFirstname(userForm.getFirstname());
-        user.setLastname(userForm.getLastname());
-        user.setEmail(userForm.getEmail());
-        user.setUsername(userForm.getUsername());
-        user.setPassword(userForm.getPassword());
-
-        User updatedUser = userRepository.save(user);
-        return ResponseEntity.ok(updatedUser);
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody UserDto userDto) {
+        User updatedUser = userDao.updateUser(id, userDto);
+        return updatedUser != null ? ResponseEntity.ok().body(updatedUser) : null;
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PATCH)
