@@ -84,7 +84,7 @@ public class WalletDao {
         return modelMapper.map(updatedWallet, WalletDto.class);
     }
 
-    public WalletDto patchWallet(int id, WalletDto walletDto) throws Exception {
+    public Wallet updateWallet(Integer id, WalletDto walletDto) throws Exception {
         Wallet wallet = walletRepository.findById(id)
                 .orElseThrow(Exception::new);
 
@@ -112,12 +112,10 @@ public class WalletDao {
             wallet.setAccountType(accountType);
         }
 
-        Wallet updatedWallet = walletRepository.save(wallet);
-
-        return modelMapper.map(updatedWallet, WalletDto.class);
+        return walletRepository.save(wallet);
     }
 
-    public boolean deleteWallet(int id) {
+    public boolean deleteWallet(Integer id) {
         if (walletRepository.existsById(id)) {
             walletRepository.deleteById(id);
             return true;

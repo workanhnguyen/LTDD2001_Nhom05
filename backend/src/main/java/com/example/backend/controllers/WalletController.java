@@ -46,18 +46,13 @@ public class WalletController {
     public ResponseEntity<Wallet> addNewWallet(@RequestBody WalletDto walletDto) throws Exception {
         return new ResponseEntity<>(walletDao.addNewWallet(walletDto), HttpStatus.CREATED);
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<WalletDto> updateWallet (@PathVariable int id, @RequestBody WalletDto walletDto) throws Exception {
+    @PatchMapping("/{walletId}")
+    public ResponseEntity<Wallet> updateWallet (@PathVariable(name = "walletId") Integer id, @RequestBody WalletDto walletDto) throws Exception {
         return ResponseEntity.ok().body(walletDao.updateWallet(id, walletDto));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<WalletDto> patchWallet (@PathVariable int id, @RequestBody WalletDto walletDto) throws Exception {
-        return ResponseEntity.ok().body(walletDao.patchWallet(id, walletDto));
-    }
-
-    @DeleteMapping("/{id}")
-    public boolean DeleteWallet(@PathVariable int id) {
+    @DeleteMapping("/{walletId}")
+    public boolean deleteWallet(@PathVariable(name = "walletId") Integer id) {
         return walletDao.deleteWallet(id);
     }
 }
