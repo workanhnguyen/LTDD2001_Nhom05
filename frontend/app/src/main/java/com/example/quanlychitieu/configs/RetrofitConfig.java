@@ -27,7 +27,7 @@ public class RetrofitConfig {
 
         // Remember to change your local IP
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.20:8081")
+                .baseUrl("http://10.17.36.254:8081")
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(okBuilder.build())
                 .build();

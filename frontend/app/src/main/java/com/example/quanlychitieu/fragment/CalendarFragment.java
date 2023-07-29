@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -15,8 +16,10 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.fragment.CreateTransactionFragment;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -28,7 +31,9 @@ public class CalendarFragment extends DialogFragment {
 
     private  static final String TAG = "CalendarActivity";
     TimePicker timePicker;
-    Button setDateTime;
+    Button btnsetDateTime;
+
+    DatePicker datepicker;
 
     @NonNull
     @Override
@@ -37,47 +42,26 @@ public class CalendarFragment extends DialogFragment {
         View rootView = LayoutInflater.from(requireContext()).inflate(R.layout.calendar_view, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(rootView);
-        timePicker = rootView.findViewById(R.id.datePicker);
-        setDateTime = rootView.findViewById(R.id.btnSetDateTime);
+        timePicker = rootView.findViewById(R.id.timePicker);
+        btnsetDateTime = rootView.findViewById(R.id.btnSetDateTime);
         timePicker.setIs24HourView(true);
-        CalendarView calendarView = rootView.findViewById(R.id.calendarView);
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+        datepicker = rootView.findViewById(R.id.calendarPicker);
 
-            }
-        });
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-
-            }
-        });
-        setDateTime.setOnClickListener(new View.OnClickListener() {
+        btnsetDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the selected date from the CalendarView
-                long selectedDateInMillis = calendarView.getDate();
-                Date selectedDate = new Date(selectedDateInMillis);
-                int day = selectedDate.getDay();
-                int month = selectedDate.getMonth();
-                int year = selectedDate.getYear();
-
-                // Get the selected time from the TimePicker
-                int selectedHour = timePicker.getHour();
-                int selectedMinute = timePicker.getMinute();
-
-                // Format the selected date and time
-                String formattedDate = formatDate(day, month, year);
-                String formattedTime = setTime(selectedHour, selectedMinute);
-
-                // Pass the selected date and time back to AddExpenseFragment
-                onDateTimeSet(formattedDate, formattedTime);
-                dismiss();
+                setDateTime();
             }
         });
         return builder.create();
     }
+
+//    public void onSelectedDateChange(String selectedDate) {
+//        Fragment parentFragment = getParentFragment();
+//        if (parentFragment instanceof AddExpenseFragment) {
+//            ((AddExpenseFragment) parentFragment).setCalendarDate(selectedDate);
+//        }
+//    }
 
     private String formatDate(int year, int month, int day) {
         // Format the selected date to a desired string format
@@ -86,11 +70,13 @@ public class CalendarFragment extends DialogFragment {
         return sdf.format(date);
     }
 
-    private void onDateTimeSet(String selectedDate, String selectedTime) {
+    private void onDateTimeSet(String selectedDateTime) {
         Fragment parentFragment = getParentFragment();
         if (parentFragment instanceof CreateTransactionFragment) {
-            ((CreateTransactionFragment) parentFragment).setDateTime(selectedDate, selectedTime);
+            CreateTransactionFragment addExpenseFragment = (CreateTransactionFragment) parentFragment;
+            addExpenseFragment.setDateTime(selectedDateTime);
         }
+        dismiss();
     }
 
     private String setTime(int hour, int minute){
@@ -112,5 +98,25 @@ public class CalendarFragment extends DialogFragment {
             am_pm="AM";
         }
         return String.format(Locale.getDefault(), "%02d:%02d %s", hour, minute, am_pm);
+    }
+
+    private void setDateTime(){
+        int day = datepicker.getDayOfMonth();
+        int month = datepicker.getMonth();
+        int year = datepicker.getYear();
+
+        // Get the selected time from the TimePicker
+        int selectedHour = timePicker.getHour();
+        int selectedMinute = timePicker.getMinute();
+
+        // Format the selected date and time
+        String formattedDate = formatDate(year, month, day);
+        String formattedTime = setTime(selectedHour, selectedMinute);
+
+        String formattedDateTime = formattedDate + " " + formattedTime;
+
+        // Pass the selected date and time back to AddExpenseFragment
+        onDateTimeSet(formattedDateTime);
+
     }
 }

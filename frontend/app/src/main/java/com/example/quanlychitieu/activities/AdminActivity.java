@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.AdminUserAdapter;
+import com.example.quanlychitieu.dtos.adapters.AdminUserAdapter;
 import com.example.quanlychitieu.models.User;
 
 import java.util.ArrayList;

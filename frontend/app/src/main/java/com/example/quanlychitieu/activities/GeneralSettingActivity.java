@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.GeneralSettingAdapter;
+import com.example.quanlychitieu.dtos.adapters.GeneralSettingAdapter;
 import com.example.quanlychitieu.models.GeneralSetting;
 
 import java.util.ArrayList;

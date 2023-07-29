@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.CategoryTypeAdapter;
+import com.example.quanlychitieu.dtos.adapters.CategoryTypeAdapter;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.sampledatas.CategoryData;
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.ChooseCategoryTypeAdapter;
+import com.example.quanlychitieu.dtos.adapters.ChooseCategoryTypeAdapter;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.presenters.ChooseCategoryTypePresenter;
 import com.example.quanlychitieu.utils.AdapterListener;

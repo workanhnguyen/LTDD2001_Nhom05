@@ -1,4 +1,4 @@
-package com.example.quanlychitieu.adapters;
+package com.example.quanlychitieu.dtos.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

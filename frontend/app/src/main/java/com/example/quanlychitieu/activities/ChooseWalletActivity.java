@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.ChooseWalletAdapter;
+import com.example.quanlychitieu.dtos.adapters.ChooseWalletAdapter;
 import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.sampledatas.WalletData;
 

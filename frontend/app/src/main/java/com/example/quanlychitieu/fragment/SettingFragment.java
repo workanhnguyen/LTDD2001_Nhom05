@@ -25,7 +25,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.UserSettingActivity;
-import com.example.quanlychitieu.adapters.SettingAdapter;
+import com.example.quanlychitieu.dtos.adapters.SettingAdapter;
 import com.example.quanlychitieu.models.Setting;
 
 import java.util.ArrayList;

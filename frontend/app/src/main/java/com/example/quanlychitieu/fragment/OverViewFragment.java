@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.StatisticFilterActivity;
-import com.example.quanlychitieu.adapters.TransactionAdapter;
+import com.example.quanlychitieu.dtos.adapters.TransactionAdapter;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.presenters.OverViewPresenter;
 import com.example.quanlychitieu.utils.CommonUtil;
@@ -79,6 +79,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
         initializeElement(view);
         loadData();
         handleSwitchToStatisticFilter();
+
     }
 
     private void handleSwitchToStatisticFilter() {
@@ -139,6 +140,12 @@ public class OverViewFragment extends Fragment implements OverViewView {
         if (requestCode == REQUEST_CODE_SECOND_ACTIVITY) {
             if (resultCode == RESULT_OK && data != null) {
                 String title = data.getStringExtra("sts_filter");
+                int year = data.getIntExtra("selected_year", -1);
+                int month = data.getIntExtra("selected_month", -1);
+                if (month >= 0 && month < 12 && year >= 0) {
+                    title = String.format("%02d/%04d", month + 1, year);
+                }
+                filterTitle.setText(title);
                 // Handle filter transaction here
                 if (title.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH)) {
                     filterTitle.setText(getString(R.string.last_month));
@@ -150,7 +157,6 @@ public class OverViewFragment extends Fragment implements OverViewView {
                     filterTitle.setText(getString(R.string.another_month));
                 }
             } else {
-                // Handle the case where the user canceled or there was an error in the second activity
             }
         }
     }
@@ -201,4 +207,5 @@ public class OverViewFragment extends Fragment implements OverViewView {
     public void showSumOfIncome(Long sumOfIncome) {
         tvSumOfIncome.setText(CommonUtil.getMoneyFormat(sumOfIncome));
     }
+
 }

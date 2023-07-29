@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.AccountRootAdapter;
+import com.example.quanlychitieu.dtos.adapters.AccountRootAdapter;
 import com.example.quanlychitieu.models.AccountRoot;
 
 import java.util.ArrayList;

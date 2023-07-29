@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.UserSettingAdapter;
+import com.example.quanlychitieu.dtos.adapters.UserSettingAdapter;
 import com.example.quanlychitieu.utils.AdapterListener;
 
 import java.util.ArrayList;

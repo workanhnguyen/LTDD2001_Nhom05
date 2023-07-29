@@ -2,21 +2,33 @@ package com.example.quanlychitieu.fragment;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultCaller;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,20 +37,29 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.models.CategoryType;
-import com.example.quanlychitieu.spinners.CustomSpinnerExpense;
-import com.example.quanlychitieu.utils.PassData;
 
 import org.parceler.Parcels;
 
-public class CreateTransactionFragment extends Fragment implements CustomSpinnerExpense.OnSpinnerEventsListener {
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Map;
+
+public class CreateTransactionFragment extends Fragment implements ActivityResultCaller {
     private static final int REQUEST_CODE_SELECT_CATEGORY = 1;
     LinearLayout calendarView, linearLayoutCreateTransactionCategoryType;
-    TextView txtCalendarDate, txtTimerDate, createTransactionCategoryTypeName;
+    TextView txtCalendarDateTime, createTransactionCategoryTypeName;
     ImageView createTransactionCategoryTypeImage;
     SharedPreferences sharedPreferences;
+
+    ImageView pictureImg;
+
+    Button btnSave;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +77,19 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_transaction, container, false);
+
         return view;
     }
+
+
+//    private void openGallery() {
+//        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        someActivityResultLauncher.launch(intent);
+//    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
-
         initializeElement(view);
         handleShowCalendar();
         handleSwitchToChooseCategoryTypeActivity();
@@ -100,25 +128,16 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
     }
 
     private void initializeElement(View view) {
-        txtCalendarDate = view.findViewById(R.id.calendarDate);
-        txtTimerDate = view.findViewById(R.id.timerDate);
-        calendarView = view.findViewById(R.id.calendar);
+        calendarView = view.findViewById(R.id.calendarDateTime);
+        pictureImg = view.findViewById(R.id.imgGallery);
+        btnSave = view.findViewById(R.id.btnSave);
+        txtCalendarDateTime = view.findViewById(R.id.dateTimeCalendar);
         linearLayoutCreateTransactionCategoryType = view.findViewById(R.id.linearLayoutCreateTransactionCategoryType);
 
         createTransactionCategoryTypeImage = view.findViewById(R.id.createTransactionCategoryTypeImage);
         createTransactionCategoryTypeName = view.findViewById(R.id.createTransactionCategoryTypeName);
     }
 
-
-    @Override
-    public void onPopupWindowOpened(Spinner spinner) {
-
-    }
-
-    @Override
-    public void onPopupWindowClosed(Spinner spinner) {
-
-    }
 
 //    private void navigateToCategoriesFragment() {
 //        CategoryTypeFragment categoryFragment = new CategoryTypeFragment();
@@ -133,9 +152,8 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
         calendarDialogFragment.show(getChildFragmentManager(), "calendar_dialog");
     }
 
-    public void setDateTime(String selectedDate, String selectedTime) {
-        txtCalendarDate.setText(selectedDate);
-        txtTimerDate.setText(selectedTime);
+    public void setDateTime(String selectedDateTime) {
+        txtCalendarDateTime.setText(selectedDateTime);
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -162,4 +180,5 @@ public class CreateTransactionFragment extends Fragment implements CustomSpinner
             createTransactionCategoryTypeName.setText(categoryType.getName());
         }
     }
+
 }
