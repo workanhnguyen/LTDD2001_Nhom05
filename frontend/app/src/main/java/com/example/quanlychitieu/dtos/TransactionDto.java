@@ -1,21 +1,15 @@
-package com.example.quanlychitieu.models;
-
-import org.parceler.Parcel;
+package com.example.quanlychitieu.dtos;
 
 import java.util.Date;
 
-@Parcel
-public class Transaction {
+public class TransactionDto {
     private Integer id;
     private String description;
     private Long createdDate;
     private Long total;
     private String image;
-    private CategoryType categoryType;
-    private Wallet wallet;
-
-    public Transaction() {
-    }
+    private Integer categoryTypeId;
+    private Integer walletId;
 
     public Integer getId() {
         return id;
@@ -31,6 +25,14 @@ public class Transaction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Long createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Long getTotal() {
@@ -49,27 +51,19 @@ public class Transaction {
         this.image = image;
     }
 
-    public Long getCreatedDate() {
-        return createdDate;
+    public Integer getCategoryTypeId() {
+        return categoryTypeId;
     }
 
-    public void setCreatedDate(Long createdDate) {
-        this.createdDate = createdDate;
+    public void setCategoryTypeId(Integer categoryTypeId) {
+        this.categoryTypeId = categoryTypeId;
     }
 
-    public CategoryType getCategoryType() {
-        return categoryType;
+    public Integer getWalletId() {
+        return walletId;
     }
 
-    public void setCategoryType(CategoryType categoryType) {
-        this.categoryType = categoryType;
-    }
-
-    public Wallet getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
+    public void setWalletId(Integer walletId) {
+        this.walletId = walletId;
     }
 }

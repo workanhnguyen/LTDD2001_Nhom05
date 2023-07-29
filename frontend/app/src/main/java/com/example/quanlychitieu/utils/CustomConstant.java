@@ -8,4 +8,5 @@ public class CustomConstant {
     public static final String CATEGORY_INCOME = "INCOME";
     public static final String ROLE_USER = "ROLE_USER";
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final Integer CATEGORY_CREATE_WALLET = 54;
 }

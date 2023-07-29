@@ -1,5 +1,6 @@
 package com.example.quanlychitieu.apis;
 
+import com.example.quanlychitieu.dtos.TransactionDto;
 import com.example.quanlychitieu.models.Transaction;
 
 import java.util.List;
@@ -24,8 +25,6 @@ public interface TransactionApi {
     @GET("/transactions/all/sum-income/by-user")
     Call<Long> getSumOfIncomeByUserId(@Query("userId") Integer userId);
 
-    // Statistic - MONTH
-
     @POST("/transactions")
-    Call<Transaction> addNewTransaction(@Body Transaction transaction);
+    Call<Transaction> addNewTransaction(@Body TransactionDto transactionDto);
 }

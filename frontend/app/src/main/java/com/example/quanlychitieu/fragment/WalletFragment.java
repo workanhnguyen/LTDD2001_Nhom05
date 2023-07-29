@@ -113,6 +113,12 @@ public class WalletFragment extends Fragment implements WalletView {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
+    }
+
+    @Override
     public void showWalletList(List<Wallet> list) {
         if (!list.isEmpty()) {
             walletAlertLoadingData.setText("");
