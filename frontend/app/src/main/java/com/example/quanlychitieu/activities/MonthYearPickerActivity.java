@@ -37,7 +37,7 @@ public class MonthYearPickerActivity extends DialogFragment {
         monthPicker.setMinValue(1);
         monthPicker.setMaxValue(12);
         monthPicker.setValue(currentMonth + 1);
-        selectedMonth = currentMonth + 1;
+        selectedMonth = currentMonth;
 
         yearPicker.setMinValue(currentYear);
         yearPicker.setMaxValue(currentYear + 10);

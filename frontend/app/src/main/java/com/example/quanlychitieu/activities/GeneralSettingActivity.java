@@ -54,7 +54,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         } else if (selectedLanguage.equals("en")) {
             return getString(R.string.language_en);
         }
-        return getString(R.string.language_vn); //
+        return getString(R.string.language_vn);
     }
 
     @Override

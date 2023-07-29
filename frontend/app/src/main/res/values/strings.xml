@@ -136,4 +136,7 @@
     <string name="registering">Đang đăng ký ...</string>
     <string name="username_existed">Tên đăng nhập đã tồn tại!</string>
     <string name="no_data">Chưa có dữ liệu!</string>
+    <string name="updated_successful">Cập nhật thành công!</string>
+    <string name="updated_failed">Cập nhật thất bại!</string>
+    <string name="updating">Đang cập nhật ...</string>
 </resources>
