@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_gravity="center"
+    android:gravity="center"
     android:padding="15dp">
 
     <NumberPicker
@@ -13,7 +13,7 @@
     <NumberPicker
         android:id="@+id/yearPicker"
         android:layout_width="152dp"
-        android:layout_height="203dp"
+        android:layout_height="204dp"
         android:baselineAligned="false" />
 
 </LinearLayout>

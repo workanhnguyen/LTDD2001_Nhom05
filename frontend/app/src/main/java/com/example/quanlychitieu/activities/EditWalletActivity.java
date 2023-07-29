@@ -227,7 +227,7 @@ public class EditWalletActivity extends AppCompatActivity implements EditWalletV
             } else if (difference < 0) {
                 TransactionDto transactionDto = new TransactionDto();
                 transactionDto.setWalletId(updatedWallet.getId());
-                transactionDto.setTotal(difference);
+                transactionDto.setTotal(Math.abs(difference));
                 transactionDto.setCategoryTypeId(CustomConstant.CATEGORY_EDIT_WALLET_LESS);
                 transactionDto.setDescription("Chênh lệch chỉnh sửa ví");
                 transactionDto.setCreatedDate(DateUtil.convertDateToSeconds(new Date()));

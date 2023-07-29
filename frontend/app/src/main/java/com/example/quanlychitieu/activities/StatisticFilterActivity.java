@@ -13,6 +13,8 @@ import com.example.quanlychitieu.MainActivity;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.utils.CustomConstant;
 
+import java.util.Calendar;
+
 public class StatisticFilterActivity extends AppCompatActivity implements MonthYearPickerActivity.OnDateSetListener {
     TextView filterLastMonth, filterThisMonth, filterAnotherMonth;
 
@@ -59,10 +61,6 @@ public class StatisticFilterActivity extends AppCompatActivity implements MonthY
             @Override
             public void onClick(View v) {
                 showMonthYearPickerDialog();
-                Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
-                intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_OTHER_MONTH);
-                setResult(RESULT_OK, intent);
-                finish();
             }
         });
     }
@@ -71,6 +69,12 @@ public class StatisticFilterActivity extends AppCompatActivity implements MonthY
         filterLastMonth = findViewById(R.id.filterLastMonth);
         filterThisMonth = findViewById(R.id.filterThisMonth);
         filterAnotherMonth = findViewById(R.id.filterAnotherMonth);
+    }
+
+    private void showMonthYearPickerDialog() {
+        MonthYearPickerActivity dialog = new MonthYearPickerActivity();
+        dialog.setOnDateSetListener(this);
+        dialog.show(getSupportFragmentManager(), "MonthYearPickerDialog");
     }
 
     @Override
@@ -84,24 +88,16 @@ public class StatisticFilterActivity extends AppCompatActivity implements MonthY
         }
     }
 
-
-    private void showMonthYearPickerDialog() {
-        MonthYearPickerActivity dialog = new MonthYearPickerActivity();
-        dialog.setOnDateSetListener(this);
-        dialog.show(getSupportFragmentManager(), "MonthYearPickerDialog");
-    }
-
     @Override
     public void onDateSet(int year, int month) {
-//        String selectedDate = String.format("Selected Date: %02d/%04d", month, year);
-//        // For example, update the text of a TextView with the selected date.
-//        selectedDateTextView.setText(selectedDate);
+        String selectedDate = ""; // Your logic to create the title based on year and month goes here
+        Intent intent = new Intent();
+        intent.putExtra("selected_year", year);
+        intent.putExtra("selected_month", month);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 
-//    @Override
-//    public void onDateSet(int year, int month) {
-//        String selectedDate = String.format("Selected Date: %02d/%04d", month, year);
-//        selectedDateTextView.setText(selectedDate);
-//    }
+
 }

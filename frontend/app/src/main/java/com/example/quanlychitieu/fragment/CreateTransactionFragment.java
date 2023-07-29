@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -15,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +36,8 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.activities.ChooseWalletActivity;
@@ -48,8 +54,9 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
     SharedPreferences sharedPreferences;
 
     LinearLayout calendarView, linearLayoutCreateTransactionCategoryType, linearLayoutCreateTransactionWallet;
-    TextView txtCalendarDate, txtTimerDate, createTransactionCategoryTypeName, createTransactionWalletName;
+    TextView txtCalendarDateTime, txtTimerDate, createTransactionCategoryTypeName, createTransactionWalletName;
     ImageView createTransactionCategoryTypeImage, createTransactionWalletImage, pictureImg;
+    Button btnSave;
     //------------------------------------
     CategoryType categoryType;
     Wallet wallet;
@@ -70,44 +77,11 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_transaction, container, false);
-
-        pictureImg = view.findViewById(R.id.choosePicture);
-
-        someActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent data = result.getData();
-                            if (data != null) {
-                                Uri selectedImageUri = data.getData();
-                                if (selectedImageUri != null) {
-                                    ImageView imageView = view.findViewById(R.id.imageView2);
-                                    imageView.setImageURI(selectedImageUri);
-                                }
-                            }
-                        }
-                    }
-                });
-        pictureImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openGallery();
-            }
-        });
         return view;
     }
-
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        someActivityResultLauncher.launch(intent);
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {
         super.onViewCreated(view, saveInstanceState);
-
         initializeElement(view);
         handleShowCalendar();
         handleSwitchToChooseCategoryTypeActivity();
@@ -133,9 +107,10 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
     }
 
     private void initializeElement(View view) {
-        txtCalendarDate = view.findViewById(R.id.calendarDate);
-        txtTimerDate = view.findViewById(R.id.timerDate);
-        calendarView = view.findViewById(R.id.calendar);
+        calendarView = view.findViewById(R.id.calendarDateTime);
+        pictureImg = view.findViewById(R.id.imgGallery);
+        btnSave = view.findViewById(R.id.btnSave);
+        txtCalendarDateTime = view.findViewById(R.id.dateTimeCalendar);
         linearLayoutCreateTransactionCategoryType = view.findViewById(R.id.linearLayoutCreateTransactionCategoryType);
         linearLayoutCreateTransactionWallet = view.findViewById(R.id.linearLayoutCreateTransactionWallet);
 
@@ -151,9 +126,8 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
         calendarDialogFragment.show(getChildFragmentManager(), "calendar_dialog");
     }
 
-    public void setDateTime(String selectedDate, String selectedTime) {
-        txtCalendarDate.setText(selectedDate);
-        txtTimerDate.setText(selectedTime);
+    public void setDateTime(String selectedDateTime) {
+        txtCalendarDateTime.setText(selectedDateTime);
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

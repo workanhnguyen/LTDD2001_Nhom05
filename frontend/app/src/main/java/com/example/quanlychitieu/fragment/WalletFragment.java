@@ -108,7 +108,7 @@ public class WalletFragment extends Fragment implements WalletView {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_only_title, menu);
+        inflater.inflate(R.menu.menu_search, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

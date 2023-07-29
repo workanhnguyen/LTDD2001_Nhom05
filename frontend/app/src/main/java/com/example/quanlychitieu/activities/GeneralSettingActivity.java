@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.quanlychitieu.R;
-import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +46,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
     }
 
     private void handleChangeLanguage() {
+
         languages.add(getString(R.string.language_vn));
         languages.add(getString(R.string.language_en));
         settingSpinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -60,8 +60,6 @@ public class GeneralSettingActivity extends AppCompatActivity {
 
             }
         });
-        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(GeneralSettingActivity.this, languages);
-        settingSpinnerLanguage.setAdapter(adapter);
     }
 
     private void handleToggleShowHideBalance() {
@@ -90,6 +88,18 @@ public class GeneralSettingActivity extends AppCompatActivity {
             switchShowHideBalance.setThumbTintList(ColorStateList.valueOf(ContextCompat.getColor(GeneralSettingActivity.this, R.color.dark_grey)));
             switchShowHideBalance.setTrackTintList(ColorStateList.valueOf(ContextCompat.getColor(GeneralSettingActivity.this, R.color.dark_grey)));
         }
+    }
+
+    private String getLanguageName() {
+        SharedPreferences languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+        String selectedLanguage = languagePreferences.getString("language", "vi");
+
+        if (selectedLanguage.equals("vi")) {
+            return getString(R.string.language_vn);
+        } else if (selectedLanguage.equals("en")) {
+            return getString(R.string.language_en);
+        }
+        return getString(R.string.language_vn); //
     }
 
     @Override

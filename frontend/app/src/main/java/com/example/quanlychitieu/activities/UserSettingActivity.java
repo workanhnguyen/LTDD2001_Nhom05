@@ -21,7 +21,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.adapters.UserSettingAdapter;
 import com.example.quanlychitieu.utils.AdapterListener;
-import com.example.quanlychitieu.utils.CustomConstant;
 
 import java.util.ArrayList;
 import java.util.List;
