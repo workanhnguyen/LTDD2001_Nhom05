@@ -43,7 +43,7 @@ public class WalletController {
     }
 
     @PostMapping
-    public ResponseEntity<WalletDto> addNewWallet(@RequestBody WalletDto walletDto) throws Exception {
+    public ResponseEntity<Wallet> addNewWallet(@RequestBody WalletDto walletDto) throws Exception {
         return new ResponseEntity<>(walletDao.addNewWallet(walletDto), HttpStatus.CREATED);
     }
     @PutMapping("/{id}")

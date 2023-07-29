@@ -13,5 +13,5 @@ public class WalletDto {
     private Long balance;
     private String description;
     private Integer userId;
-    private Integer account_TypeId;
+    private Integer accountTypeId;
 }

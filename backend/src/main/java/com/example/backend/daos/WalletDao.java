@@ -50,10 +50,10 @@ public class WalletDao {
         return walletRepository.sumBalanceByUserId(userId);
     }
 
-    public WalletDto addNewWallet(WalletDto walletDto) throws Exception {
+    public Wallet addNewWallet(WalletDto walletDto) throws Exception {
         User user = userRepository.findById(walletDto.getUserId())
                 .orElseThrow(Exception::new);
-        AccountType accountType = accountTypeRepository.findById(walletDto.getAccount_TypeId())
+        AccountType accountType = accountTypeRepository.findById(walletDto.getAccountTypeId())
                 .orElseThrow(Exception::new);
 
         Wallet wallet = new Wallet();
@@ -63,13 +63,13 @@ public class WalletDao {
         wallet.setUser((user));
         wallet.setAccountType(accountType);
 
-        return modelMapper.map(walletRepository.save(wallet), WalletDto.class);
+        return walletRepository.save(wallet);
     }
 
     public WalletDto updateWallet(int id, WalletDto walletDto) throws Exception {
         User user = userRepository.findById(walletDto.getUserId())
                 .orElseThrow(Exception::new);
-        AccountType accountType = accountTypeRepository.findById(walletDto.getAccount_TypeId())
+        AccountType accountType = accountTypeRepository.findById(walletDto.getAccountTypeId())
                 .orElseThrow(Exception::new);
         Wallet wallet = walletRepository.findById(id)
                         .orElseThrow(Exception::new);
@@ -106,8 +106,8 @@ public class WalletDao {
             wallet.setUser(user);
         }
 
-        if(walletDto.getAccount_TypeId() != null) {
-            AccountType accountType = accountTypeRepository.findById(walletDto.getAccount_TypeId())
+        if(walletDto.getAccountTypeId() != null) {
+            AccountType accountType = accountTypeRepository.findById(walletDto.getAccountTypeId())
                     .orElseThrow(Exception::new);
             wallet.setAccountType(accountType);
         }

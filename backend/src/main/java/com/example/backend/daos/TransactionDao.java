@@ -55,19 +55,19 @@ public class TransactionDao {
     public Long sumAllIncomeByUserId(Integer userId) {
         return transactionRepository.sumAllIncomeByUserId(userId);
     }
+//
+//    // Statistic - MONTH
+//    public List<Transaction> getMonthTransactionByUserId(Integer userId, Integer year, Integer month) {
+//        return transactionRepository.findMonthTransactionByUserId(userId, year, month);
+//    }
+//    public Long sumMonthExpenseByUserId(Integer userId, Integer year, Integer month) {
+//        return transactionRepository.sumMonthExpenseByUserId(userId, year, month);
+//    }
+//    public Long sumMonthIncomeByUserId(Integer userId, Integer year, Integer month) {
+//        return transactionRepository.sumMonthIncomeByUserId(userId, year, month);
+//    }
 
-    // Statistic - MONTH
-    public List<Transaction> getMonthTransactionByUserId(Integer userId, Integer year, Integer month) {
-        return transactionRepository.findMonthTransactionByUserId(userId, year, month);
-    }
-    public Long sumMonthExpenseByUserId(Integer userId, Integer year, Integer month) {
-        return transactionRepository.sumMonthExpenseByUserId(userId, year, month);
-    }
-    public Long sumMonthIncomeByUserId(Integer userId, Integer year, Integer month) {
-        return transactionRepository.sumMonthIncomeByUserId(userId, year, month);
-    }
-
-    public TransactionDto addNewTransaction(TransactionDto transactionDto) throws Exception {
+    public Transaction addNewTransaction(TransactionDto transactionDto) throws Exception {
         Wallet wallet = walletRepository.findById(transactionDto.getWalletId())
                 .orElseThrow(Exception::new);
         CategoryType categoryType = categoryTypeRepository.findById(transactionDto.getCategoryTypeId())
@@ -77,11 +77,12 @@ public class TransactionDao {
         transaction.setDescription(transactionDto.getDescription());
         transaction.setCreatedDate(transactionDto.getCreatedDate());
         transaction.setTotal(transactionDto.getTotal());
-        transaction.setImage(transactionDto.getImage());
+        if (transactionDto.getImage() != null)
+            transaction.setImage(transactionDto.getImage());
         transaction.setWallet((wallet));
         transaction.setCategoryType(categoryType);
 
-        return modelMapper.map(transactionRepository.save(transaction), TransactionDto.class);
+        return transactionRepository.save(transaction);
     }
 
     public TransactionDto updateTransaction(int id, TransactionDto transactionDto) throws Exception {
