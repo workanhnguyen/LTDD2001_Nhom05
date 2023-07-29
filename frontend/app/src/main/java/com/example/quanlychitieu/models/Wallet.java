@@ -6,7 +6,7 @@ import org.parceler.Parcel;
 public class Wallet {
     private Integer id;
     private String name;
-    private long balance;
+    private Long balance;
     private String description;
     private AccountType accountType;
     private User user;

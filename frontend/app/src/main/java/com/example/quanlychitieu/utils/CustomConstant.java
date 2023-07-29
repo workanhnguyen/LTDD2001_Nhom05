@@ -9,4 +9,6 @@ public class CustomConstant {
     public static final String ROLE_USER = "ROLE_USER";
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final Integer CATEGORY_CREATE_WALLET = 54;
+    public static final Integer CATEGORY_EDIT_WALLET_GREATER = 54;
+    public static final Integer CATEGORY_EDIT_WALLET_LESS = 55;
 }

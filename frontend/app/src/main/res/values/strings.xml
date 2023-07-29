@@ -146,4 +146,7 @@
     <string name="check_current_password_failed">Kiểm tra mật khẩu hiện tại thất bại!</string>
     <string name="creating_wallet">Đang tạo ví ...</string>
     <string name="create_wallet_failed">Tạo ví thất bại!</string>
+    <string name="deleting_wallet">Đang xóa ...</string>
+    <string name="delete_wallet_failed">Xóa ví thất bại!</string>
+    <string name="saving">Đang lưu ...</string>
 </resources>
