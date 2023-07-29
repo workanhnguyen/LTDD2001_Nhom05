@@ -33,8 +33,7 @@ public class Transaction implements Serializable {
     private String description;
     @Basic(optional = false)
     @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    private Long createdDate;
     @Column(name = "total")
     private Long total;
     @Lob
