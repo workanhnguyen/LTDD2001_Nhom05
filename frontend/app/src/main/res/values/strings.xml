@@ -149,4 +149,9 @@
     <string name="deleting_wallet">Đang xóa ...</string>
     <string name="delete_wallet_failed">Xóa ví thất bại!</string>
     <string name="saving">Đang lưu ...</string>
+    <string name="create_transaction">Tạo giao dịch</string>
+    <string name="date_wrong">Lỗi ngày tháng</string>
+    <string name="create_transaction_failed">Tạo mới giao dịch thất bại!</string>
+    <string name="creating">Đang tạo ...</string>
+    <string name="create_transaction_successful">Tạo thành công!</string>
 </resources>
