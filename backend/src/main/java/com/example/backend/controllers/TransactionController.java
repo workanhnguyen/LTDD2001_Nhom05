@@ -82,12 +82,12 @@ public class TransactionController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<TransactionDto> patchTransaction (@PathVariable int id, @RequestBody TransactionDto transactionDto) throws Exception {
+    public ResponseEntity<Transaction> patchTransaction (@PathVariable int id, @RequestBody TransactionDto transactionDto) throws Exception {
         return ResponseEntity.ok().body(transactionDao.patchTransaction(id, transactionDto));
     }
 
-    @DeleteMapping("/{id}")
-    public boolean deleteTransaction(@PathVariable int id) {
+    @DeleteMapping("/{transactionId}")
+    public boolean deleteTransaction(@PathVariable(name = "transactionId") Integer id) {
         return transactionDao.deleteTransaction(id);
     }
 

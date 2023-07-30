@@ -104,7 +104,7 @@ public class TransactionDao {
         return modelMapper.map(updatedWallet, TransactionDto.class);
     }
 
-    public TransactionDto patchTransaction(int id, TransactionDto transactionDto) throws Exception {
+    public Transaction patchTransaction(int id, TransactionDto transactionDto) throws Exception {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(Exception::new);
         if (transactionDto.getImage() != null) {
@@ -126,19 +126,20 @@ public class TransactionDao {
         if (transactionDto.getWalletId() != null) {
             Wallet wallet = walletRepository.findById(transactionDto.getWalletId())
                     .orElseThrow(Exception::new);
+            transaction.setWallet(wallet);
         }
 
         if (transactionDto.getCategoryTypeId() != null) {
             CategoryType categoryType = categoryTypeRepository.findById(transactionDto.getCategoryTypeId())
                     .orElseThrow(Exception::new);
+            transaction.setCategoryType(categoryType);
         }
 
-        Transaction updateTransaction = transactionRepository.save(transaction);
 
-        return modelMapper.map(updateTransaction, TransactionDto.class);
+        return transactionRepository.save(transaction);
     }
 
-    public boolean deleteTransaction(int id) {
+    public boolean deleteTransaction(Integer id) {
         if (transactionRepository.existsById(id)) {
             transactionRepository.deleteById(id);
             return true;
