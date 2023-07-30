@@ -47,6 +47,7 @@ import com.example.quanlychitieu.R;
 import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.activities.ChooseWalletActivity;
 import com.example.quanlychitieu.dtos.TransactionDto;
+import com.example.quanlychitieu.dtos.WalletDto;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.models.Wallet;
@@ -243,6 +244,22 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
     @Override
     public void showAddedTransaction(Transaction transaction) {
         if (transaction != null) {
+            long updatedBalance = 0;
+
+            if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE))
+                updatedBalance = wallet.getBalance() - Long.parseLong(createTransactionBalance.getText().toString());
+            else if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME))
+                updatedBalance = wallet.getBalance() + Long.parseLong(createTransactionBalance.getText().toString());
+
+            WalletDto walletDto = new WalletDto();
+            walletDto.setBalance(updatedBalance);
+            createTransactionPresenter.updateWalletBalance(wallet.getId(), walletDto);
+        }
+    }
+
+    @Override
+    public void showUpdatedWalletBalance(Wallet wallet) {
+        if (wallet != null) {
             createTransactionAlert.setVisibility(View.GONE);
             createTransactionAlert.setText("");
 
