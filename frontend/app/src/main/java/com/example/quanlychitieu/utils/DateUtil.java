@@ -10,10 +10,10 @@ import java.util.Locale;
 
 public class DateUtil {
 
-    public static String convertSecondsToFormattedDate(Long seconds) {
+    @SuppressLint("SimpleDateFormat")
+    public static String convertSecondsToFormattedDate(Long seconds, String pattern) {
         Date date = new Date(seconds * 1000);
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(date);
+        return new SimpleDateFormat(pattern).format(date);
     }
 
     public static long convertDateToSeconds(Date date) {
@@ -60,12 +60,15 @@ public class DateUtil {
         };
     }
 
+    @SuppressLint("SimpleDateFormat")
     public static String getDate(Long seconds) {
         return new SimpleDateFormat("dd").format(new Date(seconds * 1000));
     }
+    @SuppressLint("SimpleDateFormat")
     public static String getMonth(Long seconds) {
         return new SimpleDateFormat("MM").format(new Date(seconds * 1000));
     }
+    @SuppressLint("SimpleDateFormat")
     public static String getYear(Long seconds) {
         return new SimpleDateFormat("yyyy").format(new Date(seconds * 1000));
     }
@@ -76,7 +79,7 @@ public class DateUtil {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public static Date parseStringToDate(String date) throws ParseException {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+    public static Date parseStringToDate(String dateString, String pattern) throws ParseException {
+        return new SimpleDateFormat(pattern, Locale.ENGLISH).parse(dateString);
     }
 }
