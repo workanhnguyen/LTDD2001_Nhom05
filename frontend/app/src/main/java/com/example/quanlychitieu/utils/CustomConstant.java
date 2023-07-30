@@ -11,4 +11,5 @@ public class CustomConstant {
     public static final Integer CATEGORY_CREATE_WALLET = 54;
     public static final Integer CATEGORY_EDIT_WALLET_GREATER = 54;
     public static final Integer CATEGORY_EDIT_WALLET_LESS = 55;
+    public static final String DATE_FORMAT_dd_MM_yyyy_hh_mm_a = "dd-MM-yyyy hh:mm a";
 }
