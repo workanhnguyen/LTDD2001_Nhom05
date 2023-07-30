@@ -154,4 +154,5 @@
     <string name="create_transaction_failed">Tạo mới giao dịch thất bại!</string>
     <string name="creating">Đang tạo ...</string>
     <string name="create_transaction_successful">Tạo thành công!</string>
+    <string name="choose_time">Chọn thời gian</string>
 </resources>
