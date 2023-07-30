@@ -171,7 +171,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="16sp"
-                    android:textColor="@color/black"
+                    android:text="@string/choose_time"
+                    android:textColor="@color/dark_grey"
                     android:layout_marginStart="12dp" />
             </LinearLayout>
             <View
