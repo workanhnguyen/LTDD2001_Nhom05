@@ -36,21 +36,4 @@ public class CreateWalletPresenter {
             }
         });
     }
-
-    public void addTransactionByCreateNewWallet(TransactionDto transactionDto) {
-        RetrofitConfig retrofitConfig = new RetrofitConfig();
-        TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
-
-        transactionApi.addNewTransaction(transactionDto).enqueue(new Callback<Transaction>() {
-            @Override
-            public void onResponse(Call<Transaction> call, Response<Transaction> response) {
-                createWalletView.showAddedTransactionByCreateWallet(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<Transaction> call, Throwable t) {
-
-            }
-        });
-    }
 }

@@ -94,8 +94,9 @@ public class CreateWalletActivity extends AppCompatActivity implements CreateWal
 
                 createWalletPresenter.addNewWallet(walletDto);
             } else {
-                createWalletAlert.setText(alertString);
                 createWalletAlert.setVisibility(View.VISIBLE);
+                createWalletAlert.setText(alertString);
+
                 btnConfrimCreateWallet.setEnabled(true);
                 btnConfrimCreateWallet.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(CreateWalletActivity.this, R.color.primary)));
                 btnConfrimCreateWallet.setText(getString(R.string.create_wallet));
@@ -166,27 +167,17 @@ public class CreateWalletActivity extends AppCompatActivity implements CreateWal
     @Override
     public void showAddedWallet(Wallet wallet) {
         if (wallet != null) {
-            TransactionDto transactionDto = new TransactionDto();
-            transactionDto.setDescription("Số dư tạo ví mới");
-            transactionDto.setCreatedDate(DateUtil.convertDateToSeconds(new Date()));
-            transactionDto.setWalletId(wallet.getId());
-            transactionDto.setTotal(wallet.getBalance());
-            transactionDto.setCategoryTypeId(CustomConstant.CATEGORY_CREATE_WALLET);
-
-            createWalletPresenter.addTransactionByCreateNewWallet(transactionDto);
-        }
-    }
-
-    @Override
-    public void showAddedTransactionByCreateWallet(Transaction transaction) {
-        if (transaction != null) {
             createWalletAlert.setVisibility(View.GONE);
             finish();
+        } else {
+            createWalletAlert.setVisibility(View.VISIBLE);
+            createWalletAlert.setText(getString(R.string.create_wallet_failed));
         }
     }
 
     @Override
     public void showAddingWalletError() {
+        createWalletAlert.setVisibility(View.VISIBLE);
         createWalletAlert.setText(getString(R.string.create_wallet_failed));
     }
 }

@@ -47,16 +47,11 @@ public class CalendarFragment extends DialogFragment {
         timePicker.setIs24HourView(true);
         datepicker = rootView.findViewById(R.id.calendarPicker);
 
-        btnsetDateTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDateTime();
-            }
-        });
+        btnsetDateTime.setOnClickListener(v -> setDateTime());
         return builder.create();
     }
 
-//    public void onSelectedDateChange(String selectedDate) {
+    //    public void onSelectedDateChange(String selectedDate) {
 //        Fragment parentFragment = getParentFragment();
 //        if (parentFragment instanceof AddExpenseFragment) {
 //            ((AddExpenseFragment) parentFragment).setCalendarDate(selectedDate);

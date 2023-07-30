@@ -181,16 +181,27 @@
                     android:layout_marginStart="12dp"
                     android:textStyle="bold" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/light_grey"/>
         </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:padding="12dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/dashed_bg"
+                tools:layout_editor_absoluteX="192dp"
+                tools:layout_editor_absoluteY="118dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
             android:weightSum="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="12dp">
             <Button
                 android:layout_weight="50"
                 android:id="@+id/editTransactionDelete"
