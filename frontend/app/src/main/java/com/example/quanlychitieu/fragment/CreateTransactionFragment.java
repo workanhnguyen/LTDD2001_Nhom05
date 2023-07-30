@@ -198,6 +198,7 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
     }
 
     public void setDateTime(String selectedDateTime) {
+        txtCalendarDateTime.setTextColor(getResources().getColor(R.color.black));
         txtCalendarDateTime.setText(selectedDateTime);
     }
     @Override
@@ -247,7 +248,9 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
 
             createTransactionBalance.setText("");
             createTransactionDescription.setText("");
-            txtCalendarDateTime.setText("");
+
+            txtCalendarDateTime.setText(getString(R.string.choose_time));
+            txtCalendarDateTime.setTextColor(getResources().getColor(R.color.dark_grey));
 
             createTransactionCategoryTypeImage.setImageResource(R.drawable.category);
             createTransactionCategoryTypeName.setText(getString(R.string.choose_category_type));
