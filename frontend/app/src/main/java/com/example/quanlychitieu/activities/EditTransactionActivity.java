@@ -2,6 +2,7 @@ package com.example.quanlychitieu.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.MenuItem;
@@ -16,31 +17,37 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.dtos.WalletDto;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.models.Wallet;
+import com.example.quanlychitieu.presenters.EditTransactionPresenter;
 import com.example.quanlychitieu.utils.CommonUtil;
+import com.example.quanlychitieu.utils.CustomConstant;
+import com.example.quanlychitieu.views.EditTransactionView;
 
 import org.parceler.Parcels;
 
-public class EditTransactionActivity extends AppCompatActivity {
+public class EditTransactionActivity extends AppCompatActivity implements EditTransactionView {
     private static final int REQUEST_CODE_SELECT_CATEGORY = 1;
     private static final int REQUEST_CODE_SELECT_WALLET = 2;
-    Transaction transaction;
     EditText editTransactionBalance, editTransactionDescription;
     LinearLayout linearLayoutEditTransactionCategoryType, linearLayoutEditTransactionWallet;
     Button editTransactionDelete, editTransactionSave;
     ImageView editTransactionCategoryTypeImage, editTransactionWalletImage;
-    TextView editTransactionCategoryTypeName, editTransactionWalletName;
+    TextView editTransactionCategoryTypeName, editTransactionWalletName, editTransactionAlert;
 
     // ----------------------------------
     CategoryType categoryType;
     Wallet wallet;
+    Transaction transaction;
+    EditTransactionPresenter editTransactionPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,8 @@ public class EditTransactionActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.edit_transaction);
             actionBar.setElevation(0);
         }
+
+        editTransactionPresenter = new EditTransactionPresenter(this);
 
         initializeElement();
 
@@ -96,9 +105,16 @@ public class EditTransactionActivity extends AppCompatActivity {
                 builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Handle deleting wallet here
+                        editTransactionAlert.setVisibility(View.GONE);
 
-                        finish();
+                        editTransactionDelete.setEnabled(false);
+                        editTransactionDelete.setText(getString(R.string.deleting));
+                        editTransactionDelete.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.dark_grey)));
+
+                        editTransactionSave.setEnabled(false);
+                        editTransactionSave.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.dark_grey)));
+
+                        editTransactionPresenter.deleteTransaction(transaction.getId());
                     }
                 });
                 builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -123,7 +139,7 @@ public class EditTransactionActivity extends AppCompatActivity {
     }
 
     private void handleShowDataToUI() {
-        editTransactionBalance.setText(CommonUtil.getMoneyFormat(transaction.getTotal()).substring(0, CommonUtil.getMoneyFormat(transaction.getTotal()).length() - 1));
+        editTransactionBalance.setText(CommonUtil.getMoneyFormat(transaction.getTotal()).substring(0, CommonUtil.getMoneyFormat(transaction.getTotal()).length() - 2));
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.app_icon_background) // Replace with your placeholder image resource
@@ -156,6 +172,8 @@ public class EditTransactionActivity extends AppCompatActivity {
 
         editTransactionWalletImage = findViewById(R.id.editTransactionWalletImage);
         editTransactionCategoryTypeImage = findViewById(R.id.editTransactionCategoryTypeImage);
+
+        editTransactionAlert = findViewById(R.id.editTransactionAlert);
     }
 
     private void loadTransactionData() {
@@ -209,5 +227,63 @@ public class EditTransactionActivity extends AppCompatActivity {
 
             editTransactionWalletName.setText(wallet.getName());
         }
+    }
+
+    @Override
+    public void showUpdatedTransaction(Transaction transaction) {
+
+    }
+
+    @Override
+    public void showDeleteTransactionResult(boolean isDeleted) {
+        if (isDeleted) {
+            long updatedBalance = 0;
+            long transactionBalance = Long.parseLong(editTransactionBalance.getText().toString().replace(".", "").trim());
+            if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE))
+                updatedBalance = transaction.getWallet().getBalance() + transactionBalance;
+            else if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME))
+                updatedBalance = transaction.getWallet().getBalance() - transactionBalance;
+
+            WalletDto walletDto = new WalletDto();
+            walletDto.setBalance(updatedBalance);
+            editTransactionPresenter.updateWalletBalance(transaction.getWallet().getId(), walletDto);
+        }
+    }
+
+    @Override
+    public void showUpdatedWalletBalance(Wallet wallet) {
+        if (wallet != null) {
+            editTransactionAlert.setVisibility(View.GONE);
+
+            editTransactionDelete.setEnabled(true);
+            editTransactionDelete.setText(getString(R.string.delete));
+            editTransactionDelete.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.red)));
+
+            editTransactionSave.setEnabled(true);
+            editTransactionSave.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.primary)));
+
+            finish();
+        }
+    }
+
+    @Override
+    public void showErrorUpdatingTransaction() {
+        editTransactionAlert.setVisibility(View.VISIBLE);
+        editTransactionAlert.setText(getString(R.string.updated_failed));
+    }
+
+    @Override
+    public void showErrorDeletingTransaction() {
+        editTransactionAlert.setVisibility(View.VISIBLE);
+        editTransactionAlert.setText(getString(R.string.delete_transaction_failed));
+
+        editTransactionAlert.setVisibility(View.GONE);
+
+        editTransactionDelete.setEnabled(true);
+        editTransactionDelete.setText(getString(R.string.delete));
+        editTransactionDelete.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.red)));
+
+        editTransactionSave.setEnabled(true);
+        editTransactionSave.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.primary)));
     }
 }

@@ -196,6 +196,16 @@
                 tools:layout_editor_absoluteX="192dp"
                 tools:layout_editor_absoluteY="118dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/editTransactionAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:background="@color/white"
+            android:textColor="@color/red"
+            android:textAlignment="center"
+            android:paddingVertical="12dp"
+            android:visibility="gone"/>
         <LinearLayout
             android:weightSum="100"
             android:layout_width="match_parent"

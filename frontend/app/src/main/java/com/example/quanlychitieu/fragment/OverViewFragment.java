@@ -220,4 +220,9 @@ public class OverViewFragment extends Fragment implements OverViewView {
         tvSumOfIncome.setText(CommonUtil.getMoneyFormat(sumOfIncome));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
+    }
 }
