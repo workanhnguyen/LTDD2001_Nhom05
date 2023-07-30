@@ -30,9 +30,13 @@ import com.example.quanlychitieu.models.Wallet;
 import com.example.quanlychitieu.presenters.EditTransactionPresenter;
 import com.example.quanlychitieu.utils.CommonUtil;
 import com.example.quanlychitieu.utils.CustomConstant;
+import com.example.quanlychitieu.utils.DateUtil;
 import com.example.quanlychitieu.views.EditTransactionView;
 
 import org.parceler.Parcels;
+
+import java.util.Date;
+import java.util.Objects;
 
 public class EditTransactionActivity extends AppCompatActivity implements EditTransactionView {
     private static final int REQUEST_CODE_SELECT_CATEGORY = 1;
@@ -41,7 +45,7 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
     LinearLayout linearLayoutEditTransactionCategoryType, linearLayoutEditTransactionWallet;
     Button editTransactionDelete, editTransactionSave;
     ImageView editTransactionCategoryTypeImage, editTransactionWalletImage;
-    TextView editTransactionCategoryTypeName, editTransactionWalletName, editTransactionAlert;
+    TextView editTransactionCategoryTypeName, editTransactionWalletName, editTransactionAlert, editTransactionTime, editTransactionReadOnly;
 
     // ----------------------------------
     CategoryType categoryType;
@@ -155,11 +159,30 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
         editTransactionCategoryTypeName.setText(transaction.getCategoryType().getName());
         editTransactionWalletName.setText(transaction.getWallet().getName());
         editTransactionDescription.setText(transaction.getDescription());
+        editTransactionTime.setText(DateUtil.convertSecondsToFormattedDate(transaction.getCreatedDate(), CustomConstant.DATE_FORMAT_dd_MM_yyyy_hh_mm_a));
+
+        if (Objects.equals(transaction.getCategoryType().getId(), CustomConstant.CATEGORY_EDIT_WALLET_GREATER)
+                || Objects.equals(transaction.getCategoryType().getId(), CustomConstant.CATEGORY_EDIT_WALLET_LESS)) {
+            disableEditTransactionView();
+        }
+    }
+
+    private void disableEditTransactionView() {
+        editTransactionBalance.setEnabled(false);
+        editTransactionDescription.setEnabled(false);
+        editTransactionTime.setEnabled(false);
+        editTransactionSave.setVisibility(View.GONE);
+        editTransactionReadOnly.setVisibility(View.VISIBLE);
+        editTransactionReadOnly.setText(getString(R.string.read_only_transaction));
+
+        linearLayoutEditTransactionCategoryType.setEnabled(false);
+        linearLayoutEditTransactionWallet.setEnabled(false);
     }
 
     private void initializeElement() {
         editTransactionBalance = findViewById(R.id.editTransactionBalance);
         editTransactionDescription = findViewById(R.id.editTransactionDescription);
+        editTransactionReadOnly = findViewById(R.id.editTransactionReadOnly);
 
         linearLayoutEditTransactionCategoryType = findViewById(R.id.linearLayoutEditTransactionCategoryType);
         linearLayoutEditTransactionWallet = findViewById(R.id.linearLayoutEditTransactionWallet);
@@ -172,6 +195,7 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
 
         editTransactionWalletImage = findViewById(R.id.editTransactionWalletImage);
         editTransactionCategoryTypeImage = findViewById(R.id.editTransactionCategoryTypeImage);
+        editTransactionTime = findViewById(R.id.editTransactionTime);
 
         editTransactionAlert = findViewById(R.id.editTransactionAlert);
     }

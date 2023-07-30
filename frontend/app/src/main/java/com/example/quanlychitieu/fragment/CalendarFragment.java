@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.EditTransactionActivity;
 import com.example.quanlychitieu.fragment.CreateTransactionFragment;
 
 import java.text.SimpleDateFormat;
@@ -68,8 +69,8 @@ public class CalendarFragment extends DialogFragment {
     private void onDateTimeSet(String selectedDateTime) {
         Fragment parentFragment = getParentFragment();
         if (parentFragment instanceof CreateTransactionFragment) {
-            CreateTransactionFragment addExpenseFragment = (CreateTransactionFragment) parentFragment;
-            addExpenseFragment.setDateTime(selectedDateTime);
+            CreateTransactionFragment createTransactionFragment = (CreateTransactionFragment) parentFragment;
+            createTransactionFragment.setDateTime(selectedDateTime);
         }
         dismiss();
     }

@@ -13,7 +13,7 @@ public class DateUtil {
     @SuppressLint("SimpleDateFormat")
     public static String convertSecondsToFormattedDate(Long seconds, String pattern) {
         Date date = new Date(seconds * 1000);
-        return new SimpleDateFormat(pattern).format(date);
+        return new SimpleDateFormat(pattern, Locale.ENGLISH).format(date);
     }
 
     public static long convertDateToSeconds(Date date) {
