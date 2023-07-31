@@ -26,23 +26,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="60dp"
-                android:background="@drawable/circle_bg"
-                android:src="@drawable/baseline_edit_24"
-                app:circularflow_radiusInDP="100"
-                app:civ_border_color="@color/dark_grey"
-                app:civ_border_width="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/circleImageView"
-                app:layout_constraintTop_toTopOf="@+id/circleImageView"
-                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
