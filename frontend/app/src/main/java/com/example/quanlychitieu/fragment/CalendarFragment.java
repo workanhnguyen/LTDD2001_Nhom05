@@ -52,13 +52,6 @@ public class CalendarFragment extends DialogFragment {
         return builder.create();
     }
 
-    //    public void onSelectedDateChange(String selectedDate) {
-//        Fragment parentFragment = getParentFragment();
-//        if (parentFragment instanceof AddExpenseFragment) {
-//            ((AddExpenseFragment) parentFragment).setCalendarDate(selectedDate);
-//        }
-//    }
-
     private String formatDate(int year, int month, int day) {
         // Format the selected date to a desired string format
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -69,8 +62,12 @@ public class CalendarFragment extends DialogFragment {
     private void onDateTimeSet(String selectedDateTime) {
         Fragment parentFragment = getParentFragment();
         if (parentFragment instanceof CreateTransactionFragment) {
-            CreateTransactionFragment createTransactionFragment = (CreateTransactionFragment) parentFragment;
-            createTransactionFragment.setDateTime(selectedDateTime);
+            CreateTransactionFragment addExpenseFragment = (CreateTransactionFragment) parentFragment;
+            addExpenseFragment.setDateTime(selectedDateTime);
+        } if (getActivity() instanceof DateTimeListener) {
+            DateTimeListener dateTimeListener = (DateTimeListener) getActivity();
+            // Pass the selected date/time to the parent activity
+            dateTimeListener.onDateTimeSelected(selectedDateTime);
         }
         dismiss();
     }
@@ -114,5 +111,8 @@ public class CalendarFragment extends DialogFragment {
         // Pass the selected date and time back to AddExpenseFragment
         onDateTimeSet(formattedDateTime);
 
+    }
+    public interface DateTimeListener {
+        void onDateTimeSelected(String selectedDateTime);
     }
 }

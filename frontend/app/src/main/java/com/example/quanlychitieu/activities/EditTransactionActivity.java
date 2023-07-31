@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.fragment.CalendarFragment;
 import com.example.quanlychitieu.dtos.WalletDto;
 import com.example.quanlychitieu.models.CategoryType;
 import com.example.quanlychitieu.models.Transaction;
@@ -35,17 +36,16 @@ import com.example.quanlychitieu.views.EditTransactionView;
 
 import org.parceler.Parcels;
 
-import java.util.Date;
 import java.util.Objects;
 
-public class EditTransactionActivity extends AppCompatActivity implements EditTransactionView {
+public class EditTransactionActivity extends AppCompatActivity implements EditTransactionView, CalendarFragment.DateTimeListener {
     private static final int REQUEST_CODE_SELECT_CATEGORY = 1;
     private static final int REQUEST_CODE_SELECT_WALLET = 2;
     EditText editTransactionBalance, editTransactionDescription;
-    LinearLayout linearLayoutEditTransactionCategoryType, linearLayoutEditTransactionWallet;
+    LinearLayout linearLayoutEditTransactionCategoryType, linearLayoutEditTransactionWallet, linearLayoutCalendar;
     Button editTransactionDelete, editTransactionSave;
     ImageView editTransactionCategoryTypeImage, editTransactionWalletImage;
-    TextView editTransactionCategoryTypeName, editTransactionWalletName, editTransactionAlert, editTransactionTime, editTransactionReadOnly;
+    TextView editTransactionCategoryTypeName, editTransactionWalletName, editTransactionAlert, editTransactionTime, editTransactionReadOnly, txtCalendarDate;
 
     // ----------------------------------
     CategoryType categoryType;
@@ -77,6 +77,8 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
 
         handleSaveTransaction();
         handleDeleteTransaction();
+
+        handleShowCalendar();
     }
 
     private void handleSwitchToChooseWallet() {
@@ -142,6 +144,16 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
         });
     }
 
+    private void handleShowCalendar(){
+        linearLayoutCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CalendarFragment calendarDialogFragment = new CalendarFragment();
+                calendarDialogFragment.show(getSupportFragmentManager(), "calendar_dialog");
+            }
+        });
+    }
+
     private void handleShowDataToUI() {
         editTransactionBalance.setText(CommonUtil.getMoneyFormat(transaction.getTotal()).substring(0, CommonUtil.getMoneyFormat(transaction.getTotal()).length() - 2));
 
@@ -182,6 +194,8 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
     private void initializeElement() {
         editTransactionBalance = findViewById(R.id.editTransactionBalance);
         editTransactionDescription = findViewById(R.id.editTransactionDescription);
+        linearLayoutCalendar = findViewById(R.id.calendar);
+        editTransactionTime = findViewById(R.id.editTransactionTime);
         editTransactionReadOnly = findViewById(R.id.editTransactionReadOnly);
 
         linearLayoutEditTransactionCategoryType = findViewById(R.id.linearLayoutEditTransactionCategoryType);
@@ -236,7 +250,7 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
             editTransactionCategoryTypeName.setText(categoryType.getName());
         }
 
-         else if (requestCode == REQUEST_CODE_SELECT_WALLET && resultCode == RESULT_OK) {
+        else if (requestCode == REQUEST_CODE_SELECT_WALLET && resultCode == RESULT_OK) {
             // Handle to show choosed wallet
             assert data != null;
             Parcelable parcelableWallet = data.getParcelableExtra("wallet");
@@ -309,5 +323,10 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
 
         editTransactionSave.setEnabled(true);
         editTransactionSave.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.primary)));
+    }
+
+    @Override
+    public void onDateTimeSelected(String selectedDateTime) {
+        editTransactionTime.setText(selectedDateTime);
     }
 }
