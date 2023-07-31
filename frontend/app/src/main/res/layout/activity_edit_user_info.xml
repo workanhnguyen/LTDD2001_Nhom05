@@ -29,6 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avarta"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="60dp"

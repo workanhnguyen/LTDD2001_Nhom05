@@ -163,17 +163,8 @@
                     android:src="@drawable/baseline_calendar_month_24" />
                 <TextView
                     android:id="@+id/editTransactionCalendarDate"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="12dp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/editTransactionTimerDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:layout_marginStart="12dp"

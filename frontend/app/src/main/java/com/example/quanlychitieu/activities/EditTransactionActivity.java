@@ -20,19 +20,20 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.fragment.CalendarFragment;
 import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.utils.CommonUtil;
 
 import org.parceler.Parcels;
 
-public class EditTransactionActivity extends AppCompatActivity {
+public class EditTransactionActivity extends AppCompatActivity implements CalendarFragment.DateTimeListener {
     private static final int REQUEST_CODE_SECOND_ACTIVITY = 1;
     Transaction transaction;
     EditText editTransactionBalance, editTransactionDescription;
-    LinearLayout linearLayoutEditTransactionCategoryType, linearLayoutEditTransactionWallet;
+    LinearLayout linearLayoutEditTransactionCategoryType, linearLayoutEditTransactionWallet, linearLayoutCalendar;
     Button editTransactionDelete, editTransactionSave;
     ImageView editTransactionCategoryImage, editTransactionWalletImage;
-    TextView editTransactionCategoryName, editTransactionWalletName;
+    TextView editTransactionCategoryName, editTransactionWalletName, txtCalendarDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class EditTransactionActivity extends AppCompatActivity {
 
         handleSaveTransaction();
         handleDeleteTransaction();
+
+        handleShowCalendar();
     }
 
     private void handleSwitchToChooseWallet() {
@@ -113,6 +116,16 @@ public class EditTransactionActivity extends AppCompatActivity {
         });
     }
 
+    private void handleShowCalendar(){
+        linearLayoutCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CalendarFragment calendarDialogFragment = new CalendarFragment();
+                calendarDialogFragment.show(getSupportFragmentManager(), "calendar_dialog");
+            }
+        });
+    }
+
     private void handleShowDataToUI() {
         editTransactionBalance.setText(CommonUtil.getMoneyFormat(transaction.getTotal()).substring(0, CommonUtil.getMoneyFormat(transaction.getTotal()).length() - 1));
 
@@ -135,6 +148,8 @@ public class EditTransactionActivity extends AppCompatActivity {
     private void initializeElement() {
         editTransactionBalance = findViewById(R.id.editTransactionBalance);
         editTransactionDescription = findViewById(R.id.editTransactionDescription);
+        linearLayoutCalendar = findViewById(R.id.calendar);
+        txtCalendarDate = findViewById(R.id.editTransactionCalendarDate);
 
         linearLayoutEditTransactionCategoryType = findViewById(R.id.linearLayoutEditTransactionCategoryType);
         linearLayoutEditTransactionWallet = findViewById(R.id.linearLayoutEditTransactionWallet);
@@ -163,5 +178,10 @@ public class EditTransactionActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onDateTimeSelected(String selectedDateTime) {
+       txtCalendarDate.setText(selectedDateTime);
     }
 }
