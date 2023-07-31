@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/btnAddNewUser"
-        android:title="Sync Data"
-        android:icon="@drawable/baseline_add_24"
+        android:id="@+id/btnAdminLogout"
+        android:title="Log out"
+        android:icon="@drawable/baseline_logout_24"
         app:showAsAction="ifRoom">
     </item>
 </menu>

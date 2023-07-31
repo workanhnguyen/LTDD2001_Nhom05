@@ -59,24 +59,22 @@ public class UserSettingAdapter extends RecyclerView.Adapter<UserSettingHolder> 
         if (holder.getAdapterPosition() == 1)
             holder.getUserSettingItem().setTextColor(Color.RED);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.getAdapterPosition() == 0) {
-                    Intent intent = new Intent(context, ChangePasswordActivity.class);
+        holder.itemView.setOnClickListener(v -> {
+
+            if (holder.getAdapterPosition() == 0) {
+                Intent intent = new Intent(context, ChangePasswordActivity.class);
+                context.startActivity(intent);
+            } else {
+                if (adapterListener != null) {
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.clear();
+                    editor.apply();
+
+                    Intent intent = new Intent(context, WelcomeActivity.class);
                     context.startActivity(intent);
-                } else {
-                    if (adapterListener != null) {
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                        editor.clear();
-                        editor.apply();
-
-                        Intent intent = new Intent(context, WelcomeActivity.class);
-                        context.startActivity(intent);
-                        adapterListener.onFinishActivity();
-                    }
+                    adapterListener.onFinishActivity();
                 }
             }
         });

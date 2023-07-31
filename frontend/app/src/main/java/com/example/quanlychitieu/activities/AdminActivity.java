@@ -1,9 +1,14 @@
 package com.example.quanlychitieu.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +24,7 @@ import java.util.List;
 public class AdminActivity extends AppCompatActivity {
     RecyclerView adminUserList;
     List<User> list = new ArrayList<>();
+    SharedPreferences userPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,8 @@ public class AdminActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.manage_user);
             actionBar.setElevation(0);
         }
+
+        userPref = getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
 
         adminUserList = findViewById(R.id.adminUserList);
 
@@ -49,5 +57,23 @@ public class AdminActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_add, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.btnAdminLogout) {
+            SharedPreferences.Editor editor = userPref.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(AdminActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
