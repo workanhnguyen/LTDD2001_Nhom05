@@ -30,16 +30,24 @@ public class WelcomeActivity extends AppCompatActivity {
     List<String> languages = new ArrayList<>();
     Spinner spinnerLanguage;
     Button btnSwitchToSignUp, btnSwitchToSignIn;
-    SharedPreferences languagePreferences;
+    SharedPreferences languagePreferences, userPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        userPref = getSharedPreferences("loggingUser", Context.MODE_PRIVATE);
+
         if (isUserLoggedIn()) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            if (userPref.getString("role", "").equals(CustomConstant.ROLE_ADMIN)) {
+                Intent intent = new Intent(this, AdminActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         } else {
 
             setContentView(R.layout.activity_welcome);
