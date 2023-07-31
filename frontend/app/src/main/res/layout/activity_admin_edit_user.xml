@@ -188,27 +188,24 @@
     </LinearLayout>
 
     <LinearLayout
-        android:weightSum="100"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginTop="6dp">
         <Button
             android:id="@+id/btnDeleteUser"
-            android:layout_weight="50"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="55dp"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="12dp"
             android:backgroundTint="@color/red"
-            android:text="Xóa người dùng"
+            android:text="@string/delete_user"
             android:textColor="@color/white"/>
         <Button
             android:id="@+id/btnSaveUser"
-            android:layout_weight="50"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="55dp"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="12dp"
             android:backgroundTint="@color/primary"
             android:text="@string/update"
             android:textColor="@color/white"/>
