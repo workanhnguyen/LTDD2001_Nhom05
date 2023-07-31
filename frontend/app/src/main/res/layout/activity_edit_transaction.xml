@@ -186,20 +186,6 @@
                     android:layout_marginStart="12dp" />
             </LinearLayout>
         </LinearLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:padding="12dp"
-            android:background="@color/white">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/dashed_bg"
-                tools:layout_editor_absoluteX="192dp"
-                tools:layout_editor_absoluteY="118dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/editTransactionAlert"
             android:layout_width="match_parent"

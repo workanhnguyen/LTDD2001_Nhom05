@@ -177,7 +177,6 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
 
     private void initializeElement(View view) {
         calendarView = view.findViewById(R.id.calendarDateTime);
-        pictureImg = view.findViewById(R.id.imgGallery);
         btnCreateTransaction = view.findViewById(R.id.btnCreateTransaction);
         txtCalendarDateTime = view.findViewById(R.id.dateTimeCalendar);
         linearLayoutCreateTransactionCategoryType = view.findViewById(R.id.linearLayoutCreateTransactionCategoryType);
