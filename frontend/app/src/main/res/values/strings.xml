@@ -158,4 +158,5 @@
     <string name="deleting">Đang xóa ...</string>
     <string name="delete_transaction_failed">Xóa giao dịch thất bại!</string>
     <string name="read_only_transaction">(*) Giao dịch này chỉ được xem</string>
+    <string name="delete_user">Xóa người dùng</string>
 </resources>
