@@ -29,7 +29,7 @@ public interface TransactionApi {
     @POST("/transactions")
     Call<Transaction> addNewTransaction(@Body TransactionDto transactionDto);
     @PATCH("/transactions/{transactionId}")
-    Call<Transaction> updateTransaction(@Path("transactionId") Integer transactionId, TransactionDto transactionDto);
+    Call<Transaction> updateTransaction(@Path("transactionId") Integer transactionId, @Body TransactionDto transactionDto);
     @DELETE("/transactions/{transactionId}")
     Call<Boolean> deleteTransaction(@Path("transactionId") Integer transactionId);
 }
