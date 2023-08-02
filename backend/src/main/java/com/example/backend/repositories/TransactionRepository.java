@@ -25,11 +25,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("SELECT COALESCE(SUM(t.total),0) AS sum FROM Transaction t, Wallet w WHERE w.user.id=?1 AND t.wallet.id=w.id AND (t.categoryType.categoryRoot.type LIKE 'INCOME')")
     Long sumAllIncomeByUserId(Integer userId);
 
-//    // Statistic - MONTH
-//    @Query("SELECT t FROM Transaction t, Wallet w WHERE w.user.id=?1 AND t.wallet.id=w.id AND t.wallet.id=w.id AND (YEAR(t.createdDate)=?2 AND MONTH(t.createdDate)=?3) ORDER BY t.createdDate DESC")
-//    List<Transaction> findMonthTransactionByUserId(Integer userId, Integer year, Integer month);
-//    @Query("SELECT COALESCE(SUM(t.total),0) AS sum FROM Transaction t, Wallet w WHERE w.user.id=?1 AND t.wallet.id=w.id AND (t.categoryType.categoryRoot.type LIKE 'EXPENSE') AND (YEAR(t.createdDate)=?2 AND MONTH(t.createdDate)=?3)")
-//    Long sumMonthExpenseByUserId(Integer userId, Integer year, Integer month);
-//    @Query("SELECT COALESCE(SUM(t.total),0) AS sum FROM Transaction t, Wallet w WHERE w.user.id=?1 AND t.wallet.id=w.id AND (t.categoryType.categoryRoot.type LIKE 'INCOME') AND (YEAR(t.createdDate)=?2 AND MONTH(t.createdDate)=?3)")
-//    Long sumMonthIncomeByUserId(Integer userId, Integer year, Integer month);
+    // Statistic - MONTH
+    @Query("SELECT t FROM Transaction t, Wallet w WHERE w.user.id=?1 AND t.wallet.id=w.id AND t.wallet.id=w.id AND ?2 <= t.createdDate AND t.createdDate <= ?3")
+    List<Transaction> findMonthTransactionByUserId(Integer userId, Long secondsStartTime, Long secondsEndTime);
+    @Query("SELECT COALESCE(SUM(t.total),0) AS sum FROM Transaction t, Wallet w WHERE w.user.id=?1 AND t.wallet.id=w.id AND (t.categoryType.categoryRoot.type LIKE 'EXPENSE') AND ?2 <= t.createdDate AND t.createdDate <= ?3")
+    Long sumMonthExpenseByUserId(Integer userId, Long secondsStartTime, Long secondsEndTime);
+    @Query("SELECT COALESCE(SUM(t.total),0) AS sum FROM Transaction t, Wallet w WHERE w.user.id=?1 AND t.wallet.id=w.id AND (t.categoryType.categoryRoot.type LIKE 'INCOME') AND ?2 <= t.createdDate AND t.createdDate <= ?3")
+    Long sumMonthIncomeByUserId(Integer userId, Long secondsStartTime, Long secondsEndTime);
 }

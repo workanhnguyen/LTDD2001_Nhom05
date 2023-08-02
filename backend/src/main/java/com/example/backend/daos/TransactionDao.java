@@ -55,17 +55,17 @@ public class TransactionDao {
     public Long sumAllIncomeByUserId(Integer userId) {
         return transactionRepository.sumAllIncomeByUserId(userId);
     }
-//
-//    // Statistic - MONTH
-//    public List<Transaction> getMonthTransactionByUserId(Integer userId, Integer year, Integer month) {
-//        return transactionRepository.findMonthTransactionByUserId(userId, year, month);
-//    }
-//    public Long sumMonthExpenseByUserId(Integer userId, Integer year, Integer month) {
-//        return transactionRepository.sumMonthExpenseByUserId(userId, year, month);
-//    }
-//    public Long sumMonthIncomeByUserId(Integer userId, Integer year, Integer month) {
-//        return transactionRepository.sumMonthIncomeByUserId(userId, year, month);
-//    }
+
+    // Statistic - MONTH
+    public List<Transaction> getMonthTransactionByUserId(Integer userId, Long secondsStartTime, Long secondsEndTime) {
+        return transactionRepository.findMonthTransactionByUserId(userId, secondsStartTime, secondsEndTime);
+    }
+    public Long sumMonthExpenseByUserId(Integer userId, Long secondsStartTime, Long secondsEndTime) {
+        return transactionRepository.sumMonthExpenseByUserId(userId, secondsStartTime, secondsEndTime);
+    }
+    public Long sumMonthIncomeByUserId(Integer userId, Long secondsStartTime, Long secondsEndTime) {
+        return transactionRepository.sumMonthIncomeByUserId(userId, secondsStartTime, secondsEndTime);
+    }
 
     public Transaction addNewTransaction(TransactionDto transactionDto) throws Exception {
         Wallet wallet = walletRepository.findById(transactionDto.getWalletId())

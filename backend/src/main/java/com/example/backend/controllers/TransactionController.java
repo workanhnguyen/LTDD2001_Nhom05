@@ -58,19 +58,19 @@ public class TransactionController {
         return ResponseEntity.ok().body(transactionDao.sumAllIncomeByUserId(userId));
     }
 //
-//    // Statistic - MONTH
-//    @GetMapping(value = "/month/by-user", params = {"userId", "year", "month"})
-//    public ResponseEntity<List<Transaction>> getMonthTransactionByUserId(@RequestParam(name = "userId") Integer userId, @RequestParam(name = "year") Integer year, @RequestParam(name = "month") Integer month) {
-//        return ResponseEntity.ok().body(transactionDao.getMonthTransactionByUserId(userId, year, month));
-//    }
-//    @GetMapping(value = "/month/sum-expense/by-user", params = {"userId", "year", "month"})
-//    public ResponseEntity<Long> sumMonthExpenseByUserId(@RequestParam(name = "userId") Integer userId, @RequestParam(name = "year") Integer year, @RequestParam(name = "month") Integer month) {
-//        return ResponseEntity.ok().body(transactionDao.sumMonthExpenseByUserId(userId, year, month));
-//    }
-//    @GetMapping(value = "/month/sum-income/by-user", params = {"userId", "year", "month"})
-//    public ResponseEntity<Long> sumMonthIncomeByUserId(@RequestParam(name = "userId") Integer userId, @RequestParam(name = "year") Integer year, @RequestParam(name = "month") Integer month) {
-//        return ResponseEntity.ok().body(transactionDao.sumMonthIncomeByUserId(userId, year, month));
-//    }
+    // Statistic - MONTH
+    @GetMapping(value = "/month/by-user", params = {"userId", "secondsStartTime", "secondsEndTime"})
+    public ResponseEntity<List<Transaction>> getMonthTransactionByUserId(@RequestParam(name = "userId") Integer userId, @RequestParam(name = "secondsStartTime") Long secondsStartTime, @RequestParam(name = "secondsEndTime") Long secondsEndTime) {
+        return ResponseEntity.ok().body(transactionDao.getMonthTransactionByUserId(userId, secondsStartTime, secondsEndTime));
+    }
+    @GetMapping(value = "/month/sum-expense/by-user", params = {"userId", "secondsStartTime", "secondsEndTime"})
+    public ResponseEntity<Long> sumMonthExpenseByUserId(@RequestParam(name = "userId") Integer userId, @RequestParam(name = "secondsStartTime") Long secondsStartTime, @RequestParam(name = "secondsEndTime") Long secondsEndTime) {
+        return ResponseEntity.ok().body(transactionDao.sumMonthExpenseByUserId(userId, secondsStartTime, secondsEndTime));
+    }
+    @GetMapping(value = "/month/sum-income/by-user", params = {"userId", "secondsStartTime", "secondsEndTime"})
+    public ResponseEntity<Long> sumMonthIncomeByUserId(@RequestParam(name = "userId") Integer userId, @RequestParam(name = "secondsStartTime") Long secondsStartTime, @RequestParam(name = "secondsEndTime") Long secondsEndTime) {
+        return ResponseEntity.ok().body(transactionDao.sumMonthIncomeByUserId(userId, secondsStartTime, secondsEndTime));
+    }
 
     @PostMapping
     public Transaction addNewTransaction(@RequestBody TransactionDto transactionDto) throws Exception {
