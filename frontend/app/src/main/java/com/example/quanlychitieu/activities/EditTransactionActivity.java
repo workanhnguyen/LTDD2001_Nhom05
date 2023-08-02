@@ -197,12 +197,9 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
     }
 
     private void handleShowCalendar(){
-        linearLayoutCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CalendarFragment calendarDialogFragment = new CalendarFragment();
-                calendarDialogFragment.show(getSupportFragmentManager(), "calendar_dialog");
-            }
+        linearLayoutCalendar.setOnClickListener(v -> {
+            CalendarFragment calendarDialogFragment = new CalendarFragment();
+            calendarDialogFragment.show(getSupportFragmentManager(), "calendar_dialog");
         });
     }
 
@@ -323,19 +320,33 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
     }
 
     @Override
-    public void showUpdatedTransaction(Transaction transaction) {
+    public void showUpdatedTransaction(Transaction updatedTransaction) {
         if (transaction != null) {
-            editTransactionAlert.setVisibility(View.GONE);
-            editTransactionAlert.setText("");
+            long updatedBalance = updatedTransaction.getTotal();
+            long currentBalance = transaction.getTotal();
+            long difference = currentBalance - updatedBalance;
 
-            editTransactionSave.setEnabled(true);
-            editTransactionSave.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.primary)));
-            editTransactionSave.setText(getString(R.string.save));
+            WalletDto walletDto = new WalletDto();
 
-            editTransactionDelete.setEnabled(true);
-            editTransactionDelete.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.red)));
-
-            finish();
+            if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)) {
+                if (difference < 0) {
+                    walletDto.setBalance(transaction.getWallet().getBalance() - Math.abs(difference));
+                } else if (difference > 0) {
+                    walletDto.setBalance(transaction.getWallet().getBalance() + Math.abs(difference));
+                } else {
+                    walletDto.setBalance(transaction.getWallet().getBalance());
+                }
+            }
+            else if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)) {
+                if (difference < 0) {
+                    walletDto.setBalance(transaction.getWallet().getBalance() + Math.abs(difference));
+                } else if (difference > 0) {
+                    walletDto.setBalance(transaction.getWallet().getBalance() - Math.abs(difference));
+                } else {
+                    walletDto.setBalance(transaction.getWallet().getBalance());
+                }
+            }
+            editTransactionPresenter.updateWalletBalance(transaction.getWallet().getId(), walletDto);
         } else {
             editTransactionAlert.setVisibility(View.VISIBLE);
             editTransactionAlert.setText(getString(R.string.unknown_error));
@@ -369,13 +380,14 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
     public void showUpdatedWalletBalance(Wallet wallet) {
         if (wallet != null) {
             editTransactionAlert.setVisibility(View.GONE);
-
-            editTransactionDelete.setEnabled(true);
-            editTransactionDelete.setText(getString(R.string.delete));
-            editTransactionDelete.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.red)));
+            editTransactionAlert.setText("");
 
             editTransactionSave.setEnabled(true);
             editTransactionSave.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.primary)));
+            editTransactionSave.setText(getString(R.string.save));
+
+            editTransactionDelete.setEnabled(true);
+            editTransactionDelete.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(EditTransactionActivity.this, R.color.red)));
 
             finish();
         }
