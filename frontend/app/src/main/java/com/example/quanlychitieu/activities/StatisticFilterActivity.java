@@ -16,7 +16,7 @@ import com.example.quanlychitieu.utils.CustomConstant;
 import java.util.Calendar;
 
 public class StatisticFilterActivity extends AppCompatActivity implements MonthYearPickerActivity.OnDateSetListener {
-    TextView filterLastMonth, filterThisMonth, filterAnotherMonth;
+    TextView filterLastMonth, filterThisMonth, filterAnotherMonth, filterAll;
 
 
     @Override
@@ -36,39 +36,39 @@ public class StatisticFilterActivity extends AppCompatActivity implements MonthY
     }
 
     private void handleFilterItemClicked() {
-        filterLastMonth.setOnClickListener(new View.OnClickListener() {
+        filterAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
-                intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_LAST_MONTH);
+                intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_ALL);
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
 
-        filterThisMonth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
-                intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_THIS_MONTH);
-                setResult(RESULT_OK, intent);
-                finish();
-
-            }
+        filterLastMonth.setOnClickListener(v -> {
+            Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
+            intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_LAST_MONTH);
+            setResult(RESULT_OK, intent);
+            finish();
         });
 
-        filterAnotherMonth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMonthYearPickerDialog();
-            }
+        filterThisMonth.setOnClickListener(v -> {
+            Intent intent = new Intent(StatisticFilterActivity.this, MainActivity.class);
+            intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_THIS_MONTH);
+            setResult(RESULT_OK, intent);
+            finish();
+
         });
+
+        filterAnotherMonth.setOnClickListener(v -> showMonthYearPickerDialog());
     }
 
     private void initializeElement() {
         filterLastMonth = findViewById(R.id.filterLastMonth);
         filterThisMonth = findViewById(R.id.filterThisMonth);
         filterAnotherMonth = findViewById(R.id.filterAnotherMonth);
+        filterAll = findViewById(R.id.filterAll);
     }
 
     private void showMonthYearPickerDialog() {
@@ -92,12 +92,10 @@ public class StatisticFilterActivity extends AppCompatActivity implements MonthY
     public void onDateSet(int year, int month) {
         String selectedDate = ""; // Your logic to create the title based on year and month goes here
         Intent intent = new Intent();
+        intent.putExtra("sts_filter", CustomConstant.FILTER_STATISTIC_OTHER_MONTH);
         intent.putExtra("selected_year", year);
         intent.putExtra("selected_month", month);
         setResult(RESULT_OK, intent);
         finish();
     }
-
-
-
 }

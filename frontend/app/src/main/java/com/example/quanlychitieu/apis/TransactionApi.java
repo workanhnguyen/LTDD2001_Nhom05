@@ -22,9 +22,17 @@ public interface TransactionApi {
     @GET("/transactions/all/by-user")
     Call<List<Transaction>> getAllTransactionsByUserId(@Query("userId") Integer userId);
     @GET("/transactions/all/sum-expense/by-user")
-    Call<Long> getSumOfExpenseByUserId(@Query("userId") Integer userId);
+    Call<Long> getAllSumOfExpenseByUserId(@Query("userId") Integer userId);
     @GET("/transactions/all/sum-income/by-user")
-    Call<Long> getSumOfIncomeByUserId(@Query("userId") Integer userId);
+    Call<Long> getAllSumOfIncomeByUserId(@Query("userId") Integer userId);
+
+    // Statistic - MONTH
+    @GET("/transactions/month/by-user")
+    Call<List<Transaction>> getMonthTransactionsByUserId(@Query("userId") Integer userId, @Query("secondsStartTime") Long secondsStartTime, @Query("secondsEndTime") Long secondsEndTime);
+    @GET("/transactions/month/sum-expense/by-user")
+    Call<Long> getMonthSumOfExpenseByUserId(@Query("userId") Integer userId, @Query("secondsStartTime") Long secondsStartTime, @Query("secondsEndTime") Long secondsEndTime);
+    @GET("/transactions/month/sum-income/by-user")
+    Call<Long> getMonthSumOfIncomeByUserId(@Query("userId") Integer userId, @Query("secondsStartTime") Long secondsStartTime, @Query("secondsEndTime") Long secondsEndTime);
 
     @POST("/transactions")
     Call<Transaction> addNewTransaction(@Body TransactionDto transactionDto);

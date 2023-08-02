@@ -72,7 +72,6 @@
             android:id="@+id/filterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/this_month"
             android:textSize="16sp"
             android:textColor="@color/primary"/>
         <ImageView

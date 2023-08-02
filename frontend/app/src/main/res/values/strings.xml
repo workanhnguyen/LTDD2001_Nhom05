@@ -160,4 +160,5 @@
     <string name="read_only_transaction">(*) Giao dịch này chỉ được xem</string>
     <string name="delete_user">Xóa người dùng</string>
     <string name="time_error">Lỗi thời gian</string>
+    <string name="all">Tất cả</string>
 </resources>

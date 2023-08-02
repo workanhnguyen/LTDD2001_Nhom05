@@ -30,8 +30,12 @@ import com.example.quanlychitieu.models.Transaction;
 import com.example.quanlychitieu.presenters.OverViewPresenter;
 import com.example.quanlychitieu.utils.CommonUtil;
 import com.example.quanlychitieu.utils.CustomConstant;
+import com.example.quanlychitieu.utils.DateUtil;
 import com.example.quanlychitieu.views.OverViewView;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OverViewFragment extends Fragment implements OverViewView {
@@ -44,6 +48,8 @@ public class OverViewFragment extends Fragment implements OverViewView {
     private OverViewPresenter overViewPresenter;
     SharedPreferences sharedPreferences;
     SharedPreferences toggleShowBalance;
+    Date statisticDate;
+    String filterType = CustomConstant.FILTER_STATISTIC_ALL;
     public OverViewFragment() { }
     public static OverViewFragment newInstance(Bundle bundle) {
         OverViewFragment fragment = new OverViewFragment();
@@ -85,20 +91,35 @@ public class OverViewFragment extends Fragment implements OverViewView {
     }
 
     private void handleSwitchToStatisticFilter() {
-        linearLayoutFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StatisticFilterActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_SECOND_ACTIVITY);
-            }
+        linearLayoutFilter.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), StatisticFilterActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SECOND_ACTIVITY);
         });
     }
     private void loadData() {
         loadDataAlert.setText(getString(R.string.loading_data));
-        overViewPresenter.loadTransactionsByUserId(sharedPreferences.getInt("id", 1));
-        overViewPresenter.loadSumOfBalance(sharedPreferences.getInt("id", 1));
-        overViewPresenter.loadSumOfExpense(sharedPreferences.getInt("id", 1));
-        overViewPresenter.loadSumOfIncome(sharedPreferences.getInt("id", 1));
+        overViewPresenter.loadSumOfBalanceByUserId(sharedPreferences.getInt("id", 1));
+//        overViewPresenter.loadAllTransactionsByUserId(sharedPreferences.getInt("id", 1));
+//        overViewPresenter.loadAllSumOfExpenseByUserId(sharedPreferences.getInt("id", 1));
+//        overViewPresenter.loadSumOfIncomeByUserId(sharedPreferences.getInt("id", 1));
+
+        if (filterType.equals(CustomConstant.FILTER_STATISTIC_ALL)) {
+            overViewPresenter.loadAllTransactionsByUserId(sharedPreferences.getInt("id", 1));
+            overViewPresenter.loadAllSumOfExpenseByUserId(sharedPreferences.getInt("id", 1));
+            overViewPresenter.loadSumOfIncomeByUserId(sharedPreferences.getInt("id", 1));
+        } else if (filterType.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH)) {
+            overViewPresenter.loadMonthTransactionsByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(DateUtil.getCurrentMonth())), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(DateUtil.getCurrentMonth())));
+            overViewPresenter.loadMonthSumOfExpenseByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(DateUtil.getCurrentMonth())), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(DateUtil.getCurrentMonth())));
+            overViewPresenter.loadMonthSumOfIncomeByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(DateUtil.getCurrentMonth())), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(DateUtil.getCurrentMonth())));
+        } else if (filterType.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH)) {
+            overViewPresenter.loadMonthTransactionsByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(DateUtil.getPreviousMonth())), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(DateUtil.getPreviousMonth())));
+            overViewPresenter.loadMonthSumOfExpenseByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(DateUtil.getPreviousMonth())), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(DateUtil.getPreviousMonth())));
+            overViewPresenter.loadMonthSumOfIncomeByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(DateUtil.getPreviousMonth())), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(DateUtil.getPreviousMonth())));
+        } else if (filterType.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH)) {
+            overViewPresenter.loadMonthTransactionsByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(statisticDate)), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(statisticDate)));
+            overViewPresenter.loadMonthSumOfExpenseByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(statisticDate)), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(statisticDate)));
+            overViewPresenter.loadMonthSumOfIncomeByUserId(sharedPreferences.getInt("id", 1), DateUtil.convertDateToSeconds(DateUtil.getStartTimeOfDate(statisticDate)), DateUtil.convertDateToSeconds(DateUtil.getEndTimeOfDate(statisticDate)));
+        }
     }
     private void populateListView(List<Transaction> transactions) {
         TransactionAdapter adapter = new TransactionAdapter(transactions);
@@ -118,7 +139,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
         loadDataAlert = view.findViewById(R.id.loadDataAlert);
 
         filterTitle = view.findViewById(R.id.filterTitle);
-        filterTitle.setText(getString(R.string.this_month));
+        filterTitle.setText(getString(R.string.all));
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -143,24 +164,35 @@ public class OverViewFragment extends Fragment implements OverViewView {
 
         if (requestCode == REQUEST_CODE_SECOND_ACTIVITY) {
             if (resultCode == RESULT_OK && data != null) {
-                String title = data.getStringExtra("sts_filter");
-                int year = data.getIntExtra("selected_year", -1);
-                int month = data.getIntExtra("selected_month", -1);
-                if (month >= 0 && month < 12 && year >= 0) {
-                    title = String.format("%02d/%04d", month + 1, year);
-                }
-                filterTitle.setText(title);
+
+                filterType = data.getStringExtra("sts_filter");
+
                 // Handle filter transaction here
-                if (title.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH)) {
+                if (filterType.equals(CustomConstant.FILTER_STATISTIC_LAST_MONTH)) {
                     filterTitle.setText(getString(R.string.last_month));
+                    loadData();
                 }
-                else if (title.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH)) {
+                else if (filterType.equals(CustomConstant.FILTER_STATISTIC_THIS_MONTH)) {
                     filterTitle.setText(getString(R.string.this_month));
+                    loadData();
                 }
-                else if (title.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH)) {
-                    filterTitle.setText(getString(R.string.another_month));
+                else if (filterType.equals(CustomConstant.FILTER_STATISTIC_ALL)) {
+                    filterTitle.setText(getString(R.string.all));
+                    loadData();
+                } else if (filterType.equals(CustomConstant.FILTER_STATISTIC_OTHER_MONTH)) {
+                    String time = "";
+                    int year = data.getIntExtra("selected_year", -1);
+                    int month = data.getIntExtra("selected_month", -1);
+                    if (month >= 0 && month < 12 && year >= 0) {
+                        time = String.format("%02d/%04d", month + 1, year);
+                    }
+                    filterTitle.setText(time);
+                    try {
+                        statisticDate = DateUtil.parseStringToDate(time, CustomConstant.DATE_FORMAT_MM_yyyy);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            } else {
             }
         }
     }
@@ -173,6 +205,7 @@ public class OverViewFragment extends Fragment implements OverViewView {
             populateListView(list);
         } else {
             loadDataAlert.setText(getString(R.string.no_data));
+            populateListView(new ArrayList<>());
         }
     }
 

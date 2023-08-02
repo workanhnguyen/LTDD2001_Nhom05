@@ -26,8 +26,8 @@ public class MonthYearPickerActivity extends DialogFragment {
         int currentYear = calendar.get(Calendar.YEAR);
         int currentMonth = calendar.get(Calendar.MONTH);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.custom_month_year_picker, null);
         builder.setView(dialogView);
 
@@ -37,14 +37,14 @@ public class MonthYearPickerActivity extends DialogFragment {
         monthPicker.setMinValue(1);
         monthPicker.setMaxValue(12);
         monthPicker.setValue(currentMonth + 1);
-        selectedMonth = currentMonth + 1;
 
-        yearPicker.setMinValue(currentYear);
-        yearPicker.setMaxValue(currentYear + 10);
+        yearPicker.setMinValue(1900);
+        yearPicker.setMaxValue(currentYear + 100);
         yearPicker.setValue(currentYear);
-        selectedYear = currentYear;
 
         builder.setPositiveButton("OK", (dialog, which) -> {
+            selectedMonth = monthPicker.getValue() - 1; // Subtract 1 to get 0-based month value
+            selectedYear = yearPicker.getValue();
             if (onDateSetListener != null) {
                 onDateSetListener.onDateSet(selectedYear, selectedMonth);
             }

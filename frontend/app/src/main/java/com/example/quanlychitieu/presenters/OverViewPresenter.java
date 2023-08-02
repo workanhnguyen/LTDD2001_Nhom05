@@ -19,7 +19,7 @@ public class OverViewPresenter {
         this.overViewView = overViewView;
     }
 
-    public void loadTransactionsByUserId(Integer userId) {
+    public void loadAllTransactionsByUserId(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
 
@@ -35,7 +35,7 @@ public class OverViewPresenter {
             }
         });
     }
-    public void loadSumOfBalance(Integer userId) {
+    public void loadSumOfBalanceByUserId(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         WalletApi walletApi = retrofitConfig.getRetrofit().create(WalletApi.class);
 
@@ -51,11 +51,11 @@ public class OverViewPresenter {
             }
         });
     }
-    public void loadSumOfExpense(Integer userId) {
+    public void loadAllSumOfExpenseByUserId(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
 
-        transactionApi.getSumOfExpenseByUserId(userId).enqueue(new Callback<Long>() {
+        transactionApi.getAllSumOfExpenseByUserId(userId).enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
                 overViewView.showSumOfExpense(response.body());
@@ -68,11 +68,62 @@ public class OverViewPresenter {
         });
     }
 
-    public void loadSumOfIncome(Integer userId) {
+    public void loadSumOfIncomeByUserId(Integer userId) {
         RetrofitConfig retrofitConfig = new RetrofitConfig();
         TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
 
-        transactionApi.getSumOfIncomeByUserId(userId).enqueue(new Callback<Long>() {
+        transactionApi.getAllSumOfIncomeByUserId(userId).enqueue(new Callback<Long>() {
+            @Override
+            public void onResponse(Call<Long> call, Response<Long> response) {
+                overViewView.showSumOfIncome(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Long> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void loadMonthTransactionsByUserId(Integer userId, Long secondsStartTime, Long secondsEndStartTime) {
+        RetrofitConfig retrofitConfig = new RetrofitConfig();
+        TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
+
+        transactionApi.getMonthTransactionsByUserId(userId, secondsStartTime, secondsEndStartTime).enqueue(new Callback<List<Transaction>>() {
+            @Override
+            public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
+                overViewView.showTransactionList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Transaction>> call, Throwable t) {
+                overViewView.showGetDataError();
+            }
+        });
+    }
+
+    public void loadMonthSumOfExpenseByUserId(Integer userId, Long secondsStartTime, Long secondsEndStartTime) {
+        RetrofitConfig retrofitConfig = new RetrofitConfig();
+        TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
+
+        transactionApi.getMonthSumOfExpenseByUserId(userId, secondsStartTime, secondsEndStartTime).enqueue(new Callback<Long>() {
+            @Override
+            public void onResponse(Call<Long> call, Response<Long> response) {
+                overViewView.showSumOfExpense(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Long> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void loadMonthSumOfIncomeByUserId(Integer userId, Long secondsStartTime, Long secondsEndStartTime) {
+        RetrofitConfig retrofitConfig = new RetrofitConfig();
+        TransactionApi transactionApi = retrofitConfig.getRetrofit().create(TransactionApi.class);
+
+        transactionApi.getMonthSumOfIncomeByUserId(userId, secondsStartTime, secondsEndStartTime).enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
                 overViewView.showSumOfIncome(response.body());
