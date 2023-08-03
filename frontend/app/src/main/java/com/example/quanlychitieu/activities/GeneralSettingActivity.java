@@ -3,6 +3,8 @@ package com.example.quanlychitieu.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +18,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.adapters.SpinnerLanguageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class GeneralSettingActivity extends AppCompatActivity {
     Switch switchShowHideBalance;
-    Spinner settingSpinnerLanguage;
-    SharedPreferences toggleShowBalancePref;
+    Spinner spinnerLanguage;
+    SharedPreferences toggleShowBalancePref, languagePreferences;
     List<String> languages = new ArrayList<>();
 
     @Override
@@ -39,6 +43,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         }
 
         toggleShowBalancePref = getSharedPreferences("setting", Context.MODE_PRIVATE);
+        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
 
         initializeElement();
         handleToggleShowHideBalance();
@@ -49,16 +54,37 @@ public class GeneralSettingActivity extends AppCompatActivity {
 
         languages.add(getString(R.string.language_vn));
         languages.add(getString(R.string.language_en));
-        settingSpinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(GeneralSettingActivity.this, languages);
+        spinnerLanguage.setAdapter(adapter);
+
+        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+        String selectedLanguage = languagePreferences.getString("language", "vi");
+        // Set the locale based on the user's preferred language
+        setLocale(selectedLanguage);
+        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                String selectedLanguage;
+                if (position == 0) {
+                    selectedLanguage = "vi"; // Vietnamese
+                } else {
+                    selectedLanguage = "en"; // English
+                }
+                String currentLanguage = getSelectedLanguage();
+                if (!selectedLanguage.equals(currentLanguage)) {
+                    setLocale(selectedLanguage);
+                    recreate();
+                }
+                // Set the selected item in the spinner based on the selected language
+                if (selectedLanguage.equals("vi")) {
+                    spinnerLanguage.setSelection(0);
+                } else if (selectedLanguage.equals("en")) {
+                    spinnerLanguage.setSelection(1);
+                }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
@@ -77,7 +103,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         switchShowHideBalance.setChecked(toggleShowBalancePref.getBoolean("isShowBalance", true));
         handleToggleStyle(toggleShowBalancePref.getBoolean("isShowBalance", true));
 
-        settingSpinnerLanguage = findViewById(R.id.settingSpinnerLanguage);
+        spinnerLanguage = findViewById(R.id.settingSpinnerLanguage);
     }
 
     private void handleToggleStyle(boolean isChecked) {
@@ -99,7 +125,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         } else if (selectedLanguage.equals("en")) {
             return getString(R.string.language_en);
         }
-        return getString(R.string.language_vn); //
+        return getString(R.string.language_vn);
     }
 
     @Override
@@ -111,5 +137,24 @@ public class GeneralSettingActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources resources = getResources();
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = languagePreferences.edit();
+        editor.putString("language", lang);
+        editor.apply();
+    }
+
+    private String getSelectedLanguage() {
+        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+        return languagePreferences.getString("language", "vi");
     }
 }
