@@ -128,16 +128,6 @@ public class ChooseCategoryTypeActivity extends AppCompatActivity implements Cho
         alertLoadingCategoryType.setText(getString(R.string.error_loading_data));
     }
 
-//    @Override
-//    public void passCategoryTypeData(CategoryType categoryType) {
-////        Parcelable parcelable = Parcels.wrap(categoryType);
-////
-////        Intent intent = new Intent();
-////        intent.putExtra("categoryType", parcelable);
-////        setResult(RESULT_OK, intent);
-////        finish();
-//    }
-
     @Override
     public void passData(Object data) {
         Parcelable parcelable = Parcels.wrap((CategoryType) data);

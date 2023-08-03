@@ -16,19 +16,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.R;
+import com.example.quanlychitieu.activities.ChooseCategoryTypeActivity;
 import com.example.quanlychitieu.adapters.CategoryTypeAdapter;
+import com.example.quanlychitieu.adapters.ChooseCategoryTypeAdapter;
 import com.example.quanlychitieu.models.CategoryType;
+import com.example.quanlychitieu.presenters.CategoryTypePresenter;
 import com.example.quanlychitieu.sampledatas.CategoryData;
+import com.example.quanlychitieu.views.CategoryTypeView;
 
 import java.util.List;
 
-public class CategoryTypeFragment extends Fragment {
-    TextView categoryTypeExpense, categoryTypeIncome;
+public class CategoryTypeFragment extends Fragment implements CategoryTypeView {
+    TextView categoryTypeExpense, categoryTypeIncome, categoryTypeAlert;
     RecyclerView categoryTypeList;
     CategoryTypeAdapter adapter;
-
-    List<CategoryType> expenseCategories = CategoryData.getExpenseCategoryTypeList();
-    List<CategoryType> incomeCategories = CategoryData.getIncomeCategoryTypeList();
+    CategoryTypePresenter categoryTypePresenter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,8 @@ public class CategoryTypeFragment extends Fragment {
             activity.getSupportActionBar().setTitle(R.string.category_3);
             activity.getSupportActionBar().setElevation(0);
         }
+
+        categoryTypePresenter = new CategoryTypePresenter(this);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,43 +57,41 @@ public class CategoryTypeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeElement(view);
-        loadCategoryTypeData(expenseCategories);
+        loadExpenseCategoryTypeData();
         handleShowCategoryTypeDataToUI();
     }
 
-    private void loadCategoryTypeData(List<CategoryType> list) {
-        adapter = new CategoryTypeAdapter(list);
-        adapter.setContext(getActivity());
-        categoryTypeList.setAdapter(adapter);
-        categoryTypeList.setLayoutManager(new LinearLayoutManager(getContext()));
+    private void loadExpenseCategoryTypeData() {
+        categoryTypeAlert.setText(getString(R.string.loading_data));
+        categoryTypePresenter.loadExpenseCategories();
+    }
+
+    private void loadIncomeCategoryTypeData() {
+        categoryTypeAlert.setText(getString(R.string.loading_data));
+        categoryTypePresenter.loadIncomeCategories();
     }
 
     private void handleShowCategoryTypeDataToUI() {
         categoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
         categoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
 
-        categoryTypeExpense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                categoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
-                categoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
+        categoryTypeExpense.setOnClickListener(v -> {
+            categoryTypeIncome.setTextColor(getResources().getColor(R.color.black));
+            categoryTypeExpense.setTextColor(getResources().getColor(R.color.primary));
 
-                loadCategoryTypeData(expenseCategories);
-            }
+            loadExpenseCategoryTypeData();
         });
 
-        categoryTypeIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                categoryTypeExpense.setTextColor(getResources().getColor(R.color.black));
-                categoryTypeIncome.setTextColor(getResources().getColor(R.color.primary));
+        categoryTypeIncome.setOnClickListener(v -> {
+            categoryTypeIncome.setTextColor(getResources().getColor(R.color.primary));
+            categoryTypeExpense.setTextColor(getResources().getColor(R.color.black));
 
-                loadCategoryTypeData(incomeCategories);
-            }
+            loadIncomeCategoryTypeData();
         });
     }
 
     private void initializeElement(View view) {
+        categoryTypeAlert = view.findViewById(R.id.categoryTypeAlert);
         categoryTypeExpense = view.findViewById(R.id.categoryTypeExpense);
         categoryTypeIncome = view.findViewById(R.id.categoryTypeIncome);
         categoryTypeList = view.findViewById(R.id.categoryTypeList);
@@ -98,5 +100,32 @@ public class CategoryTypeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_only_title, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void showExpenseCategories(List<CategoryType> list) {
+        categoryTypeAlert.setText("");
+
+        adapter = new CategoryTypeAdapter(list);
+        adapter.setContext(requireActivity());
+
+        categoryTypeList.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        categoryTypeList.setAdapter(adapter);
+    }
+
+    @Override
+    public void showIncomeCategories(List<CategoryType> list) {
+        categoryTypeAlert.setText("");
+
+        adapter = new CategoryTypeAdapter(list);
+        adapter.setContext(requireActivity());
+
+        categoryTypeList.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        categoryTypeList.setAdapter(adapter);
+    }
+
+    @Override
+    public void showError() {
+        categoryTypeAlert.setText(getString(R.string.error_loading_data));
     }
 }
