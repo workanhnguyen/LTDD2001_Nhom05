@@ -26,7 +26,7 @@ import java.util.Locale;
 
 public class GeneralSettingActivity extends AppCompatActivity {
     Switch switchShowHideBalance;
-    Spinner spinnerLanguage;
+//    Spinner spinnerLanguage;
     SharedPreferences toggleShowBalancePref, languagePreferences;
     List<String> languages = new ArrayList<>();
 
@@ -47,46 +47,46 @@ public class GeneralSettingActivity extends AppCompatActivity {
 
         initializeElement();
         handleToggleShowHideBalance();
-        handleChangeLanguage();
+//        handleChangeLanguage();
     }
 
-    private void handleChangeLanguage() {
-
-        languages.add(getString(R.string.language_vn));
-        languages.add(getString(R.string.language_en));
-
-        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(GeneralSettingActivity.this, languages);
-        spinnerLanguage.setAdapter(adapter);
-
-        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
-        String selectedLanguage = languagePreferences.getString("language", "vi");
-        // Set the locale based on the user's preferred language
-        setLocale(selectedLanguage);
-        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedLanguage;
-                if (position == 0) {
-                    selectedLanguage = "vi"; // Vietnamese
-                } else {
-                    selectedLanguage = "en"; // English
-                }
-                String currentLanguage = getSelectedLanguage();
-                if (!selectedLanguage.equals(currentLanguage)) {
-                    setLocale(selectedLanguage);
-                    recreate();
-                }
-                // Set the selected item in the spinner based on the selected language
-                if (selectedLanguage.equals("vi")) {
-                    spinnerLanguage.setSelection(0);
-                } else if (selectedLanguage.equals("en")) {
-                    spinnerLanguage.setSelection(1);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-    }
+//    private void handleChangeLanguage() {
+//
+//        languages.add(getString(R.string.language_vn));
+//        languages.add(getString(R.string.language_en));
+//
+//        SpinnerLanguageAdapter adapter = new SpinnerLanguageAdapter(GeneralSettingActivity.this, languages);
+//        spinnerLanguage.setAdapter(adapter);
+//
+//        languagePreferences = getSharedPreferences("languagePref", Context.MODE_PRIVATE);
+//        String selectedLanguage = languagePreferences.getString("language", "vi");
+//        // Set the locale based on the user's preferred language
+//        setLocale(selectedLanguage);
+//        spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedLanguage;
+//                if (position == 0) {
+//                    selectedLanguage = "vi"; // Vietnamese
+//                } else {
+//                    selectedLanguage = "en"; // English
+//                }
+//                String currentLanguage = getSelectedLanguage();
+//                if (!selectedLanguage.equals(currentLanguage)) {
+//                    setLocale(selectedLanguage);
+//                    recreate();
+//                }
+//                // Set the selected item in the spinner based on the selected language
+//                if (selectedLanguage.equals("vi")) {
+//                    spinnerLanguage.setSelection(0);
+//                } else if (selectedLanguage.equals("en")) {
+//                    spinnerLanguage.setSelection(1);
+//                }
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {}
+//        });
+//    }
 
     private void handleToggleShowHideBalance() {
         switchShowHideBalance.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -103,7 +103,7 @@ public class GeneralSettingActivity extends AppCompatActivity {
         switchShowHideBalance.setChecked(toggleShowBalancePref.getBoolean("isShowBalance", true));
         handleToggleStyle(toggleShowBalancePref.getBoolean("isShowBalance", true));
 
-        spinnerLanguage = findViewById(R.id.settingSpinnerLanguage);
+//        spinnerLanguage = findViewById(R.id.settingSpinnerLanguage);
     }
 
     private void handleToggleStyle(boolean isChecked) {
