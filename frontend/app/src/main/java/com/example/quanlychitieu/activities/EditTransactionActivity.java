@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -159,8 +160,8 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
                 try {
                     TransactionDto transactionDto = new TransactionDto();
                     transactionDto.setTotal(Long.parseLong(transactionBalance));
-                    transactionDto.setWalletId(transaction.getWallet().getId());
-                    transactionDto.setCategoryTypeId(transaction.getCategoryType().getId());
+                    transactionDto.setWalletId(wallet.getId());
+                    transactionDto.setCategoryTypeId(categoryType.getId());
                     transactionDto.setDescription(transactionDescription);
                     transactionDto.setCreatedDate(DateUtil.convertDateToSeconds(DateUtil.parseStringToDate(transactionTime, CustomConstant.DATE_FORMAT_dd_MM_yyyy_hh_mm_a)));
 
@@ -267,6 +268,8 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
     private void loadTransactionData() {
         Parcelable parcelable = getIntent().getParcelableExtra("transaction");
         transaction = Parcels.unwrap(parcelable);
+        wallet = transaction.getWallet();
+        categoryType = transaction.getCategoryType();
     }
 
     @Override
@@ -289,7 +292,7 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
             assert data != null;
             Parcelable parcelableCategoryType = data.getParcelableExtra("categoryType");
             categoryType = Parcels.unwrap(parcelableCategoryType);
-            transaction.setCategoryType(categoryType);
+//            transaction.setCategoryType(categoryType);
 
             RequestOptions requestOptionsCategoryType = new RequestOptions()
                     .placeholder(R.drawable.app_icon_background)
@@ -306,7 +309,7 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
             assert data != null;
             Parcelable parcelableWallet = data.getParcelableExtra("wallet");
             wallet = Parcels.unwrap(parcelableWallet);
-            transaction.setWallet(wallet);
+//            transaction.setWallet(wallet);
 
             RequestOptions requestOptionsWallet = new RequestOptions()
                     .placeholder(R.drawable.app_icon_background)
@@ -324,29 +327,57 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
         if (transaction != null) {
             long updatedBalance = updatedTransaction.getTotal();
             long currentBalance = transaction.getTotal();
-            long difference = currentBalance - updatedBalance;
 
             WalletDto walletDto = new WalletDto();
+            WalletDto unChooseWalletDto = new WalletDto();
 
-            if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)) {
-                if (difference < 0) {
-                    walletDto.setBalance(transaction.getWallet().getBalance() - Math.abs(difference));
-                } else if (difference > 0) {
-                    walletDto.setBalance(transaction.getWallet().getBalance() + Math.abs(difference));
+            if (Objects.equals(transaction.getWallet().getId(), updatedTransaction.getWallet().getId())) {
+
+                if (transaction.getCategoryType().getCategoryRoot().getType().equals(updatedTransaction.getCategoryType().getCategoryRoot().getType())) {
+                    if (updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() + currentBalance - updatedBalance);
+                    } else if (updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() - currentBalance + updatedBalance);
+                    }
                 } else {
-                    walletDto.setBalance(transaction.getWallet().getBalance());
+                    if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)
+                            && updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() + currentBalance + updatedBalance);
+                    } else if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)
+                            && updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() - currentBalance - updatedBalance);
+                    }
                 }
-            }
-            else if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)) {
-                if (difference < 0) {
-                    walletDto.setBalance(transaction.getWallet().getBalance() + Math.abs(difference));
-                } else if (difference > 0) {
-                    walletDto.setBalance(transaction.getWallet().getBalance() - Math.abs(difference));
+
+                editTransactionPresenter.updateWalletBalance(updatedTransaction.getWallet().getId(), walletDto);
+            } else {
+
+                if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)) {
+                    unChooseWalletDto.setBalance(transaction.getWallet().getBalance() + currentBalance);
+                } else if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)) {
+                    unChooseWalletDto.setBalance(transaction.getWallet().getBalance() - currentBalance);
+                }
+
+                if (transaction.getCategoryType().getCategoryRoot().getType().equals(updatedTransaction.getCategoryType().getCategoryRoot().getType())) {
+                    if (updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() - updatedBalance);
+                    } else if (updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() + updatedBalance);
+                    }
                 } else {
-                    walletDto.setBalance(transaction.getWallet().getBalance());
+                    if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)
+                            && updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() + updatedBalance);
+                    } else if (transaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_INCOME)
+                            && updatedTransaction.getCategoryType().getCategoryRoot().getType().equals(CustomConstant.CATEGORY_EXPENSE)) {
+                        walletDto.setBalance(updatedTransaction.getWallet().getBalance() - updatedBalance);
+                    }
                 }
+
+                editTransactionPresenter.updateWalletBalance(transaction.getWallet().getId(), unChooseWalletDto);
+                editTransactionPresenter.updateWalletBalance(updatedTransaction.getWallet().getId(), walletDto);
             }
-            editTransactionPresenter.updateWalletBalance(transaction.getWallet().getId(), walletDto);
+
         } else {
             editTransactionAlert.setVisibility(View.VISIBLE);
             editTransactionAlert.setText(getString(R.string.unknown_error));
