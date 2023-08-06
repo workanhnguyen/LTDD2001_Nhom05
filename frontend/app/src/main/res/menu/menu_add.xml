@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/btnAdminRefresh"
+        android:title="Refresh"
+        android:icon="@drawable/baseline_autorenew_24"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
         android:id="@+id/btnAdminLogout"
         android:title="Log out"
         android:icon="@drawable/baseline_logout_24"

@@ -161,4 +161,6 @@
     <string name="delete_user">Xóa người dùng</string>
     <string name="time_error">Lỗi thời gian</string>
     <string name="all">Tất cả</string>
+    <string name="do_you_want_to_delete_this_user">Bạn có chắc chắn muốn xóa người dùng này không?</string>
+    <string name="delete_user_failed">Xóa người dùng thất bại!</string>
 </resources>
