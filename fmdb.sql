@@ -56,7 +56,7 @@ CREATE TABLE `account_type` (
   PRIMARY KEY (`id`),
   KEY `fk_account_account_type_idx` (`account_root`),
   CONSTRAINT `fk_account_account_type` FOREIGN KEY (`account_root`) REFERENCES `account_root` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `account_type` (
 
 LOCK TABLES `account_type` WRITE;
 /*!40000 ALTER TABLE `account_type` DISABLE KEYS */;
-INSERT INTO `account_type` VALUES (1,'Tiền mặt',1,NULL,NULL),(2,'Agribank',2,NULL,'Ngân hàng Nông nghiệp và Phát triển nông thôn Việt Nam'),(3,'Vietcombank',2,NULL,'Ngân hàng TMCP Ngoại thương Việt Nam'),(4,'Nam A Bank',2,NULL,'Ngân hàng TMCP Nam Á'),(5,'Momo',3,NULL,NULL),(6,'Moca',3,NULL,NULL),(7,'ShoppePay',3,NULL,NULL),(8,'ViettelPay',3,NULL,NULL),(9,'VnPay',3,NULL,NULL),(10,'ZaloPay',3,NULL,NULL),(11,'Khác',1,NULL,NULL),(12,'Mặc định',1,NULL,NULL),(17,'Tiền tiết kiệm 1',1,NULL,NULL),(18,'Tiền tiết kiệm 2',1,NULL,NULL),(19,'Tiền tiết kiệm 3',1,NULL,NULL);
+INSERT INTO `account_type` VALUES (1,'Tiền mặt',1,NULL,NULL),(2,'Agribank',2,NULL,'Ngân hàng Nông nghiệp và Phát triển nông thôn Việt Nam'),(3,'Vietcombank',2,NULL,'Ngân hàng TMCP Ngoại thương Việt Nam'),(4,'Nam A Bank',2,NULL,'Ngân hàng TMCP Nam Á'),(5,'Momo',3,NULL,NULL),(6,'Moca',3,NULL,NULL),(7,'ShoppePay',3,NULL,NULL),(8,'ViettelPay',3,NULL,NULL),(9,'VnPay',3,NULL,NULL),(10,'ZaloPay',3,NULL,NULL),(11,'Khác',1,NULL,NULL),(12,'Mặc định',1,NULL,NULL),(20,'ACB',2,NULL,'Ngân hàng TMCP Á Châu'),(21,'BIDV',2,NULL,'Ngân hàng TMCP Đầu tư và Phát triển Việt Nam'),(22,'MB',2,NULL,'Ngân hàng TMCP Quân đội'),(23,'OCB',2,NULL,'Ngân hàng TMCP Phương Đông'),(24,'Vietinbank',2,NULL,'Ngân hàng TMCP Công Thương Việt Nam'),(25,'TPBank',2,NULL,'Ngân hàng TMCP Tiên Phong'),(26,'Techcombank',2,NULL,'Ngân hàng TMCP Kỹ Thương Việt Nam'),(27,'VIB',2,NULL,'Ngân hàng TMCP Quốc tế Việt Nam'),(28,'VPBank',2,NULL,'Ngân hàng TMCP Việt Nam Thịnh Vượng');
 /*!40000 ALTER TABLE `account_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-06 14:30:03
+-- Dump completed on 2023-08-06 15:10:49
