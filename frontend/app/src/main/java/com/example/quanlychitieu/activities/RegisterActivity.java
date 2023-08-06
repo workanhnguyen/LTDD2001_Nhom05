@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
                 userDto.setCareer("");
                 userDto.setEmail(email);
                 userDto.setGender(true);
-                userDto.setImageLink("");
+                userDto.setImageLink("https://res.cloudinary.com/dougpz2fu/image/upload/v1691309723/mobile-assets/blank_avatar_peyifv.jpg");
                 userDto.setRole(CustomConstant.ROLE_USER);
 
                 registerPresenter.register(userDto);
