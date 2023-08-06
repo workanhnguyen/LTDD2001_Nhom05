@@ -27,7 +27,7 @@ public class RetrofitConfig {
 
         // Remember to change your local IP
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.31.20:8081")
+                .baseUrl("https://ltdd-nhom-05-git-mobilegroup5-dev.apps.sandbox-m4.g2pi.p1.openshiftapps.com")
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(okBuilder.build())
                 .build();
