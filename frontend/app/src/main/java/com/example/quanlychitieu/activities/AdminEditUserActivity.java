@@ -103,6 +103,13 @@ public class AdminEditUserActivity extends AppCompatActivity implements AdminEdi
             String alertString = validateUserInput(password, fullName, email);
 
             if (alertString.trim().isEmpty()) {
+                btnDeleteUser.setEnabled(false);
+                btnDeleteUser.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(AdminEditUserActivity.this, R.color.dark_grey)));
+
+                btnSaveUser.setEnabled(false);
+                btnSaveUser.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(AdminEditUserActivity.this, R.color.dark_grey)));
+                btnSaveUser.setText(getString(R.string.updating));
+
                 String[] name = CommonUtil.getFirstAndLastName(fullName);
                 String firstName = name[1];
                 String lastName = name[0];
@@ -119,6 +126,13 @@ public class AdminEditUserActivity extends AppCompatActivity implements AdminEdi
             } else {
                 adminEditUserAlert.setVisibility(View.VISIBLE);
                 adminEditUserAlert.setText(alertString);
+
+                btnDeleteUser.setEnabled(true);
+                btnDeleteUser.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(AdminEditUserActivity.this, R.color.red)));
+
+                btnSaveUser.setEnabled(true);
+                btnSaveUser.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(AdminEditUserActivity.this, R.color.primary)));
+                btnSaveUser.setText(getString(R.string.update));
             }
         });
     }
