@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +32,12 @@ public class UserController {
     private UserDao userDao;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUser(){
-        List<User> listUser = userRepository.findAll();
+    public List<User> getAllUser(){
+        List<User> listUser = userDao.getAllUsersByUserRole();
         if (listUser.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ArrayList<>();
         }
-        return new ResponseEntity<>(listUser, HttpStatus.OK);
+        return listUser;
     }
 
     @PatchMapping("/password/{userId}")
@@ -77,37 +78,14 @@ public class UserController {
         return ResponseEntity.ok().body(userDao.addNewUser(userDto));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody UserDto userDto) {
+    @PatchMapping("/{userId}")
+    public ResponseEntity<User> updateUser(@PathVariable(name = "userId") Integer id, @RequestBody UserDto userDto) {
         User updatedUser = userDao.updateUser(id, userDto);
         return updatedUser != null ? ResponseEntity.ok().body(updatedUser) : null;
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.PATCH)
-    public User updatePatchUser (@PathVariable(value = "id") int userId,
-                                 @Valid @RequestBody Map<String, Object> updates){
-        User user = userRepository.findByUserId(userId);
-        updates.forEach((key, value) -> {
-            switch (key) {
-                case "firstname" -> user.setFirstname((String) value);
-                case "lastname" -> user.setLastname((String) value);
-                case "username" -> user.setUsername((String) value);
-                case "password" -> user.setPassword((String) value);
-                case "email" -> user.setEmail((String) value);
-                default -> throw new IllegalStateException("Unexpected value: " + key);
-            }
-        });
-        return userRepository.save(user);
-    }
-
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<User> deleteUser(@PathVariable(value = "id") int id) {
-        User user = userRepository.findByUserId(id);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        userRepository.delete(user);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/{userId}")
+    public Boolean deleteUser(@PathVariable(value = "userId") Integer userId) {
+        return userDao.deleteUser(userId);
     }
 }

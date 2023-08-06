@@ -21,11 +21,8 @@ public class UserDao {
     private UserRepository userRepository;
     private ModelMapper modelMapper;
 
-    public List<UserDto> getAllUsers(){
-        List<User> users = userRepository.findAll();
-
-        return users.stream().map((a) -> modelMapper.map(a, UserDto.class))
-                .collect(Collectors.toList());
+    public List<User> getAllUsersByUserRole(){
+        return userRepository.findAllUsersByUserRole();
     }
 
     public User updateUserPassword(Integer userId, UserDto userDto) {
@@ -89,5 +86,12 @@ public class UserDao {
         user.setRole(userDto.getRole());
 
         return userRepository.save(user);
+    }
+
+    public Boolean deleteUser(Integer id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        } else return false;
     }
 }
