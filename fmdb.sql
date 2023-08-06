@@ -110,7 +110,7 @@ CREATE TABLE `category_type` (
   PRIMARY KEY (`id`),
   KEY `fk_category_category_type_idx` (`category_root`),
   CONSTRAINT `fk_category_type_category_root` FOREIGN KEY (`category_root`) REFERENCES `category_root` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `category_type` (
 
 LOCK TABLES `category_type` WRITE;
 /*!40000 ALTER TABLE `category_type` DISABLE KEYS */;
-INSERT INTO `category_type` VALUES (1,'Ăn sáng',1,NULL),(2,'Ăn trưa',1,NULL),(3,'Ăn tối',1,NULL),(4,'Ăn tiệm',1,NULL),(5,'Cafe',1,NULL),(6,'Đồ chơi',2,NULL),(7,'Học phí',2,NULL),(8,'Sách vở',2,NULL),(9,'Tiền tiêu vặt',2,NULL),(10,'Điện',3,NULL),(11,'Phí điện thoại cố định',3,NULL),(12,'Phí điện thoại di động',3,NULL),(13,'Gas',3,NULL),(14,'Internet',3,NULL),(15,'Tiền nước',3,NULL),(16,'Thuê người giúp việc',3,NULL),(17,'Truyền hình',3,NULL),(18,'Bảo hiểm xe',4,NULL),(19,'Gửi xe',4,NULL),(20,'Rửa xe',4,NULL),(21,'Sửa chữa, bảo dưỡng xe',4,NULL),(22,'Taxi/thuê xe',4,NULL),(23,'Xăng xe',4,''),(24,'Biếu tặng',5,NULL),(25,'Cưới xin',5,NULL),(26,'Ma chay',5,NULL),(27,'Thăm hỏi',5,NULL),(28,'Du lịch',6,NULL),(29,'Làm đẹp',6,NULL),(30,'Mỹ phẩm',6,NULL),(31,'Phim ảnh ca nhạc',6,NULL),(32,'Vui chơi giải trí',6,NULL),(33,'Phí chuyển khoản',7,NULL),(34,'Mua sắm đồ đạc',8,NULL),(35,'Sữa chữa nhà cửa',8,NULL),(36,'Thuê nhà',8,NULL),(37,'Học hành',9,NULL),(38,'Giao lưu, quan hệ',9,NULL),(39,'Khám chữa bệnh',10,NULL),(40,'Thể thao',10,NULL),(41,'Thuốc men',10,NULL),(42,'Giày dép',11,NULL),(43,'Phụ kiện khác',11,NULL),(44,'Quần áo',11,NULL),(45,'Trả nợ',23,NULL),(46,'Thu nợ',22,NULL),(47,'Được cho, tặng',22,NULL),(48,'Lãi ngân hàng',13,NULL),(49,'Lãi đầu tư',13,NULL),(50,'Lương',12,NULL),(51,'Thưởng',12,NULL),(52,'Đi vay',22,NULL),(53,'Cho vay',23,NULL);
+INSERT INTO `category_type` VALUES (1,'Ăn sáng',1,NULL),(2,'Ăn trưa',1,NULL),(3,'Ăn tối',1,NULL),(4,'Ăn tiệm',1,NULL),(5,'Cafe',1,NULL),(6,'Đồ chơi',2,NULL),(7,'Học phí',2,NULL),(8,'Sách vở',2,NULL),(9,'Tiền tiêu vặt',2,NULL),(10,'Điện',3,NULL),(11,'Phí điện thoại cố định',3,NULL),(12,'Phí điện thoại di động',3,NULL),(13,'Gas',3,NULL),(14,'Internet',3,NULL),(15,'Tiền nước',3,NULL),(16,'Thuê người giúp việc',3,NULL),(17,'Truyền hình',3,NULL),(18,'Bảo hiểm xe',4,NULL),(19,'Gửi xe',4,NULL),(20,'Rửa xe',4,NULL),(21,'Sửa chữa, bảo dưỡng xe',4,NULL),(22,'Taxi/thuê xe',4,NULL),(23,'Xăng xe',4,''),(24,'Biếu tặng',5,NULL),(25,'Cưới xin',5,NULL),(26,'Ma chay',5,NULL),(27,'Thăm hỏi',5,NULL),(28,'Du lịch',6,NULL),(29,'Làm đẹp',6,NULL),(30,'Mỹ phẩm',6,NULL),(31,'Phim ảnh ca nhạc',6,NULL),(32,'Vui chơi giải trí',6,NULL),(33,'Phí chuyển khoản',7,NULL),(34,'Mua sắm đồ đạc',8,NULL),(35,'Sữa chữa nhà cửa',8,NULL),(36,'Thuê nhà',8,NULL),(37,'Học hành',9,NULL),(38,'Giao lưu, quan hệ',9,NULL),(39,'Khám chữa bệnh',10,NULL),(40,'Thể thao',10,NULL),(41,'Thuốc men',10,NULL),(42,'Giày dép',11,NULL),(43,'Phụ kiện khác',11,NULL),(44,'Quần áo',11,NULL),(45,'Trả nợ',23,NULL),(46,'Thu nợ',22,NULL),(47,'Được cho, tặng',22,NULL),(48,'Lãi ngân hàng',13,NULL),(49,'Lãi đầu tư',13,NULL),(50,'Lương',12,NULL),(51,'Thưởng',12,NULL),(52,'Đi vay',22,NULL),(53,'Cho vay',23,NULL),(54,'Chỉnh sửa ví',22,NULL),(55,'Chỉnh sửa ví',23,NULL);
 /*!40000 ALTER TABLE `category_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +134,7 @@ CREATE TABLE `transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   `category_type` int DEFAULT NULL,
-  `created_date` datetime(6) NOT NULL,
+  `created_date` mediumtext COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `wallet` int DEFAULT NULL,
   `total` bigint DEFAULT NULL,
   `image` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
@@ -143,7 +143,7 @@ CREATE TABLE `transaction` (
   KEY `fk_transaction_wallet_idx` (`wallet`),
   CONSTRAINT `fk_transaction_category_type` FOREIGN KEY (`category_type`) REFERENCES `category_type` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_transaction_wallet` FOREIGN KEY (`wallet`) REFERENCES `wallet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +152,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,'Ăn sáng bánh mì',1,'2023-07-05 07:31:00.000000',1,15000,NULL),(2,'Đổ xăng đầy bình',23,'2023-06-15 20:19:00.000000',1,80000,NULL),(3,'Mua cà phê',5,'2023-07-04 07:00:04.000000',2,15000,NULL),(4,'Ăn bún bò',3,'2023-06-30 18:28:00.000000',3,30000,NULL),(5,'Mua nước suối Circle K',5,'2023-07-01 09:31:00.000000',4,6000,NULL),(6,'Đi xem phim',31,'2023-05-19 21:04:00.000000',4,139000,NULL),(7,'Ăn trưa',2,'2023-06-28 11:03:00.000000',6,25000,NULL),(8,'Đổ xăng',23,'2023-07-02 10:03:00.000000',5,50000,NULL),(9,'Đi grab',22,'2023-06-19 16:00:00.000000',5,39000,NULL),(10,'Mua mỹ phẩm',29,'2023-06-04 19:08:22.000000',7,230000,NULL),(11,'Đóng trọ',36,'2023-07-01 09:30:30.000000',7,1000000,NULL),(12,'Nhận học bổng',51,'2023-06-22 09:02:00.000000',8,5000000,NULL);
+INSERT INTO `transaction` VALUES (4,'Ăn bún bò',3,'1688124480',3,30000,NULL),(5,'Mua nước suối Circle K',5,'1688178660',4,6000,NULL),(6,'Đi xem phim',31,'1684505040',4,139000,NULL),(7,'Ăn trưa',2,'1687924980',6,25000,NULL),(8,'Đổ xăng',23,'1688266980',5,50000,NULL),(9,'Đi grab',22,'1687165200',5,39000,NULL),(10,'Mua mỹ phẩm',29,'1685880502',7,230000,NULL),(11,'Đóng trọ',36,'1688178630',7,1000000,NULL),(12,'Nhận học bổng',51,'1687399320',8,5000000,NULL),(63,'Hihi',2,'1690708140',7,20000,''),(74,'Cơm trưa',2,'1683705120',2,20000,''),(90,'Ăn trưa',2,'1691058300',1,20000,'');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `user` (
   `role` enum('ROLE_ADMIN','ROLE_USER') COLLATE utf8mb4_vietnamese_ci DEFAULT 'ROLE_USER',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Anh','Nguyễn','anhnguyen','1234','anh@gmail.com',1,'Sinh viên','https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/338018331_254856326897520_3856794107188959630_n.jpg?_nc_cat=101&cb=99be929b-59f725be&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=polDCS2paJIAX-YHF2O&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfBCQKct3Ww1dHczh1Kd_GfEaX_IeQHTQlGZDByMX2EdhQ&oe=64C280E6','ROLE_USER'),(2,'Đạt','Lương','luongdat','1234','dat@gmail.com',1,'Sinh viên','https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/341033378_927338095248252_3614182632098763100_n.jpg?stp=cp6_dst-jpg&_nc_cat=107&cb=99be929b-59f725be&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=XmCsXQ0m5CAAX_GGXZK&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDZeMDi5voLjp0VVnocfW3S9dvqxn8SuA7osUzJCHuIPw&oe=64C1C686','ROLE_USER'),(3,'Mãi','Đặng','maidang','1234','mai@gmail.com',1,'Sinh viên','https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/280334526_126618866654533_5990798067395328668_n.jpg?_nc_cat=104&cb=99be929b-59f725be&ccb=1-7&_nc_sid=174925&_nc_ohc=Fj-XSnen9HcAX_FAirq&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfAOw1xW4QJZQ9Aw6p2b1yOFExjQaoK7_yJMU_g-Ri77Kg&oe=64C23B2F','ROLE_USER'),(4,'Quỳnh','Đào','quynhdao','1234','quynh@gmail.com',0,'Sinh viên','https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/325171580_507602668030371_976961888220416543_n.jpg?stp=cp6_dst-jpg&_nc_cat=111&cb=99be929b-59f725be&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=U4-_UUoVMfUAX-YQWS4&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfCG4-EjM3ZpGMqDepOBDmrWML1hlVKa1kuy2VS_qCEX1w&oe=64C15278','ROLE_USER'),(5,'Manager','Admin','admin','admin','admin@gmail.com',1,NULL,NULL,'ROLE_ADMIN'),(16,'Bảo Lộc','Phạm','baoloc','1234','loc@gmail.com',1,'','',NULL);
+INSERT INTO `user` VALUES (1,'Nguyễn','Anh','anhnguyen','1234','anh@gmail.com',1,'Sinh viên','https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/338018331_254856326897520_3856794107188959630_n.jpg?_nc_cat=101&cb=99be929b-59f725be&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=polDCS2paJIAX-YHF2O&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfBCQKct3Ww1dHczh1Kd_GfEaX_IeQHTQlGZDByMX2EdhQ&oe=64C280E6','ROLE_USER'),(2,'Đạt','Lương','luongdat','1234','dat@gmail.com',1,'Sinh viên','https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/341033378_927338095248252_3614182632098763100_n.jpg?stp=cp6_dst-jpg&_nc_cat=107&cb=99be929b-59f725be&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=XmCsXQ0m5CAAX_GGXZK&_nc_ht=scontent.fsgn2-3.fna&oh=00_AfDZeMDi5voLjp0VVnocfW3S9dvqxn8SuA7osUzJCHuIPw&oe=64C1C686','ROLE_USER'),(3,'Mãi','Đặng','maidang','1234','mai@gmail.com',1,'Sinh viên','https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/280334526_126618866654533_5990798067395328668_n.jpg?_nc_cat=104&cb=99be929b-59f725be&ccb=1-7&_nc_sid=174925&_nc_ohc=Fj-XSnen9HcAX_FAirq&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfAOw1xW4QJZQ9Aw6p2b1yOFExjQaoK7_yJMU_g-Ri77Kg&oe=64C23B2F','ROLE_USER'),(4,'Quỳnh','Đào','quynhdao','1234','quynh@gmail.com',0,'Sinh viên','https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/325171580_507602668030371_976961888220416543_n.jpg?stp=cp6_dst-jpg&_nc_cat=111&cb=99be929b-59f725be&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=U4-_UUoVMfUAX-YQWS4&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfCG4-EjM3ZpGMqDepOBDmrWML1hlVKa1kuy2VS_qCEX1w&oe=64C15278','ROLE_USER'),(5,'Manager','Admin','admin','admin','admin@gmail.com',1,NULL,NULL,'ROLE_ADMIN'),(19,'Phan Bảo Toàn','Trần','toantran','12345','toan@gmail.com',1,'','https://res.cloudinary.com/dcheizves/image/upload/v1691289436/mobile-assets/blank_avatar_gvpfut.jpg','ROLE_USER');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +208,7 @@ CREATE TABLE `wallet` (
   KEY `fk_wallet_user_idx` (`user`),
   CONSTRAINT `fk_wallet_account_type` FOREIGN KEY (`account_type`) REFERENCES `account_type` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_wallet_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,7 +217,7 @@ CREATE TABLE `wallet` (
 
 LOCK TABLES `wallet` WRITE;
 /*!40000 ALTER TABLE `wallet` DISABLE KEYS */;
-INSERT INTO `wallet` VALUES (1,1,1,'Tiền ăn uống',2378000,'Chi phí ăn uống hàng tháng'),(2,1,5,'Ví Momo',3297000,'Gửi túi thần tài'),(3,2,1,'Tiền mặt',4240000,'Tiền hàng tháng'),(4,2,4,'Thẻ Nam Á',1506000,'Tiền trong thẻ'),(5,3,1,'Tiền đi lại',140000,'Xăng xe, di chuyển'),(6,3,2,'Tiền chi tiêu',5600000,'Ăn uống, sinh hoạt'),(7,4,1,'Tiền tiêu mẹ cho',12100000,'Phí sinh hoạt'),(8,4,4,'Học bổng',12000000,'Học bổng DHM');
+INSERT INTO `wallet` VALUES (1,1,1,'Tiền ăn uống',2258000,'Chi phí ăn uống hàng tháng'),(2,1,5,'Ví Momo',2201071,'Gửi túi thần tài'),(3,2,1,'Tiền mặt',4240000,'Tiền hàng tháng'),(4,2,4,'Thẻ Nam Á',1506000,'Tiền trong thẻ'),(5,3,1,'Tiền đi lại',140000,'Xăng xe, di chuyển'),(6,3,2,'Tiền chi tiêu',5600000,'Ăn uống, sinh hoạt'),(7,4,1,'Tiền tiêu mẹ cho',12100000,'Phí sinh hoạt'),(8,4,4,'Học bổng',12000000,'Học bổng DHM');
 /*!40000 ALTER TABLE `wallet` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -230,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-27  9:17:52
+-- Dump completed on 2023-08-06 14:30:03
