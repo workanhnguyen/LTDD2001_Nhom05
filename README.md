@@ -1,5 +1,8 @@
 # [SPENDIFY - Ứng dụng quản lý chi tiêu]
 
+[File Powerpoint](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
+[File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)
+
 ### Thành viên nhóm 05:
 1. 2051012004 - Nguyễn Vân Anh (Nhóm trưởng)  
 2. 2051012019 - Lương Tấn Đạt  
