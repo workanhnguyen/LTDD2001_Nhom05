@@ -10,9 +10,9 @@
 4. 2051050265 - Đặng Văn Mãi
 
 ### Tổng quan về ứng dụng:
-* Phía giao diện được thực hiện bằng ngôn ngữ Java trên Android Studio.
-* Phía server được thực hiện bằng framework Java Spring Boot, tạo ra các API giao tiếp với phía giao diện người dùng.
-* Phía server đã được deploy lên Redhat OpenShift (do sử dụng tài khoản miễn phí, nên tốc độ truy xuất dữ liệu chậm và bị giới hạn 30 ngày).
+* Phía giao diện được thực hiện bằng ngôn ngữ `Java` trên Android Studio.
+* Phía server được thực hiện bằng framework `Java Spring Boot`, tạo ra các API giao tiếp với phía giao diện người dùng.
+* Phía server đã được deploy lên `Redhat OpenShift` (do sử dụng tài khoản miễn phí, nên tốc độ truy xuất dữ liệu chậm và bị giới hạn 30 ngày).
 
 ### Các chức năng chính thực hiện được:
 1. Đăng nhập / đăng ký người dùng.
