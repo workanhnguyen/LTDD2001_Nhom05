@@ -30,7 +30,7 @@
 9. Cài đặt tùy chọn ẩn / hiện số dư.
 
 ### Hướng dẫn cài đặt:
-Cách 1: Dùng file `spendify-release.apk` có sẵn phía trên, tải về điện thoại và tiến hành cài đặt.
+Cách 1: Dùng file `spendify-release.apk` có sẵn phía trên, tải về điện thoại và tiến hành cài đặt.  
 Cách 2: Sử dụng lệnh:
 
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
