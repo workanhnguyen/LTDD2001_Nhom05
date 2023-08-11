@@ -1,7 +1,8 @@
 # [SPENDIFY - Ứng dụng quản lý chi tiêu]
 
 [File Powerpoint thuyết trình lý thuyết về Unity](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
-[File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)
+[File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)  
+[Bảng phân công công việc](https://drive.google.com/file/d/1TVM0gVLT_IQbITkYu2gaJbSp8OVGBGGA/view?usp=sharing)
 
 ### Thành viên nhóm 05:
 1. 2051012004 - Nguyễn Vân Anh (Nhóm trưởng)  
