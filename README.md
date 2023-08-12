@@ -1,4 +1,5 @@
 # [SPENDIFY - Ứng dụng quản lý chi tiêu]
+(Vui lòng đọc hết hướng dẫn phía dưới)
 
 [File Powerpoint thuyết trình lý thuyết về Unity](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
 [File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)  
@@ -40,3 +41,10 @@ Cách 2: Sử dụng lệnh:
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
 
 để tải project về máy tính. Sau đó mở folder `frontend` của project bằng Android Studio và chạy project này.
+
+### Tài khoản sử dụng:
+1. Tài khoản admin:
+   * Name: admin
+   * Password: admin
+  
+2. Tài khoản người dùng: có thể tự đăng ký để test.
