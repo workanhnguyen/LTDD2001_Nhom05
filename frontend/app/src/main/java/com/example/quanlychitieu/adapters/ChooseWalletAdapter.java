@@ -70,7 +70,7 @@ public class ChooseWalletAdapter extends RecyclerView.Adapter<ChooseWalletHolder
                 .error(R.drawable.app_icon_background); // Replace with your error image resource
 
         Glide.with(context)
-                .load(wallet.getImageLink())
+                .load(wallet.getAccountType().getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.getChooseWalletImage());
 

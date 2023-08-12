@@ -6,7 +6,7 @@ import org.parceler.Parcel;
 public class AccountType {
     private Integer id;
     private String name;
-    private String imageLink;
+    private String image;
     private String description;
     private AccountRoot accountRoot;
 
@@ -25,7 +25,7 @@ public class AccountType {
     public AccountType(Integer id, String name, String imageLink, String description, AccountRoot accountRoot) {
         this.id = id;
         this.name = name;
-        this.imageLink = imageLink;
+        this.image = imageLink;
         this.description = description;
         this.accountRoot = accountRoot;
     }
@@ -47,11 +47,11 @@ public class AccountType {
     }
 
     public String getImageLink() {
-        return imageLink;
+        return image;
     }
 
     public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
+        this.image = imageLink;
     }
 
     public String getDescription() {

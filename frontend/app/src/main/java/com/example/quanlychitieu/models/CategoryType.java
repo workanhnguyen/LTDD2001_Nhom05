@@ -6,7 +6,7 @@ import org.parceler.Parcel;
 public class CategoryType {
     private Integer id;
     private String name;
-    private String imageLink;
+    private String image;
     private CategoryRoot categoryRoot;
 
     public CategoryType() {
@@ -20,13 +20,13 @@ public class CategoryType {
     public CategoryType(Integer id, String name, String imageLink) {
         this.id = id;
         this.name = name;
-        this.imageLink = imageLink;
+        this.image = imageLink;
     }
 
     public CategoryType(Integer id, String name, String imageLink, CategoryRoot categoryRoot) {
         this.id = id;
         this.name = name;
-        this.imageLink = imageLink;
+        this.image = imageLink;
         this.categoryRoot = categoryRoot;
     }
 
@@ -47,11 +47,11 @@ public class CategoryType {
     }
 
     public String getImageLink() {
-        return imageLink;
+        return image;
     }
 
     public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
+        this.image = imageLink;
     }
 
     public CategoryRoot getCategoryRoot() {

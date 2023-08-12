@@ -51,11 +51,11 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletHolder> {
         Wallet wallet = wallets.get(position);
 
         RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.blank_avatar) // Replace with your placeholder image resource
-                .error(R.drawable.blank_avatar); // Replace with your error image resource
+                .placeholder(R.drawable.app_icon_background) // Replace with your placeholder image resource
+                .error(R.drawable.app_icon_background); // Replace with your error image resource
 
         Glide.with(context)
-                .load(wallet.getImageLink())
+                .load(wallet.getAccountType().getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.getWalletImage());
 

@@ -215,7 +215,7 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionCategoryTypeImage);
         Glide.with(EditTransactionActivity.this)
-                .load(transaction.getWallet().getImageLink())
+                .load(transaction.getWallet().getAccountType().getImageLink())
                 .apply(requestOptions)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionWalletImage);
         editTransactionCategoryTypeName.setText(transaction.getCategoryType().getName());
