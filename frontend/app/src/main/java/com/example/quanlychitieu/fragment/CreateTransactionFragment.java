@@ -233,7 +233,7 @@ public class CreateTransactionFragment extends Fragment implements ActivityResul
                     .placeholder(R.drawable.app_icon_background)
                     .error(R.drawable.app_icon_background);
 
-            Glide.with(requireActivity()).load(wallet.getImageLink())
+            Glide.with(requireActivity()).load(wallet.getAccountType().getImageLink())
                     .apply(requestOptionsWallet).diskCacheStrategy(DiskCacheStrategy.ALL).into(createTransactionWalletImage);
 
             createTransactionWalletName.setText(wallet.getName());

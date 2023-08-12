@@ -315,7 +315,7 @@ public class EditTransactionActivity extends AppCompatActivity implements EditTr
                     .placeholder(R.drawable.app_icon_background)
                     .error(R.drawable.app_icon_background);
 
-            Glide.with(EditTransactionActivity.this).load(wallet.getImageLink())
+            Glide.with(EditTransactionActivity.this).load(wallet.getAccountType().getImageLink())
                     .apply(requestOptionsWallet).diskCacheStrategy(DiskCacheStrategy.ALL).into(editTransactionWalletImage);
 
             editTransactionWalletName.setText(wallet.getName());
