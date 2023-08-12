@@ -40,3 +40,10 @@ Cách 2: Sử dụng lệnh:
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
 
 để tải project về máy tính. Sau đó mở folder `frontend` của project bằng Android Studio và chạy project này.
+
+### Tài khoản sử dụng:
+1. Tài khoản admin:
+   * Name: admin
+   * Password: admin
+  
+2. Tài khoản người dùng: có thể tự đăng ký để test.
