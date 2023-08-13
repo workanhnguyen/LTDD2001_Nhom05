@@ -1,4 +1,4 @@
-# [SPENDIFY - Ứng dụng quản lý chi tiêu]
+# [SPENDIFY - Ứng dụng quản lý chi tiêu cá nhân]
 (Vui lòng đọc hết hướng dẫn phía dưới)
 
 [1. File Powerpoint thuyết trình lý thuyết về Unity](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
