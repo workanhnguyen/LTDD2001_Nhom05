@@ -1,5 +1,5 @@
 # [SPENDIFY - Ứng dụng quản lý chi tiêu cá nhân]
-(Vui lòng đọc hết hướng dẫn phía dưới)
+<span style="color: red;">(Vui lòng đọc hết hướng dẫn phía dưới)</span>
 
 [1. File Powerpoint thuyết trình lý thuyết về Unity](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
 [2. File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)  
