@@ -22,7 +22,7 @@
 3. Xem thống kê thu chi theo tháng.
 4. Xem, sửa, xóa người dùng phía quản trị viên.
 5. Đăng xuất tài khoản.
-6. Ngoài ra nhóm có sử dụng Fragment, Widget (ImageView, CalendarView).
+6. Ngoài ra nhóm có sử dụng Fragment, Widget (ImageView, CalendarView), có menu, setting, trang chính, trang con.
 
 ### Các chức năng nhóm phát triển thêm:
 1. Chuyển đổi ngôn ngữ tiếng Việt / tiếng Anh.
