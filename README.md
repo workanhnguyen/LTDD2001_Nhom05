@@ -45,7 +45,7 @@ Cách 2:
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
 
 - Sau đó mở folder `frontend` của project bằng `Android Studio`.
-- Tiếp theo mở file `graddle-wrapper.properties` và chọn `Sync now`.
+- Tiếp theo mở file `gradle-wrapper.properties` và chọn `Sync now`.
 - Chạy project.
 
 ### Tài khoản sử dụng:
