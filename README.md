@@ -1,9 +1,9 @@
-# [SPENDIFY - Ứng dụng quản lý chi tiêu]
+# [SPENDIFY - Ứng dụng quản lý chi tiêu cá nhân]
 (Vui lòng đọc hết hướng dẫn phía dưới)
 
-[File Powerpoint thuyết trình lý thuyết về Unity](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
-[File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)  
-[Bảng phân công công việc](https://drive.google.com/file/d/1TVM0gVLT_IQbITkYu2gaJbSp8OVGBGGA/view?usp=sharing)
+[1. File Powerpoint thuyết trình lý thuyết về Unity](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
+[2. File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)  
+[3. Bảng phân công công việc](https://drive.google.com/file/d/1TVM0gVLT_IQbITkYu2gaJbSp8OVGBGGA/view?usp=sharing)
 
 ### Thành viên nhóm 05:
 1. 2051012004 - Nguyễn Vân Anh (Nhóm trưởng)  
@@ -22,6 +22,7 @@
 3. Xem thống kê thu chi theo tháng.
 4. Xem, sửa, xóa người dùng phía quản trị viên.
 5. Đăng xuất tài khoản.
+6. Ngoài ra nhóm có sử dụng Fragment, Widget (ImageView, CalendarView), có menu, setting, trang chính, trang con.
 
 ### Các chức năng nhóm phát triển thêm:
 1. Chuyển đổi ngôn ngữ tiếng Việt / tiếng Anh.
@@ -40,7 +41,7 @@ Cách 2: Sử dụng lệnh:
 
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
 
-để tải project về máy tính. Sau đó mở folder `frontend` của project bằng Android Studio và chạy project này.
+để tải project về máy tính. Sau đó mở folder `frontend` của project bằng `Android Studio` và chạy project này.
 
 ### Tài khoản sử dụng:
 1. Tài khoản admin:
