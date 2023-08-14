@@ -39,11 +39,14 @@
 
 ### Hướng dẫn cài đặt:
 Cách 1: Dùng file `spendify-release.apk` có sẵn phía trên, tải về điện thoại và tiến hành cài đặt.  
-Cách 2: Sử dụng lệnh:
+Cách 2: 
+- Sử dụng lệnh sau để tải project về máy tính.
 
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
 
-để tải project về máy tính. Sau đó mở folder `frontend` của project bằng `Android Studio` và chạy project này.
+- Sau đó mở folder `frontend` của project bằng `Android Studio`.
+- Tiếp theo mở file graddle-wrapper.properties và chọn `Sync now`.
+- Chạy project.
 
 ### Tài khoản sử dụng:
 1. Tài khoản admin:
