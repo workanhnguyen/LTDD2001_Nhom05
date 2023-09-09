@@ -3,7 +3,9 @@
 
 [1. File Powerpoint thuyết trình lý thuyết về Unity](https://docs.google.com/presentation/d/1UUyWsMAs5fLb2D5b0yy8Mn1Rzwoj9ItZ/edit?usp=sharing&ouid=105580800192484285399&rtpof=true&sd=true)  
 [2. File source code demo Unity](https://drive.google.com/file/d/16vFJj-8d03AWuxB5CLFMipxQZ7gQpnAd/view?usp=drive_link)  
-[3. Bảng phân công công việc](https://drive.google.com/file/d/1TVM0gVLT_IQbITkYu2gaJbSp8OVGBGGA/view?usp=sharing)
+[3. Bảng phân công công việc](https://drive.google.com/file/d/1TVM0gVLT_IQbITkYu2gaJbSp8OVGBGGA/view?usp=sharing)  
+[4. Bảng mô tả nghiệp vụ](https://drive.google.com/file/d/1v2dclUJrE9YvEnkuOxuNrhoJz1e9lY2v/view?usp=sharing)  
+[5. Bảng hướng dẫn sử dụng](https://drive.google.com/file/d/17tcACXfLb0eQnYpDgBWnO2EB4IIFEGZ7/view?usp=sharing)  
 
 ### Thành viên nhóm 05:
 1. 2051012004 - Nguyễn Vân Anh (Nhóm trưởng)  
@@ -37,11 +39,14 @@
 
 ### Hướng dẫn cài đặt:
 Cách 1: Dùng file `spendify-release.apk` có sẵn phía trên, tải về điện thoại và tiến hành cài đặt.  
-Cách 2: Sử dụng lệnh:
+Cách 2: 
+- Sử dụng lệnh sau để tải project về máy tính.
 
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
 
-để tải project về máy tính. Sau đó mở folder `frontend` của project bằng `Android Studio` và chạy project này.
+- Sau đó mở folder `frontend` của project bằng `Android Studio`.
+- Tiếp theo mở file `gradle-wrapper.properties` và chọn `Sync now`.
+- Chạy project.
 
 ### Tài khoản sử dụng:
 1. Tài khoản admin:
