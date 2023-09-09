@@ -37,9 +37,7 @@
 8. Đổi mật khẩu tài khoản.
 9. Cài đặt tùy chọn ẩn / hiện số dư.
 
-### Hướng dẫn cài đặt:
-Cách 1: Dùng file `spendify-release.apk` có sẵn phía trên, tải về điện thoại và tiến hành cài đặt.  
-Cách 2: 
+### Hướng dẫn cài đặt: 
 - Sử dụng lệnh sau để tải project về máy tính.
 
 	git clone https://github.com/workanhnguyen/LTDD2001_Nhom05
